@@ -33,6 +33,7 @@
 .pub-cache/
 .pub/
 /build/
+.env
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -46,4 +47,4 @@ app.*.map.json
 # Android Studio will place build artifacts here
 /android/app/debug
 /android/app/profile
-/android/app/release
+/android/app/release.env*

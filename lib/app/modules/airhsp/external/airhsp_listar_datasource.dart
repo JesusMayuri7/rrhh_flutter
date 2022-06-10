@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dotenv/dotenv.dart';
 import 'package:rrhh_clean/core/config/http_custom.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/errors/failure.dart';
@@ -7,10 +8,11 @@ import '../data/models/airhsp_model.dart';
 import '../data/models/conceptos_model.dart';
 
 class ListarDatasourceImpl implements IAirhspDatasource {
+  var env = DotEnv(includePlatformEnvironment: true)..load();
   @override
   Future<List<AirHspModel>> listar(ejecutora, tipoPersona) async {
     return _getListadoFromUrl(
-        '/airhsp/ConsultaGeneral_Filtro_Xml2', ejecutora, tipoPersona);
+        env['url_consulta_general']!, ejecutora, tipoPersona);
   }
 
   final HttpCustom httpCustom;
@@ -21,13 +23,13 @@ class ListarDatasourceImpl implements IAirhspDatasource {
   @override
   Future<List<ConceptoModel>> conceptos(
       ejecutora, tipoPersona, codPlaza) async {
-    return _getConceptosFromUrl('/airhsp/Consulta_Remuner_IngresosEmpleado_Xml',
-        ejecutora, tipoPersona, codPlaza);
+    return _getConceptosFromUrl(
+        env['url_consulta_resumen']!, ejecutora, tipoPersona, codPlaza);
   }
 
   Future<List<AirHspModel>> _getListadoFromUrl(
       String _url, _ejecutora, _tipoPersona) async {
-    var url = Uri.https('dggrp.mef.gob.pe', _url, {'q': '{http}'});
+    var url = Uri.https(env['url_mef']!, _url, {'q': '{http}'});
 
     Map<String, String> param = {
       'idGobierno': "0",
@@ -42,8 +44,8 @@ class ListarDatasourceImpl implements IAirhspDatasource {
       'Nombres': "",
       'accion': "3",
       'subaccion': "0",
-      'NombreUser': "jmaruyic",
-      'CodUser': "C6E0E5B1EFDA0F5C",
+      'NombreUser': env['nombre_user']!,
+      'CodUser': env['cod_user']!,
       'filtro': "01",
       'subFiltro': "0",
       'ejercicio': "2022",
@@ -55,8 +57,8 @@ class ListarDatasourceImpl implements IAirhspDatasource {
       var response = await httpCustom.post(url,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Cookie': 'JSESSIONID=864FF361F80EB2CFDDE930F1C43BE2C4',
-            'Host': 'dggrp.mef.gob.pe'
+            'Cookie': env['cookie']!,
+            'Host': env['url_mef']!
           },
           body: param);
       print(response.body);
@@ -72,7 +74,7 @@ class ListarDatasourceImpl implements IAirhspDatasource {
 
   Future<List<ConceptoModel>> _getConceptosFromUrl(String _url,
       String _ejecutora, String _tipoPersona, String _codPlaza) async {
-    var url = Uri.https('dggrp.mef.gob.pe', _url, {'q': '{http}'});
+    var url = Uri.https(env['url_mef']!, _url, {'q': '{http}'});
     Map<String, String> param = {
       'tipo': '1',
       'ejercicio': '2022',
@@ -95,7 +97,7 @@ class ListarDatasourceImpl implements IAirhspDatasource {
       var response = await httpCustom.post(url,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Cookie': 'JSESSIONID=864FF361F80EB2CFDDE930F1C43BE2C4',
+            'Cookie': env['cookie']!,
             "referer": "http://dggrp.mef.gob.pe/airhsp/ini.ejecutar.do",
             'X-Requested-With': 'XMLHttpRequest',
             'User-Agent':
