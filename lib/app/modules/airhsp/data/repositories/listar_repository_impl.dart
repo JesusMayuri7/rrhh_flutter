@@ -1,0 +1,38 @@
+import 'package:dartz/dartz.dart';
+import '../datasources/i_listar_datasource.dart';
+import '../models/airhsp_model.dart';
+import '../models/conceptos_model.dart';
+import '../../domain/repositories/i_airhsp_respository.dart';
+import '../../../../../core/errors/exceptions.dart';
+
+import '../../../../../core/errors/failure.dart';
+
+class ListarRepositoryImpl implements IAirhspRepository {
+  final IAirhspDatasource datasource;
+
+  ListarRepositoryImpl({required this.datasource});
+
+  @override
+  Future<Either<Failure, List<AirHspModel>>> listar(
+      ejecutora, tipoPersona) async {
+    List<AirHspModel> list;
+    try {
+      list = await datasource.listar(ejecutora, tipoPersona);
+      return Right(list);
+    } on ServerException catch (e) {
+      return Left(Error(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<ConceptoModel>>> conceptos(
+      ejecutora, tipoPersona, codPlaza) async {
+    List<ConceptoModel> list;
+    try {
+      list = await datasource.conceptos(ejecutora, tipoPersona, codPlaza);
+      return Right(list);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    }
+  }
+}

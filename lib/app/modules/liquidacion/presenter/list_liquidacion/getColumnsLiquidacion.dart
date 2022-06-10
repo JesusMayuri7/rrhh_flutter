@@ -1,0 +1,156 @@
+import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+
+List<GridColumn> getColumnsLiquidacion() {
+  return ([
+    GridColumn(
+        width: 20,
+        visible: false,
+        columnName: 'id',
+        label: Text(
+          'ID',
+          style: TextStyle(fontSize: 10, color: Colors.white),
+          textAlign: TextAlign.center,
+        )),
+    GridColumn(
+      width: 40,
+      columnName: 'anio',
+      label: Text('Año',
+          style: TextStyle(fontSize: 10, color: Colors.white),
+          textAlign: TextAlign.center),
+    ),
+    GridColumn(
+      width: 40,
+      columnName: 'dsc_modalidad',
+      label: Text('Modalidad',
+          style: TextStyle(fontSize: 10, color: Colors.white),
+          textAlign: TextAlign.center),
+    ),
+    GridColumn(
+      visible: false,
+      width: 30,
+      columnName: 'certificado_id',
+      label: Text('Año',
+          style: TextStyle(fontSize: 10, color: Colors.white),
+          textAlign: TextAlign.center),
+    ),
+    GridColumn(
+        width: 80,
+        allowEditing: true,
+        columnName: 'dsc_certificado',
+        label: Text('Certificado',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        width: 30,
+        columnName: 'fuente_id',
+        label: Text('FF',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        visible: false,
+        width: 280,
+        columnName: 'idmeta_anual',
+        label: Text('MetaId',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        width: 220,
+        columnName: 'finalidad',
+        label: Text('Finalidad',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        width: 70,
+        columnName: 'dni',
+        label: Text('Dni',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        width: 250,
+        columnName: 'nombres',
+        label: Text('Nombres',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        width: 40,
+        columnName: 'expediente',
+        label: Text('Exp.',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        width: 60,
+        columnName: 'fecha_expediente',
+        label: Text('Fecha Exp.',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        columnName: 'liquidacion_detalle',
+        label: Text('Detalle',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center),
+        visible: false),
+    GridColumn(
+        columnName: '_certificado_devengado_id',
+        label: Text('Certificado',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center),
+        visible: false),
+    GridColumn(
+        width: 70,
+        columnName: 'dsc_certificado_devengado',
+        label: Text('Certificado',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center),
+        visible: true),
+    GridColumn(
+        width: 30,
+        columnName: 'fuente_devengado_id',
+        label: Text('FF.',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center),
+        visible: true),
+    GridColumn(
+        width: 280,
+        columnName: 'meta_devengado_id',
+        label: Text('Finalidad',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center),
+        visible: false),
+    GridColumn(
+        width: 220,
+        columnName: 'finalidad_devengado',
+        label: Text('Finalidad',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center),
+        visible: true),
+    GridColumn(
+        allowEditing: true,
+        width: 60,
+        columnName: 'codigo_plaza',
+        label: Text('Codigo \n AIRHSP',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        allowEditing: true,
+        width: 60,
+        columnName: 'codigo_siga',
+        label: Text('Codigo \n SIGA',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        allowEditing: true,
+        width: 60,
+        columnName: 'actualizado',
+        label: Text('Actualizado',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+    GridColumn(
+        allowEditing: true,
+        width: 120,
+        columnName: 'proceso',
+        label: Text('Proceso',
+            style: TextStyle(fontSize: 10, color: Colors.white),
+            textAlign: TextAlign.center)),
+  ]);
+}
