@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../../../../core/domain/entities/clasificador_entity.dart';
-import '../../../domain/entities/concepto_entity.dart';
-import '../../../../../../core/uitls/widgets/label_with_dropdown.dart';
+import '../../../../../../../core/domain/entities/clasificador_entity.dart';
+import '../../../../domain/entities/concepto_entity.dart';
+import '../../../../../../../core/uitls/widgets/label_with_dropdown.dart';
 
-import 'bloc/certificados_bloc.dart';
+import '../bloc/certificados_bloc.dart';
 
 class DataCertificado extends StatefulWidget {
   @override
@@ -13,9 +13,9 @@ class DataCertificado extends StatefulWidget {
 }
 
 class _DataCertificadoState extends State<DataCertificado> {
+  final bloc = Modular.get<CertificadosBloc>();
   ConceptoEntity? _conceptoValue;
   ClasificadorEntity? _clasificadorValue;
-  final bloc = Modular.get<CertificadosBloc>();
   List<Map<String, dynamic>> listado = [];
 
   @override

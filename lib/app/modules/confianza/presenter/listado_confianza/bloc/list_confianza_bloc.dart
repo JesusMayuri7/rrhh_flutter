@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import '../../../domain/entities/confianza_entity.dart';
 import '../../../domain/usecases/get_confianza_use_case.dart';
 import '../../edit_confianza/bloc/edti_confianza_bloc.dart';
-import '../../../../../../core/domain/use_cases/usecase.dart';
 
 part 'list_confianza_event.dart';
 part 'list_confianza_state.dart';

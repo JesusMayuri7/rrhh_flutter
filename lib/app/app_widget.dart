@@ -9,6 +9,7 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
+    //Modular.setObservers([asuka.asukaHeroController]);
     Modular.setInitialRoute('/');
     return FluentApp.router(
       debugShowCheckedModeBanner: false,

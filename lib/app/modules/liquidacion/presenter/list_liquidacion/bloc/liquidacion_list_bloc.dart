@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 //import 'package:supercharged/supercharged.dart';
@@ -15,7 +13,6 @@ import 'package:rrhh_clean/app/modules/liquidacion/domain/usecases/get_list_liqu
 import 'package:rrhh_clean/app/modules/liquidacion/domain/usecases/sum_liquidacion_detalle_usecase.dart';
 
 import 'package:rrhh_clean/app/modules/liquidacion/domain/usecases/update_liquidacion_usecase.dart';
-import 'package:rrhh_clean/core/domain/use_cases/usecase.dart';
 
 part 'liquidacion_list_event.dart';
 part 'liquidacion_list_state.dart';

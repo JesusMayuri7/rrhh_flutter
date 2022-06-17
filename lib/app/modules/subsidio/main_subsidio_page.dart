@@ -19,9 +19,7 @@ class MainSubsidioPage extends StatelessWidget {
     this.blocSubsidio.add(SubsidioDataInitialLoad(anio: this.anioSelected));
     return BlocConsumer<SubsidioBloc, SubsidioState>(
       listener: (context, state) {
-        if (state is SubsidioError)
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.message)));
+        if (state is SubsidioError) SnackBar(content: Text(state.message));
       },
       bloc: this.blocSubsidio,
       builder: (context, state) {

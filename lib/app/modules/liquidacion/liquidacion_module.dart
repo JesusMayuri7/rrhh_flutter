@@ -34,19 +34,29 @@ import 'presenter/report_liquidacion/bloc/liquidacion_report_bloc.dart';
 class LiquidacionModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind((i) => LiquidacionBloc(getDataInitialUseCase: i())),
-    Bind((i) => LiquidacionReportBloc(getLiquidacionReportUseCase: i())),
-    Bind((i) => LiquidacionResumenBloc(gettLiquidacionResumenesUseCase: i())),
-    Bind((i) => LiquidacionListBloc(i(), i(), i(), i(), i(), i())),
-    Bind((i) => LiquidacionDetalleBloc(
-        liquidacionListBloc: i(),
-        sumLiquidacionDetalleUseCase: i(),
-        gettLiquidacionResumenUseCase: i(),
-        updateLiquidacionDetalleUseCase: i())),
-    Bind((i) => NewLiquidacionBloc(
-          i(),
-          i(),
-        )),
+    Bind.lazySingleton((i) => LiquidacionBloc(getDataInitialUseCase: i()),
+        export: true),
+    Bind.lazySingleton(
+        (i) => LiquidacionReportBloc(getLiquidacionReportUseCase: i()),
+        export: true),
+    Bind.lazySingleton(
+        (i) => LiquidacionResumenBloc(gettLiquidacionResumenesUseCase: i()),
+        export: true),
+    Bind.lazySingleton((i) => LiquidacionListBloc(i(), i(), i(), i(), i(), i()),
+        export: true),
+    Bind.lazySingleton(
+        (i) => LiquidacionDetalleBloc(
+            liquidacionListBloc: i(),
+            sumLiquidacionDetalleUseCase: i(),
+            gettLiquidacionResumenUseCase: i(),
+            updateLiquidacionDetalleUseCase: i()),
+        export: true),
+    Bind.lazySingleton(
+        (i) => NewLiquidacionBloc(
+              i(),
+              i(),
+            ),
+        export: true),
 
     // Datasource
     Bind((i) => GetLiquidacionCasDatasourceImpl(httpCustom: i())),

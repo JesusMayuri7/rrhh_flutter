@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -56,8 +55,13 @@ class CertificadosBloc extends Bloc<CertificadosEvent, CertificadosState>
           clasificadorConcepto: estado.clasificadorConcepto));
       emit(result.fold(
         (l) => estado.copyWidth(status: 'failure', message: 'Error al grabar'),
-        (r) =>
-            estado.copyWidth(status: 'saved', message: 'Se grabó exitosamente'),
+        (r) => estado.copyWidth(
+            status: 'saved',
+            message: 'Se grabó exitosamente',
+            clasificadorConcepto: [],
+            certificado: '',
+            montoCertificado: 0.0,
+            detalle: ''),
       ));
     }
   }

@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'add_certificado_page.dart';
-import 'data_certificado.dart';
+import 'widgtes/data_certificado.dart';
 
 import 'bloc/certificados_bloc.dart';
-import 'list_conceptos.dart';
+import 'widgtes/list_conceptos.dart';
 
 //import 'package:flutter_examples/model/sample_view.dart';
 
@@ -22,7 +22,9 @@ class _JsonDataSourceDataGridState extends State<CertificadoPage> {
   @override
   void initState() {
     super.initState();
-    bloc.add(GetDataInitial());
+    if (this.bloc.state is InitialCertificadosState) {
+      bloc.add(GetDataInitial());
+    }
   }
 
   @override

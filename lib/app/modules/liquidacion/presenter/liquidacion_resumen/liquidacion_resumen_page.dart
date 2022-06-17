@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/bloc/liquidacion_bloc.dart';
 
@@ -32,8 +31,6 @@ class _LiquidacionResumenPageState extends State<LiquidacionResumenPage>
   final blocResumen = Modular.get<LiquidacionResumenBloc>();
   final blocApp = Modular.get<LiquidacionBloc>();
 
-  var _anios = ['2021', '2022', '2023', '2024', '2025'];
-
   ClasificadorEntity? _clasificadorEntity;
   CertificadoEntity? _certificadoEntity;
 
@@ -61,8 +58,7 @@ class _LiquidacionResumenPageState extends State<LiquidacionResumenPage>
     return BlocConsumer<LiquidacionResumenBloc, LiquidacionResumenState>(
       listener: (_, state) {
         if (state is LiquidacionResumenError)
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.message)));
+          SnackBar(content: Text(state.message));
       },
       buildWhen: (previous, current) {
         if (current is LiquidacionResumenLoaded)

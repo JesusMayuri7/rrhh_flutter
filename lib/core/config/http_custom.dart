@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HttpCustom extends http.BaseClient {
   //SharedPreferences sharedPref;
@@ -36,7 +33,6 @@ class HttpCustom extends http.BaseClient {
       if (response.statusCode == 200) {
         print('todo ok 200');
       }
-      ;
       if (response.statusCode == 401) {
         if ((authBloc.state as SuccessAuthState).loginResponseEntity.status) {}
         print('si esta logeado');

@@ -119,11 +119,11 @@ Future<void> generateExcel(ParamsCalcular params) async {
   sheet.getRangeByIndex(sheet.getLastRow(), 33).formula =
       '=SUM(AG$firstRow:AG$rowTotal)';
 
-  int lastRow = sheet.getLastRow();
   //sheet.getRangeByName('X$firstRow:AD$lastRow').numberFormat = '#,##0.00';
 
   sheetPresupuestoExtend(workbook, firstRowHeading, params, sheet);
-  sheetCertificado(workbook, firstRowHeading, params, sheet);
+  sheetCertificado(
+      workbook, firstRowHeading, params, sheet.getLastRow() - 1, params.lista);
 
   // RESUMEN de Horizontal a Vertical
 

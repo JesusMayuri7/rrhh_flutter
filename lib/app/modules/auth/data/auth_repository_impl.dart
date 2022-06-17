@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 
-import 'package:rrhh_clean/core/auth/i_auth_core_datasource.dart';
-import 'package:rrhh_clean/core/auth/login_auth_usecase.dart';
-import 'package:rrhh_clean/core/auth/auth_response_entity.dart';
+import 'package:rrhh_clean/app/modules/auth/data/i_auth_core_datasource.dart';
+import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
+import 'package:rrhh_clean/app/modules/auth/domain/auth_response_entity.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 import 'package:rrhh_clean/core/errors/failure.dart';
 
-import 'auth_repository.dart';
+import '../domain/auth_repository.dart';
 
 class AuthRepositoyImpl implements IAuthReposity {
   final IAuthCoreDataSource iAuthCoreDataSource;

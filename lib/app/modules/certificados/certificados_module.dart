@@ -20,12 +20,14 @@ import 'presenter/pages/main_certificado_page.dart';
 class CertificadosModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind((i) => CertificadosBloc(
-          i(),
-          i(),
-          i(),
-        )),
-    Bind((i) => ListCertificadoBloc(i(), i())),
+    Bind.lazySingleton(
+        (i) => CertificadosBloc(
+              i(),
+              i(),
+              i(),
+            ),
+        export: true),
+    Bind.lazySingleton((i) => ListCertificadoBloc(i(), i()), export: true),
     Bind((i) => ValidarCertificadoUseCase(i())),
     Bind((i) => SumListCertificadosUseCase()),
     Bind((i) => SaveCertificadoUseCase(i())),

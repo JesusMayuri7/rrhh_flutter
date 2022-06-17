@@ -166,6 +166,8 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                 validator: (value) {
                                   if (value!.length < 6 || value.isEmpty)
                                     return 'cargo requerido';
+                                  else
+                                    return null;
                                 },
                               ),
                               SizedBox(
@@ -184,6 +186,8 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                 validator: (value) {
                                   if (value?.length != 8 || value!.isEmpty)
                                     return 'dni invalido';
+                                  else
+                                    return null;
                                 },
                               ),
                               SizedBox(
@@ -218,6 +222,8 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                 validator: (value) {
                                   if (value?.length != 10 || value!.isEmpty)
                                     return 'fecha invalida';
+                                  else
+                                    return null;
                                 },
                               ),
                               SizedBox(

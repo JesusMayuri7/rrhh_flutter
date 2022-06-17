@@ -32,7 +32,6 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
   DataGridRow? rowSelection;
 
   var _modalidad = ['CAS', 'CAP'];
-  var _anios = ['2021', '2022', '2023', '2024', '2025'];
 
   String anioSelected = (Modular.get<AuthBloc>().state as SuccessAuthState)
       .loginResponseEntity
@@ -65,8 +64,7 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
         bloc: this.bloc,
         listener: (context, state) {
           if (state is SubsidioDevolucionError)
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.message)));
+            SnackBar(content: Text(state.message));
         },
         builder: (context, state) {
           if (state is SubsidioDevolucionLoaded) {

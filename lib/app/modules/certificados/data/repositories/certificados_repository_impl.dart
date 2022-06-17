@@ -5,7 +5,6 @@ import '../datasources/i_save_certificado_datasource.dart';
 import '../datasources/i_validar_datasource.dart';
 import '../datasources/i_modalidad_concepto_clasificador_datasource.dart';
 import '../../domain/entities/modalidad_concepto_clasificador_entity.dart';
-import '../../domain/entities/result_entity.dart';
 import '../../domain/repositories/i_certificados_repository.dart';
 
 import '../../../../../core/errors/exceptions.dart';

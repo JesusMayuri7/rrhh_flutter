@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:http/http.dart' as http;
-
 import 'package:rrhh_clean/app/modules/requerimientos/data/model/requerimiento_model.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_list_usecase.dart';
-import 'package:rrhh_clean/core/config/http_custom.dart';
+
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';

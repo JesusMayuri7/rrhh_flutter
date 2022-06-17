@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/certificados/domain/entities/certificado_entity.dart';
@@ -15,7 +13,7 @@ class ListCertificadoBloc
     implements Disposable {
   @override
   ListCertificadoBloc(this.listarUseCase, this.sumListCertificadosUseCase)
-      : super(InitialListCertificadoState()) {
+      : super(LoadedListCertificadoState()) {
     on<FiltrarListCertificadosEvent>(_filtrarListCertificadosEvent);
     on<GetDataAllEvent>(_getDataAllState);
     on<GetListCertificadoEvent>(_listaEventToBaseCasState);
@@ -39,7 +37,7 @@ class ListCertificadoBloc
         emit(LoadingListCertificadoState());
 
         List<CertificadoEntity> listFiltered =
-            List.from(stateCurrent.listCertificadoPrev.where((element) {
+            List.from(stateCurrent.listCertificadoOri.where((element) {
           totalCertificado += element.monto;
           return (element.dscCertificado.endsWith(event.certificado) ||
               element.detalle.toUpperCase().contains(event.certificado));
@@ -62,7 +60,7 @@ class ListCertificadoBloc
         }
       } else {
         emit(stateCurrent.copyWidth(
-            listCertificadoCur: stateCurrent.listCertificadoPrev));
+            listCertificadoCur: stateCurrent.listCertificadoOri));
       }
     }
   }
@@ -76,10 +74,11 @@ class ListCertificadoBloc
     emit(LoadingListCertificadoState());
     var result = await listarUseCase(NoParams());
     emit(result.fold((l) {
+      print(l.toString());
       return InitialListCertificadoState();
     }, (r) {
       return LoadedListCertificadoState(
-          listCertificadoPrev: (r.data as List<CertificadoEntity>),
+          listCertificadoOri: (r.data as List<CertificadoEntity>),
           listCertificadoCur: (r.data as List<CertificadoEntity>));
     }));
   }

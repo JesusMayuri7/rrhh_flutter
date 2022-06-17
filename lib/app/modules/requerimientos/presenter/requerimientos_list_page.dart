@@ -10,8 +10,6 @@ class RequerimientosListPage extends StatefulWidget {
 }
 
 class _RequerimientosListPageState extends State<RequerimientosListPage> {
-  List<PlutoRow> _rows = [];
-
   @override
   Widget build(BuildContext context) {
     return Container(

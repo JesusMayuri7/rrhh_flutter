@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:rrhh_clean/core/auth/login_auth_usecase.dart';
+import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';

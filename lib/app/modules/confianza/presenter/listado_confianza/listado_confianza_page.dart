@@ -32,15 +32,15 @@ class ListadoConfianzaPage extends StatelessWidget {
     ConfianzaDataSource confianzaDataSource =
         ConfianzaDataSource(context: context, listadoConfianza: [], areas: []);
 
-    blocList.add(ListConfianzaEventGet(anio: anioSelected!));
+    //blocList.add(ListConfianzaEventGet(anio: anioSelected!));
 
     return BlocConsumer<ListConfianzaBloc, ListConfianzaBlocState>(
       listener: (context, state) {
         if (state is ListConfianzaBlocError)
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          SnackBar(
             backgroundColor: Colors.black,
             content: Text(state.message),
-          ));
+          );
       },
       bloc: this.blocList,
       builder: (context, state) {

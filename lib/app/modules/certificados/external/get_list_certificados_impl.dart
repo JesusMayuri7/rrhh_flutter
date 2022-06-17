@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:rrhh_clean/core/config/http_custom.dart';
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 
@@ -26,7 +25,7 @@ class GetListCertificadoImpl implements IGetListCertificadosDatasource {
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
-      //print('list certificados' + response.body.toString());
+      //print('list certificados' + response.toString());
 
       String bodyData = jsonEncode(response.data);
 

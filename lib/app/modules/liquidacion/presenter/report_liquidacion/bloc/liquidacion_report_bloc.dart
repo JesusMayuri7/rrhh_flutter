@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_report_entity.dart';
@@ -23,8 +21,10 @@ class LiquidacionReportBloc
     emit(LiquidacionReportLoading());
     var responseLiquidacionReport =
         await this.getLiquidacionReportUseCase(event.anio);
-    emit(responseLiquidacionReport
-        .fold((l) => LiquidacionReportError(message: l.toString()), (r) {
+    emit(responseLiquidacionReport.fold((l) {
+      print(l.toString());
+      return LiquidacionReportError(message: l.toString());
+    }, (r) {
       // print(r.data.toString());
       return LiquidacionReportLoaded(
           liquidacionReport: r.data, liquidacionReportFiltered: r.data);

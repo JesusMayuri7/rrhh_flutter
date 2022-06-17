@@ -5,8 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_module.dart';
 
-import 'package:rrhh_clean/core/auth/login_auth_usecase.dart';
-import 'package:rrhh_clean/core/auth/auth_response_entity.dart';
+import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
+import 'package:rrhh_clean/app/modules/auth/domain/auth_response_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'auth_event.dart';

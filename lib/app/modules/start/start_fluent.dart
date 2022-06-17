@@ -94,37 +94,37 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
             setState(() => index = i);
             switch (i) {
               case 0:
-                Modular.to.navigate('/start/home/');
+                Modular.to.pushNamed('/start/home/');
                 break;
               case 1:
-                Modular.to.navigate('/start/airhsp/');
+                Modular.to.pushNamed('/start/airhsp/');
                 break;
               case 2:
-                Modular.to.navigate('/start/base_cap/');
+                Modular.to.pushNamed('/start/base_cap/');
                 break;
               case 3:
-                Modular.to.navigate('/start/base_cas/');
+                Modular.to.pushNamed('/start/base_cas/');
                 break;
               case 4:
-                Modular.to.navigate('/start/base_prac/');
+                Modular.to.pushNamed('/start/base_prac/');
                 break;
               case 5:
-                Modular.to.navigate('/start/certificados/');
+                Modular.to.pushNamed('/start/certificados/');
                 break;
               case 6:
-                Modular.to.navigate('/start/confianza/');
+                Modular.to.pushNamed('/start/confianza/');
                 break;
               case 7:
-                Modular.to.navigate('/start/liquidacion/');
+                Modular.to.pushNamed('/start/liquidacion/');
                 break;
               case 8:
-                Modular.to.navigate('/start/subsidio/');
+                Modular.to.pushNamed('/start/subsidio/');
                 break;
               case 9:
-                Modular.to.navigate('/start/requerimientos/');
+                Modular.to.pushNamed('/start/requerimientos/');
                 break;
               case 10:
-                Modular.to.navigate('/start/import/');
+                Modular.to.pushNamed('/start/import/');
                 break;
               default:
             }

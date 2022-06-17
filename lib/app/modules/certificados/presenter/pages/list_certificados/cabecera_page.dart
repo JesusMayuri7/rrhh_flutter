@@ -86,6 +86,14 @@ class _CabeceraPageState extends State<CabeceraPage> {
                 bloc: this.bloc,
                 builder: (context, state) {
                   return ElevatedButton(
+                      onPressed: () => this.bloc.add(GetListCertificadoEvent()),
+                      child: Text('Actualizar'));
+                },
+              ),
+              BlocBuilder<ListCertificadoBloc, ListCertificadoState>(
+                bloc: this.bloc,
+                builder: (context, state) {
+                  return ElevatedButton(
                       onPressed: () => (state is LoadedListCertificadoState)
                           ? generateExcel(state.listCertificadoCur)
                           : null,

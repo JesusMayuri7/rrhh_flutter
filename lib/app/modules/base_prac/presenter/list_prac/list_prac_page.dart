@@ -32,7 +32,10 @@ class _ListPracPageState extends State<ListPracPage> {
 
   @override
   void initState() {
-    this.bloc.add(ListPracEvent(anio: anioSelected!));
+    if (this.bloc.state is ListPracLoaded) {
+      if ((this.bloc.state as ListPracLoaded).listPracticanteOriginal.isEmpty)
+        this.bloc.add(ListPracEvent(anio: anioSelected!));
+    }
     super.initState();
   }
 
@@ -41,93 +44,89 @@ class _ListPracPageState extends State<ListPracPage> {
     return BlocBuilder<ListPracBloc, ListPracState>(
       bloc: this.bloc,
       builder: (context, state) {
-        return Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        f.Button(
-                            onPressed: () {
-                              this.bloc.add(ListPracEvent(anio: anioSelected!));
-                            },
-                            child: Text(
-                              'Actualizar',
-                              style: TextStyle(fontSize: 12),
-                            )),
-                        SizedBox(width: 5.0),
-                        f.Button(
-                            onPressed: () {
-                              this.bloc.add(ListPracEvent(anio: anioSelected!));
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Text(
-                                  'Exportar',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                ImageIcon(
-                                  AssetImage('assets/images/ExcelExport.png'),
-                                  color: Colors.white,
-                                ),
-                              ],
-                            )),
-                      ],
-                    ),
-                    Container(
-                      width: 400,
-                      child: TextFormField(
-                          textDirection: TextDirection.rtl,
-                          controller: textSearchController,
-                          textAlign: TextAlign.left,
-                          keyboardType: TextInputType.text,
-                          onFieldSubmitted: (value) {
-                            this.bloc.add(FilterPracEvent(textFilter: value));
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      f.Button(
+                          onPressed: () {
+                            this.bloc.add(ListPracEvent(anio: anioSelected!));
                           },
-                          decoration: InputDecoration(
-                            hintText: 'Buscar',
-                            prefixIcon: textSearchController.text.length > 0
-                                ? Icon(Icons.close)
-                                : Icon(Icons.search_outlined),
-                            // set the prefix icon constraints
-                            prefixIconConstraints: BoxConstraints(
-                              minWidth: 25,
-                              minHeight: 25,
-                            ),
-                            border: OutlineInputBorder(),
-                            isDense: true, // Added this
-                            contentPadding: EdgeInsets.only(
-                                left: 5, top: 12, bottom: 0), // Added this
+                          child: Text(
+                            'Actualizar',
+                            style: TextStyle(fontSize: 12),
                           )),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5.0),
-                if (state is ListPracLoaded)
-                  GridPracPage(
-                    columns: getColumnsListPrac(context),
-                    data: (state is ListPracLoaded)
-                        ? state.listPracticanteFiltered
-                        : [],
-                    keyGrid: this.keyGrid,
+                      SizedBox(width: 5.0),
+                      f.Button(
+                          onPressed: () {
+                            this.bloc.add(ListPracEvent(anio: anioSelected!));
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                'Exportar',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                              ImageIcon(
+                                AssetImage('assets/images/ExcelExport.png'),
+                                color: Colors.white,
+                              ),
+                            ],
+                          )),
+                    ],
                   ),
-                (state is ListPracLoading)
-                    ? Center(
-                        child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircularProgressIndicator(),
-                          Text('Cargando lista')
-                        ],
-                      ))
-                    : Container()
-              ],
-            ),
+                  Container(
+                    width: 400,
+                    child: TextFormField(
+                        textDirection: TextDirection.rtl,
+                        controller: textSearchController,
+                        textAlign: TextAlign.left,
+                        keyboardType: TextInputType.text,
+                        onFieldSubmitted: (value) {
+                          this.bloc.add(FilterPracEvent(textFilter: value));
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Buscar',
+                          prefixIcon: textSearchController.text.length > 0
+                              ? Icon(Icons.close)
+                              : Icon(Icons.search_outlined),
+                          // set the prefix icon constraints
+                          prefixIconConstraints: BoxConstraints(
+                            minWidth: 25,
+                            minHeight: 25,
+                          ),
+                          border: OutlineInputBorder(),
+                          isDense: true, // Added this
+                          contentPadding: EdgeInsets.only(
+                              left: 5, top: 12, bottom: 0), // Added this
+                        )),
+                  ),
+                ],
+              ),
+              SizedBox(height: 5.0),
+              if (state is ListPracLoaded)
+                GridPracPage(
+                  columns: getColumnsListPrac(context),
+                  data: state.listPracticanteFiltered,
+                  keyGrid: this.keyGrid,
+                ),
+              (state is ListPracLoading)
+                  ? Center(
+                      child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(),
+                        Text('Cargando lista')
+                      ],
+                    ))
+                  : Container()
+            ],
           ),
         );
       },

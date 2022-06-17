@@ -47,21 +47,21 @@ class CertificadoEntity extends Equatable {
   final String secFunc;
   final String finalidad;
   final int idmetaAnual;
-  final double monto;
-  final double saldo;
-  final double devengado;
-  final double enero;
-  final double febrero;
-  final double marzo;
-  final double abril;
-  final double mayo;
-  final double junio;
-  final double julio;
-  final double agosto;
-  final double setiembre;
-  final double octubre;
-  final double noviembre;
-  final double diciembre;
+  final num monto;
+  final num saldo;
+  final num devengado;
+  final num enero;
+  final num febrero;
+  final num marzo;
+  final num abril;
+  final num mayo;
+  final num junio;
+  final num julio;
+  final num agosto;
+  final num setiembre;
+  final num octubre;
+  final num noviembre;
+  final num diciembre;
 
   @override
   List<Object?> get props => [

@@ -30,7 +30,7 @@ class ResponseEntity extends Equatable {
   ResponseEntity copyWith(
       {bool? status,
       String? message,
-      dynamic? data,
+      dynamic data,
       String? token,
       int? expiresIn,
       bool? isLoged,

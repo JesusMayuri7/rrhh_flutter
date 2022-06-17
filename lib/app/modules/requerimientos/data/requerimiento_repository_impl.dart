@@ -8,7 +8,6 @@ class RequerimientoRepositoryImpl implements IRequerimientoRepository {
   @override
   Future<Either<Failure, ResponseEntity>> getListRequerimientos(
       ParamsRequerimiento params) {
-    // TODO: implement getListRequerimientos
     throw UnimplementedError();
   }
 }

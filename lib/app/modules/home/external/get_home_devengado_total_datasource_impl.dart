@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:rrhh_clean/app/modules/home/data/devengado_total_model.dart';
 
 import 'package:rrhh_clean/app/modules/home/data/i_get_home_devengado_total_datasource.dart';
-import 'package:rrhh_clean/core/config/http_custom.dart';
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';

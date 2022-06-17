@@ -1,11 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../core/auth/auth_response_entity.dart';
+import 'modules/auth/domain/auth_response_entity.dart';
 import 'modules/auth/presenter/bloc/auth_bloc.dart';
 
 class SplashPage extends StatefulWidget {

@@ -1,6 +1,8 @@
+import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/bloc/liquidacion_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/report_liquidacion/bloc/liquidacion_report_bloc.dart';
@@ -98,9 +100,14 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
             child: BlocConsumer<LiquidacionReportBloc, LiquidacionReportState>(
               bloc: this.blocLiquidacion,
               listener: (context, state) {
-                if (state is LiquidacionReportError)
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text(state.message)));
+                if (state is LiquidacionReportError) {
+                  f.showSnackbar(
+                    context,
+                    const f.Snackbar(
+                      content: Text('Error'),
+                    ),
+                  );
+                }
               },
               builder: (context, state) {
                 if (state is LiquidacionReportLoading) {

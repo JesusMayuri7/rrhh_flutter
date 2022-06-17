@@ -24,6 +24,15 @@ class StartModule extends Module {
   ];
 
   @override
+  List<Module> get imports => [
+        CertificadosModule(),
+        BasePracModule(),
+        BaseCasModule(),
+        ConfianzaModule(),
+        LiquidacionModule()
+      ];
+
+  @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => StartFluent(), children: [
       ModuleRoute('/home', module: HomeModule()),

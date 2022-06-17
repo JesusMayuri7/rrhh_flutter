@@ -55,7 +55,7 @@ List<GridColumn> getColumnsLiquidacion() {
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
-        width: 220,
+        width: 210,
         columnName: 'finalidad',
         label: Text('Finalidad',
             style: TextStyle(fontSize: 10, color: Colors.white),
@@ -118,7 +118,7 @@ List<GridColumn> getColumnsLiquidacion() {
             textAlign: TextAlign.center),
         visible: false),
     GridColumn(
-        width: 220,
+        width: 210,
         columnName: 'finalidad_devengado',
         label: Text('Finalidad',
             style: TextStyle(fontSize: 10, color: Colors.white),
@@ -140,16 +140,16 @@ List<GridColumn> getColumnsLiquidacion() {
             textAlign: TextAlign.center)),
     GridColumn(
         allowEditing: true,
-        width: 60,
-        columnName: 'actualizado',
-        label: Text('Actualizado',
+        width: 120,
+        columnName: 'proceso',
+        label: Text('Proceso',
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
         allowEditing: true,
-        width: 120,
-        columnName: 'proceso',
-        label: Text('Proceso',
+        width: 60,
+        columnName: 'actualizado',
+        label: Text('Actualizado',
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
   ]);

@@ -1,9 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'package:rrhh_clean/app/splash_page.dart';
-import 'package:rrhh_clean/core/auth/auth_core_datasource_impl.dart';
-import 'package:rrhh_clean/core/auth/auth_repository_impl.dart';
-import 'package:rrhh_clean/core/auth/login_auth_usecase.dart';
+import 'package:rrhh_clean/app/modules/auth/external/auth_core_datasource_impl.dart';
+import 'package:rrhh_clean/app/modules/auth/data/auth_repository_impl.dart';
+import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
 import 'package:rrhh_clean/core/config/client_dio.dart';
 
 import 'package:rrhh_clean/core/config/http_custom.dart';
@@ -21,7 +21,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bloc/app_bloc.dart';
 
-import 'modules/auth/presenter/auth_module.dart';
+import 'modules/auth/auth_module.dart';
 import 'modules/auth/presenter/bloc/auth_bloc.dart';
 import 'modules/start/start_module.dart';
 

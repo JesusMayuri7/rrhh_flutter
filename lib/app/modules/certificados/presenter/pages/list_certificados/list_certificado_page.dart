@@ -39,16 +39,22 @@ class _JsonDataSourceDataGridState extends State<ListCertificadoPage> {
         CertififadosDataSource(context, <CertificadoEntity>[]);
     this.jsonDataGridSource.buildDataGridRows();
     this.jsonDataGridSource.updateDataGrid();
-    this.bloc.add(GetListCertificadoEvent());
+
+    if (bloc.state is LoadedListCertificadoState) {
+      if ((bloc.state as LoadedListCertificadoState).listCertificadoOri.isEmpty)
+        this.bloc.add(GetListCertificadoEvent());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     // print('reconstruyendo');
-    return BlocBuilder(
+    return BlocBuilder<ListCertificadoBloc, ListCertificadoState>(
         bloc: this.bloc,
         builder: (cpmtext, state) {
+          print(state.runtimeType);
           if (state is LoadedListCertificadoState) {
+            print(' si');
             this.jsonDataGridSource.listadoCertificados =
                 state.listCertificadoCur;
             this.jsonDataGridSource.buildDataGridRows();

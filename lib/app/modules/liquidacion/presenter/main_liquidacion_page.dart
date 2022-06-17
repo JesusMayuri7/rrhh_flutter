@@ -12,10 +12,9 @@ import 'report_liquidacion/pages/liquidacion_report_page.dart';
 
 class MainLiquidacionPage extends StatefulWidget {
   final liquidacionBloc = Modular.get<LiquidacionBloc>();
-  String? anioSelected =
-      Modular.get<AuthBloc>().state.loginResponseEntity!.anio;
+
   MainLiquidacionPage() {
-    liquidacionBloc.add(LiquidacionDataLoadedEvent(anio: anioSelected!));
+    //liquidacionBloc.add(LiquidacionDataLoadedEvent(anio: anioSelected!));
   }
 
   @override
@@ -29,8 +28,8 @@ class MainLiquidacionPageState extends State<MainLiquidacionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ContainedTabBarView(
+    return Material(
+      child: ContainedTabBarView(
           tabs: [
             Text('Liquidacion', style: TextStyle(color: Colors.black)),
             Text('Resumen', style: TextStyle(color: Colors.black)),
@@ -64,10 +63,10 @@ class MainLiquidacionPageState extends State<MainLiquidacionPage> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(flex: 8, child: LiquidacionGridPage()),
+                              Expanded(flex: 9, child: LiquidacionGridPage()),
                               Container(width: 2, color: Colors.blue),
                               Expanded(
-                                flex: 4,
+                                flex: 3,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.start,

@@ -28,28 +28,28 @@ class ListDataAllState extends ListCertificadoState {
 }
 
 class LoadedListCertificadoState extends ListCertificadoState {
-  final List<CertificadoEntity> listCertificadoPrev; //state previous
+  final List<CertificadoEntity> listCertificadoOri; //state previous
   final List<CertificadoEntity> listCertificadoCur; // estado current
   final double totalCertificado;
   final double totalDevengado;
   final double totalSaldo;
 
   LoadedListCertificadoState copyWidth(
-          {List<CertificadoEntity>? listCertificadoPrev,
+          {List<CertificadoEntity>? listCertificadoOri,
           List<CertificadoEntity>? listCertificadoCur,
           double? totalCertificado,
           double? totalDevengado,
           double? totalSaldo}) =>
       LoadedListCertificadoState(
           listCertificadoCur: listCertificadoCur ?? this.listCertificadoCur,
-          listCertificadoPrev: listCertificadoPrev ?? this.listCertificadoPrev,
+          listCertificadoOri: listCertificadoOri ?? this.listCertificadoOri,
           totalCertificado: totalCertificado ?? this.totalCertificado,
           totalDevengado: totalDevengado ?? this.totalDevengado,
           totalSaldo: totalSaldo ?? this.totalSaldo);
 
   LoadedListCertificadoState(
-      {required this.listCertificadoCur,
-      required this.listCertificadoPrev,
+      {this.listCertificadoCur = const [],
+      this.listCertificadoOri = const [],
       this.totalCertificado = 0,
       this.totalDevengado = 0,
       this.totalSaldo = 0});
@@ -57,7 +57,7 @@ class LoadedListCertificadoState extends ListCertificadoState {
   @override
   List<Object> get props => [
         this.listCertificadoCur,
-        this.listCertificadoPrev,
+        this.listCertificadoOri,
         this.totalCertificado,
         this.totalDevengado,
         this.totalSaldo

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
-import '../entities/response_liquidacion_entity.dart';
 
 import '../../../../../core/errors/failure.dart';
 import '../../../../../core/domain/use_cases/usecase.dart';

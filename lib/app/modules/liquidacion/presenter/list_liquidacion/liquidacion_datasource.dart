@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -88,9 +87,9 @@ class LiquidacionDataSource extends DataGridSource {
               DataGridCell<String>(
                   columnName: 'codigo_siga', value: dataGridRow.codigoSiga),
               DataGridCell<String>(
-                  columnName: 'actualizado', value: dataGridRow.actualizado),
-              DataGridCell<String>(
                   columnName: 'proceso', value: dataGridRow.proceso),
+              DataGridCell<String>(
+                  columnName: 'actualizado', value: dataGridRow.actualizado),
             ]))
         .toList();
   }
@@ -265,6 +264,7 @@ class LiquidacionDataSource extends DataGridSource {
       print('antes de build ' + displayText);
       return _buildTextFieldWidget(displayText, column, submitCell);
     }
+    return null;
   }
 
   @override

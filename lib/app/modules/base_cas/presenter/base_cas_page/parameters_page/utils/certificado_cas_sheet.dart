@@ -1,11 +1,12 @@
 import 'package:collection/collection.dart';
+import 'package:rrhh_clean/app/modules/base_cas/domain/entities/base_cas_entity.dart';
 import 'package:rrhh_clean/app/modules/base_cas/domain/entities/presupuesto_cas_entity.dart';
 import 'package:rrhh_clean/app/modules/base_cas/domain/usecases/calcular_cas_use_case.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 
 void sheetCertificado(Workbook workbook, int firstRowHeading,
-    ParamsCalcular params, Worksheet sheetBase) {
-  final Worksheet presupuestoSheet =
+    ParamsCalcular params, lastRowBase, List<BaseCasEntity> baseCas) {
+  final Worksheet certificadoSheet =
       workbook.worksheets.addWithName('CERTIFICADO');
   List<Object> headerPresupuesto = [
     'Año',
@@ -40,86 +41,93 @@ void sheetCertificado(Workbook workbook, int firstRowHeading,
     'TotalProyeccion',
     'Saldo'
   ];
-  presupuestoSheet.importList(headerPresupuesto, firstRowHeading, 1, false);
+  certificadoSheet.importList(headerPresupuesto, firstRowHeading, 1, false);
 
-  print('antes');
-  _fuenteMetaOfBase(sheetBase, params.certificado);
+  _fuenteMetaOfBase(baseCas, params.certificado);
+  fuenteMetaOfCertifcado(baseCas, params.certificado);
   print('despues');
 
   for (int index = 0; index < params.certificado.length; index++) {
     final List<Object> row =
         List.from(params.certificado[index].toMap().values.toList());
 
-    presupuestoSheet.importList(row, firstRowHeading + index + 1, 1, false);
+    certificadoSheet.importList(row, firstRowHeading + index + 1, 1, false);
   }
 
-  final int _rowSum = presupuestoSheet.getLastRow();
-  print(_rowSum);
+  final int _rowSum = certificadoSheet.getLastRow();
 
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 6).formula =
-      'SUM(F6:F$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 7).formula =
-      'SUM(G6:G$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 8).formula =
-      'SUM(H6:H$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 9).formula =
-      'SUM(I6:I$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 10).formula =
-      'SUM(J6:J$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 11).formula =
-      'SUM(K6:K$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 12).formula =
-      'SUM(L6:L$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 13).formula =
-      'SUM(M6:M$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 14).formula =
-      'SUM(N6:N$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 15).formula =
-      'SUM(O6:O$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 16).formula =
-      'SUM(P6:P$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 17).formula =
-      'SUM(Q6:Q$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 18).formula =
-      'SUM(R6:R$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 19).formula =
-      'SUM(S6:S$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 20).formula =
-      'SUM(T6:T$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 21).formula =
-      'SUM(U6:U$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 6).formula =
+      'SUBTOTAL(9,F6:F$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 7).formula =
+      'SUBTOTAL(9,G6:G$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 8).formula =
+      'SUBTOTAL(9,H6:H$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 9).formula =
+      'SUBTOTAL(9,I6:I$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 10).formula =
+      'SUBTOTAL(9,J6:J$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 11).formula =
+      'SUBTOTAL(9,K6:K$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 12).formula =
+      'SUBTOTAL(9,L6:L$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 13).formula =
+      'SUBTOTAL(9,M6:M$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 14).formula =
+      'SUBTOTAL(9,N6:N$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 15).formula =
+      'SUBTOTAL(9,O6:O$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 16).formula =
+      'SUBTOTAL(9,P6:P$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 17).formula =
+      'SUBTOTAL(9,Q6:Q$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 18).formula =
+      'SUBTOTAL(9,R6:R$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 19).formula =
+      'SUBTOTAL(9,S6:S$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 20).formula =
+      'SUBTOTAL(9,T6:T$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 21).formula =
+      'SUBTOTAL(9,U6:U$_rowSum)';
 
-  _proyeccion(6, 22, presupuestoSheet, presupuestoSheet.getLastRow() - 1,
-      sheetBase.getLastRow() - 1);
+  _proyeccion(6, 22, certificadoSheet, certificadoSheet.getLastRow() - 1,
+      baseCas, lastRowBase);
 
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 22).formula =
-      'SUM(V6:V$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 23).formula =
-      'SUM(W6:W$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 24).formula =
-      'SUM(X6:X$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 25).formula =
-      'SUM(Y6:Y$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 26).formula =
-      'SUM(Z6:Z$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 27).formula =
-      'SUM(AA6:AA$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 28).formula =
-      'SUM(AB6:AB$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 29).formula =
-      'SUM(AC6:AC$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 30).formula =
-      'SUM(AD6:AD$_rowSum)';
-  presupuestoSheet.getRangeByIndex(_rowSum + 1, 31).formula =
-      'SUM(AE6:AE$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 22).formula =
+      'SUBTOTAL(9,V6:V$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 23).formula =
+      'SUBTOTAL(9,W6:W$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 24).formula =
+      'SUBTOTAL(9,X6:X$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 25).formula =
+      'SUBTOTAL(9,Y6:Y$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 26).formula =
+      'SUBTOTAL(9,Z6:Z$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 27).formula =
+      'SUBTOTAL(9,AA6:AA$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 28).formula =
+      'SUBTOTAL(9,AB6:AB$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 29).formula =
+      'SUBTOTAL(9,AC6:AC$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 30).formula =
+      'SUBTOTAL(9,AD6:AD$_rowSum)';
+  certificadoSheet.getRangeByIndex(_rowSum + 1, 31).formula =
+      'SUBTOTAL(9,AE6:AE$_rowSum)';
 
-  presupuestoSheet.getRangeByName('F6:U${_rowSum + 1}').numberFormat =
+  certificadoSheet.getRangeByName('F6:U${_rowSum + 1}').numberFormat =
       '#,##0.00';
-  presupuestoSheet.getRangeByName('A6:T${_rowSum + 1}').autoFit();
+  certificadoSheet.getRangeByName('W6:W${_rowSum + 1}').numberFormat =
+      '#,##0.00';
+  certificadoSheet.getRangeByName('Y6:Y${_rowSum + 1}').numberFormat =
+      '#,##0.00';
+  certificadoSheet.getRangeByName('AA6:AA${_rowSum + 1}').numberFormat =
+      '#,##0.00';
+  certificadoSheet.getRangeByName('AC6:AE${_rowSum + 1}').numberFormat =
+      '#,##0.00';
+  certificadoSheet.getRangeByName('A6:AE${_rowSum + 1}').autoFit();
 }
 
-_proyeccion(
-    int _rowInit, int _column, Worksheet page, int _rowEnd, int _lastRowBase) {
+_proyeccion(int _rowInit, int _column, Worksheet page, int _rowEnd, _baseCas,
+    int _lastRowBase) {
   for (int x = _rowInit; x <= _rowEnd; x++) {
     page.getRangeByIndex(x, _column).formula =
         '''=IF(TRIM(LEFT(E$x,9))=BASE!\$Z\$4,COUNTIFS(BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,CERTIFICADO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(CERTIFICADO!D$x,4)),0)
@@ -167,30 +175,33 @@ _proyeccion(
   // POR EJEMPLO FALTA ANCASH 23.28.12
 }
 
-_fuenteMetaOfBase(Worksheet _sheetBase, List<PresupuestoCasEntity> _params) {
+_fuenteMetaOfBase(
+    // Presupuesto y Certificado tienen la misma estructura de datos, se usa PresupuestoCasEntity  ... revisar nombres en lo posterior
+    List<BaseCasEntity> _baseCas,
+    List<PresupuestoCasEntity> _params) {
   // RO
-  List<PresupuestoCasEntity> presupuestoOrderByFuenteRO = _params
+  List<PresupuestoCasEntity> certificadoOrderByFuenteRO = _params
       .where((e) => e.fuente == 'RO')
       .where((element) => element.meta.isNotEmpty)
       .toList();
 
-  presupuestoOrderByFuenteRO.sort((a, b) => a.meta.compareTo(b.meta));
+  certificadoOrderByFuenteRO.sort((a, b) => a.meta.compareTo(b.meta));
 
-  var presupuestoOrderByFuenteMetaRO = groupBy(
-      presupuestoOrderByFuenteRO, (PresupuestoCasEntity item) => item.meta);
+  var certificadoOrderByFuenteMetaRO = groupBy(
+      certificadoOrderByFuenteRO, (PresupuestoCasEntity item) => item.meta);
 
   // RDR
-  List<PresupuestoCasEntity> presupuestoOrderByFuenteRDR = _params
+  List<PresupuestoCasEntity> certificadoOrderByFuenteRDR = _params
       .where((e) => e.fuente == 'RDR')
       .where((element) => element.meta.isNotEmpty)
       .toList();
 
-  presupuestoOrderByFuenteRDR.sort((a, b) => a.meta.compareTo(b.meta));
+  certificadoOrderByFuenteRDR.sort((a, b) => a.meta.compareTo(b.meta));
 
-  var presupuestoOrderByFuenteMetaRDR = groupBy(
-      presupuestoOrderByFuenteRDR, (PresupuestoCasEntity item) => item.meta);
+  var certificadoOrderByFuenteMetaRDR = groupBy(
+      certificadoOrderByFuenteRDR, (PresupuestoCasEntity item) => item.meta);
 
-  presupuestoOrderByFuenteMetaRO.entries.forEach((e) {
+  certificadoOrderByFuenteMetaRO.entries.forEach((e) {
     if (e.value.isNotEmpty) {
       var foundEspecifica11 =
           e.value.where((element) => element.clasificador.contains('23.28.11'));
@@ -227,7 +238,7 @@ _fuenteMetaOfBase(Worksheet _sheetBase, List<PresupuestoCasEntity> _params) {
     }
   });
 
-  presupuestoOrderByFuenteMetaRDR.entries.forEach((e) {
+  certificadoOrderByFuenteMetaRDR.entries.forEach((e) {
     if (e.value.isNotEmpty) {
       var foundEspecifica11 = e.value.where((element) =>
           element.clasificador.substring(0, 8).trim() == '23.28.11');
@@ -263,4 +274,33 @@ _fuenteMetaOfBase(Worksheet _sheetBase, List<PresupuestoCasEntity> _params) {
       }
     }
   });
+}
+
+// Funcion que revisa que todas las metas de la base esten el Certificado
+fuenteMetaOfCertifcado(
+    // Presupuesto y Certificado tienen la misma estructura de datos, se usa PresupuestoCasEntity  ... revisar nombres en lo posterior
+    List<BaseCasEntity> _baseCas,
+    List<PresupuestoCasEntity> _params) {
+  for (int x = 0; x < _baseCas.length - 1; x++) {
+    var nose = _params.firstWhereOrNull((element) {
+      return element.fuente == _baseCas[x].fuenteBase &&
+          element.meta.contains(_baseCas[x].meta);
+    });
+    if (nose == null) {
+      addClasificadorInCertificado(_params, _baseCas[x], '23.28.11');
+      addClasificadorInCertificado(_params, _baseCas[x], '23.28.12');
+      addClasificadorInCertificado(_params, _baseCas[x], '23.28.14');
+      addClasificadorInCertificado(_params, _baseCas[x], '23.26.34');
+    }
+  }
+}
+
+void addClasificadorInCertificado(List<PresupuestoCasEntity> _certificado,
+    BaseCasEntity _baseCasEntity, String clasificador) {
+  _certificado.add(PresupuestoCasEntity(
+      anoEje: 2022,
+      fuente: _baseCasEntity.fuenteBase,
+      producto: _baseCasEntity.producto,
+      meta: _baseCasEntity.meta2020,
+      clasificador: clasificador));
 }

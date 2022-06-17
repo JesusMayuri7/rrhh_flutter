@@ -81,9 +81,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<NewSubsidioBloc, NewSubsidioState>(
       listener: (context, state) {
-        if (state is NewSubsidioError)
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.message)));
+        if (state is NewSubsidioError) SnackBar(content: Text(state.message));
         if (state is NewSubsidioAdded) {
           print(state.runtimeType);
           Navigator.pop(context);
@@ -121,6 +119,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         validator: (value) {
                           if (value!.isEmpty || value.length != 4)
                             return 'Año invalido';
+                          return null;
                         },
                       ),
                       LabelWithDropDown<CertificadoEntity>(
@@ -192,6 +191,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         validator: (value) {
                           if (value!.isEmpty || value.length != 6)
                             return 'Codigo invalido';
+                          return null;
                         },
                       ),
                       SizedBox(
@@ -213,6 +213,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         validator: (value) {
                           if (value!.isEmpty || value.length != 5)
                             return 'Codigo invalido';
+                          return null;
                         },
                       ),
                       SizedBox(
@@ -234,6 +235,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         validator: (value) {
                           if (value!.isEmpty || value.length != 8)
                             return 'Dni invalido';
+                          return null;
                         },
                       ),
                       SizedBox(
@@ -254,6 +256,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         },
                         validator: (value) {
                           if (value!.isEmpty) return 'Nombres invalido';
+                          return null;
                         },
                       ),
                       SizedBox(

@@ -22,11 +22,14 @@ class _HeadBaseCasPageState extends State<ParametersPage>
   @override
   void initState() {
     super.initState();
+
     anioSelected = authBloc.state.loginResponseEntity?.anio;
-    this.bloc.add(HeadParametersFormLoadEvent(
-        dscVariable: 'CALCULAR_PROYECCION_CAS',
-        modalidadId: 1,
-        anio: anioSelected!));
+    if (this.bloc.state is HeadParametersInitialState) {
+      this.bloc.add(HeadParametersFormLoadEvent(
+          dscVariable: 'CALCULAR_PROYECCION_CAS',
+          modalidadId: 1,
+          anio: anioSelected!));
+    }
   }
 
   final ScrollController controller = ScrollController();
@@ -90,7 +93,7 @@ class _HeadBaseCasPageState extends State<ParametersPage>
         showTrackOnHover: false,
         hoverThickness: -3.0,
         thickness: 5.0,
-        isAlwaysShown: w > 940 ? false : true,
+        thumbVisibility: w > 940 ? false : true,
         controller: controller,
         child: SingleChildScrollView(
           controller: controller,

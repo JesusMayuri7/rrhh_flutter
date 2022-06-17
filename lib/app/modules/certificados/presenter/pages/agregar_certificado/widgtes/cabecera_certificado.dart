@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 
-import 'bloc/certificados_bloc.dart';
+import '../bloc/certificados_bloc.dart';
 
 class CabeceraCertificado extends StatelessWidget {
   final bloc = Modular.get<CertificadosBloc>();

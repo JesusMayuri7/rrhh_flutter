@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
 import '../entities/modalidad_concepto_clasificador_entity.dart';
-import '../entities/result_entity.dart';
 import '../../../../../core/errors/failure.dart';
 
 abstract class ICertificadosRepository {

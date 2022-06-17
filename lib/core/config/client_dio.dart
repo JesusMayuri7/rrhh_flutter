@@ -54,7 +54,7 @@ class ClientDio implements IClientCustom {
               throw Exception('Inicie sesion');
             }
           });
-        } on Exception catch (e) {
+        } on Exception {
           Modular.to.navigate('/login');
           //(Modular.get<AuthCoreBloc>().state as SuccessAuthState).loginResponseEntity.copyWith(status: false, token: '');
           return errorInterceptorHandler.next(error);

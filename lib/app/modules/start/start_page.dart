@@ -131,7 +131,7 @@ class _StartPageState extends State<StartPage> with WindowListener {
                         //trailing: Icon(Icons.arrow_forward),
                         onTap: () {
                           //controller.titleAppBar = 'AirHsp';
-                          Modular.to.navigate('/start/certificados/');
+                          Modular.to.pushNamed('/start/certificados/');
                           Navigator.pop(context);
                         },
                       ),

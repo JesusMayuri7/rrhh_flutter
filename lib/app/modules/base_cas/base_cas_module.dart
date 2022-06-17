@@ -60,9 +60,10 @@ class BaseCasModule extends Module {
     Bind((i) => PresupuestoCasUseCase(i())),
 
     // BLOC
-    Bind((i) => HeadParametersBloc(i(), i(), i(), i())),
-    Bind((i) => ResumenBloc(i(), i(), i())),
-    Bind((i) => PresupuestoBloc(i())),
+    Bind.lazySingleton((i) => HeadParametersBloc(i(), i(), i(), i()),
+        export: true),
+    Bind.lazySingleton((i) => ResumenBloc(i(), i(), i()), export: true),
+    Bind.lazySingleton((i) => PresupuestoBloc(i()), export: true),
   ];
 
   @override

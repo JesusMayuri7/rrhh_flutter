@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'auth_response_entity.dart';
+import '../domain/auth_response_entity.dart';
 
 LoginResponseModel loginResponseModelFromJson(String str) =>
     LoginResponseModel.fromJson(json.decode(str));

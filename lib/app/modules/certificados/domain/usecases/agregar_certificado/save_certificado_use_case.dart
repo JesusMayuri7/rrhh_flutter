@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
 import '../../entities/modalidad_entity.dart';
-import '../../entities/result_entity.dart';
 
 import '../../repositories/i_certificados_repository.dart';
 import '../../../../../../core/errors/failure.dart';

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:rrhh_clean/core/config/http_custom.dart';
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/datasource/i_certificados_datasource_app.dart';
 import 'package:rrhh_clean/core/data/models/certificados_model.dart';

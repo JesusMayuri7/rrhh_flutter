@@ -130,6 +130,7 @@ class LiquidacionDetalleDataSource extends DataGridSource {
         column.columnName == 'monto_devolucion') {
       return _buildTextFieldWidget(displayText, column, submitCell);
     }
+    return null;
   }
 
   @override

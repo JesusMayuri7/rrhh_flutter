@@ -20,7 +20,9 @@ class _ConfianzaPageState extends State<ConfianzaPage> {
   @override
   void initState() {
     super.initState();
-    this.blocConfianza.add(ConfianzaAreaEventLoading());
+    if ((this.blocConfianza.state is ConfianzaInitial)) {
+      this.blocConfianza.add(ConfianzaAreaEventLoading());
+    }
   }
 
   @override

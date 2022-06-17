@@ -52,12 +52,12 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
 
     /*this.listLiquidacionBloc.add(GetLiquidacionFillFormEvent(
         anio: anioSelected, modalidad: modalidadSelected));*/
-
-    this.listLiquidacionBloc.add(GetListLiquidacionEvent(
-        anio: anioSelected!, modalidad: modalidadSelected));
-
-    this.liquidacionDataSource =
-        LiquidacionDataSource(listLiquidacionFiltered: []);
+    if ((this.listLiquidacionBloc.state is LiquidacionListInitial)) {
+      this.liquidacionDataSource =
+          LiquidacionDataSource(listLiquidacionFiltered: []);
+      this.listLiquidacionBloc.add(GetListLiquidacionEvent(
+          anio: anioSelected!, modalidad: modalidadSelected));
+    }
   }
 
   @override
@@ -73,12 +73,13 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
         listener: (context, state) {
           if (state is LiquidacionListLoaded) {
             if (state.status == LiquidacionStatus.LiquidacionListError)
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Error: ')));
+              SnackBar(content: Text('Error: '));
           }
         },
         builder: (context, state) {
           if (state is LiquidacionListLoaded) {
+            this.liquidacionDataSource =
+                LiquidacionDataSource(listLiquidacionFiltered: []);
             liquidacionDataSource.listLiquidacionFiltered =
                 state.listLiquidacionFiltered;
             liquidacionDataSource.buildDataGridRows();

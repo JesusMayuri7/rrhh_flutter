@@ -40,12 +40,17 @@ class BasePracModule extends Module {
     Bind((i) => UpdatedPracUseCase(iPracRepository: i())),
 
     //BLOC
-    Bind((i) => BasePracBloc(getDataInitialPracUseCase: i())
-      ..add(BasePracLoadedEvent())),
-    Bind((i) => ListPracBloc(
-        altaBajaPracBloc: i(),
-        listarPracUseCase: i(),
-        updatedPracUseCase: i())),
+    Bind.lazySingleton(
+        (i) => BasePracBloc(getDataInitialPracUseCase: i())
+        //..add(BasePracLoadedEvent())
+        ,
+        export: true),
+    Bind.lazySingleton(
+        (i) => ListPracBloc(
+            altaBajaPracBloc: i(),
+            listarPracUseCase: i(),
+            updatedPracUseCase: i()),
+        export: true),
     Bind((i) => AltaBajaPracBloc(altaBajaPracUseCase: i())),
   ];
 

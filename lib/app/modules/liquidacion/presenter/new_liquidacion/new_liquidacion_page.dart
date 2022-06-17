@@ -70,7 +70,7 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
     return BlocConsumer<NewLiquidacionBloc, NewLiquidacionState>(
       listener: (context, state) {
         if (state is NewLiquidacionError)
-          ScaffoldMessenger(child: Text(state.message));
+          SnackBar(content: Text(state.message));
       },
       bloc: this.newLiquidacionBloc,
       builder: (context, state) {
@@ -150,6 +150,7 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                         validator: (value) {
                           if (value!.isEmpty || value.length != 6)
                             return 'Codigo invalido';
+                          return null;
                         },
                       ),
                       SizedBox(
@@ -171,6 +172,7 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                         validator: (value) {
                           if (value!.isEmpty || value.length != 5)
                             return 'Codigo invalido';
+                          return null;
                         },
                       ),
                       SizedBox(
@@ -191,6 +193,7 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                         validator: (value) {
                           if (value!.isEmpty || value.length != 8)
                             return 'Dni invalido';
+                          return null;
                         },
                       ),
                       SizedBox(
@@ -210,6 +213,7 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                         },
                         validator: (value) {
                           if (value!.isEmpty) return 'Nombres invalido';
+                          return null;
                         },
                       ),
                       SizedBox(

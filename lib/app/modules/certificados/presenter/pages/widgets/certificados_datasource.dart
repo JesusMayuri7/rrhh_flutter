@@ -35,34 +35,27 @@ class CertififadosDataSource extends DataGridSource {
                   columnName: 'finalidad', value: dataGridRow.finalidad),
               //  DataGridCell<int>(
               //     columnName: 'idmeta_amual', value: dataGridRow.idmetaAnual),
-              DataGridCell<double>(
-                  columnName: 'monto', value: dataGridRow.monto),
-              DataGridCell<double>(
+              DataGridCell<num>(columnName: 'monto', value: dataGridRow.monto),
+              DataGridCell<num>(
                   columnName: 'devengado', value: dataGridRow.devengado),
-              DataGridCell<double>(
-                  columnName: 'saldo', value: dataGridRow.saldo),
-              DataGridCell<double>(
-                  columnName: 'enero', value: dataGridRow.enero),
-              DataGridCell<double>(
+              DataGridCell<num>(columnName: 'saldo', value: dataGridRow.saldo),
+              DataGridCell<num>(columnName: 'enero', value: dataGridRow.enero),
+              DataGridCell<num>(
                   columnName: 'febrero', value: dataGridRow.febrero),
-              DataGridCell<double>(
-                  columnName: 'marzo', value: dataGridRow.marzo),
-              DataGridCell<double>(
-                  columnName: 'abril', value: dataGridRow.abril),
-              DataGridCell<double>(columnName: 'mayo', value: dataGridRow.mayo),
-              DataGridCell<double>(
-                  columnName: 'junio', value: dataGridRow.junio),
-              DataGridCell<double>(
-                  columnName: 'julio', value: dataGridRow.julio),
-              DataGridCell<double>(
+              DataGridCell<num>(columnName: 'marzo', value: dataGridRow.marzo),
+              DataGridCell<num>(columnName: 'abril', value: dataGridRow.abril),
+              DataGridCell<num>(columnName: 'mayo', value: dataGridRow.mayo),
+              DataGridCell<num>(columnName: 'junio', value: dataGridRow.junio),
+              DataGridCell<num>(columnName: 'julio', value: dataGridRow.julio),
+              DataGridCell<num>(
                   columnName: 'agosto', value: dataGridRow.agosto),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'setiembre', value: dataGridRow.setiembre),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'octubre', value: dataGridRow.octubre),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'noviembre', value: dataGridRow.noviembre),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'diciembre', value: dataGridRow.diciembre),
             ]))
         .toList();
@@ -88,7 +81,7 @@ class CertififadosDataSource extends DataGridSource {
         alignment: Alignment.centerRight,
         child: Text(
           NumberFormat('#,##0.00', 'en_US').format(
-            double.parse(summaryValue.isEmpty ? '0' : summaryValue),
+            num.parse(summaryValue.isEmpty ? '0' : summaryValue),
           ),
           style: TextStyle(fontSize: 12),
           //e.value.toString(),
@@ -99,7 +92,8 @@ class CertififadosDataSource extends DataGridSource {
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
     final String dscCertificado = row.getCells().first.value;
-    final rowIndex = _baseCasDataGridRows.indexOf(row);
+    //final rowIndex = _baseCasDataGridRows.indexOf(row);
+    final int rowIndex = effectiveRows.indexOf(row);
     var backgroundColor = Colors.transparent;
     if ((rowIndex % 2) == 0) {
       if (dscCertificado.isEmpty)
@@ -130,7 +124,7 @@ class CertififadosDataSource extends DataGridSource {
                 alignment: Alignment.centerRight,
                 child: Text(
                   NumberFormat('#,##0.00', 'en_US').format(
-                    double.parse(e.value.toString()),
+                    num.parse(e.value.toString()),
                   ),
                   style: TextStyle(fontSize: 12),
                   //e.value.toString(),
@@ -160,7 +154,6 @@ class CertififadosDataSource extends DataGridSource {
   }
 
   void updateDataGrid() {
-    print('actualizando grid');
     notifyListeners();
   }
 }

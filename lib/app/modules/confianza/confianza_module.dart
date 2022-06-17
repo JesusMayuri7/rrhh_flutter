@@ -25,9 +25,9 @@ class ConfianzaModule extends Module {
     Bind((i) => ConfianzaRepositoryImpl(i(), i(), i())),
 
     // Blocs
-    Bind((i) => ConfianzaBloc(i()), isLazy: false),
-    Bind((i) => ListConfianzaBloc(i(), i())),
-    Bind((i) => EditConfianzaBloc(i())),
+    Bind.lazySingleton((i) => ConfianzaBloc(i()), export: true),
+    Bind.lazySingleton((i) => ListConfianzaBloc(i(), i()), export: true),
+    Bind.lazySingleton((i) => EditConfianzaBloc(i()), export: true),
 
     //Use Cases
     Bind((i) => GetListConfianzaUseCase(repository: i())),
