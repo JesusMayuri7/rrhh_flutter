@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
 class StartFluent extends StatefulWidget {
@@ -14,6 +15,7 @@ class StartFluent extends StatefulWidget {
 class _StartFluentState extends State<StartFluent> with WindowListener {
   final viewKey = GlobalKey();
   int index = 0;
+  PackageInfo? packageInfo;
 
   @override
   void dispose() {
@@ -23,8 +25,18 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
 
   @override
   void initState() {
-    windowManager.addListener(this);
     super.initState();
+    windowManager.addListener(this);
+    checkVersion();
+  }
+
+  checkVersion() async {
+    packageInfo = await PackageInfo.fromPlatform();
+    print(packageInfo!.version);
+    print(packageInfo!.buildNumber);
+    print(packageInfo!.appName);
+    print(packageInfo!.packageName);
+    print(packageInfo!.buildSignature);
   }
 
   @override
@@ -70,7 +82,7 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
             return const DragToMoveArea(
               child: Align(
                 alignment: AlignmentDirectional.centerStart,
-                child: Text('Recursos Humanos'),
+                child: Text('Recursos Humanos '),
               ),
             );
           }(),
