@@ -16,8 +16,8 @@ class AirhspModule extends Module {
     Bind((i) => ListarRepositoryImpl(datasource: i())),
     Bind((i) => ListarUseCase(i())),
     Bind((i) => ConceptosUseCase(i())),
-    Bind((i) => AirhspBloc(i(), i(), i()), isSingleton: false),
-    Bind((i) => ConceptosBloc((i())), isSingleton: false),
+    Bind.factory((i) => AirhspBloc(i(), i())),
+    Bind.factory((i) => ConceptosBloc((i()))),
   ];
 
   @override

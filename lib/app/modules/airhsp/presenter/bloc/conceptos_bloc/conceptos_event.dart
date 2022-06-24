@@ -18,4 +18,8 @@ class ConceptosLoadEvent extends ConceptosEvent {
       required this.codPlaza,
       required this.tipoPersona,
       required this.nombres});
+
+  @override
+  List<Object> get props =>
+      [this.ejecutora, this.codPlaza, this.tipoPersona, this.nombres];
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../../../domain/entities/airhsp_entity.dart';
-import '../../../bloc/conceptos_bloc/conceptos_bloc.dart';
+import 'package:rrhh_clean/app/modules/airhsp/domain/entities/airhsp_entity.dart';
+import 'package:rrhh_clean/app/modules/airhsp/presenter/bloc/conceptos_bloc/conceptos_bloc.dart';
 
 import '../../conceptos/conceptos_page.dart';
 import '../../../../../../../core/uitls/device_info.dart';
@@ -51,6 +51,7 @@ class ItemListPage extends StatelessWidget {
                   },
                   fullscreenDialog: true));
             } else {
+              print('click desktop');
               // Acuerdate que este bloc no es singleton, por lo tanto tiene que ser la misma instancia de la pagina principal, por eso viene como parametro
               this.blocConceptos.add(ConceptosLoadEvent(
                     ejecutora: '1078',

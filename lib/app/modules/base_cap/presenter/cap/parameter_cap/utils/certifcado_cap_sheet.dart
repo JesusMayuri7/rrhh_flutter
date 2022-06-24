@@ -14,6 +14,8 @@ void certificadoCapSheet(Workbook workbook, int firstRowHeading,
     'Producto',
     'Meta',
     'Clasificador',
+    'Subgenerica',
+    'Clasificador Ext.',
     'PIA',
     'PIM',
     'Certificado',
@@ -39,7 +41,7 @@ void certificadoCapSheet(Workbook workbook, int firstRowHeading,
     'Cantidad',
     'Proyeccion',
     'TotalProyeccion',
-    'Saldo'
+    'Saldo',
   ];
   print('Certificados ' + params.certificadoCap.length.toString());
   presupuestoSheet.importList(headerPresupuesto, firstRowHeading, 1, false);
@@ -90,7 +92,7 @@ void certificadoCapSheet(Workbook workbook, int firstRowHeading,
       'SUM(U6:U$_rowSum)';
 
   _proyeccion(
-      4, 22, presupuestoSheet, presupuestoSheet.getLastRow() - 1, _lastRowBase);
+      4, 24, presupuestoSheet, presupuestoSheet.getLastRow() - 1, _lastRowBase);
 
   presupuestoSheet.getRangeByIndex(_rowSum + 1, 22).formula =
       'SUM(V6:V$_rowSum)';
@@ -120,60 +122,73 @@ void certificadoCapSheet(Workbook workbook, int firstRowHeading,
 
 _proyeccion(int _firstRowBase, int _column, Worksheet page, int _rowEnd,
     int _lastRowBase) {
+  String celOcupado = '\$Z\$4';
+  String celVacante = '\$AB\$4';
+  String colOcupadoCantidad = '\$Z';
+  String colVacanteCantidad = '\$AB';
+  String colOcupadoMonto = '\$AA';
+  String colVacanteMonto = '\$AC';
+  String colCertificado = '\$J';
+  String colProyeccion = '\$AE';
+  String colDevengado = '\$K';
+  String colTotalAnual = '\$AF';
+
   int _firstRowCertificado = 6;
   for (int x = _firstRowBase; x < _rowEnd - 1; x++) {
     page.getRangeByIndex(_firstRowCertificado, _column).formula =
-        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,COUNTIFS(BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4)),0)''';
+        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,COUNTIFS(BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4)),0)
+        ''';
 
     page.getRangeByIndex(_firstRowCertificado, _column + 1).formula =
-        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,SUMIFS(BASE!\$EI\$$_firstRowBase:\$EI\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4)),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EJ\$2,SUMIFS(BASE!\$EJ\$$_firstRowBase:\$EJ\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4)),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EK\$2,SUMIFS(BASE!\$EK\$$_firstRowBase:\$EK\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4)),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EL\$2,SUMIFS(BASE!\$EL\$$_firstRowBase:\$EL\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4)),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EM\$2,SUMIFS(BASE!\$EM\$$_firstRowBase:\$EM\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4)),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EN\$2,SUMIFS(BASE!\$EN\$$_firstRowBase:\$EN\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4)),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$ES\$2,SUMIFS(BASE!\$ES\$$_firstRowBase:\$ES\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4)),0)''';
+        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,SUMIFS(BASE!\$EI\$$_firstRowBase:\$EI\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4)),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EJ\$2,SUMIFS(BASE!\$EJ\$$_firstRowBase:\$EJ\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4)),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EK\$2,SUMIFS(BASE!\$EK\$$_firstRowBase:\$EK\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4)),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EL\$2,SUMIFS(BASE!\$EL\$$_firstRowBase:\$EL\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4)),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EM\$2,SUMIFS(BASE!\$EM\$$_firstRowBase:\$EM\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4)),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EN\$2,SUMIFS(BASE!\$EN\$$_firstRowBase:\$EN\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4)),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$ES\$2,SUMIFS(BASE!\$ES\$$_firstRowBase:\$ES\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4)),0)''';
 
     // OCUPADOS
     // CANTIDAD
     page.getRangeByIndex(4, _column + 2).setText('OCUPADO');
     page.getRangeByIndex(_firstRowCertificado, _column + 2).formula =
-        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,COUNTIFS(BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$X\$4),0)''';
+        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,COUNTIFS(BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celOcupado),0)
+        ''';
     // MONTO OCUPADO
     page.getRangeByIndex(_firstRowCertificado, _column + 3).formula =
-        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,SUMIFS(BASE!\$EI\$$_firstRowBase:\$EI\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$X\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EJ\$2,SUMIFS(BASE!\$EJ\$$_firstRowBase:\$EJ\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$X\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EK\$2,SUMIFS(BASE!\$EK\$$_firstRowBase:\$EK\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$X\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EL\$2,SUMIFS(BASE!\$EL\$$_firstRowBase:\$EL\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$X\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EM\$2,SUMIFS(BASE!\$EM\$$_firstRowBase:\$EM\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$X\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EN\$2,SUMIFS(BASE!\$EN\$$_firstRowBase:\$EN\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$X\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$ES\$2,SUMIFS(BASE!\$ES\$$_firstRowBase:\$ES\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$X\$4),0)''';
+        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,SUMIFS(BASE!\$EI\$$_firstRowBase:\$EI\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celOcupado),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EJ\$2,SUMIFS(BASE!\$EJ\$$_firstRowBase:\$EJ\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celOcupado),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EK\$2,SUMIFS(BASE!\$EK\$$_firstRowBase:\$EK\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celOcupado),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EL\$2,SUMIFS(BASE!\$EL\$$_firstRowBase:\$EL\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celOcupado),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EM\$2,SUMIFS(BASE!\$EM\$$_firstRowBase:\$EM\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celOcupado),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EN\$2,SUMIFS(BASE!\$EN\$$_firstRowBase:\$EN\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celOcupado),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$ES\$2,SUMIFS(BASE!\$ES\$$_firstRowBase:\$ES\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celOcupado),0)''';
 
     // VACANTE
     // CANTIDAD
     page.getRangeByIndex(4, _column + 4).setText('VACANTE');
 
     page.getRangeByIndex(_firstRowCertificado, _column + 4).formula =
-        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,COUNTIFS(BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$Z\$4),0)
+        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,COUNTIFS(BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celVacante),0)
         ''';
 
     page.getRangeByIndex(_firstRowCertificado, _column + 5).formula =
-        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,SUMIFS(BASE!\$EI\$$_firstRowBase:\$EI\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$Z\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EJ\$2,SUMIFS(BASE!\$EJ\$$_firstRowBase:\$EJ\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$Z\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EK\$2,SUMIFS(BASE!\$EK\$$_firstRowBase:\$EK\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$Z\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EL\$2,SUMIFS(BASE!\$EL\$$_firstRowBase:\$EL\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$Z\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EM\$2,SUMIFS(BASE!\$EM\$$_firstRowBase:\$EM\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$Z\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EN\$2,SUMIFS(BASE!\$EN\$$_firstRowBase:\$EN\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$Z\$4),0)+
-        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$ES\$2,SUMIFS(BASE!\$ES\$$_firstRowBase:\$ES\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,CERTIFICADO!B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(CERTIFICADO!D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,CERTIFICADO!\$Z\$4),0)''';
+        '''=IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EI\$2,SUMIFS(BASE!\$EI\$$_firstRowBase:\$EI\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celVacante),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EJ\$2,SUMIFS(BASE!\$EJ\$$_firstRowBase:\$EJ\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celVacante),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EK\$2,SUMIFS(BASE!\$EK\$$_firstRowBase:\$EK\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celVacante),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EL\$2,SUMIFS(BASE!\$EL\$$_firstRowBase:\$EL\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celVacante),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EM\$2,SUMIFS(BASE!\$EM\$$_firstRowBase:\$EM\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celVacante),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$EN\$2,SUMIFS(BASE!\$EN\$$_firstRowBase:\$EN\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celVacante),0)+
+        IF(TRIM(LEFT(E$_firstRowCertificado,9))=BASE!\$ES\$2,SUMIFS(BASE!\$ES\$$_firstRowBase:\$ES\$$_lastRowBase,BASE!\$AM\$$_firstRowBase:\$AM\$$_lastRowBase,B$_firstRowCertificado,BASE!\$AT\$$_firstRowBase:\$AT\$$_lastRowBase,C$_firstRowCertificado,BASE!\$AR\$$_firstRowBase:\$AR\$$_lastRowBase,LEFT(D$_firstRowCertificado,4),BASE!\$Z\$$_firstRowBase:\$Z\$$_lastRowBase,$celVacante),0)''';
 
     page.getRangeByIndex(_firstRowCertificado, _column + 6).formula =
-        '=X$_firstRowCertificado+Z$_firstRowCertificado';
+        '=$colOcupadoCantidad$_firstRowCertificado+$colVacanteCantidad$_firstRowCertificado';
     page.getRangeByIndex(_firstRowCertificado, _column + 7).formula =
-        '=Y$_firstRowCertificado+AA$_firstRowCertificado';
+        '=$colOcupadoMonto$_firstRowCertificado+$colVacanteMonto$_firstRowCertificado';
     page.getRangeByIndex(_firstRowCertificado, _column + 8).formula =
-        '=I$_firstRowCertificado+AC$_firstRowCertificado';
+        '=$colDevengado$_firstRowCertificado+$colProyeccion$_firstRowCertificado';
     page.getRangeByIndex(_firstRowCertificado, _column + 9).formula =
-        '=H$_firstRowCertificado-AD$_firstRowCertificado';
+        '=$colCertificado$_firstRowCertificado-$colTotalAnual$_firstRowCertificado';
 
     _firstRowCertificado += 1;
   }
@@ -215,7 +230,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.11.14'));
+            especifica3: '21.11.14',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRO13 = e.value.where((element) =>
@@ -226,7 +243,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.19.13'));
+            especifica3: '21.19.13',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRO21 = e.value.where((element) =>
@@ -237,7 +256,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.19.21'));
+            especifica3: '21.19.21',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRO11 = e.value.where((element) =>
@@ -248,7 +269,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.19.11'));
+            especifica3: '21.19.11',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRO399 =
@@ -259,7 +282,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.19.399'));
+            especifica3: '21.19.399',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRO15 = e.value.where((element) =>
@@ -271,7 +296,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.31.15'));
+            especifica3: '21.31.15',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRO16 = e.value.where((element) =>
@@ -283,7 +310,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.31.16'));
+            especifica3: '21.31.16',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
     }
   });
@@ -298,7 +327,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.11.14'));
+            especifica3: '21.11.14',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRDR13 = e.value.where((element) =>
@@ -309,7 +340,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.19.13'));
+            especifica3: '21.19.13',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRDR21 = e.value.where((element) =>
@@ -320,7 +353,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.19.21'));
+            especifica3: '21.19.21',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRDR11 = e.value.where((element) =>
@@ -331,7 +366,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.19.11'));
+            especifica3: '21.19.11',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRDR399 =
@@ -342,7 +379,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.19.399'));
+            especifica3: '21.19.399',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRDR15 = e.value.where((element) =>
@@ -354,7 +393,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.31.15'));
+            especifica3: '21.31.15',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
 
       final foundEspecificaRDR16 = e.value.where((element) =>
@@ -366,7 +407,9 @@ _fuenteMetaOfBase(List<PresupuestoEntity> _params) {
             fuente: e.value[0].fuente,
             producto: e.value[0].producto,
             meta: e.value[0].meta,
-            especifica3: '21.31.16'));
+            especifica3: '21.31.16',
+            subgenerica: e.value[0].subgenerica,
+            dscClasificadorExt: e.value[0].dscClasificadorExt));
       }
     }
   });

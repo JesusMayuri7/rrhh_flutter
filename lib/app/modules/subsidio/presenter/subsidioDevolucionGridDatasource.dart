@@ -98,9 +98,16 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
       RowColumnIndex rowColumnIndex,
       String summaryValue) {
     return Container(
-      padding: EdgeInsets.all(15.0),
-      child: Text(summaryValue),
-    );
+        padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
+        alignment: Alignment.centerRight,
+        child: Text(
+          NumberFormat('#,##0.00', 'en_US').format(
+            num.parse(summaryValue.isEmpty ? '0' : summaryValue),
+          ),
+          style: TextStyle(fontSize: 12),
+          //e.value.toString(),
+          maxLines: 1,
+        ));
   }
 
   @override

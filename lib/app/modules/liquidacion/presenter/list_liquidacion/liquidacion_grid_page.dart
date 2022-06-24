@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +50,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
   @override
   void initState() {
     super.initState();
-
+    print(this.listLiquidacionBloc.state);
     /*this.listLiquidacionBloc.add(GetLiquidacionFillFormEvent(
         anio: anioSelected, modalidad: modalidadSelected));*/
     if ((this.listLiquidacionBloc.state is LiquidacionListInitial)) {
@@ -94,17 +95,17 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                 children: [
                   Container(
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
+                      padding: const EdgeInsets.only(bottom: 3, top: 3),
                       child: Form(
                         key: _formKey,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ButtonTheme(
-                              //alignedDropdown: true,
-                              child: DropdownButton<String>(
-                                  iconEnabledColor: Colors.blue,
+                            SizedBox(
+                              height: 25,
+                              width: 80,
+                              child: f.Combobox<String>(
                                   value: (this.listLiquidacionBloc.state
                                           is LiquidacionListLoaded)
                                       ? (this.listLiquidacionBloc.state
@@ -113,12 +114,11 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                                       : modalidadSelected,
                                   items: _modalidad
                                       .map((String dropDownStringItem) {
-                                    return DropdownMenuItem<String>(
+                                    return f.ComboboxItem<String>(
                                       child: Text(dropDownStringItem),
                                       value: dropDownStringItem,
                                     );
                                   }).toList(),
-                                  hint: new Text("Modalidad"),
                                   onChanged: (value) {
                                     this.listLiquidacionBloc.add(
                                         SetLiquidacionFilteredModalidadEvent(

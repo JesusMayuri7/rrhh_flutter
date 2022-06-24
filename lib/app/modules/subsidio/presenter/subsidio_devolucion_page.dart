@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -57,10 +58,10 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
             subsidioDevolucionFiltered: [],
             dataGridController: _dataGridController);
     return BlocConsumer<SubsidioDevolucionBloc, SubsidioDevolucionState>(
-        buildWhen: (previousState, newState) {
-          if (newState is SubsidioDevolucionLoaded) return true;
-          return false;
-        },
+        //buildWhen: (previousState, newState) {
+        //  if (newState is SubsidioDevolucionLoaded) return true;
+        //  return false;
+        //},
         bloc: this.bloc,
         listener: (context, state) {
           if (state is SubsidioDevolucionError)
@@ -86,7 +87,7 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          DropdownButton<String>(
+/*                           DropdownButton<String>(
                             value: modalidadSelected,
                             items: _modalidad
                                 .map<DropdownMenuItem<String>>((String value) {
@@ -98,8 +99,29 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
                               setState(() {
                                 modalidadSelected = value!;
                               });
-                              // this.blocApp.add(AppAnioSelectEvent(_anioSelected));
+                              this.bloc.add(SubsidioDevolucionModalidad(
+                                  modalidad: modalidadSelected));
                             },
+                          ), */
+                          f.SizedBox(
+                            height: 25,
+                            child: f.Combobox<String>(
+                              placeholder: const Text('Modalidad'),
+                              value: modalidadSelected,
+                              items: _modalidad
+                                  .map<f.ComboboxItem<String>>((String value) {
+                                return f.ComboboxItem<String>(
+                                    value: value, child: Text(value));
+                              }).toList(),
+                              onChanged: (String? value) {
+                                print(value);
+                                setState(() {
+                                  modalidadSelected = value!;
+                                });
+                                this.bloc.add(SubsidioDevolucionModalidad(
+                                    modalidad: modalidadSelected));
+                              },
+                            ),
                           ),
                           Container(
                               width: 200,
@@ -207,7 +229,7 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
                           columns: getColumnsSubisioDevolucion(),
                           headerRowHeight: 30,
                           footer: Container(),
-                          footerHeight: 25,
+                          footerHeight: 5,
                           rowHeight: 19,
                           isScrollbarAlwaysShown: true,
                           gridLinesVisibility: GridLinesVisibility.both,
@@ -217,6 +239,7 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
                           allowTriStateSorting: true,
                           showSortNumbers: true,
                           selectionMode: SelectionMode.single,
+
                           onSelectionChanged: (List<DataGridRow> addedRows,
                               List<DataGridRow> removedRows) {
                             final index = subsidioDevolucionDataSource.rows

@@ -4,12 +4,14 @@
 
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 ConceptoEntity conceptoModelFromJson(String str) =>
     ConceptoEntity.fromJson(json.decode(str));
 
 String conceptoModelToJson(ConceptoEntity data) => json.encode(data.toJson());
 
-class ConceptoEntity {
+class ConceptoEntity extends Equatable {
   String concepto;
   String descripcion;
   String monto;
@@ -44,4 +46,7 @@ class ConceptoEntity {
         "monto": monto,
         "fuente": fuente,
       };
+
+  @override
+  List<Object> get props => [concepto, descripcion, monto, fuente];
 }

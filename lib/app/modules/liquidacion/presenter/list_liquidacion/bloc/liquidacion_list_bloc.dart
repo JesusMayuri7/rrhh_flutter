@@ -113,6 +113,7 @@ class LiquidacionListBloc
   _onGetListLiquidacionEvent(
       GetListLiquidacionEvent event, Emitter<LiquidacionListState> emit) async {
     var result = await this.getListLiquidacionUseCase(event.anio);
+    print('solicitando liquidacioens');
     emit(result.fold((l) {
       if (state is LiquidacionListLoaded)
         return (state as LiquidacionListLoaded)

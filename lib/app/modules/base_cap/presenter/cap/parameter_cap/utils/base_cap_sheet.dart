@@ -394,7 +394,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
 
     // Total
     sheet.getRangeByIndex(rowIndex, 146).formula =
-        '=SUM(\$EI$rowIndex:\$EO$rowIndex)';
+        '=SUM(\$EI$rowIndex:\$EN$rowIndex)';
 
     // Vida Ley - 21.31.16
     sheet.getRangeByIndex(rowIndex, 147).formula =
@@ -416,7 +416,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
 
     // Total - General
     sheet.getRangeByIndex(rowIndex, 152).formula =
-        '=\$EP$rowIndex+\$ES$rowIndex+\$ET$rowIndex+\$EU$rowIndex';
+        '=\$EP$rowIndex+\$ES$rowIndex';
   }
 
   sheet.getRangeByIndex(firstRowHeading, 64, lastRow, 152).numberFormat =

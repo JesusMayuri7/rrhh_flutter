@@ -17,6 +17,8 @@ import 'package:rrhh_clean/app/modules/certificados/certificados_module.dart';
 import 'package:rrhh_clean/app/modules/confianza/confianza_module.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/liquidacion_module.dart';
 
+import '../reports/reports_module.dart';
+
 class StartModule extends Module {
   @override
   final List<Bind> binds = [
@@ -46,6 +48,7 @@ class StartModule extends Module {
       ModuleRoute('/subsidio', module: SubsidioModule()),
       ModuleRoute('/requerimientos', module: RequerimientosModule()),
       ModuleRoute('/import', module: ImportModule()),
+      ModuleRoute('/reports', module: ReportsModule()),
       //ModuleRoute('/login', module: AuthModule()),
     ]),
   ];

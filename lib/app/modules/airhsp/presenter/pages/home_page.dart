@@ -15,7 +15,6 @@ class _HomeState extends State<HomePage> {
   final pageViewController = PageController();
   @override
   Widget build(BuildContext context) {
-    print('airhsp');
     return ScaffoldMessenger(
       child: Scaffold(
         body: PageView(

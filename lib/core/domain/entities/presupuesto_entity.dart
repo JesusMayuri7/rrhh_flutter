@@ -12,29 +12,30 @@ String presupuestoEntityToMap(List<PresupuestoEntity> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
 
 class PresupuestoEntity {
-  PresupuestoEntity({
-    required this.anoEje,
-    required this.fuente,
-    required this.producto,
-    required this.meta,
-    required this.especifica3,
-    this.pia = 0,
-    this.pim = 0,
-    this.certificado = 0,
-    this.devengado = 0,
-    this.enero = 0,
-    this.febrero = 0,
-    this.marzo = 0,
-    this.abril = 0,
-    this.mayo = 0,
-    this.junio = 0,
-    this.julio = 0,
-    this.agosto = 0,
-    this.setiembre = 0,
-    this.octubre = 0,
-    this.noviembre = 0,
-    this.diciembre = 0,
-  });
+  PresupuestoEntity(
+      {required this.anoEje,
+      required this.fuente,
+      required this.producto,
+      required this.meta,
+      required this.especifica3,
+      this.pia = 0,
+      this.pim = 0,
+      this.certificado = 0,
+      this.devengado = 0,
+      this.enero = 0,
+      this.febrero = 0,
+      this.marzo = 0,
+      this.abril = 0,
+      this.mayo = 0,
+      this.junio = 0,
+      this.julio = 0,
+      this.agosto = 0,
+      this.setiembre = 0,
+      this.octubre = 0,
+      this.noviembre = 0,
+      this.diciembre = 0,
+      required this.subgenerica,
+      required this.dscClasificadorExt});
 
   final int anoEje;
   final String fuente;
@@ -57,6 +58,8 @@ class PresupuestoEntity {
   final double octubre;
   final double noviembre;
   final double diciembre;
+  final String subgenerica;
+  final String dscClasificadorExt;
 
   factory PresupuestoEntity.fromMap(Map<String, dynamic> json) =>
       PresupuestoEntity(
@@ -65,6 +68,8 @@ class PresupuestoEntity {
         producto: json['producto'],
         especifica3: json["clasificador"],
         meta: json['meta'],
+        subgenerica: json["subgenerica"],
+        dscClasificadorExt: json["dsc_clasificador_ext"],
         pia: json["pia"],
         pim: json["pim"],
         certificado: json["certificado"],
@@ -89,6 +94,8 @@ class PresupuestoEntity {
         "producto": producto,
         "meta": meta,
         "especifica3": especifica3,
+        "subgenerica": subgenerica,
+        "dsc_clasificador_ext": dscClasificadorExt,
         "pia": pia,
         "pim": pim,
         "certificado": certificado,
@@ -109,7 +116,7 @@ class PresupuestoEntity {
 
   @override
   String toString() {
-    return 'PresupuestoEntity(anoEje: $anoEje, fuente: $fuente, producto: $producto, meta: $meta, especifica3: $especifica3, pia: $pia, pim: $pim, certificado: $certificado, devengado: $devengado, enero: $enero, febrero: $febrero, marzo: $marzo, abril: $abril, mayo: $mayo, junio: $junio, julio: $julio, agosto: $agosto, setiembre: $setiembre, octubre: $octubre, noviembre: $noviembre, diciembre: $diciembre)';
+    return 'PresupuestoEntity(anoEje: $anoEje, fuente: $fuente, producto: $producto, meta: $meta, especifica3: $especifica3, pia: $pia, pim: $pim, certificado: $certificado, devengado: $devengado, enero: $enero, febrero: $febrero, marzo: $marzo, abril: $abril, mayo: $mayo, junio: $junio, julio: $julio, agosto: $agosto, setiembre: $setiembre, octubre: $octubre, noviembre: $noviembre, diciembre: $diciembre, subgenerica: $subgenerica)';
   }
 
   PresupuestoEntity copyWith({
@@ -118,6 +125,8 @@ class PresupuestoEntity {
     String? producto,
     String? meta,
     String? especifica3,
+    String? subgenerica,
+    String? dscClasificadorExt,
     double? pia,
     double? pim,
     double? certificado,
@@ -141,6 +150,8 @@ class PresupuestoEntity {
       producto: producto ?? this.producto,
       meta: meta ?? this.meta,
       especifica3: especifica3 ?? this.especifica3,
+      dscClasificadorExt: dscClasificadorExt ?? this.dscClasificadorExt,
+      subgenerica: subgenerica ?? this.dscClasificadorExt,
       pia: pia ?? this.pia,
       pim: pim ?? this.pim,
       certificado: certificado ?? this.certificado,

@@ -26,8 +26,11 @@ class SubsidioDevolucionLoaded extends SubsidioDevolucionState {
   });
 
   @override
-  List<Object> get props =>
-      [this.subsidioDevolucionList, this.subsidioDevolucionFiltered];
+  List<Object> get props => [
+        this.subsidioDevolucionList,
+        this.subsidioDevolucionFiltered,
+        this.modalidad
+      ];
 
   SubsidioDevolucionLoaded copyWith({
     String? modalidad,

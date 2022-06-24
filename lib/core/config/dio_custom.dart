@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
 
-class ClientDio implements IClientCustom {
+class DioCustom implements IClientCustom {
   final bloc = Modular.get<AuthBloc>();
   String? token;
 
@@ -84,5 +84,20 @@ class ClientDio implements IClientCustom {
     /*} on Exception catch (e) {
       return Exception('Error de servidor');
     }*/
+  }
+
+  @override
+  Future<Response> download(String url) async {
+    Response response = await Dio().get(
+      url,
+      options: Options(
+          responseType: ResponseType.bytes,
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          }),
+    );
+    print(response.headers);
+    return response;
   }
 }

@@ -42,10 +42,10 @@ class ConceptosPage extends StatelessWidget {
             else if (state is ConceptosLoadingState)
               CircularProgressIndicator()
             else if (state is ConceptosLoadedState)
-              itemConceptoPage(
-                state.conceptos,
-                this.codPlaza,
-                this.nombres,
+              ItemConceptoPage(
+                conceptos: state.conceptos,
+                codPlaza: this.codPlaza,
+                nombres: this.nombres,
               )
             else if (state is ConceptosErrorState)
               MessageDisplay(message: state.message)

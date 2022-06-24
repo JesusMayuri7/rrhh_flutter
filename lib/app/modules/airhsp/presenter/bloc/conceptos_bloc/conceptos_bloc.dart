@@ -1,7 +1,5 @@
-import 'dart:async';
-
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/entities/concepto_entity.dart';
 import '../../../domain/use_cases/conceptos_use_case.dart';
 import '../../../../../../core/errors/failure.dart';
@@ -16,27 +14,24 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
 
 class ConceptosBloc extends Bloc<ConceptosEvent, ConceptosState> {
   final ConceptosUseCase _conceptosUseCase;
-  ConceptosBloc(this._conceptosUseCase) : super(ConceptosInitialState());
+  ConceptosBloc(this._conceptosUseCase) : super(ConceptosInitialState()) {
+    on<ConceptosLoadEvent>(_conceptosAirhsp);
+  }
 
-  @override
-  Stream<ConceptosState> mapEventToState(
-    ConceptosEvent event,
-  ) async* {
-    if (event is ConceptosLoadEvent) {
-      yield ConceptosLoadingState();
-      var result = await _conceptosUseCase(ParamsConceptos(
-          ejecutora: event.ejecutora,
-          tipoPersona: event.tipoPersona,
-          codPlaza: event.codPlaza));
+  _conceptosAirhsp(ConceptosLoadEvent event, Emitter emit) async {
+    print('event concepto' + event.runtimeType.toString());
+    emit(ConceptosLoadingState());
+    var result = await _conceptosUseCase(ParamsConceptos(
+        ejecutora: event.ejecutora,
+        tipoPersona: event.tipoPersona,
+        codPlaza: event.codPlaza));
 
-      yield result.fold(
-        (failure) =>
-            ConceptosErrorState(message: _mapFailureToMessage(failure)),
-        (data) {
-          return ConceptosLoadedState(data);
-        },
-      );
-    }
+    emit(result.fold(
+      (failure) => ConceptosErrorState(message: _mapFailureToMessage(failure)),
+      (data) {
+        return ConceptosLoadedState(data);
+      },
+    ));
   }
 
   String _mapFailureToMessage(Failure failure) {

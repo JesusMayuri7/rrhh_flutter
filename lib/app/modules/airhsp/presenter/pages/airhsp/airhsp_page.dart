@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../../bloc/air_bloc/airhsp_bloc.dart';
-import '../../bloc/conceptos_bloc/conceptos_bloc.dart';
+import 'package:rrhh_clean/app/modules/airhsp/presenter/bloc/air_bloc/airhsp_bloc.dart';
+import 'package:rrhh_clean/app/modules/airhsp/presenter/bloc/conceptos_bloc/conceptos_bloc.dart';
+
 import 'widgets/text_field_search.dart';
 import '../conceptos/conceptos_page.dart';
 import '../conceptos/item_concepto_widget.dart';
@@ -13,8 +14,6 @@ import 'widgets/lista_widget.dart';
 
 class AirhspPage extends StatefulWidget {
   final String tipoPersona;
-  static const String routeName = '/airhsp_page';
-
   const AirhspPage({required this.tipoPersona}) : super(); //
 
   @override
@@ -30,28 +29,32 @@ class _AirhspPageState extends State<AirhspPage>
   final _focusNode = FocusNode();
 
   @override
-  initState() {
+  void initState() {
     super.initState();
+    this
+        .bloc
+        .add(ListarEvent(ejecutora: '1078', tipoPersona: widget.tipoPersona));
     this._focusNode.addListener(() {
       if (this._focusNode.hasFocus) {
         this._controller.selection = TextSelection(
             baseOffset: 0, extentOffset: this._controller.text.length);
       }
     });
-    listar();
+    // listar();
   }
 
   @override
   dispose() {
     bloc.close();
     super.dispose();
-    // buscar();
   }
 
-  listar() {
-    bloc.add(ListarEvent(ejecutora: '1078', tipoPersona: widget.tipoPersona));
+/*   listar() {
+    this
+        .bloc
+        .add(ListarEvent(ejecutora: '1078', tipoPersona: widget.tipoPersona));
     //bloc.add(SelectedItemEvent(ejecutora: '1078',codPlaza: '000411', tipoPersona: widget.tipoPersona));
-  }
+  } */
 
   Widget screenConceptos(
       {required String codPlaza,
@@ -70,8 +73,8 @@ class _AirhspPageState extends State<AirhspPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     BlocListener(listener: (context, _state) {
-      print('listener ' + _state.runtimeType.toString());
       if (_state is ErrorAirhspState) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -132,7 +135,7 @@ class _AirhspPageState extends State<AirhspPage>
                             child: Center(child: CircularProgressIndicator())),
                       if (state is LoadedAirhspState)
                         ListaPage(this.blocConcepto, state.listado,
-                            widget.tipoPersona),
+                            widget.tipoPersona, ValueKey(widget.tipoPersona)),
                     ]),
                   );
                 },
@@ -169,7 +172,10 @@ class _AirhspPageState extends State<AirhspPage>
                       Expanded(
                           child: Center(child: CircularProgressIndicator())),
                     if (_state is ConceptosLoadedState)
-                      itemConceptoPage(_state.conceptos, '00000', 'NOMBRES')
+                      ItemConceptoPage(
+                          conceptos: _state.conceptos,
+                          codPlaza: '00000',
+                          nombres: 'NOMBRES')
                   ],
                 ),
               );

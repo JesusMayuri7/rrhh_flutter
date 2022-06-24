@@ -10,13 +10,16 @@ class ListaPage extends StatelessWidget {
   final List<AirhspEntity> listado;
   final String tipoPersona;
 
-  ListaPage(this.bloc, this.listado, this.tipoPersona);
+  ListaPage(this.bloc, this.listado, this.tipoPersona, Key? key)
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ScrollController _scrollController = ScrollController();
     return Expanded(
         child: ListView.builder(
-            //physics: NeverScrollableScrollPhysics(),
+            controller: _scrollController,
+            //key: ValueKey(tipoPersona),
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
             itemCount: listado.length,

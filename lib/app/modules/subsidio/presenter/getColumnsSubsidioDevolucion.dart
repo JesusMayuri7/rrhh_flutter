@@ -151,7 +151,7 @@ List<GridColumn> getColumnsSubisioDevolucion() {
           textAlign: TextAlign.center),
     ),
     GridColumn(
-        width: 50,
+        width: 60,
         columnName: 'monto_devolucion',
         label: Text('Monto',
             style: TextStyle(fontSize: 10.5, color: Colors.white),

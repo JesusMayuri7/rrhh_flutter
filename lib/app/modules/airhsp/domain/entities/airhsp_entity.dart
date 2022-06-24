@@ -1,4 +1,7 @@
-class AirhspEntity {
+import 'package:equatable/equatable.dart';
+
+// ignore: must_be_immutable
+class AirhspEntity extends Equatable {
   String plaza;
   String nombres;
   String cargo;
@@ -19,4 +22,19 @@ class AirhspEntity {
       required this.estado,
       required this.dni,
       required this.estadoCant});
+
+  @override
+  List<Object> get props {
+    return [
+      plaza,
+      nombres,
+      cargo,
+      nivel,
+      establecimiento,
+      dependencia,
+      estado,
+      estadoCant,
+      dni,
+    ];
+  }
 }

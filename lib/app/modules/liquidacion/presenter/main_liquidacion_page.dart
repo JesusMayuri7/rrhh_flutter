@@ -11,20 +11,25 @@ import 'list_liquidacion/liquidacion_grid_page.dart';
 import 'report_liquidacion/pages/liquidacion_report_page.dart';
 
 class MainLiquidacionPage extends StatefulWidget {
-  final liquidacionBloc = Modular.get<LiquidacionBloc>();
-
-  MainLiquidacionPage() {
-    //liquidacionBloc.add(LiquidacionDataLoadedEvent(anio: anioSelected!));
-  }
+  MainLiquidacionPage();
 
   @override
   MainLiquidacionPageState createState() => MainLiquidacionPageState();
 }
 
 class MainLiquidacionPageState extends State<MainLiquidacionPage> {
+  final liquidacionBloc = Modular.get<LiquidacionBloc>();
   final anioSelected = (Modular.get<AuthBloc>().state as SuccessAuthState)
       .loginResponseEntity
       .anio;
+
+  @override
+  void initState() {
+    if (this.liquidacionBloc.state is LiquidacionInitalState) {
+      this.liquidacionBloc.add(LiquidacionDataLoadedEvent(anio: anioSelected));
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +58,7 @@ class MainLiquidacionPageState extends State<MainLiquidacionPage> {
             Padding(
               padding: const EdgeInsets.only(right: 5, left: 5, bottom: 5),
               child: BlocBuilder<LiquidacionBloc, LiquidacionState>(
-                bloc: widget.liquidacionBloc,
+                bloc: this.liquidacionBloc,
                 builder: (context, state) {
                   if (state is LiquidacionLoadedState) {
                     return Column(
@@ -102,7 +107,7 @@ class MainLiquidacionPageState extends State<MainLiquidacionPage> {
                     else
                       return Center(
                         child: TextButton(
-                            onPressed: () => widget.liquidacionBloc.add(
+                            onPressed: () => this.liquidacionBloc.add(
                                 LiquidacionDataLoadedEvent(anio: anioSelected)),
                             child: Text('Reintentar')),
                       );

@@ -61,7 +61,6 @@ class ListarDatasourceImpl implements IAirhspDatasource {
             'Host': env['url_mef']!
           },
           body: param);
-      print(response.body);
       return airHspModelFromXML(response.body);
     } on SocketException {
       throw ServerException('Sin conexion');

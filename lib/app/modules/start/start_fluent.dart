@@ -138,6 +138,9 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
               case 10:
                 Modular.to.pushNamed('/start/import/');
                 break;
+              case 11:
+                Modular.to.pushNamed('/start/reports/');
+                break;
               default:
             }
           },
@@ -201,6 +204,10 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
               title: const Text('Importar'),
             ),
             PaneItemSeparator(),
+            PaneItem(
+              icon: const Icon(FluentIcons.cloud_import_export),
+              title: const Text('Reports'),
+            ),
           ],
         ),
         content: RouterOutlet());
