@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:rrhh_clean/core/data/models/response_model.dart';
 
 import '../../../../../core/errors/failure.dart';
 import '../entities/airhsp_entity.dart';
@@ -10,4 +11,6 @@ abstract class IAirhspRepository {
 
   Future<Either<Failure, List<ConceptoEntity>>> conceptos(
       String ejecutora, String tipoPersona, String codPlaza);
+
+  Future<Either<Failure, ResponseModel>> downloadFile(String tipoPersona);
 }

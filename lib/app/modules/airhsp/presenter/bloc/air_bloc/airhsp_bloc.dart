@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/download_file_use_case.dart';
 
 import '../../../domain/entities/airhsp_entity.dart';
 import '../../../domain/use_cases/conceptos_use_case.dart';
@@ -19,16 +20,19 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
     'Invalid Input - The number must be a positive integer or zero.';
 
 class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
-  AirhspBloc(this._listarUseCase, this._conceptosUseCase)
+  AirhspBloc(
+      this._listarUseCase, this._conceptosUseCase, this._downloadFileUseCase)
       : super(EmptyAirhspState()) {
     on<ListarEvent>(_listarEvent);
     on<SearchEvent>(_searchEvent);
     on<SelectedItemEvent>(_selectedItemEvent);
+    on<DownloadFileEvent>(_downloadFileEvent);
   }
 
   List<AirhspEntity> listadoActual = [];
   final ListarUseCase _listarUseCase;
   final ConceptosUseCase _conceptosUseCase;
+  final DownloadFileUseCase _downloadFileUseCase;
   String itemSelected = '000000';
 
   String totalPlazas = '0';
@@ -52,6 +56,23 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
         return LoadedAirhspState(listado: data, conceptos: []);
       },
     ));
+  }
+
+  _downloadFileEvent(DownloadFileEvent event, Emitter emit) async {
+    if (state is LoadedAirhspState) {
+      var stateNow = state;
+      emit(LoadingAirhspState());
+      var result = await _downloadFileUseCase(event.tipoPersona);
+
+      emit(result.fold(
+        (failure) {
+          return ErrorAirhspState(message: failure.toString());
+        },
+        (data) {
+          return stateNow;
+        },
+      ));
+    }
   }
 
   FutureOr<void> _searchEvent(event, Emitter<AirhspState> emit) {

@@ -1,4 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'domain/use_cases/download_file_use_case.dart';
+import 'external/download_file_datasource_impl.dart';
 import 'presenter/bloc/conceptos_bloc/conceptos_bloc.dart';
 import 'presenter/pages/home_page.dart';
 
@@ -13,10 +15,13 @@ class AirhspModule extends Module {
   @override
   final List<Bind> binds = [
     Bind((i) => ListarDatasourceImpl(httpCustom: i())),
-    Bind((i) => ListarRepositoryImpl(datasource: i())),
+    Bind((i) => DownloadFileDatasourceImpl(iClientCustom: i())),
+    Bind((i) =>
+        ListarRepositoryImpl(datasource: i(), iDownloadFileDatasource: i())),
     Bind((i) => ListarUseCase(i())),
+    Bind((i) => DownloadFileUseCase(repository: i())),
     Bind((i) => ConceptosUseCase(i())),
-    Bind.factory((i) => AirhspBloc(i(), i())),
+    Bind.factory((i) => AirhspBloc(i(), i(), i())),
     Bind.factory((i) => ConceptosBloc((i()))),
   ];
 

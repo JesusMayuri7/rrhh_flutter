@@ -14,6 +14,8 @@ class EmptyAirhspState extends AirhspState {}
 
 class LoadingAirhspState extends AirhspState {}
 
+class DownloadedirhspState extends AirhspState {}
+
 class LoadedAirhspState extends AirhspState {
   final List<AirhspEntity> listado;
   final List<ConceptoEntity> conceptos;

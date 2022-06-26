@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -102,12 +103,15 @@ class _AirhspPageState extends State<AirhspPage>
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              /*   ElevatedButton(
+        BlocBuilder<AirhspBloc, AirhspState>(
+          bloc: this.bloc,
+          builder: (context, state) {
+            return Expanded(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                  /*   ElevatedButton(
                   onPressed: () {
                     this.bloc.add(SelectedItemEvent(
                         ejecutora: '1078',
@@ -116,19 +120,23 @@ class _AirhspPageState extends State<AirhspPage>
                         nombres: 'NOMBRES'));
                   },
                   child: Text('hola')),*/
-              Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                Expanded(
-                    child: TextFieldSearch(
-                        controller: this._controller,
-                        focusNode: this._focusNode,
-                        search: (value) =>
-                            {this.bloc.add(SearchEvent(criterio: value))})),
-                TextFieldTotalPlazas(bloc.totalPlazas)
-              ]),
-              BlocBuilder<AirhspBloc, AirhspState>(
-                bloc: this.bloc,
-                builder: (context, state) {
-                  return Expanded(
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Expanded(
+                        child: TextFieldSearch(
+                            controller: this._controller,
+                            focusNode: this._focusNode,
+                            search: (value) => {
+                                  this.bloc.add(SearchEvent(criterio: value)),
+                                })),
+                    TextFieldTotalPlazas(bloc.totalPlazas),
+                    f.Button(
+                        child: Text('Descargar'),
+                        onPressed: () {
+                          this.bloc.add(DownloadFileEvent(
+                              tipoPersona: widget.tipoPersona));
+                        }),
+                  ]),
+                  Expanded(
                     child: Column(children: [
                       if (state is LoadingAirhspState)
                         Expanded(
@@ -137,12 +145,11 @@ class _AirhspPageState extends State<AirhspPage>
                         ListaPage(this.blocConcepto, state.listado,
                             widget.tipoPersona, ValueKey(widget.tipoPersona)),
                     ]),
-                  );
-                },
-              ),
-            ],
-          ),
+                  ),
+                ]));
+          },
         ),
+
         /*  BlocBuilder<AirhspBloc, AirhspState>(
             bloc: this.bloc,
             builder: (context, _state) {

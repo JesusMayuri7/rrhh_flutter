@@ -23,6 +23,15 @@ class SearchEvent extends AirhspEvent {
   SearchEvent({required this.criterio});
 }
 
+class DownloadFileEvent extends AirhspEvent {
+  final String tipoPersona;
+
+  DownloadFileEvent({required this.tipoPersona});
+
+  @override
+  List<Object> get props => [tipoPersona];
+}
+
 class SelectedItemEvent extends AirhspEvent {
   final String ejecutora;
   final String codPlaza;
