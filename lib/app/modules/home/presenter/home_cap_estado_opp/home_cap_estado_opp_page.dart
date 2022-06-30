@@ -20,8 +20,8 @@ class HomeCapEstadoOppPage extends StatefulWidget {
 
 class _HomeCapEstadoOppPageState extends State<HomeCapEstadoOppPage> {
   late HomeCapEstadoOppDataSource capEstadoOppDataSource;
-  var _estados = ['CONCURSO', 'CONFIANZA'];
-  String estadoSelected = 'CONCURSO';
+  var _estados = ['TODOS', 'CONCURSO', 'CONFIANZA'];
+  String estadoSelected = 'TODOS';
 
   @override
   void initState() {
@@ -43,45 +43,55 @@ class _HomeCapEstadoOppPageState extends State<HomeCapEstadoOppPage> {
     return Expanded(
       child: Column(
         children: [
-          Container(
-              alignment: Alignment.centerLeft,
-              child: Combobox<String>(
-                placeholder: Text('Tipo'),
-                items: _estados.map<ComboboxItem<String>>((String value) {
-                  return ComboboxItem<String>(
-                    value: value,
-                    child: Container(
-                        width: 80,
-                        child: Text(value, style: TextStyle(fontSize: 10))),
-                  );
-                }).toList(),
-                value: estadoSelected,
-                onChanged: (value) {
-                  setState(() {
-                    estadoSelected = value!;
-                  });
-                  // this.blocApp.add(AppAnioSelectEvent(_anioSelected));
-                },
-              )),
-          SfDataGridTheme(
-            data: SfDataGridThemeData(
-              brightness: FluentTheme.of(context).brightness,
-              headerHoverColor: Colors.white.withOpacity(0.3),
-              headerColor: Colors.blue,
-            ),
-            child: SfDataGrid(
-              key: UniqueKey(),
-              allowEditing: true,
-              footerFrozenRowsCount: 1,
-              editingGestureType: EditingGestureType.tap,
-              navigationMode: GridNavigationMode.cell,
-              source: capEstadoOppDataSource,
-              columns: getColumnsCapEstadoOpp(),
-              headerRowHeight: 20,
-              rowHeight: 20,
-              isScrollbarAlwaysShown: true,
-              gridLinesVisibility: GridLinesVisibility.both,
-              headerGridLinesVisibility: GridLinesVisibility.both,
+          Row(
+            children: [
+              SizedBox(
+                  height: 25,
+                  child: Combobox<String>(
+                    placeholder: Text('Tipo'),
+                    items: _estados.map<ComboboxItem<String>>((String value) {
+                      return ComboboxItem<String>(
+                        value: value,
+                        child: Container(
+                            width: 80,
+                            child: Text(value, style: TextStyle(fontSize: 10))),
+                      );
+                    }).toList(),
+                    value: estadoSelected,
+                    onChanged: (value) {
+                      setState(() {
+                        estadoSelected = value!;
+                      });
+                      // this.blocApp.add(AppAnioSelectEvent(_anioSelected));
+                    },
+                  )),
+              SizedBox(width: 10),
+              Text('CAP PROVISIONAL 2022 - RM N°352-2021',
+                  style: TextStyle(fontSize: 12))
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SfDataGridTheme(
+              data: SfDataGridThemeData(
+                brightness: FluentTheme.of(context).brightness,
+                headerHoverColor: Colors.white.withOpacity(0.3),
+                headerColor: Colors.blue,
+              ),
+              child: SfDataGrid(
+                key: UniqueKey(),
+                allowEditing: true,
+                footerFrozenRowsCount: 1,
+                editingGestureType: EditingGestureType.tap,
+                navigationMode: GridNavigationMode.cell,
+                source: capEstadoOppDataSource,
+                columns: getColumnsCapEstadoOpp(),
+                headerRowHeight: 20,
+                rowHeight: 20,
+                isScrollbarAlwaysShown: true,
+                gridLinesVisibility: GridLinesVisibility.both,
+                headerGridLinesVisibility: GridLinesVisibility.both,
+              ),
             ),
           ),
         ],

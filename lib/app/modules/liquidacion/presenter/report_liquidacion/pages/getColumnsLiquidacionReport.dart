@@ -15,7 +15,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
-        width: 70,
+        width: 50,
         columnName: 'dsc_modalidad',
         label: Container(
           alignment: Alignment.center,
@@ -26,6 +26,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
+        width: 65,
         columnName: 'dsc_certificado_devengado',
         label: Container(
           alignment: Alignment.center,
@@ -47,7 +48,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
-        width: 50,
+        width: 40,
         columnName: 'fuente_devengado_id',
         label: Container(
           alignment: Alignment.center,
@@ -58,7 +59,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
-        width: 280,
+        width: 210,
         columnName: 'finalidad_devengado',
         label: Container(
           alignment: Alignment.center,
@@ -80,6 +81,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
+        width: 80,
         columnName: 'monto_certificado',
         label: Container(
           alignment: Alignment.center,
@@ -90,6 +92,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
+        width: 80,
         columnName: 'monto_liquidacion',
         label: Container(
           alignment: Alignment.center,
@@ -100,6 +103,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
+        width: 80,
         columnName: 'monto_devengado',
         label: Container(
           alignment: Alignment.center,
@@ -110,6 +114,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
+        width: 80,
         columnName: 'total_certificado',
         label: Container(
           alignment: Alignment.center,
@@ -120,6 +125,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
+        width: 80,
         columnName: 'total_devengado',
         label: Container(
           alignment: Alignment.center,
@@ -130,6 +136,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
+        width: 80,
         columnName: 'diff_devengado',
         label: Container(
           alignment: Alignment.center,
@@ -140,11 +147,12 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
+        width: 80,
         columnName: 'saldo_devengado',
         label: Container(
           alignment: Alignment.center,
           child: Text(
-            'Saldo Deven.',
+            'Saldo Dev.',
             //textAlign: TextAlign.right,
             style: TextStyle(fontSize: 10, color: Colors.white),
           ),

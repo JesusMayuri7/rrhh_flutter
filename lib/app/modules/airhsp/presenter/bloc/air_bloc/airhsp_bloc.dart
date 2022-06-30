@@ -38,28 +38,28 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
   String totalPlazas = '0';
 
   _listarEvent(ListarEvent event, Emitter emit) async {
-    print('event ' + event.runtimeType.toString());
-
-    print('event listar');
-    emit(LoadingAirhspState());
+    /* emit(LoadingAirhspState());
     var result = await _listarUseCase(ParamsListar(
         ejecutora: event.ejecutora, tipoPersona: event.tipoPersona));
 
     emit(result.fold(
       (failure) {
+        print(failure.toString());
         return ErrorAirhspState(message: failure.toString());
       },
       (data) {
+        print('ok');
         this.totalPlazas = data.length.toString();
         this.listadoActual = data;
         //this.appBloc.add(TotalPlazasAppEvent(this.totalPlazas));
         return LoadedAirhspState(listado: data, conceptos: []);
       },
-    ));
+    )); */
   }
 
   _downloadFileEvent(DownloadFileEvent event, Emitter emit) async {
-    if (state is LoadedAirhspState) {
+    //if (state is LoadedAirhspState)
+    {
       var stateNow = state;
       emit(LoadingAirhspState());
       var result = await _downloadFileUseCase(event.tipoPersona);
@@ -95,9 +95,7 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
 
   FutureOr<void> _selectedItemEvent(
       SelectedItemEvent event, Emitter<AirhspState> emit) async {
-    print('entro al evento SelecteitemdEvent');
     AirhspState currentState = state;
-    //yield LoadingAirhspState();
     var result = await _conceptosUseCase(ParamsConceptos(
         ejecutora: event.ejecutora,
         tipoPersona: event.tipoPersona,

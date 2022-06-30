@@ -42,6 +42,7 @@ class ParameterCapBloc extends Bloc<ParameterCapEvent, ParameterCapState> {
     emit(CapLoadingState());
     var result = await this.getListBaseCapUseCase(event.anio);
     emit(result.fold((l) {
+      print(l.toString());
       return CapLoadedState(statusCap: StatusCap.error);
     }, (r) {
       List<CapEntity> resultCalc = this.calcularListBaseCapUseCase(

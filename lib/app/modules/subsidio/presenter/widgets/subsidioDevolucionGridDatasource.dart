@@ -141,22 +141,15 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
         // color: getRowBackgroundColor(),
         cells: row.getCells().map<Widget>((e) {
       if (e.columnName == 'acciones') {
-        return Center(
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 8),
-            alignment: Alignment.center,
-            child: IconButton(
-              icon: Icon(
-                Icons.edit_outlined,
-                color: Colors.amber[800],
-                size: 14,
-              ),
-              onPressed: () {
-                _showModalDialog(this.context, e.value);
-              },
-            ),
-          ),
-        );
+        return LayoutBuilder(
+            builder: (BuildContext contextLayout, BoxConstraints constraints) {
+          return TextButton(
+            child: Text('Editar'),
+            onPressed: () {
+              _showModalDialog(contextLayout, e.value);
+            },
+          );
+        });
       } else if (e.columnName == 'dsc_meta' ||
           e.columnName == 'dsc_certificado' ||
           e.columnName == 'nombres' ||

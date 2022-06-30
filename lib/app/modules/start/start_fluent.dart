@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart' as m;
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -195,6 +196,7 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
               icon: const Icon(MaterialIcons.money_off),
               title: const Text('Devolucion'),
             ),
+            PaneItemSeparator(),
             PaneItem(
               icon: const Icon(FluentIcons.folder_list),
               title: const Text('Requerimientos'),
@@ -203,14 +205,14 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
               icon: const Icon(FluentIcons.cloud_import_export),
               title: const Text('Importar'),
             ),
-            PaneItemSeparator(),
+
             PaneItem(
               icon: const Icon(FluentIcons.cloud_import_export),
               title: const Text('Reports'),
             ),
           ],
         ),
-        content: RouterOutlet());
+        content: m.ScaffoldMessenger(child: RouterOutlet()));
   }
 }
 

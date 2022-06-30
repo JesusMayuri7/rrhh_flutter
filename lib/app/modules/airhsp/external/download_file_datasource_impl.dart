@@ -21,17 +21,14 @@ class DownloadFileDatasourceImpl implements IDownloadFileDatasource {
 
   @override
   Future<ResponseModel> downloadFile(String tipoPersona) async {
-    //Map<String, String?> params = {"anio": anio};
-    // print('external ' + params.toString());
-    List<List<Object>> dataList = [];
     try {
       Response response = await iClientCustom.download(
           'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2022&tipoPersona=$tipoPersona&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
 
+      String modalidad = tipoPersonaToModalidad(tipoPersona);
+      print(modalidad);
       await FileSaveHelper.saveAndLaunchFile(
-          response.data, 'ReporteDatoslaboralesNomina1078_$tipoPersona.xlsx');
-
-      print('data ' + dataList.toString());
+          response.data, 'ReporteDatoslaboralesNomina1078_$modalidad.xlsx');
       return ResponseModel(status: true, message: 'ok');
     } on SocketException {
       throw ServerException('Sin conexion');
@@ -42,5 +39,19 @@ class DownloadFileDatasourceImpl implements IDownloadFileDatasource {
     } catch (e) {
       throw ServerException(e.toString());
     }
+  }
+}
+
+tipoPersonaToModalidad(String _tipoPersona) {
+  print(_tipoPersona);
+  switch (_tipoPersona) {
+    case '1':
+      return 'CAP';
+    case '4':
+      return 'CAS';
+    case '6':
+      return 'PRAC';
+    default:
+      return 'ERROR';
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:dotenv/dotenv.dart';
 import 'package:rrhh_clean/core/config/http_custom.dart';
 import '../../../../core/errors/exceptions.dart';
@@ -7,7 +8,7 @@ import '../data/datasources/i_listar_datasource.dart';
 import '../data/models/airhsp_model.dart';
 import '../data/models/conceptos_model.dart';
 
-class ListarDatasourceImpl implements IAirhspDatasource {
+class ListarDatasourceImpl implements IListarAirhspDatasource {
   var env = DotEnv(includePlatformEnvironment: true)..load();
   @override
   Future<List<AirHspModel>> listar(ejecutora, tipoPersona) async {
@@ -29,7 +30,7 @@ class ListarDatasourceImpl implements IAirhspDatasource {
 
   Future<List<AirHspModel>> _getListadoFromUrl(
       String _url, _ejecutora, _tipoPersona) async {
-    var url = Uri.https(env['url_mef']!, _url, {'q': '{http}'});
+    var url = Uri.http(env['url_mef']!, _url);
 
     Map<String, String> param = {
       'idGobierno': "0",
@@ -54,26 +55,40 @@ class ListarDatasourceImpl implements IAirhspDatasource {
     };
 
     try {
-      var response = await httpCustom.post(url,
+      print(url);
+      Response response = await Dio().post(url.toString(),
+          queryParameters: param,
+          options: Options(
+              sendTimeout: 5 * 1000, // 60 seconds
+              receiveTimeout: 5 * 1000,
+              headers: {
+                'Content-Type':
+                    'application/x-www-form-urlencoded; charset=UTF-8',
+                'Cookie': env['cookie']!,
+                'Host': env['url_mef']!
+              }));
+      /* var response = await httpCustom.post(url,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Cookie': env['cookie']!,
             'Host': env['url_mef']!
           },
-          body: param);
-      return airHspModelFromXML(response.body);
+          body: param); */
+      return airHspModelFromXML(response.data);
     } on SocketException {
       throw ServerException('Sin conexion');
     } on HttpException {
       throw ServerException("No se encuentra la plaza");
     } on FormatException {
       throw ServerException("Formato incorrecto");
+    } catch (e) {
+      throw ServerException(e.toString());
     }
   }
 
   Future<List<ConceptoModel>> _getConceptosFromUrl(String _url,
       String _ejecutora, String _tipoPersona, String _codPlaza) async {
-    var url = Uri.https(env['url_mef']!, _url, {'q': '{http}'});
+    var url = Uri.http(env['url_mef']!, _url, {'q': '{http}'});
     Map<String, String> param = {
       'tipo': '1',
       'ejercicio': '2022',

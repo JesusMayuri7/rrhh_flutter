@@ -17,7 +17,16 @@ class ParameterCapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 250,
-      child: BlocBuilder<ParameterCapBloc, ParameterCapState>(
+      child: BlocConsumer<ParameterCapBloc, ParameterCapState>(
+          listener: (context, state) {
+            if (state is CapLoadedState) {
+              if (state.statusCap == StatusCap.error)
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                      backgroundColor: Colors.black, content: Text('Error')),
+                );
+            }
+          },
           bloc: this.blocParameter,
           builder: (context, state) {
             return Column(

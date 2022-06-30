@@ -11,7 +11,7 @@ import '../models/airhsp_model.dart';
 import '../models/conceptos_model.dart';
 
 class ListarRepositoryImpl implements IAirhspRepository {
-  final IAirhspDatasource datasource;
+  final IListarAirhspDatasource datasource;
   final IDownloadFileDatasource iDownloadFileDatasource;
 
   ListarRepositoryImpl({

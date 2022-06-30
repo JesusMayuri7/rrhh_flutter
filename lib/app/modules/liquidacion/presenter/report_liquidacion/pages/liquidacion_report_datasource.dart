@@ -40,7 +40,7 @@ class LiquidacionReportDatasource extends DataGridSource {
               DataGridCell<double>(
                   columnName: 'monto_certificado',
                   value: dataGridRow.montoCertificado),
-                                DataGridCell<double>(
+              DataGridCell<double>(
                   columnName: 'monto_liquidacion',
                   value: dataGridRow.montoLiquidacion),
               DataGridCell<double>(
@@ -52,7 +52,6 @@ class LiquidacionReportDatasource extends DataGridSource {
               DataGridCell<double>(
                   columnName: 'total_devengado',
                   value: dataGridRow.totalDevengado),
-
               DataGridCell<double>(
                   columnName: 'diff_devengado',
                   value: dataGridRow.diffDevengado),
@@ -61,6 +60,25 @@ class LiquidacionReportDatasource extends DataGridSource {
                   value: dataGridRow.saldoDevengado),
             ]))
         .toList();
+  }
+
+  @override
+  Widget? buildTableSummaryCellWidget(
+      GridTableSummaryRow summaryRow,
+      GridSummaryColumn? summaryColumn,
+      RowColumnIndex rowColumnIndex,
+      String summaryValue) {
+    return Container(
+        padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
+        alignment: Alignment.centerRight,
+        child: Text(
+          NumberFormat('#,##0.00', 'en_US').format(
+            num.parse(summaryValue.isEmpty ? '0' : summaryValue),
+          ),
+          style: TextStyle(fontSize: 12),
+          //e.value.toString(),
+          maxLines: 1,
+        ));
   }
 
   @override

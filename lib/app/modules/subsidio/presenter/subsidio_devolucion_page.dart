@@ -8,14 +8,14 @@ import 'package:rrhh_clean/app/modules/subsidio/domain/new_subsidio_devolucion_u
 
 import 'package:rrhh_clean/app/modules/subsidio/domain/subsidio_devolucion_entity.dart';
 import 'package:rrhh_clean/app/modules/subsidio/presenter/bloc/subsidio_devolucion_bloc.dart';
-import 'package:rrhh_clean/app/modules/subsidio/presenter/exportSubsidio.dart';
+import 'package:rrhh_clean/app/modules/subsidio/presenter/widgets/exportSubsidio.dart';
 import 'package:rrhh_clean/app/modules/subsidio/presenter/new_subsidio/new_subsidio_devolucion_page.dart';
-import 'package:rrhh_clean/app/modules/subsidio/presenter/subsidioDevolucionGridDatasource.dart';
+import 'package:rrhh_clean/app/modules/subsidio/presenter/widgets/subsidioDevolucionGridDatasource.dart';
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
-import 'getColumnsSubsidioDevolucion.dart';
+import 'widgets/getColumnsSubsidioDevolucion.dart';
 
 class SubsidioDevolucionPage extends StatefulWidget {
   const SubsidioDevolucionPage({Key? key}) : super(key: key);

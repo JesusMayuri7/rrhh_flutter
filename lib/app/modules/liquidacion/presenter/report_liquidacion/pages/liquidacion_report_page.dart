@@ -142,6 +142,22 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
                     selectionMode: SelectionMode.single,
                     gridLinesVisibility: GridLinesVisibility.both,
                     headerGridLinesVisibility: GridLinesVisibility.both,
+                    tableSummaryRows: [
+                      GridTableSummaryRow(
+                          showSummaryInRow: false,
+                          title: 'Total Salary: {Sum} for 20 employees',
+                          columns: [
+                            GridSummaryColumn(
+                                name: 'Sum',
+                                columnName: 'diff_devengado',
+                                summaryType: GridSummaryType.sum),
+                            GridSummaryColumn(
+                                name: 'Sum',
+                                columnName: 'saldo_devengado',
+                                summaryType: GridSummaryType.sum)
+                          ],
+                          position: GridTableSummaryRowPosition.bottom)
+                    ],
                   ),
                 );
               },
