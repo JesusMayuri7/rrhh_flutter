@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:rrhh_clean/core/config/http_custom.dart';
@@ -56,14 +55,14 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
     };
 
     try {
-      Response response = await Dio().post(url.toString(),
-          queryParameters: param,
-          options: Options(headers: {
+      var response = await httpCustom.post(url,
+          headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Cookie': env['cookie']!,
             'Host': env['url_mef']!
-          }));
-      return airHspModelFromXML(response.data);
+          },
+          body: param);
+      return airHspModelFromXML(response.body);
     } on SocketException {
       throw ServerException('Sin conexion');
     } on HttpException {
