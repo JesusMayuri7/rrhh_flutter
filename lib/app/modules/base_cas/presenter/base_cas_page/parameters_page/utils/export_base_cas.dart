@@ -1,12 +1,12 @@
 import 'package:rrhh_clean/app/modules/base_cas/domain/usecases/calcular_cas_use_case.dart';
 import 'package:rrhh_clean/app/modules/base_cas/presenter/base_cas_page/parameters_page/utils/columns_base_sheet.dart';
-import 'package:rrhh_clean/app/modules/base_cas/presenter/base_cas_page/parameters_page/utils/presupuesto_cas_sheet.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 
 import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
 
 import 'certificado_cas_sheet.dart';
+import 'presupuesto_cas_sheet.dart';
 
 Future<void> generateExcel(ParamsCalcular params) async {
   // Create a new Excel Document.
@@ -20,37 +20,37 @@ Future<void> generateExcel(ParamsCalcular params) async {
   int firstRowHeading = 5;
 
   String _fmesInicio =
-      '\$${ColumnBaseHeader.mesInicioValue.columnLetter}\$${RowBaseHeader.uno.rowIndex}';
+      '\$${ColumnBaseHeader.mesInicioValue.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
   String _fmesFin =
-      '\$${ColumnBaseHeader.mesFinValue.columnLetter}\$${RowBaseHeader.dos.rowIndex}';
+      '\$${ColumnBaseHeader.mesFinValue.columnLetter}\$${RowBaseHeader.rowDos.rowIndex}';
 
   String _fuit =
-      '\$${ColumnBaseHeader.uitValue.columnLetter}\$${RowBaseHeader.uno.rowIndex}';
+      '\$${ColumnBaseHeader.uitValue.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
   String _fmaxSueldo =
-      '\$${ColumnBaseHeader.porcentajeMaxSueldoValue.columnLetter}\$${RowBaseHeader.dos.rowIndex}';
+      '\$${ColumnBaseHeader.porcentajeMaxSueldoValue.columnLetter}\$${RowBaseHeader.rowDos.rowIndex}';
   String _fmaxEssalud =
-      '\$${ColumnBaseHeader.porcentajeEssaludValue.columnLetter}\$${RowBaseHeader.tres.rowIndex}';
+      '\$${ColumnBaseHeader.porcentajeEssaludValue.columnLetter}\$${RowBaseHeader.rowTres.rowIndex}';
   String _fprimaSctrSalud =
-      '\$${ColumnBaseHeader.primaSctrSaludValue.columnLetter}\$${RowBaseHeader.uno.rowIndex}';
+      '\$${ColumnBaseHeader.primaSctrSaludValue.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
   String _figvSctrSalud =
-      '\$${ColumnBaseHeader.igvAdicionalSctrSaludValue.columnLetter}\$${RowBaseHeader.dos.rowIndex}';
+      '\$${ColumnBaseHeader.igvAdicionalSctrSaludValue.columnLetter}\$${RowBaseHeader.rowDos.rowIndex}';
   String _faguinaldo =
-      '\$${ColumnBaseHeader.aguinaldoSemestralValue.columnLetter}\$${RowBaseHeader.uno.rowIndex}';
+      '\$${ColumnBaseHeader.aguinaldoSemestralValue.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
   String _fprimaSctrPension =
-      '\$${ColumnBaseHeader.primaSctrPensionValue.columnLetter}\$${RowBaseHeader.uno.rowIndex}';
+      '\$${ColumnBaseHeader.primaSctrPensionValue.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
   String _figvSctrPension =
-      '\$${ColumnBaseHeader.igvAdicionalSctrPensionValue.columnLetter}\$${RowBaseHeader.dos.rowIndex}';
+      '\$${ColumnBaseHeader.igvAdicionalSctrPensionValue.columnLetter}\$${RowBaseHeader.rowDos.rowIndex}';
   String _fcomisionSctrPension =
-      '\$${ColumnBaseHeader.comisionSctrPensionValue.columnLetter}\$${RowBaseHeader.tres.rowIndex}';
+      '\$${ColumnBaseHeader.comisionSctrPensionValue.columnLetter}\$${RowBaseHeader.rowTres.rowIndex}';
 
-  //Meses
+  // Establecer Parametros
   parameterBaseSheet(
       sheet,
       params,
-      RowBaseHeader.uno.rowIndex,
-      RowBaseHeader.dos.rowIndex,
-      RowBaseHeader.tres.rowIndex,
-      RowBaseHeader.cuatro.rowIndex);
+      RowBaseHeader.rowUno.rowIndex,
+      RowBaseHeader.rowDos.rowIndex,
+      RowBaseHeader.rowTres.rowIndex,
+      RowBaseHeader.rowCuatro.rowIndex);
 
   final List<Object> heading = List.from(params.lista[0].toMap().keys.toList());
   sheet.importList(heading, firstRowHeading, 1, false);
@@ -64,7 +64,7 @@ Future<void> generateExcel(ParamsCalcular params) async {
   }
 
   for (int rowIndex = firstRowHeading + 1;
-      rowIndex < sheet.getLastRow();
+      rowIndex <= sheet.getLastRow();
       rowIndex++) {
     sheet
         .getRangeByName(ColumnBaseTable.mesInicio.columnLetter + '$rowIndex')
@@ -99,9 +99,10 @@ Future<void> generateExcel(ParamsCalcular params) async {
             .formula =
         '=SUM(${ColumnBaseTable.montoAnual.columnLetter}$rowIndex:${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowIndex)';
     sheet
-        .getRangeByName(
-            ColumnBaseTable.sctrSaludMensual.columnLetter + '$rowIndex')
-        .formula = '=X$rowIndex*($_fprimaSctrSalud)*($_figvSctrSalud)';
+            .getRangeByName(
+                ColumnBaseTable.sctrSaludMensual.columnLetter + '$rowIndex')
+            .formula =
+        '=${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*($_fprimaSctrSalud)*($_figvSctrSalud)';
     sheet
             .getRangeByName(
                 ColumnBaseTable.sctrSaludAnual.columnLetter + '$rowIndex')
@@ -121,36 +122,62 @@ Future<void> generateExcel(ParamsCalcular params) async {
 
   // Totales
   final firstRow = firstRowHeading + 1;
-  int rowTotal = sheet.getLastRow() - 1;
+  int rowLastData = sheet.getLastRow();
+  int rowSummary = rowLastData + 1;
+  sheet
+          .getRangeByName('${ColumnBaseTable.montoMensual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.montoMensual.columnLetter}$firstRow:${ColumnBaseTable.montoMensual.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName(
+              '${ColumnBaseTable.essaludMensual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.essaludMensual.columnLetter}$firstRow:${ColumnBaseTable.essaludMensual.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName('${ColumnBaseTable.montoAnual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.montoAnual.columnLetter}$firstRow:${ColumnBaseTable.montoAnual.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName('${ColumnBaseTable.essaludAnual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.essaludAnual.columnLetter}$firstRow:${ColumnBaseTable.essaludAnual.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName(
+              '${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.aguinaldoAnual.columnLetter}$firstRow:${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName('${ColumnBaseTable.total.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.total.columnLetter}$firstRow:${ColumnBaseTable.total.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName(
+              '${ColumnBaseTable.sctrSaludMensual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.sctrSaludMensual.columnLetter}$firstRow:${ColumnBaseTable.sctrSaludMensual.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName(
+              '${ColumnBaseTable.sctrSaludAnual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.sctrSaludAnual.columnLetter}$firstRow:${ColumnBaseTable.sctrSaludAnual.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName(
+              '${ColumnBaseTable.sctrPensionMensual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.sctrPensionMensual.columnLetter}$firstRow:${ColumnBaseTable.sctrPensionMensual.columnLetter}$rowLastData)';
+  sheet
+          .getRangeByName(
+              '${ColumnBaseTable.sctrPensionAnual.columnLetter}$rowSummary')
+          .formula =
+      '=SUM(${ColumnBaseTable.sctrPensionAnual.columnLetter}$firstRow:${ColumnBaseTable.sctrPensionAnual.columnLetter}$rowLastData)';
 
-  sheet.getRangeByIndex(sheet.getLastRow(), 24).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.montoMensual.columnLetter}$firstRow:${ColumnBaseTable.montoMensual.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 25).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.essaludMensual.columnLetter}$firstRow:${ColumnBaseTable.essaludMensual.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 26).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.montoAnual.columnLetter}$firstRow:${ColumnBaseTable.montoAnual.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 27).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.essaludAnual.columnLetter}$firstRow:${ColumnBaseTable.essaludAnual.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 28).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.aguinaldoAnual.columnLetter}$firstRow:${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 29).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.total.columnLetter}$firstRow:${ColumnBaseTable.total.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 30).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.sctrSaludMensual.columnLetter}$firstRow:${ColumnBaseTable.sctrSaludMensual.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 31).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.sctrSaludAnual.columnLetter}$firstRow:${ColumnBaseTable.sctrSaludAnual.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 32).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.sctrPensionMensual.columnLetter}$firstRow:${ColumnBaseTable.sctrPensionMensual.columnLetter}$rowTotal)';
-  sheet.getRangeByIndex(sheet.getLastRow(), 33).formula =
-      '=SUBTOTAL(9,${ColumnBaseTable.sctrPensionAnual.columnLetter}$firstRow:${ColumnBaseTable.sctrPensionAnual.columnLetter}$rowTotal)';
-
-  //sheet.getRangeByName('X$firstRow:AD$lastRow').numberFormat = '#,##0.00';
+  Range range = sheet.getRangeByName(
+      '${ColumnBaseTable.montoMensual.columnLetter}$firstRow:${ColumnBaseTable.sctrPensionAnual.columnLetter}$rowSummary');
+  range.numberFormat = '#,##0.00';
 
   sheetPresupuestoExtend(workbook, firstRowHeading, params, sheet);
   sheetCertificado(
       workbook, firstRowHeading, params, sheet.getLastRow() - 1, params.lista);
-
-  // RESUMEN de Horizontal a Vertical
 
 // Save and dispose workbook.
   final List<int> bytes = workbook.saveAsStream();
@@ -259,8 +286,8 @@ void parameterBaseSheet(Worksheet sheet, ParamsCalcular params, int _rowUno,
           ColumnBaseHeader.clasificadorSueldoValue.columnLetter + '$_rowCuatro')
       .setText('23.28.11');
   sheet
-      .getRangeByName(
-          ColumnBaseHeader.clasificadorEsaludValue.columnLetter + '$_rowCuatro')
+      .getRangeByName(ColumnBaseHeader.clasificadorEssaludValue.columnLetter +
+          '$_rowCuatro')
       .setText('23.28.12');
   sheet
       .getRangeByName(ColumnBaseHeader.clasificadorAguinaldoValue.columnLetter +

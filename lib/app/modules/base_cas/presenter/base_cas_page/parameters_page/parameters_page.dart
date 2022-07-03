@@ -86,6 +86,7 @@ class _HeadBaseCasPageState extends State<ParametersPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
     double w = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -292,8 +293,8 @@ class _HeadBaseCasPageState extends State<ParametersPage>
                                           porcentajePrimaSctrPension: double.parse(porcentajePrimaSctrPensionController.text),
                                           porcentajeComisionSctrPension: double.parse(porcentajeComisionSctrPensionController.text),
                                           porcentajeIgv: double.parse(porcentajeIgvController.text),
-                                          mesInicio: mesInicio,
-                                          mesFin: mesFin))
+                                          mesInicio: this.mesInicio,
+                                          mesFin: this.mesFin))
                                       : null,
                                   child: (state.status == StatusCas.calculating)
                                       ? Center(

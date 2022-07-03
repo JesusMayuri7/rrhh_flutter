@@ -29,7 +29,7 @@ class LoadParameterEvent extends ParameterCapEvent {
 }
 
 class ExportCapEvent extends ParameterCapEvent {
-  final List<CapEntity> listCap;
+  final List<BaseCapEntity> listCap;
   final String anio;
 
   ExportCapEvent({

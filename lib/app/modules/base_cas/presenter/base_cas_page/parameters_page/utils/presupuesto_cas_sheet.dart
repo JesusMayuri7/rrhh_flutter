@@ -1,7 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:rrhh_clean/app/modules/base_cas/domain/entities/presupuesto_cas_entity.dart';
 import 'package:rrhh_clean/app/modules/base_cas/domain/usecases/calcular_cas_use_case.dart';
+import 'package:rrhh_clean/app/modules/base_cas/presenter/base_cas_page/parameters_page/utils/functions_custom_cas.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
+
+import 'columns_base_sheet.dart';
+import 'columns_presupuesto_sheet.dart';
 
 void sheetPresupuestoExtend(Workbook workbook, int firstRowHeading,
     ParamsCalcular params, Worksheet sheetBase) {
@@ -15,7 +19,7 @@ void sheetPresupuestoExtend(Workbook workbook, int firstRowHeading,
     'Clasificador',
     'PIA',
     'PIM',
-    'Certificado',
+    'Presupuesto',
     'Devengado',
     'Enero',
     'Febrero',
@@ -121,43 +125,85 @@ void sheetPresupuestoExtend(Workbook workbook, int firstRowHeading,
 _proyeccion(
     int _rowInit, int _column, Worksheet page, int _rowEnd, int _lastRowBase) {
   for (int x = _rowInit; x <= _rowEnd; x++) {
-    page.getRangeByIndex(x, _column).formula =
-        '''=IF(TRIM(LEFT(E$x,9))=BASE!\$Z\$4,COUNTIFS(BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4)),0)
+    page
+            .getRangeByName(
+                '${ColumnPresupuestoTable.tCantidad.columnLetter}$x')
+            .formula =
+        '''=IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorSueldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},COUNTIFS(BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4)),0)
         ''';
 
-    page.getRangeByIndex(x, _column + 1).formula =
-        '''=IF(TRIM(LEFT(E$x,9))=BASE!\$Z\$4,SUMIFS(BASE!\$Z\$$_rowInit:\$Z\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4)),0)+
-        IF(TRIM(LEFT(E$x,9))=BASE!\$AA\$4,SUMIFS(BASE!\$AA\$$_rowInit:\$AA\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4)),0)+
-        IF(TRIM(LEFT(E$x,9))=BASE!\$AB\$4,SUMIFS(BASE!\$AB\$$_rowInit:\$AB\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4)),0)''';
+    page
+            .getRangeByName(
+                '${ColumnPresupuestoTable.tProyeccion.columnLetter}$x')
+            .formula =
+        '''=IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorSueldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.montoAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.montoAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4)),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorEssaludValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.essaludAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.essaludAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4)),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorAguinaldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.aguinaldoAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.aguinaldoAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4)),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorSctrSaludValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.sctrSaludAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.sctrSaludAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4)),0)''';
 
     // OCUPADOS
     // CANTIDAD
-    page.getRangeByIndex(4, _column + 2).setText('OCUPADO');
-    page.getRangeByIndex(x, _column + 2).formula =
-        '''=IF(TRIM(LEFT(E$x,9))=BASE!\$Z\$4,COUNTIFS(BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,PRESUPUESTO!\$X\$4),0)
+    print(
+        '${ColumnPresupuestoHeader.ocupadoValue.columnLetter}${RowPresupuestoHeader.rowCuatro.rowIndex}$x');
+    page
+        .getRangeByName(
+            '${ColumnPresupuestoHeader.ocupadoValue.columnLetter}${RowPresupuestoHeader.rowCuatro.rowIndex}')
+        .setText('OCUPADO');
+    page
+            .getRangeByName(
+                '${ColumnPresupuestoTable.oCantidad.columnLetter}$x')
+            .formula =
+        '''=IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorSueldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},COUNTIFS(BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$${ColumnBaseTable.estadoOpp.columnLetter}\$$_rowInit:\$${ColumnBaseTable.estadoOpp.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoHeader.ocupadoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)
         ''';
     // MONTO OCUPADO
-    page.getRangeByIndex(x, _column + 3).formula =
-        '''=IF(TRIM(LEFT(E$x,9))=BASE!\$Z\$4,SUMIFS(BASE!\$Z\$$_rowInit:\$Z\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,PRESUPUESTO!\$X\$4),0)+
-        IF(TRIM(LEFT(E$x,9))=BASE!\$AA\$4,SUMIFS(BASE!\$AA\$$_rowInit:\$AA\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,PRESUPUESTO!\$X\$4),0)+
-        IF(TRIM(LEFT(E$x,9))=BASE!\$AB\$4,SUMIFS(BASE!\$AB\$$_rowInit:\$AB\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,PRESUPUESTO!\$X\$4),0)''';
+    page
+            .getRangeByName(
+                '${ColumnPresupuestoTable.oProyeccion.columnLetter}$x')
+            .formula =
+        '''=IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorSueldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.montoAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.montoAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,${ColumnPresupuestoHeader.ocupadoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorEssaludValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.essaludAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.essaludAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,${ColumnPresupuestoHeader.ocupadoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorAguinaldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.aguinaldoAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.aguinaldoAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,${ColumnPresupuestoHeader.ocupadoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorSctrSaludValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.sctrSaludAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.sctrSaludAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,${ColumnPresupuestoHeader.ocupadoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)''';
 
     // VACANTE
     // CANTIDAD
-    page.getRangeByIndex(4, _column + 4).setText('VACANTE');
-    page.getRangeByIndex(x, _column + 4).formula =
-        '''=IF(TRIM(LEFT(E$x,9))=BASE!\$Z\$4,COUNTIFS(BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,PRESUPUESTO!\$Z\$4),0)
+    page
+        .getRangeByName(
+            '${ColumnPresupuestoHeader.vacanteValue.columnLetter}${RowPresupuestoHeader.rowCuatro.rowIndex}')
+        .setText('VACANTE');
+    page
+            .getRangeByName(
+                '${ColumnPresupuestoTable.vCantidad.columnLetter}$x')
+            .formula =
+        '''=IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorSueldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},COUNTIFS(BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$${ColumnBaseTable.estadoOpp.columnLetter}\$$_rowInit:\$${ColumnBaseTable.estadoOpp.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoHeader.vacanteValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)
         ''';
     // MONTO VACANTE
-    page.getRangeByIndex(x, _column + 5).formula =
-        '''=IF(TRIM(LEFT(E$x,9))=BASE!\$Z\$4,SUMIFS(BASE!\$Z\$$_rowInit:\$Z\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,PRESUPUESTO!\$Z\$4),0)+
-        IF(TRIM(LEFT(E$x,9))=BASE!\$AA\$4,SUMIFS(BASE!\$AA\$$_rowInit:\$AA\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,PRESUPUESTO!\$Z\$4),0)+
-        IF(TRIM(LEFT(E$x,9))=BASE!\$AB\$4,SUMIFS(BASE!\$AB\$$_rowInit:\$AB\$$_lastRowBase,BASE!\$F\$$_rowInit:\$F\$$_lastRowBase,PRESUPUESTO!B$x,BASE!\$C\$$_rowInit:\$C\$$_lastRowBase,C$x,BASE!\$G\$$_rowInit:\$G\$$_lastRowBase,LEFT(PRESUPUESTO!D$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,PRESUPUESTO!\$Z\$4),0)''';
+    page
+            .getRangeByName(
+                '${ColumnPresupuestoTable.vProyeccion.columnLetter}$x')
+            .formula =
+        '''=IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorSueldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.montoAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.montoAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,${ColumnPresupuestoHeader.vacanteValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorEssaludValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.essaludAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.essaludAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,${ColumnPresupuestoHeader.vacanteValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!\$${ColumnBaseHeader.clasificadorAguinaldoValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.aguinaldoAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.aguinaldoAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,${ColumnPresupuestoHeader.vacanteValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)+
+        IF(TRIM(LEFT(\$${ColumnPresupuestoTable.clasificador.columnLetter}$x,9))=BASE!${ColumnBaseHeader.clasificadorSctrSaludValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex},SUMIFS(BASE!\$${ColumnBaseTable.sctrSaludAnual.columnLetter}\$$_rowInit:\$${ColumnBaseTable.sctrSaludAnual.columnLetter}\$$_lastRowBase,BASE!\$${ColumnBaseTable.fuente.columnLetter}\$$_rowInit:\$${ColumnBaseTable.fuente.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.fuente.columnLetter}$x,BASE!\$${ColumnBaseTable.producto.columnLetter}\$$_rowInit:\$${ColumnBaseTable.producto.columnLetter}\$$_lastRowBase,\$${ColumnPresupuestoTable.producto.columnLetter}$x,BASE!\$${ColumnBaseTable.meta.columnLetter}\$$_rowInit:\$${ColumnBaseTable.meta.columnLetter}\$$_lastRowBase,LEFT(\$${ColumnPresupuestoTable.meta.columnLetter}$x,4),BASE!\$N\$$_rowInit:\$N\$$_lastRowBase,${ColumnPresupuestoHeader.vacanteValue.columnLetter}\$${RowPresupuestoHeader.rowCuatro.rowIndex}),0)''';
 
-    page.getRangeByIndex(x, _column + 6).formula = '=X$x+Z$x';
-    page.getRangeByIndex(x, _column + 7).formula = '=Y$x+AA$x';
-    page.getRangeByIndex(x, _column + 8).formula = '=I$x+AC$x';
-    page.getRangeByIndex(x, _column + 9).formula = '=G$x-AD$x';
+    page
+            .getRangeByName('${ColumnPresupuestoTable.cantidad.columnLetter}$x')
+            .formula =
+        '=\$${ColumnPresupuestoTable.oCantidad.columnLetter}$x+\$${ColumnPresupuestoTable.vCantidad.columnLetter}$x';
+    page
+            .getRangeByName('${ColumnPresupuestoTable.proyeccion.columnLetter}$x')
+            .formula =
+        '=\$${ColumnPresupuestoTable.oProyeccion.columnLetter}$x+\$${ColumnPresupuestoTable.vProyeccion.columnLetter}$x';
+    page
+            .getRangeByName(
+                '${ColumnPresupuestoTable.totalProyeccion.columnLetter}$x')
+            .formula =
+        '=\$${ColumnPresupuestoTable.devengado.columnLetter}$x+\$${ColumnPresupuestoTable.proyeccion.columnLetter}$x';
+    page
+            .getRangeByName('${ColumnPresupuestoTable.saldo.columnLetter}$x')
+            .formula =
+        '=\$${ColumnPresupuestoTable.pim.columnLetter}$x-\$${ColumnPresupuestoTable.totalProyeccion.columnLetter}$x';
   }
 
   // SE TIENE QUE CREAR REGISTROS EN CERO , SINO EXISTE EN PRESUPUESTO, PERO SI EN LA PROYECCION
@@ -189,74 +235,50 @@ _fuenteMetaOfBase(Worksheet _sheetBase, List<PresupuestoCasEntity> _params) {
 
   presupuestoOrderByFuenteMetaRO.entries.forEach((e) {
     if (e.value.isNotEmpty) {
-      var foundEspecifica11 = e.value.where((element) =>
-          element.clasificador.substring(0, 8).trim() == '23.28.11');
+      var foundEspecifica11 =
+          e.value.where((element) => element.clasificador.contains('23.28.11'));
       if (foundEspecifica11.isEmpty) {
-        _params.add(PresupuestoCasEntity(
-            anoEje: e.value[0].anoEje,
-            fuente: e.value[0].fuente,
-            producto: e.value[0].producto,
-            meta: e.value[0].meta,
-            clasificador: '23.28.11 - CONTRATO ADMINISTRATIVO DE SERVICIOS'));
+        addClasificadorInPresupuesto(_params, e.value[0],
+            '23.28.11 - CONTRATO ADMINISTRATIVO DE SERVICIOS');
       }
 
-      final foundEspecifica12 = e.value.where((element) =>
-          element.clasificador.substring(0, 8).trim() == '23.28.12');
+      final foundEspecifica12 =
+          e.value.where((element) => element.clasificador.contains('23.28.12'));
       if (foundEspecifica12.isEmpty) {
-        _params.add(PresupuestoCasEntity(
-            anoEje: e.value[0].anoEje,
-            fuente: e.value[0].fuente,
-            producto: e.value[0].producto,
-            meta: e.value[0].meta,
-            clasificador: '23.28.12 - CONTRIBUCIONES A ESSALUD DE C.A.S.'));
+        addClasificadorInPresupuesto(_params, e.value[0],
+            '23.28.12 - CONTRIBUCIONES A ESSALUD DE C.A.S.');
       }
 
-      final foundEspecifica14 = e.value.where((element) =>
-          element.clasificador.substring(0, 8).trim() == '23.28.14');
+      final foundEspecifica14 =
+          e.value.where((element) => element.clasificador.contains('23.28.14'));
       if (foundEspecifica14.isEmpty) {
-        _params.add(PresupuestoCasEntity(
-            anoEje: e.value[0].anoEje,
-            fuente: e.value[0].fuente,
-            producto: e.value[0].producto,
-            meta: e.value[0].meta,
-            clasificador: '23.28.14 - AGUINALDOS DE C.A.S.'));
+        addClasificadorInPresupuesto(
+            _params, e.value[0], '23.28.14 - AGUINALDOS DE C.A.S.');
       }
     }
   });
 
   presupuestoOrderByFuenteMetaRDR.entries.forEach((e) {
     if (e.value.isNotEmpty) {
-      var foundEspecifica11 = e.value.where((element) =>
-          element.clasificador.substring(0, 8).trim() == '23.28.11');
+      var foundEspecifica11 =
+          e.value.where((element) => element.clasificador.contains('23.28.11'));
       if (foundEspecifica11.isEmpty) {
-        _params.add(PresupuestoCasEntity(
-            anoEje: e.value[0].anoEje,
-            fuente: e.value[0].fuente,
-            producto: e.value[0].producto,
-            meta: e.value[0].meta,
-            clasificador: '23.28.11 - CONTRATO ADMINISTRATIVO DE SERVICIOS'));
+        addClasificadorInPresupuesto(_params, e.value[0],
+            '23.28.11 - CONTRATO ADMINISTRATIVO DE SERVICIOS');
       }
 
-      final foundEspecifica12 = e.value.where((element) =>
-          element.clasificador.substring(0, 8).trim() == '23.28.12');
+      final foundEspecifica12 =
+          e.value.where((element) => element.clasificador.contains('23.28.12'));
       if (foundEspecifica12.isEmpty) {
-        _params.add(PresupuestoCasEntity(
-            anoEje: e.value[0].anoEje,
-            fuente: e.value[0].fuente,
-            producto: e.value[0].producto,
-            meta: e.value[0].meta,
-            clasificador: '23.28.12 - CONTRIBUCIONES A ESSALUD DE C.A.S.'));
+        addClasificadorInPresupuesto(_params, e.value[0],
+            '23.28.12 - CONTRIBUCIONES A ESSALUD DE C.A.S.');
       }
 
-      final foundEspecifica14 = e.value.where((element) =>
-          element.clasificador.substring(0, 8).trim() == '23.28.14');
+      final foundEspecifica14 =
+          e.value.where((element) => element.clasificador.contains('23.28.14'));
       if (foundEspecifica14.isEmpty) {
-        _params.add(PresupuestoCasEntity(
-            anoEje: e.value[0].anoEje,
-            fuente: e.value[0].fuente,
-            producto: e.value[0].producto,
-            meta: e.value[0].meta,
-            clasificador: '23.28.14 - AGUINALDOS DE C.A.S.'));
+        addClasificadorInPresupuesto(
+            _params, e.value[0], '23.28.14 - AGUINALDOS DE C.A.S.');
       }
     }
   });

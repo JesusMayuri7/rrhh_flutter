@@ -12,13 +12,13 @@ class ListadoCapInitial extends ListadoCapState {}
 class ListadoCapLoading extends ListadoCapState {}
 
 class ListadoCapLoaded extends ListadoCapState {
-  final List<CapEntity> listadoCap;
+  final List<BaseCapEntity> listadoCap;
   ListadoCapLoaded({
     required this.listadoCap,
   });
 
   ListadoCapLoaded copyWith({
-    List<CapEntity>? listadoCap,
+    List<BaseCapEntity>? listadoCap,
   }) {
     return ListadoCapLoaded(
       listadoCap: listadoCap ?? this.listadoCap,

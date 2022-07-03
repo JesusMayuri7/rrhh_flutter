@@ -110,7 +110,22 @@ List<GridColumn> getColumns(BuildContext context) {
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'Estado Base',
+          'Estado Opp',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'estado_opp',
+      width: 65,
+      ////columnWidthMode: ColumnWidthMode.fill,
+      //width: model.isWeb ? 135 : 90,
+    ),
+    GridColumn(
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Estado Actual',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
@@ -132,6 +147,21 @@ List<GridColumn> getColumns(BuildContext context) {
         ),
       ),
       columnName: 'estadoAir',
+      width: 65,
+      ////columnWidthMode: ColumnWidthMode.fill,
+      //width: model.isWeb ? 135 : 90,
+    ),
+    GridColumn(
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Vigencia',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'vigencia',
       width: 65,
       ////columnWidthMode: ColumnWidthMode.fill,
       //width: model.isWeb ? 135 : 90,
@@ -192,6 +222,34 @@ List<GridColumn> getColumns(BuildContext context) {
       label: Container(
         alignment: Alignment.center,
         child: Text(
+          'Modalidad',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'modalidad',
+      width: 85,
+      ////columnWidthMode: ColumnWidthMode.fill,
+      //width: model.isWeb ? 135 : 90,
+    ),
+    GridColumn(
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Tipo Ingreso',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'tipo_ingreso',
+      width: 88,
+    ),
+    GridColumn(
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
           'Fecha Alta',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -199,6 +257,19 @@ List<GridColumn> getColumns(BuildContext context) {
         ),
       ),
       columnName: 'fechaAlta',
+      width: 88,
+    ),
+    GridColumn(
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Tipo Salida',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'tipo_salida',
       width: 88,
     ),
     GridColumn(
@@ -218,16 +289,14 @@ List<GridColumn> getColumns(BuildContext context) {
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'Modalidad',
+          'Fin Licencia',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
       ),
-      columnName: 'modalidad',
-      width: 85,
-      ////columnWidthMode: ColumnWidthMode.fill,
-      //width: model.isWeb ? 135 : 90,
+      columnName: 'finLicencia',
+      width: 88,
     ),
     GridColumn(
       width: 45,

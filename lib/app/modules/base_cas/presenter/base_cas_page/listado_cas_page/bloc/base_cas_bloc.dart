@@ -155,7 +155,7 @@ class BaseCasBloc extends Bloc<BaseCasEvent, BaseCasState>
     }, (r) {
       List<BaseCasEntity> listaInicial = List<BaseCasEntity>.from(r).toList();
       return LoadedBaseCasState(
-        listBaseCasCur: _agregarMontoTotal(listaInicial),
+        listBaseCasCur: listaInicial,
         listBaseCasInit: r,
       );
     }));
@@ -185,38 +185,6 @@ class BaseCasBloc extends Bloc<BaseCasEvent, BaseCasState>
         ));
       }
     }
-  }
-
-  List<BaseCasEntity> _agregarMontoTotal(List<BaseCasEntity> lista) {
-    double totalMonto = 0;
-    lista.map((e) => totalMonto += e.monto).toList();
-
-    lista.add(BaseCasEntity(
-      codigoPlaza: '# ${lista.length}',
-      presupuesto: '',
-      producto: '',
-      descArea: '',
-      sede: '',
-      fuenteBase: '',
-      meta: '',
-      meta2020: '',
-      cargo: '',
-      dni: '',
-      nombres: '',
-      modalidad: '',
-      vigencia: '',
-      estadoActual: '',
-      estadoAir: '',
-      sustentoLegal: '',
-      nroConvocatoria: '',
-      estadoConvocatoria: '',
-      resultadoConvocatoria: '',
-      fechaAlta: '',
-      fechaBaja: '',
-      monto: totalMonto,
-      detalle: '',
-    ));
-    return lista;
   }
 
   @override

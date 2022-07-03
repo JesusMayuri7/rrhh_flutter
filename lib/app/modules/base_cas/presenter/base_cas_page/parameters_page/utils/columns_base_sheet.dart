@@ -1,36 +1,36 @@
 enum ColumnBaseHeader {
-  mesInicioTitle('U'),
-  mesFinTitle('U'),
-  mesInicioValue('V'),
-  mesFinValue('V'),
+  mesInicioTitle('Y'),
+  mesFinTitle('Y'),
+  mesInicioValue('Z'),
+  mesFinValue('Z'),
 
-  uitTitle('X'),
-  uitValue('Y'),
+  uitTitle('AB'),
+  uitValue('AC'),
 
-  porcentajeMaxSueldoTitle('X'),
-  porcentajeMaxSueldoValue('Y'),
-  porcentajeEssaludTitle('X'),
-  porcentajeEssaludValue('Y'),
+  porcentajeMaxSueldoTitle('AB'),
+  porcentajeMaxSueldoValue('AC'),
+  porcentajeEssaludTitle('AB'),
+  porcentajeEssaludValue('AC'),
 
-  aguinaldoSemestralTitle('AA'),
-  aguinaldoSemestralValue('AB'),
+  aguinaldoSemestralTitle('AE'),
+  aguinaldoSemestralValue('AF'),
 
-  primaSctrSaludTitle('AD'),
-  primaSctrSaludValue('AE'),
-  igvAdicionalSctrSaludTitle('AD'),
-  igvAdicionalSctrSaludValue('AE'),
+  primaSctrSaludTitle('AH'),
+  primaSctrSaludValue('AI'),
+  igvAdicionalSctrSaludTitle('AH'),
+  igvAdicionalSctrSaludValue('AI'),
 
-  primaSctrPensionTitle('AF'),
-  primaSctrPensionValue('AG'),
-  igvAdicionalSctrPensionTitle('AF'),
-  igvAdicionalSctrPensionValue('AG'),
-  comisionSctrPensionTitle('AF'),
-  comisionSctrPensionValue('AG'),
+  primaSctrPensionTitle('AJ'),
+  primaSctrPensionValue('AK'),
+  igvAdicionalSctrPensionTitle('AJ'),
+  igvAdicionalSctrPensionValue('AK'),
+  comisionSctrPensionTitle('AJ'),
+  comisionSctrPensionValue('AK'),
 
-  clasificadorSueldoValue('Z'),
-  clasificadorEsaludValue('AA'),
-  clasificadorAguinaldoValue('AB'),
-  clasificadorSctrSaludValue('AE');
+  clasificadorSueldoValue('AD'),
+  clasificadorEssaludValue('AE'),
+  clasificadorAguinaldoValue('AF'),
+  clasificadorSctrSaludValue('AI');
 
   final String columnLetter;
 
@@ -41,19 +41,19 @@ enum ColumnBaseTable {
   producto('C'),
   fuente('F'),
   meta('G'),
-  estado('N'),
-  mesInicio('V'),
-  mesFin('W'),
-  montoMensual('X'),
-  essaludMensual('Y'),
-  montoAnual('Z'),
-  essaludAnual('AA'),
-  aguinaldoAnual('AB'),
-  total('AC'),
-  sctrSaludMensual('AD'),
-  sctrSaludAnual('AE'),
-  sctrPensionMensual('AF'),
-  sctrPensionAnual('AG');
+  estadoOpp('N'),
+  mesInicio('Z'),
+  mesFin('AA'),
+  montoMensual('AB'),
+  essaludMensual('AC'),
+  montoAnual('AD'),
+  essaludAnual('AE'),
+  aguinaldoAnual('AF'),
+  total('AG'),
+  sctrSaludMensual('AH'),
+  sctrSaludAnual('AI'),
+  sctrPensionMensual('AJ'),
+  sctrPensionAnual('AK');
 
   final String columnLetter;
 
@@ -61,10 +61,10 @@ enum ColumnBaseTable {
 }
 
 enum RowBaseHeader {
-  uno(1),
-  dos(2),
-  tres(3),
-  cuatro(4);
+  rowUno(1),
+  rowDos(2),
+  rowTres(3),
+  rowCuatro(4);
 
   final int rowIndex;
 

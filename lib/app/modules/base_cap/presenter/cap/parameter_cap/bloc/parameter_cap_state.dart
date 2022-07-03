@@ -18,7 +18,7 @@ abstract class ParameterCapState extends Equatable {
 
 class CapLoadedState extends ParameterCapState {
   final List<ParameterCapEntity> parameterBaseCap;
-  final List<CapEntity> listadoBaseCap;
+  final List<BaseCapEntity> listadoBaseCap;
   final StatusCap statusCap;
   CapLoadedState({
     this.parameterBaseCap = const [],
@@ -31,7 +31,7 @@ class CapLoadedState extends ParameterCapState {
 
   CapLoadedState copyWith(
       {List<ParameterCapEntity>? parameterBaseCap,
-      List<CapEntity>? listadoBaseCap,
+      List<BaseCapEntity>? listadoBaseCap,
       StatusCap? statusCap}) {
     return CapLoadedState(
       parameterBaseCap: parameterBaseCap ?? this.parameterBaseCap,

@@ -1,8 +1,8 @@
-import 'package:rrhh_clean/app/modules/base_cap/domain/entities/cap_entity.dart';
+import 'package:rrhh_clean/app/modules/base_cap/domain/entities/base_cap_entity.dart';
 import 'package:rrhh_clean/app/modules/base_cap/domain/entities/parameter_cap_entity.dart';
 
 class CalcularListBaseCapUseCase {
-  List<CapEntity> call(ParamsCalcularListBaseCap params) {
+  List<BaseCapEntity> call(ParamsCalcularListBaseCap params) {
     for (final item in params.capEntityList) {
       item.copyWith(totalBasico: item.montoEscala + item.asigFam);
       print(item);
@@ -18,7 +18,7 @@ class CalcularListBaseCapUseCase {
 }
 
 class ParamsCalcularListBaseCap {
-  final List<CapEntity> capEntityList;
+  final List<BaseCapEntity> capEntityList;
   final List<ParameterCapEntity> parameterCapEntityList;
 
   ParamsCalcularListBaseCap({

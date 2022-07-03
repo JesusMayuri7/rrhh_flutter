@@ -58,15 +58,11 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
       print(url);
       Response response = await Dio().post(url.toString(),
           queryParameters: param,
-          options: Options(
-              sendTimeout: 5 * 1000, // 60 seconds
-              receiveTimeout: 5 * 1000,
-              headers: {
-                'Content-Type':
-                    'application/x-www-form-urlencoded; charset=UTF-8',
-                'Cookie': env['cookie']!,
-                'Host': env['url_mef']!
-              }));
+          options: Options(headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+            'Cookie': env['cookie']!,
+            'Host': env['url_mef']!
+          }));
       /* var response = await httpCustom.post(url,
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',

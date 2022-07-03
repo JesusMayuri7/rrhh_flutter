@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../domain/entities/cap_entity.dart';
+import '../../../domain/entities/base_cap_entity.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class BaseCapDataSource extends DataGridSource {
@@ -242,7 +242,7 @@ class BaseCapDataSource extends DataGridSource {
         .toList();
   }
 
-  List<CapEntity> basecapList = [];
+  List<BaseCapEntity> basecapList = [];
 
   //BuildContext context;
 

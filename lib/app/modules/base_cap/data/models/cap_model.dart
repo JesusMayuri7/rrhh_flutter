@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../domain/entities/cap_entity.dart';
+import '../../domain/entities/base_cap_entity.dart';
 
 List<CapModel> baseCapModelFromJson(String str) {
   List<dynamic> baseCapJson = json.decode(str);
@@ -12,7 +12,7 @@ List<CapModel> baseCapModelFromJson(String str) {
 String baseCapModelToJson(List<CapModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class CapModel extends CapEntity {
+class CapModel extends BaseCapEntity {
   CapModel({
     required int id,
     required int anio,
@@ -57,6 +57,7 @@ class CapModel extends CapEntity {
     required String detalle,
     required int capPvnId,
     required double montoEscalaNext,
+    required double montoEscalaAnterior,
     required String ppto2021,
     required int epsAporta,
     required double montoBasico,
@@ -106,6 +107,7 @@ class CapModel extends CapEntity {
             detalle: detalle,
             capPvnId: capPvnId,
             montoEscalaNext: montoEscalaNext,
+            montoEscalaAnterior: montoEscalaAnterior,
             ppto2021: ppto2021,
             epsAporta: epsAporta,
             montoBasico: montoBasico,
@@ -155,6 +157,7 @@ class CapModel extends CapEntity {
         codigoPlaza: json["codigo_plaza"] ?? '',
         detalle: json["detalle"] ?? '',
         capPvnId: json["cap_pvn_id"] ?? 0,
+        montoEscalaAnterior: double.parse(json["monto_escala_anterior"] ?? '0'),
         montoEscalaNext: double.parse(json["monto_escala_next"] ?? '0'),
         ppto2021: json["ppto_2021"] ?? '',
         epsAporta: json['eps_aporta'] ?? 0,
@@ -209,6 +212,7 @@ class CapModel extends CapEntity {
         "codigo_plaza": codigoPlaza,
         "detalle": detalle,
         "cap_pvn_id": capPvnId,
+        "monto_escala_anterior": montoEscalaAnterior,
         "monto_escala_next": montoEscalaNext,
         "ppto_2021": ppto2021,
         'eps_aporta': epsAporta

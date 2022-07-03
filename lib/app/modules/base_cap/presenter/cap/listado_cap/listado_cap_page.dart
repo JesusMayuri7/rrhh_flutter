@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-import '../../../domain/entities/cap_entity.dart';
+import '../../../domain/entities/base_cap_entity.dart';
 import '../widgets/base_cap_datasource.dart';
 import '../widgets/getColumnsCap.dart';
 import 'stacked_header.dart';
 
 class ListadoCapPage extends StatelessWidget {
-  final List<CapEntity> listadoBaseCap;
+  final List<BaseCapEntity> listadoBaseCap;
   const ListadoCapPage({
     Key? key,
     required this.listadoBaseCap,

@@ -28,9 +28,13 @@ class BaseCasDataSource extends DataGridSource {
               DataGridCell<String>(
                   columnName: 'cargo', value: dataGridRow.cargo),
               DataGridCell<String>(
+                  columnName: 'estado_opp', value: dataGridRow.estadoOpp),
+              DataGridCell<String>(
                   columnName: 'estado_actual', value: dataGridRow.estadoActual),
               DataGridCell<String>(
                   columnName: 'estadoAir', value: dataGridRow.estadoAir),
+              DataGridCell<String>(
+                  columnName: 'vigencia', value: dataGridRow.vigencia),
               DataGridCell<String>(
                   columnName: 'sustento_legal',
                   value: dataGridRow.sustentoLegal),
@@ -44,11 +48,17 @@ class BaseCasDataSource extends DataGridSource {
                   columnName: 'resultadoConvocatoria',
                   value: dataGridRow.resultadoConvocatoria),
               DataGridCell<String>(
+                  columnName: 'modalidad', value: dataGridRow.modalidad),
+              DataGridCell<String>(
+                  columnName: 'tipo_ingreso', value: dataGridRow.tipoIngreso),
+              DataGridCell<String>(
                   columnName: 'fechaAlta', value: dataGridRow.fechaAlta),
+              DataGridCell<String>(
+                  columnName: 'tipo_salida', value: dataGridRow.tipoSalida),
               DataGridCell<String>(
                   columnName: 'fechaBaja', value: dataGridRow.fechaBaja),
               DataGridCell<String>(
-                  columnName: 'modalidad', value: dataGridRow.modalidad),
+                  columnName: 'finLicencia', value: dataGridRow.finLicencia),
               DataGridCell<int>(
                   columnName: 'mesInicio', value: dataGridRow.mesInicio),
               DataGridCell<int>(
@@ -90,6 +100,25 @@ class BaseCasDataSource extends DataGridSource {
 
   @override
   List<DataGridRow> get rows => _baseCasDataGridRows;
+
+  @override
+  Widget? buildTableSummaryCellWidget(
+      GridTableSummaryRow summaryRow,
+      GridSummaryColumn? summaryColumn,
+      RowColumnIndex rowColumnIndex,
+      String summaryValue) {
+    return Container(
+        padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
+        alignment: Alignment.centerRight,
+        child: Text(
+          NumberFormat('#,##0.00', 'en_US').format(
+            num.parse(summaryValue.isEmpty ? '0' : summaryValue),
+          ),
+          style: TextStyle(fontSize: 12),
+          //e.value.toString(),
+          maxLines: 1,
+        ));
+  }
 
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {

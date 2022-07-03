@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../domain/entities/cap_entity.dart';
+import '../../../../domain/entities/base_cap_entity.dart';
 import '../../../../domain/use_cases/get_list_base_cap_usecase.dart';
 
 part 'listado_cap_event.dart';

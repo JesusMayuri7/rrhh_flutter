@@ -1,5 +1,5 @@
-class CapEntity {
-  CapEntity({
+class BaseCapEntity {
+  BaseCapEntity({
     required this.id,
     required this.anio,
     required this.orgAreaId,
@@ -46,6 +46,7 @@ class CapEntity {
     required this.ppto2021,
     required this.epsAporta,
     required this.montoBasico,
+    required this.montoEscalaAnterior,
     required this.montoEscala,
     required this.asigFam,
     this.essalud = 0,
@@ -171,6 +172,7 @@ class CapEntity {
   final String ppto2021;
   final int epsAporta;
   final double montoBasico;
+  final double montoEscalaAnterior;
   final double montoEscala;
   final double asigFamiliarAir;
   final double totalBasico;
@@ -249,7 +251,7 @@ class CapEntity {
   final double dicBoni;
   final double dicGrati;
 
-  CapEntity copyWith({
+  BaseCapEntity copyWith({
     int? id,
     int? anio,
     int? orgAreaId,
@@ -296,6 +298,7 @@ class CapEntity {
     String? detalle,
     int? capPvnId,
     double? montoEscalaNext,
+    double? montoEscalaAnterior,
     String? ppto2021,
     double? totalBasico,
     int? epsAporta,
@@ -374,7 +377,7 @@ class CapEntity {
     double? dicBoni,
     double? dicGrati,
   }) =>
-      CapEntity(
+      BaseCapEntity(
         id: id ?? this.id,
         anio: anio ?? this.anio,
         orgAreaId: orgAreaId ?? this.orgAreaId,
@@ -427,6 +430,7 @@ class CapEntity {
         sctrPension: sctrPension ?? this.sctrPension,
         sctrPensionGrati: sctrPensionGrati ?? this.sctrPensionGrati,
         montoEscala: montoEscala ?? this.montoEscala,
+        montoEscalaAnterior: montoEscalaAnterior ?? this.montoEscalaAnterior,
         montoBasico: montoBasico ?? this.montoBasico,
         asigFamiliarAir: asigFamiliarAir ?? this.asigFamiliarAir,
         totalBasico: totalBasico ?? this.totalBasico,
@@ -500,7 +504,7 @@ class CapEntity {
         dicGrati: dicGrati ?? this.dicGrati,
       );
 
-  factory CapEntity.fromMap(Map<String, dynamic> json) => CapEntity(
+  factory BaseCapEntity.fromMap(Map<String, dynamic> json) => BaseCapEntity(
         id: json["id"],
         anio: json["anio"],
         orgAreaId: json["org_area_id"],
@@ -543,6 +547,7 @@ class CapEntity {
         codigoPlaza: json["codigo_plaza"],
         detalle: json["detalle"],
         capPvnId: json["cap_pvn_id"],
+        montoEscalaAnterior: json["monto_escala_anterior"],
         montoEscalaNext: json["monto_escala_next"],
         ppto2021: json["ppto_2021"],
         epsAporta: json['eps_aporta'],
@@ -667,6 +672,7 @@ class CapEntity {
         "codigo_plaza": codigoPlaza,
         "detalle": detalle,
         "cap_pvn_id": capPvnId,
+        "monto_escala_anterior": montoEscalaAnterior,
         "monto_escala_next": montoEscalaNext,
         "ppto_2021": ppto2021,
         "uniforme": uniforme,

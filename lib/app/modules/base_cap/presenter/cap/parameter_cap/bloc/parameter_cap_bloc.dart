@@ -6,7 +6,7 @@ import 'package:rrhh_clean/app/modules/base_cap/domain/use_cases/calcular_list_b
 import 'package:rrhh_clean/app/modules/base_cap/domain/use_cases/get_presupuesto_base_cap_usecase.dart';
 import 'package:rrhh_clean/core/domain/entities/presupuesto_entity.dart';
 
-import '../../../../domain/entities/cap_entity.dart';
+import '../../../../domain/entities/base_cap_entity.dart';
 import '../../../../domain/entities/parameter_cap_entity.dart';
 import '../../../../domain/entities/params_cap_calcular.dart';
 import '../../../../domain/use_cases/get_list_base_cap_usecase.dart';
@@ -45,7 +45,7 @@ class ParameterCapBloc extends Bloc<ParameterCapEvent, ParameterCapState> {
       print(l.toString());
       return CapLoadedState(statusCap: StatusCap.error);
     }, (r) {
-      List<CapEntity> resultCalc = this.calcularListBaseCapUseCase(
+      List<BaseCapEntity> resultCalc = this.calcularListBaseCapUseCase(
           ParamsCalcularListBaseCap(
               capEntityList: r.data,
               parameterCapEntityList: (state is CapLoadedState)

@@ -73,32 +73,14 @@ class HeadParametersBloc
 
       emit((state as HeadParametersSuccessState)
           .copyWith(status: StatusCas.loadedList, message: 'Lista Exportada'));
-
-      /*
-      yield (state as HeadParametersSuccessState).copyWith(
-          status: StatusCas.exportingList, message: 'Exportando Lista');
-      await compute(
-          generateExcel,
-          ParamsCalcular(
-              lista: (state as HeadParametersSuccessState).listadoCas,
-              uit: event.uit,
-              porcentajeMaximoEssalud: event.porcentajeMaximoEssalud,
-              aguinaldoSemestral: event.aguinaldoSemestral,
-              porcentajeEssalud: event.porcentajeEssalud,
-              porcentajePrimaSctrSalud: event.porcentajePrimaSctrSalud,
-              porcentajeIgv: event.porcentajeIgv,
-              mesInicio: event.mesInicio,
-              mesFin: event.mesFin));
-              */
     }
   }
 
-  _calcularEventToBaseCasState(event, Emitter<HeadParametersState> emit) async {
+  _calcularEventToBaseCasState(HeadParametersCalcularEvent event,
+      Emitter<HeadParametersState> emit) async {
     if (state is HeadParametersSuccessState) {
-      //HeadParametersSuccessState stateCurrent = state;
       emit((state as HeadParametersSuccessState).copyWith(
           status: StatusCas.calculating, message: 'Calculando lista'));
-      //List<BaseCasEntity> listado = stateCurrent.listBaseCasCur;
       var result = await calcularCasUseCase(ParamsCalcular(
           lista: (state as HeadParametersSuccessState).listadoCas,
           uit: event.uit,
@@ -116,7 +98,6 @@ class HeadParametersBloc
       emit(result.fold(
           (l) => (state as HeadParametersSuccessState).copyWith(
               status: StatusCas.failure, message: 'Error al calcular'), (r) {
-        print('total ' + r.listaBaseCas.length.toString());
         return (state as HeadParametersSuccessState).copyWith(
           status: StatusCas.loadedList,
           uit: event.uit,
@@ -194,53 +175,21 @@ class HeadParametersBloc
 
   _listaEventToBaseCasState(
       HeadParametersListEvent event, Emitter<HeadParametersState> emit) async {
-    print('entrando lista base bloc');
     if (state is HeadParametersSuccessState) {
       emit((state as HeadParametersSuccessState)
           .copyWith(status: StatusCas.loadingList, message: 'Cargando lista'));
       var result = await listarUseCase(event.anio);
+
       emit(result.fold((l) {
         return HeadParametersSuccessState(
             status: StatusCas.failure, message: 'Error al listar');
       }, (r) {
         List<BaseCasEntity> lista = List<BaseCasEntity>.from(r).toList();
         return (state as HeadParametersSuccessState).copyWith(
-            listadoCas: _agregarMontoTotal(lista),
+            listadoCas: lista,
             status: StatusCas.loadedList,
             message: 'Lista cargada');
       }));
     }
-  }
-
-  List<BaseCasEntity> _agregarMontoTotal(List<BaseCasEntity> lista) {
-    double totalMonto = 0;
-    lista.map((e) => totalMonto += e.monto).toList();
-
-    lista.add(BaseCasEntity(
-      codigoPlaza: '# ${lista.length}',
-      presupuesto: '',
-      producto: '',
-      descArea: '',
-      sede: '',
-      fuenteBase: '',
-      meta: '',
-      meta2020: '',
-      cargo: '',
-      dni: '',
-      nombres: '',
-      modalidad: '',
-      vigencia: '',
-      estadoActual: '',
-      estadoAir: '',
-      sustentoLegal: '',
-      estadoConvocatoria: '',
-      resultadoConvocatoria: '',
-      fechaAlta: '',
-      fechaBaja: '',
-      nroConvocatoria: '',
-      monto: totalMonto,
-      detalle: '',
-    ));
-    return lista;
   }
 }

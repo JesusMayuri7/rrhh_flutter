@@ -73,32 +73,78 @@ class ListadoCasPage extends StatelessWidget {
             PointerDeviceKind.mouse,
           }),
           child: SfDataGrid(
-            highlightRowOnHover: true,
-            footerFrozenRowsCount: 1,
-            //footer: Container(color: Colors.amber),
-            frozenColumnsCount: 1,
-            //footerFrozenColumnsCount: 1,
-            isScrollbarAlwaysShown: true,
-            source: jsonDataGridSource,
-            headerRowHeight: 23,
-            rowHeight: 22,
-            gridLinesVisibility: GridLinesVisibility.both,
-            headerGridLinesVisibility: GridLinesVisibility.both,
-            //allowSorting: true,
-            allowMultiColumnSorting: true,
-            //allowTriStateSorting: true,
-            //showSortNumbers: true,
-            selectionMode: SelectionMode.singleDeselect,
-            navigationMode: GridNavigationMode.cell,
-            controller: this._dataGridController,
-            columns: getColumns(context),
-            onCellTap: (DataGridCellTapDetails details) {
-              if (details.rowColumnIndex.rowIndex == 0) {
-                // buildShowMenu(context, details);
-                //  buildShowMenu(context, details);
-              }
-            },
-          ),
+              highlightRowOnHover: true,
+              //footerFrozenRowsCount: 1,
+              //footer: Container(color: Colors.amber),
+              frozenColumnsCount: 1,
+              //footerFrozenColumnsCount: 1,
+              isScrollbarAlwaysShown: true,
+              source: jsonDataGridSource,
+              headerRowHeight: 23,
+              rowHeight: 22,
+              gridLinesVisibility: GridLinesVisibility.both,
+              headerGridLinesVisibility: GridLinesVisibility.both,
+              //allowSorting: true,
+              allowMultiColumnSorting: true,
+              //allowTriStateSorting: true,
+              //showSortNumbers: true,
+              selectionMode: SelectionMode.singleDeselect,
+              navigationMode: GridNavigationMode.cell,
+              controller: this._dataGridController,
+              columns: getColumns(context),
+              onCellTap: (DataGridCellTapDetails details) {
+                if (details.rowColumnIndex.rowIndex == 0) {
+                  // buildShowMenu(context, details);
+                  //  buildShowMenu(context, details);
+                }
+              },
+              tableSummaryRows: [
+                GridTableSummaryRow(
+                    showSummaryInRow: false,
+                    columns: [
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'monto',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'essalud',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'montoAnual',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'essaludAnual',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'aguinaldoAnual',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'total',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'sctrSalud',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'sctrSaludAnual',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'sctrPension',
+                          summaryType: GridSummaryType.sum),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'sctrPensionAnual',
+                          summaryType: GridSummaryType.sum),
+                    ],
+                    position: GridTableSummaryRowPosition.bottom)
+              ]),
         ),
       ),
     );
