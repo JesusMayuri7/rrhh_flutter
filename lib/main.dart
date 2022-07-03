@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:window_manager/window_manager.dart';
 import 'app/app_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -25,6 +26,7 @@ void main() async {
       await windowManager.setSkipTaskbar(false);
     });
   }
+  await dotenv.load(fileName: ".env");
 
 /*
   final appModule = AppModule();

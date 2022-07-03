@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:dotenv/dotenv.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:rrhh_clean/core/config/http_custom.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/errors/failure.dart';
@@ -9,7 +10,7 @@ import '../data/models/airhsp_model.dart';
 import '../data/models/conceptos_model.dart';
 
 class ListarDatasourceImpl implements IListarAirhspDatasource {
-  var env = DotEnv(includePlatformEnvironment: true)..load();
+  var env = dotenv.env;
   @override
   Future<List<AirHspModel>> listar(ejecutora, tipoPersona) async {
     return _getListadoFromUrl(
@@ -55,7 +56,6 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
     };
 
     try {
-      print(url);
       Response response = await Dio().post(url.toString(),
           queryParameters: param,
           options: Options(headers: {
@@ -63,13 +63,6 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
             'Cookie': env['cookie']!,
             'Host': env['url_mef']!
           }));
-      /* var response = await httpCustom.post(url,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            'Cookie': env['cookie']!,
-            'Host': env['url_mef']!
-          },
-          body: param); */
       return airHspModelFromXML(response.data);
     } on SocketException {
       throw ServerException('Sin conexion');

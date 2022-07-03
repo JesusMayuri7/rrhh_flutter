@@ -38,7 +38,7 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
   String totalPlazas = '0';
 
   _listarEvent(ListarEvent event, Emitter emit) async {
-    /* emit(LoadingAirhspState());
+    emit(LoadingAirhspState());
     var result = await _listarUseCase(ParamsListar(
         ejecutora: event.ejecutora, tipoPersona: event.tipoPersona));
 
@@ -48,13 +48,13 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
         return ErrorAirhspState(message: failure.toString());
       },
       (data) {
-        print('ok');
+        print('ok airhsp');
         this.totalPlazas = data.length.toString();
         this.listadoActual = data;
         //this.appBloc.add(TotalPlazasAppEvent(this.totalPlazas));
         return LoadedAirhspState(listado: data, conceptos: []);
       },
-    )); */
+    ));
   }
 
   _downloadFileEvent(DownloadFileEvent event, Emitter emit) async {
