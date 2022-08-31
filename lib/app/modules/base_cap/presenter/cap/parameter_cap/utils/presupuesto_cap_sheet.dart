@@ -130,8 +130,8 @@ String colCertificado = '\$J';
 String colProyeccion = '\$AE';
 String colDevengado = '\$K';
 String colTotalAnual = '\$AF';
-String colBaseEstadoOPP = '\$Y';
-String colBaseFuente = '\$AL';
+String colBaseEstadoOPP = '\$X';
+String colBaseFuente = '\$AK';
 String colBaseProducto = '\$AS';
 String colBaseMeta = '\$AQ';
 

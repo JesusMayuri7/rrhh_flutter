@@ -6,6 +6,7 @@ import 'package:rrhh_clean/app/modules/base_prac/data/i_updated_prac_datasource.
 import 'package:rrhh_clean/app/modules/base_prac/domain/alta_baja_use_case.dart';
 import 'package:rrhh_clean/app/modules/base_prac/domain/i_prac_repository.dart';
 import 'package:rrhh_clean/app/modules/base_prac/domain/practicante_entity.dart';
+
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';

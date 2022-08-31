@@ -20,6 +20,8 @@ class BaseCapDataSource extends DataGridSource {
                   columnName: 'plaza_old', value: dataGridRow.plazaOld),
               DataGridCell(
                   columnName: 'fuente_base', value: dataGridRow.fuenteBase),
+              DataGridCell(
+                  columnName: 'fuente_pap', value: dataGridRow.fuentePap),
               DataGridCell(columnName: 'producto', value: dataGridRow.producto),
               DataGridCell(columnName: 'sede', value: dataGridRow.sede),
               DataGridCell(

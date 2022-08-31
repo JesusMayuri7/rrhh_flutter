@@ -70,7 +70,7 @@ class _ListPracPageState extends State<ListPracPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
-                                'Exportar',
+                                'Exportara',
                                 style: TextStyle(fontSize: 12),
                               ),
                               ImageIcon(

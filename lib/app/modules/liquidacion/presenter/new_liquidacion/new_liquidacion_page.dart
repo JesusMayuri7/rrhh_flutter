@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,11 +21,13 @@ import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
 class NewLiquidacionPage extends StatefulWidget {
   final String dscModalidad;
   final String anioSelected;
+  final BuildContext contextLiq;
 
   const NewLiquidacionPage({
     Key? key,
     required this.dscModalidad,
     required this.anioSelected,
+    required this.contextLiq,
   }) : super(key: key);
 
   @override
@@ -69,8 +72,17 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<NewLiquidacionBloc, NewLiquidacionState>(
       listener: (context, state) {
-        if (state is NewLiquidacionError)
-          SnackBar(content: Text(state.message));
+        print((state as NewLiquidacionSuccessState).status);
+        if (state.status == AddLiquidacionStatus.Saved) {
+          ScaffoldMessenger.of(widget.contextLiq).showSnackBar(SnackBar(
+              backgroundColor: Colors.green,
+              content: Text('Operacon exitosa')));
+          Navigator.pop(context);
+        }
+        if (state.status == AddLiquidacionStatus.Failure) {
+          ScaffoldMessenger.of(widget.contextLiq).showSnackBar(SnackBar(
+              backgroundColor: Colors.red, content: Text('Error al grabar')));
+        }
       },
       bloc: this.newLiquidacionBloc,
       builder: (context, state) {
@@ -286,7 +298,7 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                       SizedBox(
                         height: 10,
                       ),
-                      _listClasificadores(state),
+                      Expanded(child: _listClasificadores(state)),
                       SizedBox(
                         height: 10,
                       ),
@@ -316,7 +328,6 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                                   this.newLiquidacionBloc.add(
                                       AddLiquidacionEvent(
                                           liquidacionEntity: newLiquidacion!));
-                                  print(newLiquidacion.toString());
                                 }
                               },
                               child: Text('Guardar')),
@@ -337,40 +348,42 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
   }
 
   Widget _listClasificadores(stateClasificadores) {
-    if (stateClasificadores is NewLiquidacionSuccessState) {
+    if ((stateClasificadores as NewLiquidacionSuccessState).status ==
+        AddLiquidacionStatus.ClasificadorAded) {
       print('listadoState ' + stateClasificadores.clasificadorMonto.toString());
       return (stateClasificadores.clasificadorMonto.length > 0)
-          ? Expanded(
-              child: DataTable(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.amber, width: 2)),
-                  headingRowColor:
-                      MaterialStateColor.resolveWith((states) => Colors.amber),
-                  headingRowHeight: 20,
-                  headingTextStyle: const TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                  dataRowHeight: 22,
-                  columns: const <DataColumn>[
-                    DataColumn(
-                      label: Text(
-                        'Clasificador',
-                      ),
-                    ),
-                    DataColumn(
-                      numeric: true,
-                      label: Text(
-                        'Monto',
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'Accion',
-                      ),
-                    ),
-                  ],
-                  rows: stateClasificadores.clasificadorMonto
-                      .map(
-                        (e) => DataRow(
+          ? Column(
+              children: [
+                Expanded(
+                  child: DataTable(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.amber, width: 2)),
+                      headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.amber),
+                      headingRowHeight: 20,
+                      headingTextStyle: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                      dataRowHeight: 22,
+                      columns: const <DataColumn>[
+                        DataColumn(
+                          label: Text(
+                            'Clasificador',
+                          ),
+                        ),
+                        DataColumn(
+                          numeric: true,
+                          label: Text(
+                            'Monto',
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Accion',
+                          ),
+                        ),
+                      ],
+                      rows: stateClasificadores.clasificadorMonto.map((e) {
+                        return DataRow(
                           cells: <DataCell>[
                             DataCell(Text(e['id'].toString() +
                                 ': ' +
@@ -380,9 +393,14 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                                     e['monto_certificado'].toString())))),
                             DataCell(Text('Del')),
                           ],
-                        ),
-                      )
-                      .toList()))
+                        );
+                      }).toList()),
+                ),
+                Container(
+                  child: Text('Total: ${stateClasificadores.total}'),
+                )
+              ],
+            )
           : Container();
     } else
       return Container();

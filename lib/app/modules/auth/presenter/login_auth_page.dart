@@ -1,11 +1,15 @@
+import 'package:fluent_ui/fluent_ui.dart' as f;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
+import 'package:rrhh_clean/core/uitls/widgets/windows_buttons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'bloc/auth_bloc.dart';
 
@@ -16,7 +20,7 @@ class AuthPage extends StatefulWidget {
   _AuthPageState createState() => _AuthPageState();
 }
 
-class _AuthPageState extends State<AuthPage> {
+class _AuthPageState extends State<AuthPage> with WindowListener {
   List<String> _anios = ['2020', '2021', '2022', '2023'];
   static final DateFormat formatter = DateFormat('yyyy');
   String _anioSelected = formatter.format(DateTime.now());
@@ -25,6 +29,23 @@ class _AuthPageState extends State<AuthPage> {
   final share = Modular.getAsync<SharedPreferences>();
   //final SharedPreferences share = Modular.get<SharedPreferences>();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    windowManager.addListener(this);
+  }
+
+  @override
+  void onWindowClose() async {
+    windowManager.destroy();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,66 +63,95 @@ class _AuthPageState extends State<AuthPage> {
                 .showSnackBar(SnackBar(content: Text(state.message)));
         },
         child: Scaffold(
-          appBar: AppBar(title: Center(child: Text('Login'))),
-          body: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 200.0),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+          body: Material(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: f.MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 27,
+                    child: Row(
+                      crossAxisAlignment: f.CrossAxisAlignment.start,
                       children: [
-                        _logo(),
-                        Container(
-                          width: 200,
-                          child: LabelWithFormField(
-                              maxLength: 100,
-                              textAlign: TextAlign.start,
-                              title: 'Email',
-                              onSaved: (value) {
-                                params.email = value!;
-                              },
-                              keyboardType: TextInputType.emailAddress),
+                        Expanded(
+                          child: const DragToMoveArea(
+                            child: Align(
+                              alignment: AlignmentDirectional.centerStart,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 5),
+                                child: Text('Recursos Humanos '),
+                              ),
+                            ),
+                          ),
                         ),
-                        Container(
-                          width: 200,
-                          child: LabelWithFormField(
-                              maxLength: 100,
-                              textAlign: TextAlign.start,
-                              title: 'Password',
-                              onSaved: (value) {
-                                params.password = value!;
-                              },
-                              keyboardType: TextInputType.visiblePassword),
-                        ),
-                        DropdownButton<String>(
-                          value: _anioSelected,
-                          items: _anios
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                                value: value, child: Text(value));
-                          }).toList(),
-                          onChanged: (String? value) {
-                            print(value);
-                            setState(() {
-                              _anioSelected = value!;
-                              params.anio = _anioSelected;
-                            });
-                            // this.blocApp.add(AppAnioSelectEvent(_anioSelected));
-                          },
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              // if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-                              this.bloc.add(LoginAuthEvent(params: params));
-                              //}
-                            },
-                            child: Text('Login'))
-                      ]),
-                ),
+                        if (!kIsWeb) const WindowButtons(),
+                      ],
+                    ),
+                  ),
+                  Form(
+                    key: _formKey,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 200.0),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              _logo(),
+                              Container(
+                                width: 200,
+                                child: LabelWithFormField(
+                                    maxLength: 100,
+                                    textAlign: TextAlign.start,
+                                    title: 'Email',
+                                    onSaved: (value) {
+                                      params.email = value!;
+                                    },
+                                    keyboardType: TextInputType.emailAddress),
+                              ),
+                              Container(
+                                width: 200,
+                                child: LabelWithFormField(
+                                    maxLength: 100,
+                                    textAlign: TextAlign.start,
+                                    title: 'Password',
+                                    onSaved: (value) {
+                                      params.password = value!;
+                                    },
+                                    keyboardType:
+                                        TextInputType.visiblePassword),
+                              ),
+                              DropdownButton<String>(
+                                value: _anioSelected,
+                                items: _anios.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value, child: Text(value));
+                                }).toList(),
+                                onChanged: (String? value) {
+                                  print(value);
+                                  setState(() {
+                                    _anioSelected = value!;
+                                    params.anio = _anioSelected;
+                                  });
+                                  // this.blocApp.add(AppAnioSelectEvent(_anioSelected));
+                                },
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    // if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
+                                    this
+                                        .bloc
+                                        .add(LoginAuthEvent(params: params));
+                                    //}
+                                  },
+                                  child: Text('Login'))
+                            ]),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

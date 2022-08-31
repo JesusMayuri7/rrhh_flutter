@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 List<GridColumn> getColumnsCapEstadoOpp() {
   return ([
     GridColumn(
-      width: 190,
+      width: 200,
       allowEditing: false,
       columnName: 'desc_unidad',
       label: Container(
@@ -37,7 +37,7 @@ List<GridColumn> getColumnsCapEstadoOpp() {
           ),
         )),
     GridColumn(
-        width: 42,
+        width: 45,
         columnName: 'reservado',
         label: Container(
           alignment: Alignment.center,

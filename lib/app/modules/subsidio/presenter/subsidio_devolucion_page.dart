@@ -33,12 +33,12 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
   DataGridRow? rowSelection;
 
   var _modalidad = ['CAS', 'CAP'];
+  String modalidadSelected = 'CAS';
 
   String anioSelected = (Modular.get<AuthBloc>().state as SuccessAuthState)
       .loginResponseEntity
       .anio;
   //String anioSelected = DateFormat('y').format(DateTime.now());
-  String modalidadSelected = 'CAS';
 
   @override
   void initState() {

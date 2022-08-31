@@ -22,14 +22,12 @@ class GetDataInitialPracDatasourceImpl
   @override
   Future<List<ResponseModel>> getDataInitial(String anio) async {
     try {
-      print('get data initial');
       var responseFuentes = this.getFuentesImpl.getFuentes(anio);
       var responseMetas = this.getMetasImpl.getMetas(anio);
-      var responseAreas = this.getAreasImpl.getAreas(anio);
+      var responseAreas = this.getAreasImpl.getAreas();
 
       List<ResponseModel> listData =
           await Future.wait([responseFuentes, responseMetas, responseAreas]);
-      print('listadata ' + listData.toString());
       return listData;
     } on SocketException {
       throw ServerException('Sin Conexion');

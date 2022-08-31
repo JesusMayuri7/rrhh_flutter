@@ -16,12 +16,15 @@ import 'package:rrhh_clean/core/external/get_fuentes_impl.dart';
 import 'package:rrhh_clean/core/external/get_metas_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bloc/app_bloc.dart';
 import 'modules/auth/auth_module.dart';
-import 'modules/auth/presenter/bloc/auth_bloc.dart';
 import 'modules/start/start_module.dart';
 
 class AppModule extends Module {
+  @override
+  List<Module> get imports => [
+        AuthModule(),
+      ];
+
   @override
   final List<Bind> binds = [
     Bind((i) => HttpCustom()),
@@ -29,8 +32,7 @@ class AppModule extends Module {
 
     //AUTH
 
-    Bind((i) => AppBloc()),
-    Bind((i) => AuthBloc(authCoreUseCase: i())),
+    //Bind((i) => AuthBloc(authCoreUseCase: i())),
 
     Bind((i) => LoginAuthUseCase(iAuthRepository: i())),
     Bind((i) => AuthRepositoyImpl(iAuthCoreDataSource: i())),
@@ -49,6 +51,7 @@ class AppModule extends Module {
           iDatasourceApp: i(),
           iMetasDatasourceApp: i(),
           iCertificadosDatasourceApp: i(),
+          iAreasDatasourceApp: i(),
         )),
   ];
 

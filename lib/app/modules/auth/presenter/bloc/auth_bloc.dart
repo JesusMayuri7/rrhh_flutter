@@ -15,10 +15,16 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({required this.authCoreUseCase}) : super(AuthInitial()) {
     on<LoginAuthEvent>(_onLoginAuthEventToState);
+    on<LogoutAuthEvent>(_onLogoutAuthEventToState);
     on<LoadPreferencesAuthEvent>(_onLoadPreferencesAuthEventToState);
   }
 
   final LoginAuthUseCase authCoreUseCase;
+
+  Future<void> _onLogoutAuthEventToState(
+      LogoutAuthEvent event, Emitter<AuthState> emit) async {
+    emit(AuthInitial());
+  }
 
   Future<void> _onLoginAuthEventToState(
       LoginAuthEvent event, Emitter<AuthState> emit) async {

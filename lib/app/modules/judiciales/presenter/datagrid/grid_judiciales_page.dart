@@ -1,0 +1,164 @@
+import 'package:collection/collection.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+
+import '../../domain/judicial_entity.dart';
+import 'list_judiciales_datasource.dart';
+
+class GridJudicialesPage extends StatelessWidget {
+  final List<GridColumn> columns;
+  final List<JudicialEntity> data;
+  //final GlobalKey<SfDataGridState> keyGrid;
+
+  final EditingGestureType editingGestureType = EditingGestureType.doubleTap;
+  late ListJudicialesDataSource listJudicialesDataSource;
+
+  /// Default sorting operating in drop down widget
+  final List<String> showMenuItems = <String>[
+    'Filter',
+    'Clear filter',
+  ];
+
+  GridJudicialesPage(
+      {required this.columns,
+      required this.data,
+      //required this.keyGrid,
+      required this.listJudicialesDataSource});
+
+  @override
+  Widget build(BuildContext context) {
+    this.listJudicialesDataSource.listadoJudiciales = data;
+    return Expanded(
+      child: Column(
+        children: [
+          Expanded(
+            child: SfDataGridTheme(
+              data: SfDataGridThemeData(
+                  currentCellStyle: DataGridCurrentCellStyle(
+                      borderWidth: 2, borderColor: Colors.lightBlue[800]!),
+                  rowHoverColor: Colors.blue,
+                  sortIconColor: Colors.redAccent,
+                  brightness: Theme.of(context).brightness,
+                  headerHoverColor: Colors.white.withOpacity(0.3),
+                  headerColor: Colors.lightBlue[800],
+                  rowHoverTextStyle: TextStyle(color: Colors.white)),
+              child: ScrollConfiguration(
+                behavior:
+                    ScrollConfiguration.of(context).copyWith(dragDevices: {
+                  PointerDeviceKind.touch,
+                  PointerDeviceKind.mouse,
+                }),
+                child: SfDataGrid(
+                  //key: this.keyGrid,
+                  footer: Container(),
+                  onCellSecondaryTap: (DataGridCellTapDetails details) {
+                    if (details.rowColumnIndex.rowIndex > 0) {
+                      buildShowMenu(context, details);
+                    }
+                  },
+/*                     onQueryRowHeight: (details) {
+                      return details.rowIndex == 0
+                          ? 21
+                          : details.getIntrinsicRowHeight(details.rowIndex,
+                              excludedColumns: [
+                                  'detalle',
+                                  'observacion',
+                                  'documento_orh',
+                                  'nro_expediente_judicial',
+                                  'cargo',
+                                  'nro_expediente_tramite'
+                                ]);
+                    }, */
+                  footerHeight: 2,
+                  highlightRowOnHover: true,
+                  footerFrozenRowsCount: 0,
+                  footerFrozenColumnsCount: 1,
+                  source: this.listJudicialesDataSource,
+                  headerRowHeight: 21,
+                  rowHeight: 65,
+                  isScrollbarAlwaysShown: true,
+                  gridLinesVisibility: GridLinesVisibility.both,
+                  headerGridLinesVisibility: GridLinesVisibility.both,
+                  allowSorting: true,
+                  allowMultiColumnSorting: true,
+                  allowTriStateSorting: true,
+                  showSortNumbers: true,
+                  selectionMode: SelectionMode.single,
+                  navigationMode: GridNavigationMode.cell,
+                  allowEditing: true,
+                  editingGestureType: editingGestureType,
+                  columns: this.columns,
+                  tableSummaryRows: [
+                    GridTableSummaryRow(
+                        position: GridTableSummaryRowPosition.bottom,
+                        showSummaryInRow: false,
+                        columns: [
+                          GridSummaryColumn(
+                              name: 'Sum',
+                              columnName: 'anio',
+                              summaryType: GridSummaryType.count)
+                        ])
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void buildShowMenu(BuildContext context, DataGridCellTapDetails details) {
+    double dx = 0.0, dy = 0.0;
+    const double rowHeight = 56.0;
+    if (true) {
+      final RenderBox getBox = context.findRenderObject()! as RenderBox;
+      final Offset local = getBox.globalToLocal(details.globalPosition);
+      dx = local.dx - details.localPosition.dx;
+      dy = local.dy - details.localPosition.dy + rowHeight;
+      // After Flutter v2.0, the 8.0 pixels added extra to the showMenu by default in the web and desktop.
+      // Removed the extra pixels to aligned the pop up in the bottom of header cell.
+      dy -= 0.0;
+    }
+    print(listJudicialesDataSource.rows
+        .firstWhereIndexedOrNull(
+            (index, element) => index == details.rowColumnIndex.columnIndex)!
+        .getCells()
+        .first
+        .value);
+
+    showMenu(
+        context: context,
+        position: RelativeRect.fromLTRB(dx, dy, dx + 200, dy + 200),
+        items: buildMenuItems(details.column));
+  }
+
+  Widget buildMenuItem(GridColumn column, String value) {
+    return GestureDetector(
+        onTap: () {
+          print('filtro ' + column.columnName);
+        },
+        child: Container(width: 130, height: 30, child: Text(value)));
+  }
+
+  List<PopupMenuItem<String>> buildMenuItems(GridColumn column) {
+    List<PopupMenuItem<String>> menuItems;
+
+    menuItems = <PopupMenuItem<String>>[
+      PopupMenuItem<String>(
+        value: showMenuItems[0],
+        //enabled: isEnabled(DataGridSortDirection.descending),
+        child: buildMenuItem(column, showMenuItems[0]),
+      ),
+      PopupMenuItem<String>(
+        value: showMenuItems[1],
+        //enabled: isEnabled(DataGridSortDirection.ascending),
+        child: buildMenuItem(column, showMenuItems[1]),
+      ),
+    ];
+
+    return menuItems;
+  }
+}

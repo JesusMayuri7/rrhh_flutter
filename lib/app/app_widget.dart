@@ -11,6 +11,7 @@ class _AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context) {
     //Modular.setObservers([asuka.asukaHeroController]);
     Modular.setInitialRoute('/');
+
     return FluentApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

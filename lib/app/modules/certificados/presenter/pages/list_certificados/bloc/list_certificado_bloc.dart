@@ -40,6 +40,8 @@ class ListCertificadoBloc
             List.from(stateCurrent.listCertificadoOri.where((element) {
           totalCertificado += element.monto;
           return (element.dscCertificado.endsWith(event.certificado) ||
+              element.tipo.contains(event.certificado) ||
+              element.clasificador.contains(event.certificado) ||
               element.detalle.toUpperCase().contains(event.certificado));
         }).toList());
 

@@ -13,7 +13,8 @@ class NewLiquidacionBloc
   NewLiquidacionBloc(
     this._getClasificadoresUseCase,
     this._addLiquidacionUseCase,
-  ) : super(NewLiquidacionInitial()) {
+  ) : super(NewLiquidacionSuccessState(
+            clasificadorMonto: [], clasificadores: [])) {
     on<AddLiquidacionEvent>(_onAddLiquidacionEventToState);
     on<GetLiquidacionClasificadoresEvent>(
         _onGetLiquidacionClasificadoresEventToState);
@@ -25,14 +26,18 @@ class NewLiquidacionBloc
   final AddLiquidacionUseCase _addLiquidacionUseCase;
 
   _onAddLiquidacionEventToState(
-      event, Emitter<NewLiquidacionState> emit) async {
-    if (event is AddLiquidacionEvent) {
+      AddLiquidacionEvent event, Emitter<NewLiquidacionState> emit) async {
+    if (state is NewLiquidacionSuccessState) {
       var result = await this._addLiquidacionUseCase(event.liquidacionEntity);
       emit(result.fold((l) {
-        return NewLiquidacionError(message: l.toString());
+        print(l.toString());
+        return (state as NewLiquidacionSuccessState)
+            .copyWith(status: AddLiquidacionStatus.Failure);
       }, (r) {
-        return NewLiquidacionSuccessState(
-            clasificadores: r.data, clasificadorMonto: []);
+        return (state as NewLiquidacionSuccessState).copyWith(
+            status: AddLiquidacionStatus.Saved,
+            clasificadorMonto: [],
+            total: 0);
       }));
     }
   }
@@ -42,10 +47,14 @@ class NewLiquidacionBloc
     if (event is GetLiquidacionClasificadoresEvent) {
       var result = await this._getClasificadoresUseCase(event.anio);
       emit(result.fold((l) {
-        return NewLiquidacionError(message: l.toString());
+        return (state as NewLiquidacionSuccessState)
+            .copyWith(status: AddLiquidacionStatus.Failure);
       }, (r) {
-        return NewLiquidacionSuccessState(
-            clasificadores: r.data, clasificadorMonto: []);
+        return (state as NewLiquidacionSuccessState).copyWith(
+            status: AddLiquidacionStatus.ClasificadorLoaded,
+            clasificadores: r.data,
+            clasificadorMonto: [],
+            total: 0);
       }));
     }
   }
@@ -54,12 +63,13 @@ class NewLiquidacionBloc
       event, Emitter<NewLiquidacionState> emit) async {
     if (event is AddClasificadorMontoEvent) {
       if (state is NewLiquidacionSuccessState) {
+        num totalizado = 0;
         List<Map<String, dynamic>> lista = [];
         (state is NewLiquidacionSuccessState)
             ? lista =
                 List.of((state as NewLiquidacionSuccessState).clasificadorMonto)
             : lista = [];
-
+        totalizado = (state as NewLiquidacionSuccessState).total;
         if (lista
             .every((element) => element['id'] != event.clasificadorEntity.id)) {
           if (lista.length == 0) {
@@ -68,6 +78,7 @@ class NewLiquidacionBloc
               'id': event.clasificadorEntity.id,
               'monto_certificado': event.montoCertificado
             });
+            totalizado += event.montoCertificado;
           } else {
             lista.insert(0, {
               'dsc_clasificador': event.clasificadorEntity.dscClasificador,
@@ -75,8 +86,11 @@ class NewLiquidacionBloc
               'monto_certificado': event.montoCertificado
             });
           }
-          emit((state as NewLiquidacionSuccessState)
-              .copyWith(clasificadorMonto: lista));
+          totalizado += event.montoCertificado;
+          emit((state as NewLiquidacionSuccessState).copyWith(
+              status: AddLiquidacionStatus.ClasificadorAded,
+              clasificadorMonto: lista,
+              total: totalizado));
         }
       }
     }

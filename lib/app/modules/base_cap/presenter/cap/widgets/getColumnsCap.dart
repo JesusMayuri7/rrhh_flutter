@@ -62,6 +62,21 @@ List<GridColumn> getColumnsCap(BuildContext context) {
       //width: model.isWeb ? 135 : 90,
     ),
     GridColumn(
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Fuente PAP',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'fuente_pap',
+      width: 50,
+      ////columnWidthMode: ColumnWidthMode.fill,
+      //width: model.isWeb ? 135 : 90,
+    ),
+    GridColumn(
         label: Container(
           alignment: Alignment.center,
           child: Text(

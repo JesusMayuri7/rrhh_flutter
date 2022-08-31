@@ -31,7 +31,8 @@ class _LiquidacionDetallePageState extends State<LiquidacionDetallePage> {
     return BlocConsumer<LiquidacionDetalleBloc, LiquidacionDetalleState>(
         listener: (context, newState) {
           if (newState is LiquidacionDetalleError)
-            SnackBar(content: Text(newState.message));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Error al grabar: ' + newState.message)));
         },
         buildWhen: (previousState, newState) {
           if (newState is LiquidacionDetalleLoaded) return true;

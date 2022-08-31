@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
-import 'package:rrhh_clean/core/data/datasource/i_areas_datasource.dart';
+import 'package:rrhh_clean/core/data/datasource/i_areas_datasource_app.dart';
 import 'package:rrhh_clean/core/data/models/area_model.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
@@ -14,7 +14,7 @@ class GetAreasImpl implements IAreasDatasourceApp {
   });
 
   @override
-  Future<ResponseModel> getAreas(String anio) async {
+  Future<ResponseModel> getAreas() async {
     Uri url = Uri.http('rrhh.pvn.gob.pe', 'api/configuracion/areas');
     try {
       ResponseModel response = await httpCustom.request(

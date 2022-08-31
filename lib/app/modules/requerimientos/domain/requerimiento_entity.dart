@@ -21,7 +21,7 @@ class RequerimientoEntity extends Equatable {
   final String dctoSolicitud;
   final DateTime fechaSolicitud;
   final String descArea;
-  final List<RequerimientoDetalleEntity> requerimientoDetalle;
+  final List<DocumentoDetalleEntity> requerimientoDetalle;
 
   @override
   List<Object> get props {

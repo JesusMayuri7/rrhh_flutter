@@ -1,9 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 
 import 'package:rrhh_clean/app/modules/base_prac/basePrac_module.dart';
 import 'package:rrhh_clean/app/modules/home/home_module.dart';
 import 'package:rrhh_clean/app/modules/import/import_module.dart';
+
 import 'package:rrhh_clean/app/modules/requerimientos/requerimientos_module.dart';
 import 'package:rrhh_clean/app/modules/start/start_fluent.dart';
 import 'package:rrhh_clean/app/modules/subsidio/subsidio_module.dart';
@@ -17,21 +17,21 @@ import 'package:rrhh_clean/app/modules/certificados/certificados_module.dart';
 import 'package:rrhh_clean/app/modules/confianza/confianza_module.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/liquidacion_module.dart';
 
+import '../documentos/documentos_module.dart';
+import '../judiciales/judiciales_module.dart';
 import '../reports/reports_module.dart';
 
 class StartModule extends Module {
   @override
-  final List<Bind> binds = [
-    Bind((i) => AppBloc()),
-  ];
-
-  @override
   List<Module> get imports => [
+        //AuthModule(),
         CertificadosModule(),
         BasePracModule(),
         BaseCasModule(),
         ConfianzaModule(),
-        LiquidacionModule()
+        LiquidacionModule(),
+        DocumentosModule(),
+        //JudicialesModule(),
       ];
 
   @override
@@ -49,6 +49,8 @@ class StartModule extends Module {
       ModuleRoute('/requerimientos', module: RequerimientosModule()),
       ModuleRoute('/import', module: ImportModule()),
       ModuleRoute('/reports', module: ReportsModule()),
+      ModuleRoute('/documentos', module: DocumentosModule()),
+      ModuleRoute('/judiciales', module: JudicialesModule()),
       //ModuleRoute('/login', module: AuthModule()),
     ]),
   ];

@@ -74,7 +74,8 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
         listener: (context, state) {
           if (state is LiquidacionListLoaded) {
             if (state.status == LiquidacionStatus.LiquidacionListError)
-              SnackBar(content: Text('Error: '));
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text('Error')));
           }
         },
         builder: (context, state) {
@@ -87,161 +88,165 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
             liquidacionDataSource.updateDataGrid();
           }
 
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 3, top: 3),
-                      child: Form(
-                        key: _formKey,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 25,
-                              width: 80,
-                              child: f.Combobox<String>(
-                                  value: (this.listLiquidacionBloc.state
-                                          is LiquidacionListLoaded)
-                                      ? (this.listLiquidacionBloc.state
-                                              as LiquidacionListLoaded)
-                                          .modalidad
-                                      : modalidadSelected,
-                                  items: _modalidad
-                                      .map((String dropDownStringItem) {
-                                    return f.ComboboxItem<String>(
-                                      child: Text(dropDownStringItem),
-                                      value: dropDownStringItem,
-                                    );
-                                  }).toList(),
-                                  onChanged: (value) {
-                                    this.listLiquidacionBloc.add(
-                                        SetLiquidacionFilteredModalidadEvent(
-                                            dscModalidad: value!));
-                                    // modalidadSelected = value;
-                                    modalidadSelected = value;
-                                  }),
-                            ),
-                            Container(
-                                width: 200,
-                                child: TextFormField(
-                                    textAlign: TextAlign.right,
-                                    keyboardType: TextInputType.text,
-                                    onFieldSubmitted: (value) {
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 3, top: 3),
+                        child: Form(
+                          key: _formKey,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 25,
+                                width: 80,
+                                child: f.Combobox<String>(
+                                    value: (this.listLiquidacionBloc.state
+                                            is LiquidacionListLoaded)
+                                        ? (this.listLiquidacionBloc.state
+                                                as LiquidacionListLoaded)
+                                            .modalidad
+                                        : modalidadSelected,
+                                    items: _modalidad
+                                        .map((String dropDownStringItem) {
+                                      return f.ComboboxItem<String>(
+                                        child: Text(dropDownStringItem),
+                                        value: dropDownStringItem,
+                                      );
+                                    }).toList(),
+                                    onChanged: (value) {
                                       this.listLiquidacionBloc.add(
-                                          SetLiquidacionFilteredTextEvent(
-                                              modalidad: modalidadSelected,
-                                              anio: anioSelected!,
-                                              criterio: value));
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: 'Filtrar',
-                                      prefixIcon: Icon(Icons.search_outlined),
-                                      // set the prefix icon constraints
-                                      prefixIconConstraints: BoxConstraints(
-                                        minWidth: 25,
-                                        minHeight: 25,
-                                      ),
-                                      border: OutlineInputBorder(),
-                                      isDense: true, // Added this
-                                      contentPadding: EdgeInsets.only(
-                                          left: 5,
-                                          top: 12,
-                                          bottom: 0), // Added this
-                                    ))),
-                            ElevatedButton(
-                                onPressed: () => this.listLiquidacionBloc.add(
-                                    GetListLiquidacionEvent(
-                                        anio: anioSelected!,
-                                        modalidad: (this
-                                                .listLiquidacionBloc
-                                                .state is LiquidacionListLoaded)
-                                            ? (this.listLiquidacionBloc.state
-                                                    as LiquidacionListLoaded)
-                                                .modalidad
-                                            : modalidadSelected)),
-                                child: Text('Actualizar')),
-                            ElevatedButton(
-                                onPressed: exportDataGridToExcel,
-                                child: Text('Exp')),
-                            ElevatedButton(
-                                onPressed: () => exportLiquidaciontoExcel((this
-                                        .listLiquidacionBloc
-                                        .state is LiquidacionListLoaded)
-                                    ? (this.listLiquidacionBloc.state
-                                            as LiquidacionListLoaded)
-                                        .listLiquidacionFiltered
-                                    : []),
-                                child: Text('Exportar')),
-                            ElevatedButton(
-                                onPressed: () => _showModalDialog(context),
-                                child: Text('Nuevo')),
-                          ],
+                                          SetLiquidacionFilteredModalidadEvent(
+                                              dscModalidad: value!));
+                                      // modalidadSelected = value;
+                                      modalidadSelected = value;
+                                    }),
+                              ),
+                              Container(
+                                  width: 200,
+                                  child: TextFormField(
+                                      textAlign: TextAlign.right,
+                                      keyboardType: TextInputType.text,
+                                      onFieldSubmitted: (value) {
+                                        this.listLiquidacionBloc.add(
+                                            SetLiquidacionFilteredTextEvent(
+                                                modalidad: modalidadSelected,
+                                                anio: anioSelected!,
+                                                criterio: value));
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: 'Filtrar',
+                                        prefixIcon: Icon(Icons.search_outlined),
+                                        // set the prefix icon constraints
+                                        prefixIconConstraints: BoxConstraints(
+                                          minWidth: 25,
+                                          minHeight: 25,
+                                        ),
+                                        border: OutlineInputBorder(),
+                                        isDense: true, // Added this
+                                        contentPadding: EdgeInsets.only(
+                                            left: 5,
+                                            top: 12,
+                                            bottom: 0), // Added this
+                                      ))),
+                              ElevatedButton(
+                                  onPressed: () => this.listLiquidacionBloc.add(
+                                      GetListLiquidacionEvent(
+                                          anio: anioSelected!,
+                                          modalidad: (this
+                                                      .listLiquidacionBloc
+                                                      .state
+                                                  is LiquidacionListLoaded)
+                                              ? (this.listLiquidacionBloc.state
+                                                      as LiquidacionListLoaded)
+                                                  .modalidad
+                                              : modalidadSelected)),
+                                  child: Text('Actualizar')),
+                              ElevatedButton(
+                                  onPressed: exportDataGridToExcel,
+                                  child: Text('Exp')),
+                              ElevatedButton(
+                                  onPressed: () => exportLiquidaciontoExcel(
+                                      (this.listLiquidacionBloc.state
+                                              is LiquidacionListLoaded)
+                                          ? (this.listLiquidacionBloc.state
+                                                  as LiquidacionListLoaded)
+                                              .listLiquidacionFiltered
+                                          : []),
+                                  child: Text('Exportar')),
+                              ElevatedButton(
+                                  onPressed: () => _showModalDialog(context),
+                                  child: Text('Nuevo')),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: SfDataGridTheme(
-                      data: SfDataGridThemeData(
-                        brightness: Theme.of(context).brightness,
-                        headerHoverColor: Colors.white.withOpacity(0.3),
-                        headerColor: Colors.lightBlue[800],
-                      ),
-                      child: ScrollConfiguration(
-                        behavior: ScrollConfiguration.of(context).copyWith(
-                            dragDevices: {
-                              PointerDeviceKind.touch,
-                              PointerDeviceKind.mouse
-                            }),
-                        child: SfDataGrid(
-                          key: keyGrid,
-                          source: liquidacionDataSource,
-                          columns: getColumnsLiquidacion(),
-                          allowEditing: true,
-                          highlightRowOnHover: true,
-                          editingGestureType: EditingGestureType.doubleTap,
-                          navigationMode: GridNavigationMode.cell,
-                          //controller: this._dataGridController,
-                          headerRowHeight: 30,
-                          footer: Container(),
-                          footerHeight: 25,
-                          rowHeight: 19,
-                          isScrollbarAlwaysShown: true,
-                          gridLinesVisibility: GridLinesVisibility.both,
-                          headerGridLinesVisibility: GridLinesVisibility.both,
-                          allowSorting: true,
-                          allowMultiColumnSorting: true,
-                          allowTriStateSorting: true,
-                          showSortNumbers: true,
-                          selectionMode: SelectionMode.single,
+                    Expanded(
+                      child: SfDataGridTheme(
+                        data: SfDataGridThemeData(
+                          brightness: Theme.of(context).brightness,
+                          headerHoverColor: Colors.white.withOpacity(0.3),
+                          headerColor: Colors.lightBlue[800],
+                        ),
+                        child: ScrollConfiguration(
+                          behavior: ScrollConfiguration.of(context).copyWith(
+                              dragDevices: {
+                                PointerDeviceKind.touch,
+                                PointerDeviceKind.mouse
+                              }),
+                          child: SfDataGrid(
+                            key: keyGrid,
+                            source: liquidacionDataSource,
+                            columns: getColumnsLiquidacion(),
+                            allowEditing: true,
+                            highlightRowOnHover: true,
+                            editingGestureType: EditingGestureType.doubleTap,
+                            navigationMode: GridNavigationMode.cell,
+                            //controller: this._dataGridController,
+                            headerRowHeight: 30,
+                            footer: Container(),
+                            footerHeight: 25,
+                            rowHeight: 19,
+                            isScrollbarAlwaysShown: true,
+                            gridLinesVisibility: GridLinesVisibility.both,
+                            headerGridLinesVisibility: GridLinesVisibility.both,
+                            allowSorting: true,
+                            allowMultiColumnSorting: true,
+                            allowTriStateSorting: true,
+                            showSortNumbers: true,
+                            selectionMode: SelectionMode.single,
 
-                          onSelectionChanged: (List<DataGridRow> addedRows,
-                              List<DataGridRow> removedRows) {
-                            final index = liquidacionDataSource.rows
-                                .indexOf(addedRows.last);
+                            onSelectionChanged: (List<DataGridRow> addedRows,
+                                List<DataGridRow> removedRows) {
+                              final index = liquidacionDataSource.rows
+                                  .indexOf(addedRows.last);
 
-                            LiquidacionEntity liquidacion =
-                                liquidacionDataSource
-                                    .listLiquidacionFiltered[index];
+                              LiquidacionEntity liquidacion =
+                                  liquidacionDataSource
+                                      .listLiquidacionFiltered[index];
 
-                            this.listLiquidacionBloc.add(
-                                SetLiquidacionDetalleEvent(
-                                    dscCertificado: liquidacion.dscCertificado,
-                                    liquidacionDetalle:
-                                        liquidacion.liquidacionDetalle,
-                                    nombres: liquidacion.nombres));
-                          },
+                              this.listLiquidacionBloc.add(
+                                  SetLiquidacionDetalleEvent(
+                                      dscCertificado:
+                                          liquidacion.dscCertificado,
+                                      liquidacionDetalle:
+                                          liquidacion.liquidacionDetalle,
+                                      nombres: liquidacion.nombres));
+                            },
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ]),
+                  ]),
+            ),
           );
         });
   }
@@ -266,7 +271,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
     //if (keyGrid.currentState == null)
     {
       PdfDocument document = keyGrid.currentState!.exportToPdfDocument();
-      final List<int> bytes = document.save();
+      final List<int> bytes = await document.save();
       await FileSaveHelper.saveAndLaunchFile(bytes, 'BaseCasCalculado.pdf');
     }
   }
@@ -274,7 +279,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
   _showModalDialog(_context) {
     showDialog(
         context: _context,
-        builder: (BuildContext _context) {
+        builder: (BuildContext _context2) {
           return Dialog(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
@@ -282,6 +287,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                   width: 350,
                   height: 600,
                   child: NewLiquidacionPage(
+                      contextLiq: _context,
                       anioSelected: this.anioSelected!,
                       dscModalidad: (this.listLiquidacionBloc.state
                               as LiquidacionListLoaded)

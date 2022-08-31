@@ -10,20 +10,23 @@ class MainSubsidioPage extends StatelessWidget {
   MainSubsidioPage({Key? key}) : super(key: key);
 
   final blocSubsidio = Modular.get<SubsidioBloc>();
-  String anioSelected = (Modular.get<AuthBloc>().state as SuccessAuthState)
-      .loginResponseEntity
-      .anio;
+  final String anioSelected =
+      (Modular.get<AuthBloc>().state as SuccessAuthState)
+          .loginResponseEntity
+          .anio;
 
   @override
   Widget build(BuildContext context) {
     this.blocSubsidio.add(SubsidioDataInitialLoad(anio: this.anioSelected));
     return BlocConsumer<SubsidioBloc, SubsidioState>(
       listener: (context, state) {
-        if (state is SubsidioError) SnackBar(content: Text(state.message));
+        if (state is SubsidioError) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Error: ' + state.message)));
+        }
       },
       bloc: this.blocSubsidio,
       builder: (context, state) {
-        print(state.toString());
         if (state is SubsidioLoaded)
           return Material(child: Container(child: SubsidioDevolucionPage()));
         if (state is SubsidioError)

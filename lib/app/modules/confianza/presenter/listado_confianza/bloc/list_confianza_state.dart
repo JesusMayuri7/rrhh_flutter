@@ -22,21 +22,29 @@ class ListConfianzaBlocError extends ListConfianzaBlocState {
 
 class ListConfianzaBlocLoaded extends ListConfianzaBlocState {
   final StatusList status;
-  final List<ConfianzaEntity> listConfianza;
+  final List<ConfianzaEntity> listConfianzaFiltered;
+  final List<ConfianzaEntity> listConfianzaOriginal;
 
   ListConfianzaBlocLoaded(
-      {required this.listConfianza, this.status = StatusList.empty});
+      {required this.listConfianzaFiltered,
+      required this.listConfianzaOriginal,
+      this.status = StatusList.empty});
 
   @override
-  List<Object> get props => [this.listConfianza];
+  List<Object> get props =>
+      [this.listConfianzaOriginal, this.listConfianzaFiltered, this.status];
 
   ListConfianzaBlocLoaded copyWith({
     StatusList? status,
-    List<ConfianzaEntity>? listConfianza,
+    List<ConfianzaEntity>? listConfianzaFiltered,
+    List<ConfianzaEntity>? listConfianzaOriginal,
   }) {
     return ListConfianzaBlocLoaded(
       status: status ?? this.status,
-      listConfianza: listConfianza ?? this.listConfianza,
+      listConfianzaOriginal:
+          listConfianzaOriginal ?? this.listConfianzaOriginal,
+      listConfianzaFiltered:
+          listConfianzaFiltered ?? this.listConfianzaFiltered,
     );
   }
 }

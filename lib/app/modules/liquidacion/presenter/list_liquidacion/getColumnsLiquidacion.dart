@@ -55,19 +55,19 @@ List<GridColumn> getColumnsLiquidacion() {
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
-        width: 210,
+        width: 200,
         columnName: 'finalidad',
         label: Text('Finalidad',
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
-        width: 70,
+        width: 60,
         columnName: 'dni',
         label: Text('Dni',
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
-        width: 250,
+        width: 230,
         columnName: 'nombres',
         label: Text('Nombres',
             style: TextStyle(fontSize: 10, color: Colors.white),
@@ -118,7 +118,7 @@ List<GridColumn> getColumnsLiquidacion() {
             textAlign: TextAlign.center),
         visible: false),
     GridColumn(
-        width: 210,
+        width: 200,
         columnName: 'finalidad_devengado',
         label: Text('Finalidad',
             style: TextStyle(fontSize: 10, color: Colors.white),
@@ -126,14 +126,14 @@ List<GridColumn> getColumnsLiquidacion() {
         visible: true),
     GridColumn(
         allowEditing: true,
-        width: 60,
+        width: 50,
         columnName: 'codigo_plaza',
         label: Text('Codigo \n AIRHSP',
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
         allowEditing: true,
-        width: 60,
+        width: 40,
         columnName: 'codigo_siga',
         label: Text('Codigo \n SIGA',
             style: TextStyle(fontSize: 10, color: Colors.white),

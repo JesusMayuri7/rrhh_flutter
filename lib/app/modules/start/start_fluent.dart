@@ -1,10 +1,16 @@
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' as m;
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:window_manager/window_manager.dart';
+
+import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
+
+import 'package:rrhh_clean/core/presenter/logou_widget.dart';
+import 'package:rrhh_clean/core/uitls/widgets/windows_buttons.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StartFluent extends StatefulWidget {
   const StartFluent({Key? key}) : super(key: key);
@@ -16,7 +22,8 @@ class StartFluent extends StatefulWidget {
 class _StartFluentState extends State<StartFluent> with WindowListener {
   final viewKey = GlobalKey();
   int index = 0;
-  PackageInfo? packageInfo;
+  final bloc = Modular.get<AuthBloc>();
+  final SharedPreferences preferences = Modular.get<SharedPreferences>();
 
   @override
   void dispose() {
@@ -28,16 +35,6 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
   void initState() {
     super.initState();
     windowManager.addListener(this);
-    checkVersion();
-  }
-
-  checkVersion() async {
-    packageInfo = await PackageInfo.fromPlatform();
-    print(packageInfo!.version);
-    print(packageInfo!.buildNumber);
-    print(packageInfo!.appName);
-    print(packageInfo!.packageName);
-    print(packageInfo!.buildSignature);
   }
 
   @override
@@ -47,18 +44,18 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
       showDialog(
         context: context,
         builder: (_) {
-          return ContentDialog(
+          return f.ContentDialog(
             title: const Text('Confirmar cierre'),
             content: const Text('Estas seguro de cerrar el programa RRHH?'),
             actions: [
-              FilledButton(
+              f.FilledButton(
                 child: const Text('Si'),
                 onPressed: () {
                   Navigator.pop(context);
                   windowManager.destroy();
                 },
               ),
-              Button(
+              f.Button(
                 child: const Text('No'),
                 onPressed: () {
                   Navigator.pop(context);
@@ -73,9 +70,17 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationView(
+    return BlocListener<AuthBloc, AuthState>(
+      bloc: this.bloc,
+      listener: (context, state) {
+        if (state is AuthInitial) {
+          preferences.clear();
+          Modular.to.pushNamedAndRemoveUntil('/login', (p0) => false);
+        }
+      },
+      child: f.NavigationView(
         key: viewKey,
-        appBar: NavigationAppBar(
+        appBar: f.NavigationAppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: true,
           title: () {
@@ -87,7 +92,7 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
               ),
             );
           }(),
-          height: 25,
+          height: 27,
           leading: Align(
             alignment: AlignmentDirectional.centerStart,
             child: FlutterLogo(size: 15),
@@ -96,12 +101,13 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Spacer(),
+              LogoutWidget(),
               if (!kIsWeb) const WindowButtons(),
             ],
           ),
         ),
-        pane: NavigationPane(
-          displayMode: PaneDisplayMode.compact,
+        pane: f.NavigationPane(
+          displayMode: f.PaneDisplayMode.compact,
           selected: index,
           onChanged: (i) {
             setState(() => index = i);
@@ -134,24 +140,31 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
                 Modular.to.pushNamed('/start/subsidio/');
                 break;
               case 9:
-                Modular.to.pushNamed('/start/requerimientos/');
+                Modular.to.pushNamed('/start/documentos/');
                 break;
               case 10:
-                Modular.to.pushNamed('/start/import/');
+                Modular.to.pushNamed('/start/judiciales/');
                 break;
               case 11:
+                Modular.to.pushNamed('/start/requerimientos/');
+                break;
+              case 12:
+                Modular.to.pushNamed('/start/import/');
+                break;
+              case 13:
                 Modular.to.pushNamed('/start/reports/');
                 break;
+
               default:
             }
           },
           header: Padding(
             padding: EdgeInsets.all(2),
             child: DefaultTextStyle(
-                style: FluentTheme.of(context).typography.bodyStrong!,
+                style: f.FluentTheme.of(context).typography.bodyStrong!,
                 child: const Text('Recursos Humanos')),
           ),
-          size: const NavigationPaneSize(
+          size: const f.NavigationPaneSize(
             openWidth: 200,
             openMinWidth: 200.0,
             openMaxWidth: 200.0,
@@ -159,76 +172,68 @@ class _StartFluentState extends State<StartFluent> with WindowListener {
           items: [
             // It doesn't look good when resizing from compact to open
             // PaneItemHeader(header: Text('User Interaction')),
-            PaneItem(
-              icon: const Icon(FluentIcons.home),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.home),
               title: const Text('Inicio'),
             ),
-            PaneItemSeparator(),
-            PaneItem(
-              icon: const Icon(FluentIcons.bank),
+            f.PaneItemSeparator(),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.bank),
               title: const Text('AIRHSP'),
             ),
-            PaneItem(
+            f.PaneItem(
               icon: const Icon(MaterialIcons.person),
               title: const Text('Base CAP'),
             ),
-            PaneItem(
+            f.PaneItem(
               icon: const Icon(MaterialIcons.person_outline),
               title: const Text('Base CAS'),
             ),
-            PaneItem(
+            f.PaneItem(
               title: const Text('Base PRAC'),
               icon: const Icon(Entypo.graduation_cap),
             ),
-            PaneItem(
-              icon: const Icon(FluentIcons.check_list_text),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.check_list_text),
               title: const Text('Certificados'),
             ),
-            PaneItem(
-              icon: const Icon(FluentIcons.employee_self_service),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.employee_self_service),
               title: const Text('Confianza'),
             ),
-            PaneItem(
-              icon: const Icon(FluentIcons.clipboard_list),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.clipboard_list),
               title: const Text('Liquidacion'),
             ),
-            PaneItem(
+            f.PaneItem(
               icon: const Icon(MaterialIcons.money_off),
               title: const Text('Devolucion'),
             ),
-            PaneItemSeparator(),
-            PaneItem(
-              icon: const Icon(FluentIcons.folder_list),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.document_management),
+              title: const Text('Documentos'),
+            ),
+            f.PaneItem(
+              icon: const Icon(Icons.balance),
+              title: const Text('Judiciales'),
+            ),
+            f.PaneItemSeparator(),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.folder_list),
               title: const Text('Requerimientos'),
             ),
-            PaneItem(
-              icon: const Icon(FluentIcons.cloud_import_export),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.cloud_import_export),
               title: const Text('Importar'),
             ),
 
-            PaneItem(
-              icon: const Icon(FluentIcons.cloud_import_export),
+            f.PaneItem(
+              icon: const Icon(f.FluentIcons.cloud_import_export),
               title: const Text('Reports'),
             ),
           ],
         ),
-        content: m.ScaffoldMessenger(child: RouterOutlet()));
-  }
-}
-
-class WindowButtons extends StatelessWidget {
-  const WindowButtons({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData theme = FluentTheme.of(context);
-
-    return SizedBox(
-      width: 138,
-      height: 50,
-      child: WindowCaption(
-        brightness: theme.brightness,
-        backgroundColor: Colors.transparent,
+        content: RouterOutlet(),
       ),
     );
   }

@@ -14,9 +14,7 @@ class _RequerimientosListPageState extends State<RequerimientosListPage> {
   Widget build(BuildContext context) {
     return Container(
         child: PlutoGrid(
-            configuration: PlutoGridConfiguration(
-              rowHeight: 25,
-            ),
+            configuration: PlutoGridConfiguration(),
             columns: columns,
             rows: rows,
             onChanged: (PlutoGridOnChangedEvent event) {

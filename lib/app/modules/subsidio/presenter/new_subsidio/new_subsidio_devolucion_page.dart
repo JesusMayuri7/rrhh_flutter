@@ -81,7 +81,10 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<NewSubsidioBloc, NewSubsidioState>(
       listener: (context, state) {
-        if (state is NewSubsidioError) SnackBar(content: Text(state.message));
+        if (state is NewSubsidioError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Error al grabar: ' + state.message)));
+        }
         if (state is NewSubsidioAdded) {
           print(state.runtimeType);
           Navigator.pop(context);

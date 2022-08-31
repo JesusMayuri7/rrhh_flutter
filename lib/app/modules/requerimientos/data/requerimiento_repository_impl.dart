@@ -6,7 +6,7 @@ import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_list_
 
 class RequerimientoRepositoryImpl implements IRequerimientoRepository {
   @override
-  Future<Either<Failure, ResponseEntity>> getListRequerimientos(
+  Future<Either<Failure, ResponseEntity>> getListRequerimiento(
       ParamsRequerimiento params) {
     throw UnimplementedError();
   }

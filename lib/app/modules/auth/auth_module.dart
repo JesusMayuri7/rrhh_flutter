@@ -13,7 +13,7 @@ class AuthModule extends Module {
   @override
   final List<Bind> binds = [
     // BLOC
-    Bind((i) => AuthBloc(authCoreUseCase: i())),
+    Bind((i) => AuthBloc(authCoreUseCase: i()), export: true),
 
     // USES CASE
     Bind((i) => LoginAuthUseCase(iAuthRepository: i())),

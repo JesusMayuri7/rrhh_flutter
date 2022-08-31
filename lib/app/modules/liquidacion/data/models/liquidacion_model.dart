@@ -4,10 +4,10 @@ import 'liquidacion_detalle._model.dart';
 import '../../domain/entities/liquidacion_entity.dart';
 
 List<LiquidacionModel> liquidacionModelFromJson(String str) {
-  List<dynamic> liquidacionJson = json.decode(str);
+  //List<dynamic> liquidacionJson = json.decode(str);
 
   return List<LiquidacionModel>.from(
-      liquidacionJson.map((x) => LiquidacionModel.fromJson(x)));
+      json.decode(str).map((x) => LiquidacionModel.fromJson(x)));
 }
 
 class LiquidacionModel extends LiquidacionEntity {

@@ -6,5 +6,6 @@ import 'package:rrhh_clean/core/errors/failure.dart';
 abstract class IRepositoryApp {
   Future<Either<Failure, ResponseEntity>> getClasificadores(String anio);
   Future<Either<Failure, ResponseEntity>> getMetas(String anio);
+  Future<Either<Failure, ResponseEntity>> getAreas();
   Future<Either<Failure, ResponseEntity>> getCertificados(String anio);
 }

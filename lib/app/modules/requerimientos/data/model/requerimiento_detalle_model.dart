@@ -9,7 +9,7 @@ List<RequerimientoDetalleModel> requerimientoDetalleModelFromJson(String str) =>
 String requerimientoDetalleModelToJson(List<RequerimientoDetalleModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class RequerimientoDetalleModel extends RequerimientoDetalleEntity {
+class RequerimientoDetalleModel extends DocumentoDetalleEntity {
   RequerimientoDetalleModel(
       {required final String cargo,
       required final int monto,

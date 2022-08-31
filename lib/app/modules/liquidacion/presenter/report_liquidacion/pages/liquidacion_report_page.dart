@@ -101,12 +101,8 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
               bloc: this.blocLiquidacion,
               listener: (context, state) {
                 if (state is LiquidacionReportError) {
-                  f.showSnackbar(
-                    context,
-                    const f.Snackbar(
-                      content: Text('Error'),
-                    ),
-                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Error: ' + state.message)));
                 }
               },
               builder: (context, state) {

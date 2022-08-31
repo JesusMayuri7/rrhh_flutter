@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 
 import 'package:rrhh_clean/app/modules/airhsp/data/datasources/i_download_file_datasource.dart';
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
@@ -21,14 +22,15 @@ class DownloadFileDatasourceImpl implements IDownloadFileDatasource {
 
   @override
   Future<ResponseModel> downloadFile(String tipoPersona) async {
+    final String fechaActual = DateFormat('yyyy-MM-dd').format(DateTime.now());
     try {
       Response response = await iClientCustom.download(
           'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2022&tipoPersona=$tipoPersona&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
 
       String modalidad = tipoPersonaToModalidad(tipoPersona);
       print(modalidad);
-      await FileSaveHelper.saveAndLaunchFile(
-          response.data, 'ReporteDatoslaboralesNomina1078_$modalidad.xlsx');
+      await FileSaveHelper.saveAndLaunchFile(response.data,
+          '${fechaActual}_ReporteDatoslaboralesNomina1078_$modalidad.xlsx');
       return ResponseModel(status: true, message: 'ok');
     } on SocketException {
       throw ServerException('Sin conexion');

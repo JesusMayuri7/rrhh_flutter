@@ -23,7 +23,7 @@ class LiquidacionDataSource extends DataGridSource {
     'PENDIENTE',
     'SOLICITUD_VALIDADA',
     'ENVIADO_OTC',
-    'CON_EXPEDIENTE',
+    'ENVIADO_OPP',
     'CERTIFICADO_VALIDADO',
     'ENVIADO_GBEL'
   ];

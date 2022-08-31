@@ -84,7 +84,8 @@ class _HeadBaseCasPageState extends State<CapPage>
               listener: (context, state) {
                 if (state is CapLoadedState) {
                   if (StatusCap.error == (state as CapLoadedState).statusCap) {
-                    //ScaffoldMessenger(child: SnackBar.)
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text('Error')));
                   }
                 }
               },

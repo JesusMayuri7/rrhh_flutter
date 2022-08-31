@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'presenter/requerimientos_list_page.dart';
 
-class MainRequerimientosPage extends StatefulWidget {
-  const MainRequerimientosPage({Key? key}) : super(key: key);
+class MainDocumentosPage extends StatefulWidget {
+  const MainDocumentosPage({Key? key}) : super(key: key);
 
   @override
-  State<MainRequerimientosPage> createState() => _MainRequerimientosPageState();
+  State<MainDocumentosPage> createState() => _MainDocumentosPageState();
 }
 
-class _MainRequerimientosPageState extends State<MainRequerimientosPage> {
+class _MainDocumentosPageState extends State<MainDocumentosPage> {
   @override
   Widget build(BuildContext context) {
     return Material(

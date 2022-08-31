@@ -51,11 +51,11 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
             if (state is AltaBajaPracLoaded) {
               Navigator.pop(context);
               ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Operacion exitosa')));
+                  .showSnackBar(SnackBar(content: Text('Operacon exitosa')));
             }
             if (state is AltaBajaPracError) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Error al grabar')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error al grabar: ' + state.message)));
             }
           },
           builder: (context, state) {
@@ -283,6 +283,11 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                       title: 'Codigo Alta',
                                       onSaved: (value) {
                                         paramsAltaBaja.codigoAlta = value!;
+                                      },
+                                      validator: (value) {
+                                        return value!.length != 6
+                                            ? 'Codigo de plaza es de 06 digitos'
+                                            : null;
                                       },
                                       keyboardType: TextInputType.text),
                                   Padding(

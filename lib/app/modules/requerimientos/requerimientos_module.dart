@@ -24,6 +24,6 @@ class RequerimientosModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MainRequerimientosPage()),
+    ChildRoute('/', child: (_, args) => MainDocumentosPage()),
   ];
 }

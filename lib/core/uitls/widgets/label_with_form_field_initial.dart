@@ -14,6 +14,7 @@ class LabelWithFormFieldInitial extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String hintText;
   final String initialValue;
+  final int maxLines;
 
   const LabelWithFormFieldInitial(
       {required this.maxLength,
@@ -27,7 +28,8 @@ class LabelWithFormFieldInitial extends StatelessWidget {
       this.icon,
       this.inputFormatters = const [],
       this.hintText = '',
-      this.initialValue = ''
+      this.initialValue = '',
+      this.maxLines = 1
 
       // this.inputFormatter = const FilteringTextInputFormatter.,
       });
@@ -68,7 +70,8 @@ class LabelWithFormFieldInitial extends StatelessWidget {
               //isCollapsed: true,
               isDense: true,
               hintText: this.hintText,
-              contentPadding: EdgeInsets.only(left: 2, top: 12, bottom: 0),
+              contentPadding:
+                  EdgeInsets.only(left: 4, top: 12, bottom: 0, right: 2),
               prefixIcon: this.icon == null ? null : Icon(this.icon),
               counterText: "",
               errorBorder: const OutlineInputBorder(
@@ -80,7 +83,7 @@ class LabelWithFormFieldInitial extends StatelessWidget {
               ),
             ),
             style: TextStyle(fontSize: 11),
-            maxLines: 1,
+            maxLines: this.maxLines,
           ),
         ]);
   }

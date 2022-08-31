@@ -14,6 +14,15 @@ class ListConfianzaEventGet extends ListConfianzaBlocEvent {
   });
 }
 
+class ListConfianzaEventFilter extends ListConfianzaBlocEvent {
+  final String textFilter;
+  ListConfianzaEventFilter({
+    required this.textFilter,
+  });
+  @override
+  List<Object> get props => [this.textFilter];
+}
+
 class ListConfianzaEventUpdate extends ListConfianzaBlocEvent {
   final List<ConfianzaEntity> listConfianza;
 

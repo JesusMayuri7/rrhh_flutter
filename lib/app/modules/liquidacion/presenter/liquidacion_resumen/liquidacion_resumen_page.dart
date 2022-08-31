@@ -58,7 +58,8 @@ class _LiquidacionResumenPageState extends State<LiquidacionResumenPage>
     return BlocConsumer<LiquidacionResumenBloc, LiquidacionResumenState>(
       listener: (_, state) {
         if (state is LiquidacionResumenError)
-          SnackBar(content: Text(state.message));
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Error: ' + state.message)));
       },
       buildWhen: (previous, current) {
         if (current is LiquidacionResumenLoaded)

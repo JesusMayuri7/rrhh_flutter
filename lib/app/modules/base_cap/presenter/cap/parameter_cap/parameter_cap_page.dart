@@ -21,10 +21,8 @@ class ParameterCapPage extends StatelessWidget {
           listener: (context, state) {
             if (state is CapLoadedState) {
               if (state.statusCap == StatusCap.error)
-                Scaffold.of(context).showSnackBar(
-                  SnackBar(
-                      backgroundColor: Colors.black, content: Text('Error')),
-                );
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('Error')));
             }
           },
           bloc: this.blocParameter,

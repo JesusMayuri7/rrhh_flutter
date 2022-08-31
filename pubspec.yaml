@@ -24,16 +24,16 @@ dependencies:
   excel: ^2.0.0-null-safety-3
   
   #filepicker_windows: ^2.0.0
-  equatable: ^2.0.3
-  flutter_bloc: ^8.0.1
-  flutter_modular: ^5.0.2
-  syncfusion_flutter_core: ^20.1.55
-  syncfusion_flutter_datagrid: ^20.1.55
-  syncfusion_flutter_xlsio: ^20.1.55-beta
-  syncfusion_flutter_charts: ^20.1.55
-  syncfusion_flutter_datagrid_export: ^20.1.55-beta
-  syncfusion_flutter_pdf: ^20.1.55-beta
-  pluto_grid: ^3.0.0-1.pre
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.0
+  flutter_modular: ^5.0.3
+  syncfusion_flutter_core: ^20.2.44
+  syncfusion_flutter_datagrid: ^20.2.44
+  syncfusion_flutter_xlsio: ^20.2.44-beta
+  syncfusion_flutter_charts: ^20.2.44
+  syncfusion_flutter_datagrid_export: ^20.2.44-beta
+  syncfusion_flutter_pdf: ^20.2.44
+  pluto_grid: ^5.0.4
   shared_preferences: ^2.0.15  
   #after_layout: ^1.0.7+2
   dartz: ^0.10.1
@@ -48,11 +48,10 @@ dependencies:
   filepicker_windows: ^2.0.1
   mask_text_input_formatter: ^2.3.0  
   collection: ^1.16.0
-  fluent_ui: ^3.12.0  
+  fluent_ui: ^4.0.0-pre.3
   contained_tab_bar_view: ^0.8.0
   window_manager: ^0.2.5
-  flutter_dotenv: ^5.0.2
-  package_info_plus: ^1.4.2
+  flutter_dotenv: ^5.0.2  
   flutter_icons:
     git:
       url: https://github.com/adarsh-technocrat/flutter-icons  

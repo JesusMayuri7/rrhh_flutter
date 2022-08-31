@@ -18,6 +18,18 @@ import 'external/get_data_initial_prac_impl.dart';
 class BasePracModule extends Module {
   @override
   final List<Bind> binds = [
+    //BLOC
+    Bind.lazySingleton((i) => BasePracBloc(getDataInitialPracUseCase: i()),
+        export: true),
+    Bind.lazySingleton(
+        (i) => ListPracBloc(
+            altaBajaPracBloc: i(),
+            listarPracUseCase: i(),
+            updatedPracUseCase: i()),
+        export: true),
+    Bind((i) => AltaBajaPracBloc(altaBajaPracUseCase: i())),
+
+    //REPOSITORY
     Bind(
       (i) => PracRepositoryImpl(
           iPracDataSource: i(),
@@ -27,10 +39,10 @@ class BasePracModule extends Module {
     ),
 
     // DATASOURCE
-    Bind((i) => ListarPracDataSourceImpl(httpCustom: i())),
-    Bind((i) => AltaBajaPracDataSourceImpl(httpCustom: i())),
     Bind((i) => GetDataInitialPracDatasourceImpl(
         getFuentesImpl: i(), getMetasImpl: i(), getAreasImpl: i())),
+    Bind((i) => ListarPracDataSourceImpl(httpCustom: i())),
+    Bind((i) => AltaBajaPracDataSourceImpl(httpCustom: i())),
     Bind((i) => UpdatedPracDataSourceImpl(httpCustom: i())),
 
     //USECASE
@@ -38,20 +50,6 @@ class BasePracModule extends Module {
     Bind((i) => AltaBajaPracUseCase(iPracRepository: i())),
     Bind((i) => GetDataInitialPracUseCase(iPracRepository: i())),
     Bind((i) => UpdatedPracUseCase(iPracRepository: i())),
-
-    //BLOC
-    Bind.lazySingleton(
-        (i) => BasePracBloc(getDataInitialPracUseCase: i())
-        //..add(BasePracLoadedEvent())
-        ,
-        export: true),
-    Bind.lazySingleton(
-        (i) => ListPracBloc(
-            altaBajaPracBloc: i(),
-            listarPracUseCase: i(),
-            updatedPracUseCase: i()),
-        export: true),
-    Bind((i) => AltaBajaPracBloc(altaBajaPracUseCase: i())),
   ];
 
   @override

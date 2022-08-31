@@ -21,9 +21,11 @@ class ListadoConfianzaPage extends StatelessWidget {
 
   //final List<ConfianzaEntity> listadoConfianza;
   //final List<AreaEntity> listadoAreas;
-  final blocList = Modular.get<ListConfianzaBloc>();
+  final blocConfianza = Modular.get<ListConfianzaBloc>();
   final String? anioSelected =
       Modular.get<AuthBloc>().state.loginResponseEntity?.anio;
+
+  final textSearchController = TextEditingController();
 
   //final DataGridController dataGridController = DataGridController();
 
@@ -37,15 +39,13 @@ class ListadoConfianzaPage extends StatelessWidget {
     return BlocConsumer<ListConfianzaBloc, ListConfianzaBlocState>(
       listener: (context, state) {
         if (state is ListConfianzaBlocError)
-          SnackBar(
-            backgroundColor: Colors.black,
-            content: Text(state.message),
-          );
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Error: ' + state.message)));
       },
-      bloc: this.blocList,
+      bloc: this.blocConfianza,
       builder: (context, state) {
         if (state is ListConfianzaBlocLoaded) {
-          confianzaDataSource.listadoConfianza = state.listConfianza;
+          confianzaDataSource.listadoConfianza = state.listConfianzaFiltered;
           confianzaDataSource.buildDataGridRows();
           confianzaDataSource.updateDataGrid();
         }
@@ -61,7 +61,7 @@ class ListadoConfianzaPage extends StatelessWidget {
                     children: [
                       ElevatedButton(
                           onPressed: () {
-                            this.blocList.add(
+                            this.blocConfianza.add(
                                 ListConfianzaEventGet(anio: anioSelected!));
                           },
                           child: Text('Actualizar')),
@@ -99,6 +99,34 @@ class ListadoConfianzaPage extends StatelessWidget {
                                 estado: ''));
                       },
                       child: Text('Nuevo')),
+                  Container(
+                    width: 400,
+                    child: TextFormField(
+                        textDirection: TextDirection.rtl,
+                        controller: textSearchController,
+                        textAlign: TextAlign.left,
+                        keyboardType: TextInputType.text,
+                        onFieldSubmitted: (value) {
+                          this
+                              .blocConfianza
+                              .add(ListConfianzaEventFilter(textFilter: value));
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Buscar',
+                          prefixIcon: textSearchController.text.length > 0
+                              ? Icon(Icons.close)
+                              : Icon(Icons.search_outlined),
+                          // set the prefix icon constraints
+                          prefixIconConstraints: BoxConstraints(
+                            minWidth: 25,
+                            minHeight: 25,
+                          ),
+                          border: OutlineInputBorder(),
+                          isDense: true, // Added this
+                          contentPadding: EdgeInsets.only(
+                              left: 5, top: 12, bottom: 0), // Added this
+                        )),
+                  ),
                 ],
               ),
               Expanded(
@@ -134,7 +162,7 @@ class ListadoConfianzaPage extends StatelessWidget {
               if (state is ListConfianzaBlocError)
                 ElevatedButton(
                     onPressed: () => this
-                        .blocList
+                        .blocConfianza
                         .add(ListConfianzaEventGet(anio: anioSelected!)),
                     child: Text('Volver a cargar'))
             ],

@@ -93,12 +93,8 @@ class _AirhspPageState extends State<AirhspPage>
       bloc: this.bloc,
       listener: (context, state) {
         if (state is ErrorAirhspState) {
-          Scaffold.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Colors.black,
-              content: Text(state.message),
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Error al grabar: ' + state.message)));
         }
       },
       child: Row(

@@ -15,12 +15,24 @@ class ItemListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color colorEstado = (item.estado == 'O')
+        ? Colors.blueAccent
+        : (item.estado == 'V')
+            ? Colors.yellow
+            : Colors.orange;
     return Card(
       shape: RoundedRectangleBorder(
           side: new BorderSide(color: Colors.blue, width: 2.0),
           borderRadius: BorderRadius.circular(10.0)),
       // color: Colors.indigo,
       child: ListTile(
+          leading: CircleAvatar(
+            child: Text(
+              item.estado,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            backgroundColor: colorEstado,
+          ),
           title: Row(
             children: <Widget>[
               Text(' ' + (item.plaza) + '' + ' ',
