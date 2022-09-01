@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'judiciales_list_bloc.dart';
 
 abstract class JudicialesListState extends Equatable {
@@ -26,10 +27,25 @@ class JudicialesListError extends JudicialesListState {
 }
 
 class JudicialesListLoaded extends JudicialesListState {
-  final List<JudicialEntity> judicialesList;
+  final List<JudicialEntity> judicialesListOriginal;
+  final List<JudicialEntity> judicialesListFiltered;
   JudicialesListLoaded({
-    required this.judicialesList,
+    required this.judicialesListOriginal,
+    required this.judicialesListFiltered,
   });
   @override
-  List<Object> get props => [this.judicialesList];
+  List<Object> get props =>
+      [this.judicialesListOriginal, this.judicialesListFiltered];
+
+  JudicialesListLoaded copyWith({
+    List<JudicialEntity>? judicialesListOriginal,
+    List<JudicialEntity>? judicialesListFiltered,
+  }) {
+    return JudicialesListLoaded(
+      judicialesListOriginal:
+          judicialesListOriginal ?? this.judicialesListOriginal,
+      judicialesListFiltered:
+          judicialesListFiltered ?? this.judicialesListFiltered,
+    );
+  }
 }

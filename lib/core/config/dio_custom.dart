@@ -1,15 +1,26 @@
-import 'package:dio/dio.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:http_parser/http_parser.dart';
+import 'package:mime/mime.dart';
 
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
+import 'package:rrhh_clean/app/modules/import/presenter/domain/import_file_use_case.dart';
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+
+import '../data/models/response_model.dart';
 
 class DioCustom implements IClientCustom {
   final bloc = Modular.get<AuthBloc>();
   String? token;
 
   late Dio _dio;
+  DioCustom() {
+    init();
+  }
 
   void init() {
     token = (bloc.state as SuccessAuthState).loginResponseEntity.token;
@@ -75,7 +86,7 @@ class DioCustom implements IClientCustom {
   @override
   Future<dynamic> request(method, url, data, Function(dynamic) fromJson) async {
     log(url);
-    init();
+    //init();
     //try {
     Response<String> response =
         await _dio.request(url, data: data, options: Options(method: method));
@@ -88,7 +99,7 @@ class DioCustom implements IClientCustom {
 
   @override
   Future<Response> download(String url) async {
-    Response response = await Dio().get(
+    Response response = await _dio.get(
       url,
       options: Options(
           responseType: ResponseType.bytes,
@@ -98,6 +109,25 @@ class DioCustom implements IClientCustom {
           }),
     );
     print(response.headers);
+    return response;
+  }
+
+  @override
+  Future<dynamic> load(
+      String url, ParamsInportFile params, String method) async {
+    FormData formData = FormData.fromMap({
+      "anio": "2022",
+      "file": await MultipartFile.fromFileSync(
+        params.bytes!.path,
+        filename: params.bytes!.path.split('/').last,
+        contentType: new MediaType("application", "xls"),
+      ),
+      //   "anio": params.anio,
+    });
+    var response = await _dio.request(url,
+        data: formData,
+        options: Options(contentType: "application/form-data", method: method));
+    print('dentro ' + response.toString());
     return response;
   }
 }

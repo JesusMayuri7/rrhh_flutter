@@ -1,24 +1,31 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:collection/collection.dart';
 import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
+import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
+import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 import 'package:rrhh_clean/core/uitls/widgets/dropdownmenuitem_presupuesto.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
-
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
 
+import '../../cubit/judiciales_bloc.dart';
 import '../../domain/judicial_entity.dart';
 import '../../domain/new_judiciales_use_case.dart';
 import '../bloc/new/bloc/new_judicial_bloc.dart';
 
 class NewJudicialPage extends StatefulWidget {
   final JudicialEntity judicialEntity;
+  final BuildContext contextJudicial;
 
   NewJudicialPage({
     Key? key,
     required this.judicialEntity,
+    required this.contextJudicial,
   }) : super(key: key);
 
   @override
@@ -29,41 +36,68 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
   late ParamsNewJudicial paramsAltaBaja;
   final _formKey = GlobalKey<FormState>();
   final _bloc = Modular.get<NewJudicialBloc>();
+  final _blocJudicial = Modular.get<JudicialesBloc>();
 
   List<String> _presupuesto = ['ACTIVO', 'PREVISTA', 'NO_PREVISTA'];
+  List<String> _estadoProcesal = [
+    'SEGUIMIENTO',
+    'DEMANDA_ADMITIDA',
+    'MEDIDA_CAUTELAR',
+    'SENTENCIA_1RA_INSTANCIA',
+    'SENTENCIA_2DA_INSTANCIA',
+    'SENTENCIA_CASACION',
+    'TRIBUNAL_CONSTITUACIONAL',
+    'COSA_JUZGADA'
+  ];
+
   String presupuestoSelected = 'NO_PREVISTA';
-  FuenteEntity? _fuenteEntity;
+  String estadoProcesalSelected = 'SEGUIMIENTO';
+  int? _fuenteEntity;
+  int? _metaEntity;
+  int? _areaEntity;
 
   var maskDateFormatter = new MaskTextInputFormatter(
       mask: '####-##-##', filter: {"#": RegExp(r'[0-9]')});
 
   @override
   void initState() {
+    _fuenteEntity = widget.judicialEntity.fuenteId == 0
+        ? (this._blocJudicial.state as JudicialesLoaded).fuentes.first.id
+        : widget.judicialEntity.fuenteId;
+
+    _areaEntity = widget.judicialEntity.orgAreaId == 0
+        ? (this._blocJudicial.state as JudicialesLoaded).areas.first.orgAreaId
+        : widget.judicialEntity.orgAreaId;
+
+    _metaEntity = widget.judicialEntity.metaId == 0
+        ? (this._blocJudicial.state as JudicialesLoaded).metas.first.idmetaAnual
+        : widget.judicialEntity.metaId;
+
     paramsAltaBaja = ParamsNewJudicial(
       id: widget.judicialEntity.id,
       anio: widget.judicialEntity.anio,
-      presupuesto: '',
-      fuenteId: '',
-      orgAreaId: '',
-      dni: '',
-      nombres: '',
-      metaId: '',
-      fecha: '',
-      cargo: '',
-      montoJudicial: 0,
-      montoPlanilla: 0,
-      nroExpedienteJudicial: '',
-      expedientePvn: '',
-      expedienteMtc: '',
-      expedienteMef: '',
-      estadoProcesal: '',
-      detalle: '',
-      codigoPlaza: '',
-      documentoOrh: '',
-      nroCap: '',
-      descEscala: '',
+      presupuesto: widget.judicialEntity.presupuesto,
+      fuenteId: _fuenteEntity!,
+      orgAreaId: _areaEntity!,
+      dni: widget.judicialEntity.dni,
+      nombres: widget.judicialEntity.nombres,
+      metaId: _metaEntity!,
+      fecha: widget.judicialEntity.fechaIngreso,
+      cargo: widget.judicialEntity.cargo,
+      montoJudicial: widget.judicialEntity.montoJudicial,
+      montoPlanilla: widget.judicialEntity.montoPlanilla,
+      nroExpedienteJudicial: widget.judicialEntity.nroExpedienteJudicial,
+      expedientePvn: widget.judicialEntity.expedientePvn,
+      expedienteMtc: widget.judicialEntity.expedienteMtc,
+      expedienteMef: widget.judicialEntity.expedienteMef,
+      estadoProcesal: widget.judicialEntity.estadoProcesal,
+      detalle: widget.judicialEntity.detalle,
+      codigoPlaza: widget.judicialEntity.codigoPlaza,
+      documentoOrh: widget.judicialEntity.documentoOrh,
+      nroCap: widget.judicialEntity.nroCap,
+      descEscala: widget.judicialEntity.descEscala,
+      observacion: widget.judicialEntity.observacion,
     );
-
     super.initState();
   }
 
@@ -123,9 +157,9 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                       flex: 4,
                                       child: LabelWithDropDown<String>(
                                         title: 'Presupuesto',
-                                        value: presupuestoSelected,
+                                        value: paramsAltaBaja.presupuesto,
                                         dropdownMenuItemList:
-                                            buildPresupuesto(_presupuesto),
+                                            buildCombo(_presupuesto),
                                         onChanged: (value) {
                                           paramsAltaBaja.presupuesto = value!;
                                         },
@@ -134,51 +168,59 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                     SizedBox(width: 20.0),
                                     Expanded(
                                       flex: 8,
-                                      child: LabelWithDropDown<FuenteEntity>(
+                                      child: LabelWithDropDown<int>(
                                         title: 'Fuente',
-                                        value: _fuenteEntity,
-                                        dropdownMenuItemList:
-                                            /*      (this.blocSubsidio.state is SubsidioLoaded)
-                                ? buildFuentes(
-                                    (this.blocSubsidio.state as SubsidioLoaded)
-                                        .fuentes)
-                                : */
-                                            [],
+                                        value: paramsAltaBaja.fuenteId,
+                                        dropdownMenuItemList: (this
+                                                ._blocJudicial
+                                                .state is JudicialesLoaded)
+                                            ? buildFuentes((this
+                                                    ._blocJudicial
+                                                    .state as JudicialesLoaded)
+                                                .fuentes)
+                                            : [],
                                         onChanged: (value) {
-                                          paramsAltaBaja.fuenteId =
-                                              value!.id.toString();
-                                          _fuenteEntity = value;
+                                          paramsAltaBaja.fuenteId = value!;
+                                          // _fuenteEntity = value;
                                         },
                                       ),
                                     ),
                                   ]),
                                   SizedBox(height: 5.0),
-                                  LabelWithFormFieldInitial(
-                                    initialValue:
-                                        widget.judicialEntity.finalidad,
-                                    maxLength: 15,
-                                    textAlign: TextAlign.left,
+                                  LabelWithDropDown<int>(
                                     title: 'Meta',
-                                    keyboardType: TextInputType.text,
-                                    onSaved: (value) {
-                                      //paramsAltaBaja.descArea = value!;
+                                    value: paramsAltaBaja.metaId,
+                                    dropdownMenuItemList: (this
+                                            ._blocJudicial
+                                            .state is JudicialesLoaded)
+                                        ? buildMetas((this._blocJudicial.state
+                                                as JudicialesLoaded)
+                                            .metas)
+                                        : [],
+                                    onChanged: (value) {
+                                      paramsAltaBaja.metaId = value!;
+                                      //_metaEntity = value;
                                     },
                                   ),
                                   SizedBox(height: 5.0),
-                                  LabelWithFormFieldInitial(
-                                    initialValue:
-                                        widget.judicialEntity.descArea,
-                                    maxLength: 15,
-                                    textAlign: TextAlign.left,
+                                  LabelWithDropDown<int>(
                                     title: 'Area',
-                                    keyboardType: TextInputType.text,
-                                    onSaved: (value) {
-                                      //paramsAltaBaja.descArea = value!;
+                                    value: paramsAltaBaja.orgAreaId,
+                                    dropdownMenuItemList: (this
+                                            ._blocJudicial
+                                            .state is JudicialesLoaded)
+                                        ? buildAreas((this._blocJudicial.state
+                                                as JudicialesLoaded)
+                                            .areas)
+                                        : [],
+                                    onChanged: (value) {
+                                      paramsAltaBaja.orgAreaId = value!;
+                                      //_areaEntity = value;
                                     },
                                   ),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
-                                    initialValue: widget.judicialEntity.cargo,
+                                    initialValue: paramsAltaBaja.cargo,
                                     maxLength: 255,
                                     textAlign: TextAlign.left,
                                     title: 'Cargo',
@@ -192,11 +234,10 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                   Row(
                                     children: [
                                       Expanded(
-                                        flex: 3,
+                                        flex: 2,
                                         child: LabelWithFormFieldInitial(
                                           maxLength: 255,
-                                          initialValue:
-                                              widget.judicialEntity.dni,
+                                          initialValue: paramsAltaBaja.dni,
                                           maxLines: 1,
                                           textAlign: TextAlign.left,
                                           title: 'Dni',
@@ -208,11 +249,10 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                       ),
                                       SizedBox(width: 20),
                                       Expanded(
-                                        flex: 9,
+                                        flex: 8,
                                         child: LabelWithFormFieldInitial(
-                                          initialValue: widget
-                                              .judicialEntity.nombres
-                                              .toString(),
+                                          initialValue:
+                                              paramsAltaBaja.nombres.toString(),
                                           maxLength: 255,
                                           maxLines: 1,
                                           textAlign: TextAlign.left,
@@ -223,45 +263,11 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                           },
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 5.0),
-                                  Row(
-                                    children: [
+                                      SizedBox(width: 20),
                                       Expanded(
+                                        flex: 2,
                                         child: LabelWithFormFieldInitial(
-                                          initialValue:
-                                              widget.judicialEntity.codigoPlaza,
-                                          maxLength: 10,
-                                          maxLines: 1,
-                                          textAlign: TextAlign.right,
-                                          title: 'Codigo Plaza',
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
-                                            paramsAltaBaja.codigoPlaza = value!;
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 20.0),
-                                      Expanded(
-                                        child: LabelWithFormFieldInitial(
-                                          initialValue:
-                                              widget.judicialEntity.nroCap,
-                                          maxLength: 10,
-                                          maxLines: 1,
-                                          textAlign: TextAlign.right,
-                                          title: 'Nro. Cap',
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
-                                            paramsAltaBaja.nroCap = value!;
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 20.0),
-                                      Expanded(
-                                        child: LabelWithFormFieldInitial(
-                                          initialValue: widget
-                                              .judicialEntity.fechaIngreso,
+                                          initialValue: paramsAltaBaja.fecha,
                                           maxLength: 10,
                                           maxLines: 1,
                                           textAlign: TextAlign.right,
@@ -278,9 +284,37 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                   Row(
                                     children: [
                                       Expanded(
+                                        child: LabelWithFormFieldInitial(
+                                          initialValue:
+                                              paramsAltaBaja.codigoPlaza,
+                                          maxLength: 10,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.right,
+                                          title: 'Cod. Plaza',
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsAltaBaja.codigoPlaza = value!;
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(width: 20.0),
+                                      Expanded(
+                                        child: LabelWithFormFieldInitial(
+                                          initialValue: paramsAltaBaja.nroCap,
+                                          maxLength: 10,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.right,
+                                          title: 'Nro. Cap',
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsAltaBaja.nroCap = value!;
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(width: 20.0),
+                                      Expanded(
                                           child: LabelWithFormFieldInitial(
-                                        initialValue:
-                                            widget.judicialEntity.descEscala,
+                                        initialValue: paramsAltaBaja.descEscala,
                                         maxLength: 10,
                                         maxLines: 1,
                                         textAlign: TextAlign.right,
@@ -293,8 +327,8 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                       SizedBox(width: 20.0),
                                       Expanded(
                                           child: LabelWithFormFieldInitial(
-                                        initialValue: widget
-                                            .judicialEntity.descEscala
+                                        initialValue: paramsAltaBaja
+                                            .montoPlanilla
                                             .toString(),
                                         maxLength: 10,
                                         maxLines: 1,
@@ -302,19 +336,74 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                         title: 'Monto Planilla',
                                         keyboardType: TextInputType.text,
                                         onSaved: (value) {
-                                          paramsAltaBaja.descEscala = value!;
+                                          paramsAltaBaja.montoPlanilla =
+                                              num.parse(value!);
                                         },
                                       )),
                                     ],
                                   ),
+                                  Divider(color: Colors.blue),
                                   SizedBox(height: 5.0),
                                   Row(
                                     children: [
                                       Expanded(
                                         child: LabelWithFormFieldInitial(
-                                          initialValue: widget
-                                              .judicialEntity.documentoOrh,
-                                          maxLength: 15,
+                                          initialValue:
+                                              paramsAltaBaja.expedientePvn,
+                                          maxLength: 30,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.right,
+                                          title: 'Exp. PVN',
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsAltaBaja.expedientePvn =
+                                                value!;
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(width: 15),
+                                      Expanded(
+                                        child: LabelWithFormFieldInitial(
+                                          initialValue:
+                                              paramsAltaBaja.expedienteMtc,
+                                          maxLength: 30,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.right,
+                                          title: 'Exp. MTC',
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsAltaBaja.expedienteMtc =
+                                                value!;
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(width: 15),
+                                      Expanded(
+                                        child: LabelWithFormFieldInitial(
+                                          initialValue:
+                                              paramsAltaBaja.expedienteMef,
+                                          maxLength: 30,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.right,
+                                          title: 'Exp. MEF',
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsAltaBaja.expedienteMef =
+                                                value!;
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Divider(color: Colors.blue),
+                                  SizedBox(height: 5.0),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: LabelWithFormFieldInitial(
+                                          initialValue:
+                                              paramsAltaBaja.documentoOrh,
+                                          maxLength: 100,
                                           textAlign: TextAlign.center,
                                           title: 'N° Doc. ORH',
                                           keyboardType: TextInputType.text,
@@ -328,14 +417,15 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                   ),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
-                                    initialValue: widget
-                                        .judicialEntity.nroExpedienteJudicial,
-                                    maxLength: 15,
+                                    initialValue:
+                                        paramsAltaBaja.nroExpedienteJudicial,
+                                    maxLength: 100,
                                     textAlign: TextAlign.right,
                                     title: 'N° Exp. Judicial',
                                     keyboardType: TextInputType.text,
                                     onSaved: (value) {
-                                      // paramsAltaBaja.hojaRuta = value!;
+                                      paramsAltaBaja.nroExpedienteJudicial =
+                                          value!;
                                     },
                                   ),
                                   SizedBox(height: 5.0),
@@ -344,8 +434,8 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                       Expanded(
                                           flex: 3,
                                           child: LabelWithFormFieldInitial(
-                                            initialValue: widget
-                                                .judicialEntity.montoJudicial
+                                            initialValue: paramsAltaBaja
+                                                .montoJudicial
                                                 .toString(),
                                             maxLength: 10,
                                             maxLines: 1,
@@ -359,15 +449,13 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                           )),
                                       SizedBox(width: 20.0),
                                       Expanded(
-                                        flex: 9,
-                                        child: LabelWithFormFieldInitial(
-                                          initialValue: widget
-                                              .judicialEntity.estadoProcesal,
-                                          maxLength: 15,
-                                          textAlign: TextAlign.center,
-                                          title: 'Estado Procesal',
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
+                                        flex: 4,
+                                        child: LabelWithDropDown<String>(
+                                          title: 'Presupuesto',
+                                          value: paramsAltaBaja.estadoProcesal,
+                                          dropdownMenuItemList:
+                                              buildCombo(_estadoProcesal),
+                                          onChanged: (value) {
                                             paramsAltaBaja.estadoProcesal =
                                                 value!;
                                           },
@@ -376,68 +464,27 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                     ],
                                   ),
                                   SizedBox(height: 5.0),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: LabelWithFormFieldInitial(
-                                          initialValue: widget
-                                              .judicialEntity.expedientePvn,
-                                          maxLength: 10,
-                                          maxLines: 1,
-                                          textAlign: TextAlign.right,
-                                          title: 'Exp. PVN',
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
-                                            paramsAltaBaja.expedientePvn =
-                                                value!;
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 20),
-                                      Expanded(
-                                        child: LabelWithFormFieldInitial(
-                                          initialValue: widget
-                                              .judicialEntity.expedienteMtc,
-                                          maxLength: 10,
-                                          maxLines: 1,
-                                          textAlign: TextAlign.right,
-                                          title: 'Exp. MTC',
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
-                                            paramsAltaBaja.expedienteMtc =
-                                                value!;
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 20),
-                                      Expanded(
-                                        child: LabelWithFormFieldInitial(
-                                          initialValue: widget
-                                              .judicialEntity.expedienteMef
-                                              .toString(),
-                                          maxLength: 10,
-                                          maxLines: 1,
-                                          textAlign: TextAlign.right,
-                                          title: 'Exp. MEF',
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
-                                            paramsAltaBaja.expedienteMef =
-                                                value!;
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
-                                    initialValue: widget.judicialEntity.detalle,
-                                    maxLength: 255,
+                                    initialValue: paramsAltaBaja.detalle,
+                                    maxLength: 1025,
                                     textAlign: TextAlign.left,
                                     title: 'Detalle',
                                     maxLines: 6,
                                     keyboardType: TextInputType.text,
                                     onSaved: (value) {
                                       paramsAltaBaja.detalle = value!;
+                                    },
+                                  ),
+                                  SizedBox(height: 5.0),
+                                  LabelWithFormFieldInitial(
+                                    initialValue: paramsAltaBaja.observacion,
+                                    maxLength: 255,
+                                    textAlign: TextAlign.left,
+                                    title: 'Observacion',
+                                    maxLines: 1,
+                                    keyboardType: TextInputType.text,
+                                    onSaved: (value) {
+                                      paramsAltaBaja.observacion = value!;
                                     },
                                   ),
                                   SizedBox(height: 5.0),
@@ -506,14 +553,14 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
   }
 }
 
-List<DropdownMenuItem<String>> buildPresupuesto(List<String> fuenteModel) {
+List<DropdownMenuItem<String>> buildCombo(List<String> model) {
   List<DropdownMenuItem<String>> listFuente = [];
-  for (String item in fuenteModel) {
+  for (String item in model) {
     listFuente.add(DropdownMenuItem(
       value: item,
       child: Text(item),
     ));
   }
-  //_fuenteFinanciamientoEntity = fuenteModel[0];
+  //_fuenteFinanciamientoEntity = model[0];
   return listFuente;
 }

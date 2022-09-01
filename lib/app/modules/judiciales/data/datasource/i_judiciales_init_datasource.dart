@@ -10,14 +10,6 @@ abstract class IJudicialesInitDatasource {
   Future<List<ResponseModel>> getDataInit(String anio);
 }
 
-/* class GetJudicialesInitDatasource implements IJudicialesInitDatasource {
-  @override
-  Future<List<ResponseModel>> getDataInit(String anio) {
-    // TODO: implement getDataInit
-    throw UnimplementedError();
-  }
-}  */
-
 class GetJudicialesInitDatasource implements IJudicialesInitDatasource {
   final GetMetasImpl getMetasImpl;
   final GetAreasImpl getAreasImpl;

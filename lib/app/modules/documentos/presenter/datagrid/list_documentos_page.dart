@@ -30,6 +30,10 @@ class _ListDocumentosPageState extends State<ListDocumentosPage> {
   final bloc = Modular.get<DocumentosListBloc>();
   final String? anioSelected =
       Modular.get<AuthBloc>().state.loginResponseEntity?.anio;
+  final List<String> control = ['EXTERNO', 'INTERNO'];
+  final List<String> estado = ['PENDIENTE', 'ATENDIDO'];
+  String controlSelected = 'EXTERNO';
+  String estadoSelected = 'PENDIENTE';
 
   @override
   void initState() {
@@ -58,8 +62,53 @@ class _ListDocumentosPageState extends State<ListDocumentosPage> {
                 children: [
                   Row(
                     children: [
+                      f.SizedBox(
+                        height: 25,
+                        width: 90,
+                        child: f.Combobox<String>(
+                            value: controlSelected,
+                            items: control
+                                .map((String e) => f.ComboboxItem<String>(
+                                      child: Text(
+                                        e,
+                                        style: TextStyle(fontSize: 11),
+                                      ),
+                                      value: e,
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              this.bloc.add(DocumentosListFilterEvent(
+                                  criterio: "",
+                                  control: value!,
+                                  estado: estadoSelected));
+                              controlSelected = value;
+                            }),
+                      ),
+                      f.SizedBox(
+                        height: 25,
+                        width: 100,
+                        child: f.Combobox<String>(
+                            value: estadoSelected,
+                            items: estado
+                                .map((String e) => f.ComboboxItem<String>(
+                                      child: Text(
+                                        e,
+                                        style: TextStyle(fontSize: 11),
+                                      ),
+                                      value: e,
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              this.bloc.add(DocumentosListFilterEvent(
+                                  criterio: "",
+                                  control: controlSelected,
+                                  estado: value!));
+                              estadoSelected = value;
+                            }),
+                      ),
                       f.Button(
                           onPressed: () {
+                            controlSelected = 'EXTERNO';
                             this
                                 .bloc
                                 .add(DocumentosListLoad(anio: anioSelected!));
@@ -129,7 +178,7 @@ class _ListDocumentosPageState extends State<ListDocumentosPage> {
               if (state is DocumentosListLoaded)
                 GridDocumentosPage(
                   columns: getColumnsListDocumentos(context),
-                  data: state.documentosList,
+                  data: state.documentosListFiltered,
                   keyGrid: this.keyGrid,
                 ),
               (state is DocumentosListLoading)
@@ -189,7 +238,8 @@ class _ListDocumentosPageState extends State<ListDocumentosPage> {
                         id: 0,
                         numeroPvn: '',
                         remite: '',
-                        tipo: 'OFICIO'),
+                        tipo: 'OFICIO',
+                        control: 'EXTERNO'),
                   )));
         });
   }

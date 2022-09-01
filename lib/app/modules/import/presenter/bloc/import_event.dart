@@ -14,6 +14,13 @@ class ImportLoad extends ImportEvent {
   });
 }
 
+class ImportLoadFile extends ImportEvent {
+  final File bytes;
+  ImportLoadFile({
+    required this.bytes,
+  });
+}
+
 class ImportExport extends ImportEvent {
   final List<List<Object>> list;
   ImportExport({

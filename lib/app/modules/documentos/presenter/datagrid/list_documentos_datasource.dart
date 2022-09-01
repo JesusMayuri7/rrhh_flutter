@@ -29,22 +29,24 @@ class ListDocumentosDataSource extends DataGridSource {
     _documentosDataGridRows = listadoDocumentos
         .map((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(columnName: 'anio', value: dataGridRow.anio),
-              DataGridCell<String>(columnName: 'tipo', value: dataGridRow.tipo),
+              DataGridCell<String>(
+                  columnName: 'control', value: dataGridRow.control),
               DataGridCell<String>(
                   columnName: 'estado', value: dataGridRow.estado),
-              DataGridCell<String>(
-                  columnName: 'remite', value: dataGridRow.remite),
-              DataGridCell<String>(
-                  columnName: 'destino', value: dataGridRow.destino),
-              DataGridCell<String>(
-                  columnName: 'asunto', value: dataGridRow.asunto),
-              DataGridCell<String>(
-                  columnName: 'numero_pvn', value: dataGridRow.numeroPvn),
-              DataGridCell<String>(
-                  columnName: 'fecha', value: dataGridRow.fecha),
+              DataGridCell<String>(columnName: 'tipo', value: dataGridRow.tipo),
               DataGridCell<String>(
                   columnName: 'expediente_pvn',
                   value: dataGridRow.expedientePvn),
+              DataGridCell<String>(
+                  columnName: 'numero_pvn', value: dataGridRow.numeroPvn),
+              DataGridCell<String>(
+                  columnName: 'remite', value: dataGridRow.remite),
+              DataGridCell<String>(
+                  columnName: 'asunto', value: dataGridRow.asunto),
+              DataGridCell<String>(
+                  columnName: 'destino', value: dataGridRow.destino),
+              DataGridCell<String>(
+                  columnName: 'fecha', value: dataGridRow.fecha),
               DataGridCell<String>(
                   columnName: 'expediente_mtc',
                   value: dataGridRow.expedienteMtc),

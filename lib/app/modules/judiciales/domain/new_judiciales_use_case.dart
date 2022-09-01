@@ -25,9 +25,9 @@ class ParamsNewJudicial {
   int? id;
   String anio;
   String presupuesto;
-  String fuenteId;
-  String orgAreaId;
-  String metaId;
+  int fuenteId;
+  int orgAreaId;
+  int metaId;
   String cargo;
   String fecha;
   String dni;
@@ -44,6 +44,7 @@ class ParamsNewJudicial {
   String documentoOrh;
   String nroCap;
   String descEscala;
+  String observacion;
 
   ParamsNewJudicial({
     required this.id,
@@ -68,6 +69,7 @@ class ParamsNewJudicial {
     required this.documentoOrh,
     required this.nroCap,
     required this.descEscala,
+    required this.observacion,
   });
 
   factory ParamsNewJudicial.fromMap(Map<String, dynamic> map) {
@@ -75,9 +77,9 @@ class ParamsNewJudicial {
       id: map['id'] != null ? map['id'] as int : null,
       anio: map['anio'] as String,
       presupuesto: map['presupuesto'] as String,
-      fuenteId: map['fuente_id'] as String,
-      orgAreaId: map['org_area_id'] as String,
-      metaId: map['meta_d'] as String,
+      fuenteId: map['fuente_id'] as int,
+      orgAreaId: map['org_area_id'] as int,
+      metaId: map['meta_d'] as int,
       cargo: map['cargo'] as String,
       dni: map['dni'] as String,
       fecha: map['fecha'] as String,
@@ -94,6 +96,7 @@ class ParamsNewJudicial {
       documentoOrh: map['documento_orh'] as String,
       nroCap: map['nro_cap'] as String,
       descEscala: map['desc_escala'] as String,
+      observacion: map['observacion'] as String,
     );
   }
 
@@ -120,6 +123,7 @@ class ParamsNewJudicial {
       'documento_orh': documentoOrh,
       'nro_cap': nroCap,
       'desc_escala': descEscala,
+      'observacion': observacion,
     };
   }
 }

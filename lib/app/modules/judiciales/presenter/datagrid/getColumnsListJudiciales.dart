@@ -79,7 +79,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         ),
       ),
     ),
-        GridColumn(
+    GridColumn(
       allowEditing: false,
       width: 55,
       columnName: 'nro_cap',
@@ -118,7 +118,6 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         ),
       ),
     ),
-
     GridColumn(
       allowEditing: false,
       width: 220,
@@ -182,7 +181,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
       ),
     ),
     GridColumn(
-      visible: false,
+      visible: true,
       width: 150,
       columnName: 'expediente_pvn',
       label: Container(
@@ -195,7 +194,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
       ),
     ),
     GridColumn(
-      visible: false,
+      visible: true,
       width: 150,
       columnName: 'expediente_mtc',
       label: Container(
@@ -208,7 +207,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
       ),
     ),
     GridColumn(
-      visible: false,
+      visible: true,
       width: 150,
       columnName: 'expediente_mef',
       label: Container(

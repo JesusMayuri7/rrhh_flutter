@@ -30,7 +30,6 @@ class _MainJudicialesPageState extends State<MainJudicialesPage> {
             child: BlocConsumer<JudicialesBloc, JudicialesState>(
                 bloc: this.blocJudicial,
                 listener: (context, state) {
-                  print(state.toString());
                   if (state is JudicialesError)
                     f.showSnackbar(context,
                         SnackBar(content: Text('Error: ' + state.message)));

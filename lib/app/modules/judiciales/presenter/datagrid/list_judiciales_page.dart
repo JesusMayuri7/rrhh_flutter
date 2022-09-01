@@ -47,15 +47,20 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
     return BlocConsumer<JudicialesListBloc, JudicialesListState>(
       listener: (context, state) {
         if (this.blocJudicial.state is JudicialesListError) {
-          print(state.toString());
-          //ScaffoldMessenger.of(context).showSnackBar(              SnackBar(content: Text('Error: ' + state.toString())));
+          f.showSnackbar(
+            context,
+            f.Snackbar(
+              content: Text('Error: no se puede listar! ' + state.toString()),
+            ),
+          );
         }
       },
       bloc: this.blocJudicial,
       builder: (context, state) {
         if (this.blocJudicial.state is JudicialesListLoaded) {
           this.listJudicialesDataSource.listadoJudiciales =
-              (this.blocJudicial.state as JudicialesListLoaded).judicialesList;
+              (this.blocJudicial.state as JudicialesListLoaded)
+                  .judicialesListFiltered;
           this.listJudicialesDataSource.buildDataGridRows();
           this.listJudicialesDataSource.updateDataGrid();
         }
@@ -86,7 +91,7 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                                     is JudicialesListLoaded)
                                 ? (this.blocJudicial.state
                                         as JudicialesListLoaded)
-                                    .judicialesList
+                                    .judicialesListOriginal
                                 : []);
                           },
                           child: Row(
@@ -121,7 +126,10 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                         textAlign: TextAlign.left,
                         keyboardType: TextInputType.text,
                         onFieldSubmitted: (value) {
-                          //this.blocJudicial.add(FilterPracEvent(textFilter: value));
+                          print('criterio ' + value);
+                          this
+                              .blocJudicial
+                              .add(JudicialesListFilter(criterio: value));
                         },
                         decoration: InputDecoration(
                           hintText: 'Buscar',
@@ -146,7 +154,7 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                 GridJudicialesPage(
                   listJudicialesDataSource: this.listJudicialesDataSource,
                   columns: getColumnsListJudiciales(context),
-                  data: state.judicialesList,
+                  data: state.judicialesListFiltered,
                 ),
               (state is JudicialesListLoading)
                   ? Center(
@@ -215,10 +223,12 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               child: Container(
-                  height: 650,
-                  width: 400,
-                  child:
-                      NewJudicialPage(judicialEntity: JudicialEntity.empty())));
+                  height: 700,
+                  width: 500,
+                  child: NewJudicialPage(
+                    judicialEntity: JudicialEntity.empty(),
+                    contextJudicial: _context,
+                  )));
         });
   }
 }

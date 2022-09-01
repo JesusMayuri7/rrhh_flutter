@@ -41,8 +41,8 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
   TextEditingController montoCertificadoController = TextEditingController();
   CertificadoEntity? _certificadoEntity;
   ClasificadorEntity? _clasificadorEntity;
-  MetaEntity? _metaEntity;
-  FuenteEntity? _fuenteEntity;
+  int? _metaEntity;
+  int? _fuenteEntity;
   String _estadoEntity = 'PENDIENTE';
 
   int modalidadId = 0;
@@ -62,14 +62,9 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
         .firstWhereOrNull(
             (element) => element.id == newSubsidio?.certificadoId);
 
-    _fuenteEntity = (this.blocSubsidio.state as SubsidioLoaded)
-        .fuentes
-        .firstWhereOrNull((element) => element.id == newSubsidio?.fuenteId);
+    _fuenteEntity = newSubsidio?.fuenteId;
 
-    _metaEntity = (this.blocSubsidio.state as SubsidioLoaded)
-        .metas
-        .firstWhereOrNull(
-            (element) => element.idmetaAnual == newSubsidio?.metaId);
+    _metaEntity = newSubsidio?.metaId;
 
     _clasificadorEntity = (this.blocSubsidio.state as SubsidioLoaded)
         .clasificadores
@@ -143,7 +138,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                       SizedBox(
                         height: 5,
                       ),
-                      LabelWithDropDown<FuenteEntity>(
+                      LabelWithDropDown<int>(
                         title: 'Fuente',
                         value: _fuenteEntity,
                         dropdownMenuItemList:
@@ -153,14 +148,14 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                                         .fuentes)
                                 : [],
                         onChanged: (value) {
-                          newSubsidio?.fuenteId = value?.id;
+                          newSubsidio?.fuenteId = value;
                           _fuenteEntity = value;
                         },
                       ),
                       SizedBox(
                         height: 5,
                       ),
-                      LabelWithDropDown<MetaEntity>(
+                      LabelWithDropDown<int>(
                         isExpanded: true,
                         title: 'Meta',
                         value: _metaEntity,
@@ -171,7 +166,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                                         .metas)
                                 : [],
                         onChanged: (value) {
-                          newSubsidio?.metaId = value?.idmetaAnual;
+                          newSubsidio?.metaId = value;
                           _metaEntity = value;
                         },
                       ),

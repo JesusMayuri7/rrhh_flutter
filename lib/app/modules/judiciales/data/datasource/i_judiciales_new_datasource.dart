@@ -20,16 +20,16 @@ class NewJudicialDatasourceImpl implements IJudicialesNewDataSource {
 
   @override
   Future<ResponseModel> newJudicial(ParamsNewJudicial params) async {
-    print('intentar grabar ' + params.toMap().toString());
     Uri url = Uri.http('rrhh.pvn.gob.pe', '/api/judiciales', {'q': 'http'});
 
     try {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           jsonEncode(params.toMap()), (i) => responseFromJson(i));
       print(response);
-      String bodyData = jsonEncode(response.data);
+      //String bodyData = jsonEncode(response.data);
 
-      List<JudicialModel> result = judicialModelFromJson(bodyData);
+      JudicialModel result = JudicialModel.fromJson(response.data);
+      print('Response new ' + result.toString());
       return ResponseModel(
           data: result, status: response.status, message: response.message);
     } on SocketException {

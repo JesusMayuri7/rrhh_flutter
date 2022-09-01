@@ -12,3 +12,11 @@ class JudicialesListLoad extends JudicialesListEvent {
   @override
   List<Object> get props => [this.anio];
 }
+
+class JudicialesListFilter extends JudicialesListEvent {
+  final String criterio;
+  JudicialesListFilter({required this.criterio});
+
+  @override
+  List<Object> get props => [this.criterio];
+}

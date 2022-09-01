@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rrhh_clean/app/modules/judiciales/cubit/judiciales_bloc.dart';
 
 import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_entity.dart';
 import 'package:rrhh_clean/app/modules/judiciales/domain/judiciales_list_usecase.dart';
@@ -13,16 +14,30 @@ class JudicialesListBloc
 
   JudicialesListBloc({required this.judicialesListUseCase})
       : super(JudicialesListInitial()) {
-    on<JudicialesListEvent>(_onJudicialListLoadToState);
+    on<JudicialesListLoad>(_onJudicialListLoadToState);
+    on<JudicialesListFilter>(_onJudicialListFilterToState);
   }
+
   _onJudicialListLoadToState(
-      JudicialesListEvent event, Emitter<JudicialesListState> emit) async {
-    print('event Judiciales');
+      JudicialesListLoad event, Emitter<JudicialesListState> emit) async {
     var result =
         await this.judicialesListUseCase(ParamsJudiciales(anio: '2022'));
     emit(result.fold((l) => JudicialesListError(message: l.toString()), (r) {
-      print('blocv' + r.data.toString());
-      return JudicialesListLoaded(judicialesList: r.data);
+      return JudicialesListLoaded(
+          judicialesListOriginal: r.data, judicialesListFiltered: r.data);
     }));
+  }
+
+  _onJudicialListFilterToState(
+      JudicialesListFilter event, Emitter<JudicialesListState> emit) async {
+    if (state is JudicialesListLoaded) {
+      List<JudicialEntity> judiciales = List.from(
+          (state as JudicialesListLoaded)
+              .judicialesListOriginal
+              .where((element) => element.nombres.contains(event.criterio))
+              .toList());
+      emit((state as JudicialesListLoaded)
+          .copyWith(judicialesListFiltered: judiciales));
+    }
   }
 }

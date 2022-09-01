@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'documentos_list_bloc.dart';
 
 abstract class DocumentosListState extends Equatable {
@@ -26,10 +27,25 @@ class DocumentosListError extends DocumentosListState {
 }
 
 class DocumentosListLoaded extends DocumentosListState {
-  final List<DocumentoEntity> documentosList;
+  final List<DocumentoEntity> documentosListOriginal;
+  final List<DocumentoEntity> documentosListFiltered;
   DocumentosListLoaded({
-    required this.documentosList,
+    required this.documentosListOriginal,
+    required this.documentosListFiltered,
   });
   @override
-  List<Object> get props => [this.documentosList];
+  List<Object> get props =>
+      [this.documentosListOriginal, this.documentosListFiltered];
+
+  DocumentosListLoaded copyWith({
+    List<DocumentoEntity>? documentosListOriginal,
+    List<DocumentoEntity>? documentosListFiltered,
+  }) {
+    return DocumentosListLoaded(
+      documentosListOriginal:
+          documentosListOriginal ?? this.documentosListOriginal,
+      documentosListFiltered:
+          documentosListFiltered ?? this.documentosListFiltered,
+    );
+  }
 }

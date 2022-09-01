@@ -24,21 +24,22 @@ class DocumentoModel extends DocumentoEntity {
     required String remite,
     required String detalle,
     required String estado,
+    required String control,
   }) : super(
-          anio: anio,
-          id: id,
-          asunto: asunto,
-          tipo: tipo,
-          expedientePvn: expedientePvn,
-          expedienteMtc: expedienteMtc,
-          expedienteMef: expedienteMef,
-          numeroPvn: numeroPvn,
-          destino: destino,
-          remite: remite,
-          fecha: fecha,
-          detalle: detalle,
-          estado: estado,
-        );
+            anio: anio,
+            id: id,
+            asunto: asunto,
+            tipo: tipo,
+            expedientePvn: expedientePvn,
+            expedienteMtc: expedienteMtc,
+            expedienteMef: expedienteMef,
+            numeroPvn: numeroPvn,
+            destino: destino,
+            remite: remite,
+            fecha: fecha,
+            detalle: detalle,
+            estado: estado,
+            control: control);
 
   factory DocumentoModel.fromJson(Map<String, dynamic> json) => DocumentoModel(
         id: json["id"],
@@ -54,6 +55,7 @@ class DocumentoModel extends DocumentoEntity {
         destino: json["destino"] ?? '',
         detalle: json["detalle"] ?? '',
         estado: json["estado"] ?? '',
+        control: json["control"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -70,5 +72,6 @@ class DocumentoModel extends DocumentoEntity {
         "detalle": detalle,
         "estado": estado,
         "tipo": tipo,
+        "control": control,
       };
 }

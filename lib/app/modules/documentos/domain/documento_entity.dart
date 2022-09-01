@@ -15,6 +15,7 @@ class DocumentoEntity extends Equatable {
     required this.remite,
     required this.detalle,
     required this.estado,
+    required this.control,
   });
 
   final String anio;
@@ -30,6 +31,7 @@ class DocumentoEntity extends Equatable {
   final String destino;
   final String detalle;
   final String estado;
+  final String control;
 
   @override
   List<Object> get props {
@@ -47,7 +49,8 @@ class DocumentoEntity extends Equatable {
       destino,
       remite,
       detalle,
-      estado
+      estado,
+      control
     ];
   }
 }

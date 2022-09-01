@@ -9,8 +9,11 @@ class JudicialEntity extends Equatable {
       required this.anio,
       required this.presupuesto,
       required this.fuente,
+      required this.fuenteId,
       required this.descArea,
+      required this.orgAreaId,
       required this.finalidad,
+      required this.metaId,
       required this.cargo,
       required this.fechaIngreso,
       required this.dni,
@@ -33,9 +36,12 @@ class JudicialEntity extends Equatable {
   final String anio;
   final String presupuesto;
   final String fuente;
+  final int fuenteId;
   final String descArea;
+  final int orgAreaId;
   final String nombres;
   final String finalidad;
+  final int metaId;
   final String cargo;
   final String fechaIngreso;
   final String dni;
@@ -56,11 +62,14 @@ class JudicialEntity extends Equatable {
   factory JudicialEntity.empty() {
     return JudicialEntity(
         id: 0,
-        anio: '',
-        presupuesto: '',
+        anio: "2022",
+        presupuesto: 'NO_PREVISTA',
         fuente: '',
+        fuenteId: 0,
         descArea: '',
+        orgAreaId: 0,
         finalidad: '',
+        metaId: 0,
         cargo: '',
         fechaIngreso: '',
         dni: '',
@@ -72,7 +81,7 @@ class JudicialEntity extends Equatable {
         detalle: '',
         montoJudicial: 0,
         montoPlanilla: 0,
-        estadoProcesal: '',
+        estadoProcesal: 'SEGUIMIENTO',
         observacion: '',
         documentoOrh: '',
         codigoPlaza: '',
@@ -87,8 +96,11 @@ class JudicialEntity extends Equatable {
       id,
       presupuesto,
       fuente,
+      fuenteId,
       descArea,
+      orgAreaId,
       finalidad,
+      metaId,
       nombres,
       cargo,
       fechaIngreso,
@@ -116,9 +128,12 @@ class JudicialEntity extends Equatable {
       'anio': anio,
       'presupuesto': presupuesto,
       'fuente': fuente,
+      'fuente_id': fuenteId,
       'descArea': descArea,
+      'org_area_id': orgAreaId,
       'nombres': nombres,
       'finalidad': finalidad,
+      'meta_id': metaId,
       'cargo': cargo,
       'fecha_ingreso': fechaIngreso,
       'dni': dni,

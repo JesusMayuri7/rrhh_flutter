@@ -40,8 +40,8 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
 
   TextEditingController montoCertificadoController = TextEditingController();
   ClasificadorEntity? _clasificadorEntity;
-  MetaEntity? _metaEntity;
-  FuenteEntity? _fuenteEntity;
+  int? _metaEntity;
+  int? _fuenteEntity;
 
   final newLiquidacionBloc = Modular.get<NewLiquidacionBloc>();
   final blocLiquidacion = Modular.get<LiquidacionBloc>();
@@ -116,19 +116,19 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                       SizedBox(
                         height: 5,
                       ),
-                      LabelWithDropDown<FuenteEntity>(
+                      LabelWithDropDown<int>(
                         title: 'Fuente',
                         value: _fuenteEntity,
                         dropdownMenuItemList: buildFuentes(fuentes),
                         onChanged: (value) {
-                          newLiquidacion!.fuenteId = value!.id;
+                          newLiquidacion!.fuenteId = value!;
                           _fuenteEntity = value;
                         },
                       ),
                       SizedBox(
                         height: 5,
                       ),
-                      LabelWithDropDown<MetaEntity>(
+                      LabelWithDropDown<int>(
                         isExpanded: true,
                         title: 'Meta',
                         value: _metaEntity,
@@ -139,7 +139,7 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
                                 .metas)
                             : [],
                         onChanged: (value) {
-                          newLiquidacion!.metaId = value!.idmetaAnual;
+                          newLiquidacion!.metaId = value!;
                           _metaEntity = value;
                         },
                       ),

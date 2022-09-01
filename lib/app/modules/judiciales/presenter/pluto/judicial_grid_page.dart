@@ -32,7 +32,7 @@ class _JudicialGridPageState extends State<JudicialGridPage> {
         },
         builder: (context, state) {
           if (state is JudicialesListLoaded) {
-            rowList.addAll(getRowsGrid(state.judicialesList));
+            rowList.addAll(getRowsGrid(state.judicialesListOriginal));
             //stateManager.notifyListeners();
             if (stateManager != null) {
               //stateManager.removeAllRows();

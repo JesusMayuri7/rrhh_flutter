@@ -17,13 +17,12 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
       ),
     ),
     GridColumn(
-      allowEditing: false,
-      width: 45,
-      columnName: 'tipo',
+      width: 60,
+      columnName: 'control',
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'Tipo',
+          'Control',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
@@ -42,24 +41,51 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 250,
-      columnName: 'remite',
+      allowEditing: false,
+      width: 45,
+      columnName: 'tipo',
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'Remite',
+          'Tipo',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
       ),
     ),
     GridColumn(
-      width: 190,
-      columnName: 'destino',
+      allowEditing: false,
+      width: 120,
+      columnName: 'expediente_pvn',
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'Destino',
+          'Exp. PVN',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+    GridColumn(
+      allowEditing: false,
+      width: 170,
+      columnName: 'numero_pvn',
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'N° Doc. PVN',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+    GridColumn(
+      width: 250,
+      columnName: 'remite',
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Remite',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
@@ -79,13 +105,12 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
       ),
     ),
     GridColumn(
-      allowEditing: false,
-      width: 120,
-      columnName: 'numero_pvn',
+      width: 190,
+      columnName: 'destino',
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'N° Doc. PVN',
+          'Destino',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
@@ -93,25 +118,12 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
     ),
     GridColumn(
       allowEditing: false,
-      width: 65,
+      width: 110,
       columnName: 'fecha',
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'Fec. Doc.',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
-        ),
-      ),
-    ),
-    GridColumn(
-      allowEditing: false,
-      width: 85,
-      columnName: 'expediente_pvn',
-      label: Container(
-        alignment: Alignment.center,
-        child: Text(
-          'Exp. PVN',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),

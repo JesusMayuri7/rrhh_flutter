@@ -15,7 +15,6 @@ class GetModalidadConceptoClasificadorUseCase
   @override
   Future<Either<Failure, ModalidadConceptoClasificadorEntity>> call(
       NoParams params) async {
-    print(' entro al caso de uso getModalidadConceptoClasificador');
     return await repository.modalidadConceptoClasificador();
   }
 }

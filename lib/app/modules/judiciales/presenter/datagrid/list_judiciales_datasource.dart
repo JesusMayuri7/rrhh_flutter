@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -96,11 +97,11 @@ class ListJudicialesDataSource extends DataGridSource {
         row.getCells().where((e) => e.columnName == 'presupuesto').first.value;
 
     Color getRowBackgroundColor() {
-      if (estado == 'ACTIVO') return Colors.green[100]!;
-      if (estado == 'TRAMITADO') return Colors.yellow[100]!;
-      if (estado == 'PREVISTA') return Color.fromARGB(255, 84, 212, 221);
+      if (estado == 'ACTIVO') return Color.fromARGB(255, 198, 243, 199);
+      if (estado == 'TRAMITADO') return Color.fromARGB(255, 241, 237, 194);
+      if (estado == 'PREVISTA') return Color.fromARGB(255, 178, 228, 231);
       if (estado == 'NO_PREVISTA')
-        return Color.fromARGB(255, 189, 188, 188);
+        return Color.fromARGB(255, 228, 228, 228);
       else
         return Colors.transparent;
     }
@@ -149,15 +150,16 @@ class ListJudicialesDataSource extends DataGridSource {
         } else if (e.columnName == 'monto_judicial' ||
             e.columnName == 'monto_planilla') {
           return Container(
-            alignment: Alignment.centerRight,
-            padding: EdgeInsets.only(
-              right: 5,
-            ),
-            child: Text(
-              e.value.toString(),
-              style: TextStyle(fontSize: 11),
-            ),
-          );
+              padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
+              alignment: Alignment.centerRight,
+              child: Text(
+                NumberFormat('#,##0.00', 'en_US').format(
+                  e.value,
+                ),
+                style: TextStyle(fontSize: 11),
+                //e.value.toString(),
+                maxLines: 1,
+              ));
         } else if (e.columnName == 'observacion' ||
             e.columnName == 'documento_orh' ||
             e.columnName == 'nro_expediente_judicial' ||
@@ -190,18 +192,19 @@ class ListJudicialesDataSource extends DataGridSource {
     );
   }
 
-  _showModalDialog(_context, JudicialEntity row) {
+  _showModalDialog(_contextJudicial, JudicialEntity row) {
     showDialog(
-        context: _context,
+        context: _contextJudicial,
         builder: (BuildContext _context) {
           return Dialog(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               child: Container(
-                  width: 400,
-                  height: 650,
+                  width: 500,
+                  height: 700,
                   child: NewJudicialPage(
                     judicialEntity: row,
+                    contextJudicial: _contextJudicial,
                   )));
         });
   }

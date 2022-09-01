@@ -15,3 +15,17 @@ class ImportLoaded extends ImportState {
     required this.list,
   });
 }
+
+class ImportLoadError extends ImportState {
+  final String message;
+  ImportLoadError({
+    required this.message,
+  });
+}
+
+class ImportLoadedDocumento extends ImportState {
+  final List<List<Object>> list;
+  ImportLoadedDocumento({
+    required this.list,
+  });
+}

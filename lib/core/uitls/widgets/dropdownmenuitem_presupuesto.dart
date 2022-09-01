@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/certificado_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/clasificador_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
@@ -30,11 +31,11 @@ List<DropdownMenuItem<CertificadoEntity>> buildCertificados(
   return listCertificado;
 }
 
-List<DropdownMenuItem<MetaEntity>> buildMetas(List metaModel) {
-  List<DropdownMenuItem<MetaEntity>> listMeta = [];
+List<DropdownMenuItem<int>> buildMetas(List metaModel) {
+  List<DropdownMenuItem<int>> listMeta = [];
   for (MetaEntity item in metaModel) {
     listMeta.add(DropdownMenuItem(
-      value: item,
+      value: item.idmetaAnual,
       child: Text('${item.idmetaAnual} : ${item.finalidad}'),
     ));
   }
@@ -42,14 +43,26 @@ List<DropdownMenuItem<MetaEntity>> buildMetas(List metaModel) {
   return listMeta;
 }
 
-List<DropdownMenuItem<FuenteEntity>> buildFuentes(List fuenteModel) {
-  List<DropdownMenuItem<FuenteEntity>> listFuente = [];
+List<DropdownMenuItem<int>> buildAreas(List areaModel) {
+  List<DropdownMenuItem<int>> listArea = [];
+  for (AreaEntity item in areaModel) {
+    listArea.add(DropdownMenuItem(
+      value: item.orgAreaId,
+      child: Text('${item.orgAreaId} : ${item.descArea}'),
+    ));
+  }
+  //_metaEntity = metaModel[0];
+  return listArea;
+}
+
+List<DropdownMenuItem<int>> buildFuentes(List fuenteModel) {
+  List<DropdownMenuItem<int>> listFuente = [];
   for (FuenteEntity item in fuenteModel) {
     listFuente.add(DropdownMenuItem(
-      value: item,
+      value: item.id,
       child: Text('${item.id} : ${item.dscFuente}'),
     ));
   }
-  //_fuenteFinanciamientoEntity = fuenteModel[0];
+
   return listFuente;
 }

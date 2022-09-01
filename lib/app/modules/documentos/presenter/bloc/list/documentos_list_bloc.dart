@@ -13,15 +13,35 @@ class DocumentosListBloc
 
   DocumentosListBloc({required this.documentosListUseCase})
       : super(DocumentosListInitial()) {
-    on<DocumentosListEvent>(_onDocumentoListLoadToState);
+    on<DocumentosListLoad>(_onDocumentoListLoadToState);
+    on<DocumentosListFilterEvent>(_onDocumentoListFilterToState);
   }
   _onDocumentoListLoadToState(
-      DocumentosListEvent event, Emitter<DocumentosListState> emit) async {    
+      DocumentosListLoad event, Emitter<DocumentosListState> emit) async {
     var result =
         await this.documentosListUseCase(ParamsDocumentos(anio: '2022'));
     emit(result.fold((l) => DocumentosListError(message: l.toString()), (r) {
-      
-      return DocumentosListLoaded(documentosList: r.data);
+      List<DocumentoEntity> result = (r.data as List<DocumentoEntity>)
+          .where((element) =>
+              (element.control == 'EXTERNO' && element.estado == 'PENDIENTE'))
+          .toList();
+      return DocumentosListLoaded(
+          documentosListOriginal: r.data, documentosListFiltered: result);
     }));
+  }
+
+  _onDocumentoListFilterToState(DocumentosListFilterEvent event,
+      Emitter<DocumentosListState> emit) async {
+    if (state is DocumentosListLoaded) {
+      List<DocumentoEntity> result = (state as DocumentosListLoaded)
+          .documentosListOriginal
+          .where((element) =>
+              element.control == event.control &&
+              element.estado == event.estado)
+          .toList();
+
+      emit((state as DocumentosListLoaded)
+          .copyWith(documentosListFiltered: result));
+    }
   }
 }

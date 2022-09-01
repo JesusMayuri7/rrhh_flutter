@@ -5,12 +5,13 @@ import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:rrhh_clean/app/modules/import/presenter/import_datasource.dart';
+import 'package:http/http.dart';
+import 'package:rrhh_clean/app/modules/import/presenter/import_grid_datasource.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:filepicker_windows/filepicker_windows.dart';
 
-import 'exportImportToExcel.dart';
+import 'exportImportToExcelGrid.dart';
 import 'getColumnsAll.dart';
 
 import 'package:rrhh_clean/app/modules/import/presenter/bloc/import_bloc.dart';
@@ -54,7 +55,6 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
                 ElevatedButton(
                     onPressed: () {
                       openFile();
-                      //this.bloc.add(ImportLoad());
                     },
                     child: Text('Cargar')),
                 ElevatedButton(
@@ -119,13 +119,15 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
         ..title = 'Select a document';
 
       final result = file.getFile();
+      //var FileData = MultipartFile.fromPath('file', file.)
+
       if (result != null) {
         //result.readAsBytes();
-        var bytes = result.readAsBytesSync();
+        //var bytes = result.readAsBytesSync();
 
-        var excel = Excel.decodeBytes(bytes);
+        //var excel = Excel.decodeBytes(bytes);
 
-        this.bloc.add(ImportLoad(list: importCertificado(excel)));
+        this.bloc.add(ImportLoadFile(bytes: result));
         //return result.;
       }
     }
@@ -172,7 +174,7 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
         List<String> listRow = [];
         for (var i = 0; i < row.length; i++) {
           String r = row[i]?.value.toString() ?? '';
-          
+
           listRow.add(r.toString());
         }
         if (itemRow > 0) dataList.add(listRow);
