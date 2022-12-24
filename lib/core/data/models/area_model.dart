@@ -12,17 +12,17 @@ String areaModelToJson(List<AreaModel> data) =>
 
 class AreaModel extends AreaEntity {
   AreaModel({
-    orgAreaId,
+    id,
     descArea,
-  }) : super(descArea: descArea, orgAreaId: orgAreaId);
+  }) : super(descArea: descArea, id: id);
 
   factory AreaModel.fromJson(Map<String, dynamic> json) => AreaModel(
-        orgAreaId: json["org_area_id"],
+        id: json["id"],
         descArea: json["desc_area"],
       );
 
   Map<String, dynamic> toJson() => {
-        "org_area_id": orgAreaId,
+        "id": id,
         "desc_area": descArea,
       };
 }

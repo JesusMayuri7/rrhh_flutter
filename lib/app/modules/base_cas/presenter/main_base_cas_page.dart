@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'base_cas_page/base_cas_page.dart';
+import 'base_cas_page/listado/listado_cas_page/base_cas_page.dart';
 import 'presupuesto_page/pages/presupuesto_cas_page.dart';
 
 import 'resumen_page/resumen_cas_page.dart';

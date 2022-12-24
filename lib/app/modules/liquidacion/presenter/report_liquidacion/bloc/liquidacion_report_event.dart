@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'liquidacion_report_bloc.dart';
 
 abstract class LiquidacionReportEvent extends Equatable {
@@ -6,22 +7,29 @@ abstract class LiquidacionReportEvent extends Equatable {
 
 class LiquidacionReportLoad extends LiquidacionReportEvent {
   final String anio;
+  final String dscModalidad;
 
   LiquidacionReportLoad({
     required this.anio,
+    this.dscModalidad = 'CAS',
   });
 
   @override
-  List<Object> get props => [this.anio];
+  List<Object> get props => [this.anio, this.dscModalidad];
 }
 
 class LiquidacionReportFilter extends LiquidacionReportEvent {
-  final int certificadoDevengadoId;
+  final String dscModalidad;
+//  final int certificadoDevengadoId;
 
   LiquidacionReportFilter({
-    required this.certificadoDevengadoId,
+    this.dscModalidad = 'CAS',
+    //  required this.certificadoDevengadoId,
   });
 
   @override
-  List<Object> get props => [this.certificadoDevengadoId];
+  List<Object> get props => [
+        //this.certificadoDevengadoId,
+        this.dscModalidad
+      ];
 }

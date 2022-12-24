@@ -21,7 +21,7 @@ class BaseCasEntity extends Equatable {
       required this.sustentoLegal,
       required this.nroConvocatoria,
       required this.estadoConvocatoria,
-      required this.resultadoConvocatoria,
+      required this.fase,
       required this.fechaAlta,
       required this.tipoIngreso,
       required this.fechaBaja,
@@ -61,7 +61,7 @@ class BaseCasEntity extends Equatable {
   final String sustentoLegal;
   final String nroConvocatoria;
   final String estadoConvocatoria;
-  final String resultadoConvocatoria;
+  final String fase;
   final String tipoIngreso;
   final String fechaAlta;
   final String tipoSalida;
@@ -103,7 +103,7 @@ class BaseCasEntity extends Equatable {
       'sustentoLegal': sustentoLegal,
       'nroConvocatoria': nroConvocatoria,
       'estadoConvocatoria': estadoConvocatoria,
-      'resultadoConvocatoria': resultadoConvocatoria,
+      'fase': fase,
       'tipoIngreso': tipoIngreso,
       'fechaAlta': fechaAlta,
       'tipoSalida': tipoSalida,
@@ -145,7 +145,7 @@ class BaseCasEntity extends Equatable {
     String? sustentoLegal,
     String? nroConvocatoria,
     String? estadoConvocatoria,
-    String? resultadoConvocatoria,
+    String? fase,
     String? tipoIngreso,
     String? fechaAlta,
     String? tipoSalida,
@@ -186,8 +186,7 @@ class BaseCasEntity extends Equatable {
       sustentoLegal: sustentoLegal ?? this.sustentoLegal,
       nroConvocatoria: nroConvocatoria ?? this.nroConvocatoria,
       estadoConvocatoria: estadoConvocatoria ?? this.estadoConvocatoria,
-      resultadoConvocatoria:
-          resultadoConvocatoria ?? this.resultadoConvocatoria,
+      fase: fase ?? this.fase,
       tipoIngreso: tipoIngreso ?? this.tipoIngreso,
       fechaAlta: fechaAlta ?? this.fechaAlta,
       tipoSalida: tipoSalida ?? this.tipoSalida,
@@ -230,7 +229,7 @@ class BaseCasEntity extends Equatable {
       String? sustentoLegal,
       String? nroConvocatoria,
       String? estadoConvocatoria,
-      String? resultadoConvocatoria,
+      String? fase,
       String? tipoIngreso,
       String? fechaAlta,
       String? tipoSalida,
@@ -337,8 +336,7 @@ class BaseCasEntity extends Equatable {
       sustentoLegal: sustentoLegal ?? this.sustentoLegal,
       nroConvocatoria: nroConvocatoria ?? this.nroConvocatoria,
       estadoConvocatoria: estadoConvocatoria ?? this.estadoConvocatoria,
-      resultadoConvocatoria:
-          resultadoConvocatoria ?? this.resultadoConvocatoria,
+      fase: fase ?? this.fase,
       tipoIngreso: tipoIngreso ?? this.tipoIngreso,
       fechaAlta: fechaAlta ?? this.fechaAlta,
       tipoSalida: tipoSalida ?? this.tipoSalida,
@@ -381,7 +379,7 @@ class BaseCasEntity extends Equatable {
       sustentoLegal,
       nroConvocatoria,
       estadoConvocatoria,
-      resultadoConvocatoria,
+      fase,
       fechaAlta,
       fechaBaja,
       mesInicio,

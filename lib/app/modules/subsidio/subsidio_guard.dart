@@ -19,7 +19,6 @@ class SubsidioGuard extends RouteGuard {
     */
 
     final authBloc = Modular.get<AuthBloc>();
-    // print((appBloc.state as SuccessAuthState).loginResponseEntity.status);
 
     return authBloc.state.loginResponseEntity!.isLogged;
 

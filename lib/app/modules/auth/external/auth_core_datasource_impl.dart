@@ -17,7 +17,6 @@ class AuthCoreDataSourceImpl implements IAuthCoreDataSource {
 
   @override
   Future<LoginResponseModel> login(AuthCoreParams params) async {
-    print(params);
     try {
       var response = await http.post(url,
           headers: {'Content-Type': 'application/json'},
@@ -35,7 +34,6 @@ class AuthCoreDataSourceImpl implements IAuthCoreDataSource {
     } on FormatException {
       throw ServerException("Formato incorrecto");
     } catch (e) {
-      // print(e);
       throw ServerException(e.toString());
     }
   }

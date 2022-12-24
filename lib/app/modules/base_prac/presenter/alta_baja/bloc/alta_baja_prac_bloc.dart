@@ -17,11 +17,16 @@ class AltaBajaPracBloc extends Bloc<AltaBajaPracEvent, AltaBajaPracState> {
 
   _onAltaBajaPracEventToState(
       AltaBajaPracEventLoad event, Emitter<AltaBajaPracState> emit) async {
+    emit(AltaBajaPracLoading());
     var result = await this.altaBajaPracUseCase(event.params);
-    emit(result.fold((l) => AltaBajaPracError(message: l.toString()), (r) {
+    emit(result.fold((l) {
+      return AltaBajaPracError(message: l.toString());
+    }, (r) {
       PracticanteEntity practicante = r.data as PracticanteEntity;
       return AltaBajaPracLoaded(
-          practicanteBajaId: event.params.id, practicanteEntity: practicante);
+          practicanteBajaId: event.params.id,
+          practicanteEntity: practicante,
+          newFuente: '');
     }));
   }
 }

@@ -199,7 +199,6 @@ class ListPracticanteDataSource extends DataGridSource {
   }
 
   void updateDataGrid() {
-    print('actualizando Practicante');
     notifyListeners();
   }
 

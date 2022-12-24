@@ -13,3 +13,10 @@ class AltaBajaPracEventLoad extends AltaBajaPracEvent {
     required this.params,
   });
 }
+
+class AltaBajaPracEventNewFuente extends AltaBajaPracEvent {
+  final String newFuente;
+  AltaBajaPracEventNewFuente({
+    required this.newFuente,
+  });
+}

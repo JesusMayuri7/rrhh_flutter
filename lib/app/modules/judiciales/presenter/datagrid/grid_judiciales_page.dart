@@ -85,6 +85,7 @@ class GridJudicialesPage extends StatelessWidget {
                   allowMultiColumnSorting: true,
                   allowTriStateSorting: true,
                   showSortNumbers: true,
+                  allowFiltering: true,
                   selectionMode: SelectionMode.single,
                   navigationMode: GridNavigationMode.cell,
                   allowEditing: true,
@@ -122,12 +123,6 @@ class GridJudicialesPage extends StatelessWidget {
       // Removed the extra pixels to aligned the pop up in the bottom of header cell.
       dy -= 0.0;
     }
-    print(listJudicialesDataSource.rows
-        .firstWhereIndexedOrNull(
-            (index, element) => index == details.rowColumnIndex.columnIndex)!
-        .getCells()
-        .first
-        .value);
 
     showMenu(
         context: context,
@@ -137,9 +132,7 @@ class GridJudicialesPage extends StatelessWidget {
 
   Widget buildMenuItem(GridColumn column, String value) {
     return GestureDetector(
-        onTap: () {
-          print('filtro ' + column.columnName);
-        },
+        onTap: () {},
         child: Container(width: 130, height: 30, child: Text(value)));
   }
 

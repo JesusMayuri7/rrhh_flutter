@@ -13,6 +13,15 @@ import 'package:rrhh_clean/core/domain/models/item_model.dart';
 @immutable
 abstract class CertificadosEvent extends Equatable {}
 
+class DeleteCertificadosEvent extends CertificadosEvent {
+  final int id;
+  DeleteCertificadosEvent({
+    required this.id,
+  });
+  @override
+  List<Object?> get props => [this.id];
+}
+
 class GetDataInitial implements CertificadosEvent {
   @override
   List<Object?> get props => [];

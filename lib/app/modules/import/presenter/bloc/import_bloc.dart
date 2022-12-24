@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -21,19 +20,18 @@ class ImportBloc extends Bloc<ImportEvent, ImportState> {
   final ImportFileUseCase importFileUseCase;
 
   _importLoadFile(ImportLoadFile event, Emitter<ImportState> emit) async {
+    emit(ImportFileLoading());
     var result = await this
         .importFileUseCase(ParamsInportFile(anio: '2022', bytes: event.bytes));
     emit(result.fold((l) {
-      print('error ' + l.toString());
-      return ImportLoadError(message: 'error');
+      return ImportLoadError(message: 'Error al importar');
     }, (r) {
-      print('bien ' + r.data.toString());
-      return ImportLoadError(message: 'aca');
+      return ImportFileLoaded(message: r.message);
     }));
   }
 
   _importLoad(ImportLoad event, Emitter<ImportState> emit) async* {
-    emit(ImportLoaded(list: event.list));
+    emit(ImportListLoaded(list: event.list));
     //if (event is Import) yield ImportLoaded(list: event.list);
   }
 }

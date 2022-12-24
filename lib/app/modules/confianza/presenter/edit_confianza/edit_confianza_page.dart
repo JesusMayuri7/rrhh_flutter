@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 import '../../bloc/confianza_bloc.dart';
 import '../../../../../core/domain/entities/area_entity.dart';
 import '../../domain/entities/confianza_entity.dart';
@@ -69,12 +70,11 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
         bloc: this.blocEdit,
         listener: (context, state) {
           if (state is EdtiConfianzaError)
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Colors.black,
-              content: Text(state.message),
-            ));
-          if (state is EdtiConfianzaSaved) Navigator.pop(context);
-          if (state is EditConfianzaCreated) Navigator.pop(context);
+            showToastError(context, state.message);
+          if (state is EdtiConfianzaSaved || state is EditConfianzaCreated) {
+            Navigator.pop(context);
+            showToastSuccess(context, 'Se actualizo exitosamente');
+          }
         },
         builder: (context, state) {
           return Padding(
@@ -87,7 +87,6 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                 Text('Personal de Confianza'),
                 Expanded(
                   child: Scrollbar(
-                    isAlwaysShown: true,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Padding(
@@ -146,7 +145,6 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                   dropdownMenuItemList: _buildAreas(listAreas),
                                   value: this._area,
                                   onChanged: (int? value) {
-                                    print('onChanged: ' + value.toString());
                                     this._area = value;
                                   },
                                   title: 'Area'),
@@ -203,6 +201,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                 validator: (value) {
                                   if (value!.length < 8 || value.isEmpty)
                                     return 'nombre invalido';
+                                  return null;
                                 },
                               ),
                               SizedBox(
@@ -307,7 +306,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                                     modalidadController.text,
                                                 nombres: nombresController.text
                                                     .toUpperCase(),
-                                                orgAreaId: this._area!,
+                                                area_id: this._area!,
                                                 plaza: plazaController.text,
                                                 tipo: tipoController.text,
                                                 trabajadorId: 0,
@@ -378,7 +377,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
     List<DropdownMenuItem<int>> listDropDownItemAreas = [];
     for (AreaEntity item in areas) {
       listDropDownItemAreas.add(DropdownMenuItem(
-        value: item.orgAreaId,
+        value: item.id,
         child: Text(
           '${item.descArea}',
           overflow: TextOverflow.ellipsis,
@@ -386,10 +385,10 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
         ),
       ));
     }
-    if (widget.confianzaEntity.orgAreaId == 0)
+    if (widget.confianzaEntity.area_id == 0)
       this._area = listDropDownItemAreas[0].value;
     else
-      this._area = widget.confianzaEntity.orgAreaId;
+      this._area = widget.confianzaEntity.area_id;
     return listDropDownItemAreas;
   }
 }

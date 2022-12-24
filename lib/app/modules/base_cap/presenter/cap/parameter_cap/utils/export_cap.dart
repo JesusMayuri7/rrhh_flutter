@@ -9,7 +9,6 @@ import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
 import 'presupuesto_cap_sheet.dart';
 
 Future<void> generateExcel(ParamsCapCalcular params) async {
-  print('compute calcular');
 // Create a new Excel Document.
   final Workbook workbook = Workbook();
 

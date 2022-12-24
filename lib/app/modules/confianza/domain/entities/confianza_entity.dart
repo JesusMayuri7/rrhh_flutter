@@ -13,7 +13,7 @@ class ConfianzaEntity extends Equatable {
       required this.docCese,
       required this.direccion,
       required this.modalidad,
-      required this.orgAreaId,
+      required this.area_id,
       required this.trabajadorId,
       required this.detalle,
       required this.tipo,
@@ -31,7 +31,7 @@ class ConfianzaEntity extends Equatable {
   final String docCese;
   final String direccion;
   final String modalidad;
-  final int orgAreaId;
+  final int area_id;
   final int trabajadorId;
   final String detalle;
   final String tipo;
@@ -40,7 +40,7 @@ class ConfianzaEntity extends Equatable {
 
   @override
   String toString() {
-    return 'ConfianzaEntity(id: $id, descArea: $descArea, cargo: $cargo, dni: $dni, nombres: $nombres, inicio: $inicio, fin: $fin, docDesignacion: $docDesignacion, docCese: $docCese, direccion: $direccion, modalidad: $modalidad, orgAreaId: $orgAreaId, trabajadorId: $trabajadorId, detalle: $detalle, tipo: $tipo, plaza: $plaza)';
+    return 'ConfianzaEntity(id: $id, descArea: $descArea, cargo: $cargo, dni: $dni, nombres: $nombres, inicio: $inicio, fin: $fin, docDesignacion: $docDesignacion, docCese: $docCese, direccion: $direccion, modalidad: $modalidad, orgAreaId: $area_id, trabajadorId: $trabajadorId, detalle: $detalle, tipo: $tipo, plaza: $plaza)';
   }
 
   @override
@@ -57,7 +57,7 @@ class ConfianzaEntity extends Equatable {
       docCese,
       direccion,
       modalidad,
-      orgAreaId,
+      area_id,
       trabajadorId,
       detalle,
       tipo,
@@ -96,7 +96,7 @@ class ConfianzaEntity extends Equatable {
         docCese: docCese ?? this.docCese,
         direccion: direccion ?? this.direccion,
         modalidad: modalidad ?? this.modalidad,
-        orgAreaId: orgAreaId ?? this.orgAreaId,
+        area_id: orgAreaId ?? this.area_id,
         trabajadorId: trabajadorId ?? this.trabajadorId,
         detalle: detalle ?? this.detalle,
         tipo: tipo ?? this.tipo,

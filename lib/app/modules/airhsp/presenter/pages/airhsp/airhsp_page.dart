@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/airhsp/presenter/bloc/air_bloc/airhsp_bloc.dart';
 import 'package:rrhh_clean/app/modules/airhsp/presenter/bloc/conceptos_bloc/conceptos_bloc.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'widgets/text_field_search.dart';
 import '../conceptos/conceptos_page.dart';
@@ -60,7 +61,6 @@ class _AirhspPageState extends State<AirhspPage>
       {required String codPlaza,
       required String nombres,
       required String tipoPersona}) {
-    print('entrando conceptos');
     return Expanded(
       child: ConceptosPage(
           codPlaza: codPlaza, nombres: nombres, tipoPersona: tipoPersona),
@@ -93,8 +93,7 @@ class _AirhspPageState extends State<AirhspPage>
       bloc: this.bloc,
       listener: (context, state) {
         if (state is ErrorAirhspState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Error al grabar: ' + state.message)));
+          showToastError(context, state.message);
         }
       },
       child: Row(
@@ -174,7 +173,6 @@ class _AirhspPageState extends State<AirhspPage>
           BlocBuilder<ConceptosBloc, ConceptosState>(
               bloc: this.blocConcepto,
               builder: (context, _state) {
-                print('estados conceptos $_state');
                 return Expanded(
                   child: Column(
                     children: [

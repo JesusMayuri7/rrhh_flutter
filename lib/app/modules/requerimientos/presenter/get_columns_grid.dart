@@ -1,50 +1,160 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 List<PlutoColumn> columns = [
   PlutoColumn(
-    title: 'Año',
-    field: 'number_field',
+    title: 'Id',
+    field: 'id',
     width: 60,
+    type: PlutoColumnType.text(),
     enableSorting: false,
     enableFilterMenuItem: false,
     enableContextMenu: false,
     enableHideColumnMenuItem: false,
     enableSetColumnsMenuItem: false,
-    type: PlutoColumnType.number(format: '0'),
+    backgroundColor: Colors.blue,
+    //type: PlutoColumnType.number(format: '0'),
+  ),
+
+  PlutoColumn(
+    title: 'Año',
+    field: 'anio',
+    width: 60,
+    type: PlutoColumnType.text(),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
+    //type: PlutoColumnType.number(format: '0'),
+  ),
+  PlutoColumn(
+    width: 60,
+    title: 'Modalidad',
+    field: 'dsc_modalidad',
+    type: PlutoColumnType.select(['CAS', 'CAP', 'PRAC']),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
   ),
 
   /// Text Column definition
   PlutoColumn(
-    title: 'text column',
-    field: 'text_field',
+    width: 200,
+    title: 'N° Exp. PVN',
+    field: 'nro_expediente',
     type: PlutoColumnType.text(),
-  ),
-
-  /// Number Column definition
-
-  /// Select Column definition
-  PlutoColumn(
-    title: 'select column',
-    field: 'select_field',
-    type: PlutoColumnType.select(['item1', 'item2', 'item3']),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
   ),
 
   /// Datetime Column definition
   PlutoColumn(
-    title: 'date column',
-    field: 'date_field',
-    type: PlutoColumnType.date(),
+    width: 300,
+    title: 'N° Doc. Solic.',
+    field: 'dcto_solicitud',
+    type: PlutoColumnType.text(),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
   ),
 
   /// Time Column definition
   PlutoColumn(
-    title: 'time column',
-    field: 'time_field',
-    type: PlutoColumnType.time(),
+    width: 250,
+    title: 'Area',
+    field: 'desc_area',
+    type: PlutoColumnType.text(),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
+  ),
+  PlutoColumn(
+    width: 100,
+    title: 'Fecha',
+    field: 'fecha_solicitud',
+    type: PlutoColumnType.text(),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
   ),
 ];
 
-List<PlutoRow> rows = [
+List<PlutoColumn> columnsDetail = [
+  PlutoColumn(
+    title: 'Cantidad',
+    field: 'cantidad',
+    width: 60,
+    type: PlutoColumnType.text(),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
+    //type: PlutoColumnType.number(format: '0'),
+  ),
+  PlutoColumn(
+    width: 200,
+    title: 'Sub. Area',
+    field: 'desc_subarea',
+    type: PlutoColumnType.text(),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
+  ),
+
+  PlutoColumn(
+    width: 200,
+    title: 'Cargo',
+    field: 'cargo',
+    type: PlutoColumnType.text(),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
+  ),
+
+  /// Text Column definition
+  PlutoColumn(
+    width: 80,
+    title: 'monto',
+    field: 'monto',
+    type: PlutoColumnType.text(),
+    enableSorting: false,
+    enableFilterMenuItem: false,
+    enableContextMenu: false,
+    enableHideColumnMenuItem: false,
+    enableSetColumnsMenuItem: false,
+    backgroundColor: Colors.blue,
+  ),
+
+  /// Datetime Column definition
+];
+
+/* List<PlutoRow> rows = [
   PlutoRow(
     cells: {
       'text_field': PlutoCell(value: 'Text cell value1'),
@@ -72,4 +182,4 @@ List<PlutoRow> rows = [
       'time_field': PlutoCell(value: '23:59'),
     },
   ),
-];
+]; */

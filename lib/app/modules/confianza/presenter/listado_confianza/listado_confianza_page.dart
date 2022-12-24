@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -16,19 +17,30 @@ import 'package:rrhh_clean/app/modules/confianza/presenter/listado_confianza/wid
 import 'bloc/list_confianza_bloc.dart';
 import 'widgtes/confianza_datasource.dart';
 
-class ListadoConfianzaPage extends StatelessWidget {
+class ListadoConfianzaPage extends StatefulWidget {
   ListadoConfianzaPage({Key? key}) : super(key: key);
 
-  //final List<ConfianzaEntity> listadoConfianza;
-  //final List<AreaEntity> listadoAreas;
+  @override
+  State<ListadoConfianzaPage> createState() => _ListadoConfianzaPageState();
+}
+
+class _ListadoConfianzaPageState extends State<ListadoConfianzaPage> {
   final blocConfianza = Modular.get<ListConfianzaBloc>();
   final String? anioSelected =
       Modular.get<AuthBloc>().state.loginResponseEntity?.anio;
 
+  @override
+  void initState() {
+    if (blocConfianza.state is ListConfianzaBlocInitial) {
+      this.blocConfianza.add(ListConfianzaEventGet(anio: anioSelected!));
+    }
+    super.initState();
+  }
+  //final List<ConfianzaEntity> listadoConfianza;
+
   final textSearchController = TextEditingController();
 
   //final DataGridController dataGridController = DataGridController();
-
   @override
   Widget build(BuildContext context) {
     ConfianzaDataSource confianzaDataSource =
@@ -39,8 +51,9 @@ class ListadoConfianzaPage extends StatelessWidget {
     return BlocConsumer<ListConfianzaBloc, ListConfianzaBlocState>(
       listener: (context, state) {
         if (state is ListConfianzaBlocError)
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Error: ' + state.message)));
+          showToastError(context, state.message);
+/*         if (state is ListConfianzaBlocLoaded)
+          showToastSuccess(context, 'Se agrego exitosamente'); */
       },
       bloc: this.blocConfianza,
       builder: (context, state) {
@@ -91,7 +104,7 @@ class ListadoConfianzaPage extends StatelessWidget {
                                 docCese: '',
                                 direccion: '',
                                 modalidad: 'CAP',
-                                orgAreaId: 0,
+                                area_id: 0,
                                 trabajadorId: 0,
                                 detalle: '',
                                 tipo: 'DESIGNACION',
@@ -149,7 +162,8 @@ class ListadoConfianzaPage extends StatelessWidget {
                       isScrollbarAlwaysShown: true,
                       gridLinesVisibility: GridLinesVisibility.both,
                       headerGridLinesVisibility: GridLinesVisibility.both,
-                      allowSorting: true,
+                      //allowSorting: true,
+                      allowFiltering: true,
                       allowMultiColumnSorting: true,
                       allowTriStateSorting: true,
                       showSortNumbers: true,
@@ -210,7 +224,6 @@ class ListadoConfianzaPage extends StatelessWidget {
 
       sheet.importList(row, index + 2, 1, false);
     }
-    //print(sheet.toString());
 
 // Save and dispose workbook.
     final List<int> bytes = workbook.saveAsStream();

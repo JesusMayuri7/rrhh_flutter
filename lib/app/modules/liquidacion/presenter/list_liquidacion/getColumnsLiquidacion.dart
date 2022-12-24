@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 List<GridColumn> getColumnsLiquidacion() {
   return ([
     GridColumn(
-        width: 20,
+        width: 50,
         visible: false,
         columnName: 'id',
         label: Text(
@@ -13,14 +13,15 @@ List<GridColumn> getColumnsLiquidacion() {
           textAlign: TextAlign.center,
         )),
     GridColumn(
-      width: 40,
+      allowEditing: false,
+      width: 50,
       columnName: 'anio',
       label: Text('Año',
           style: TextStyle(fontSize: 10, color: Colors.white),
           textAlign: TextAlign.center),
     ),
     GridColumn(
-      width: 40,
+      width: 50,
       columnName: 'dsc_modalidad',
       label: Text('Modalidad',
           style: TextStyle(fontSize: 10, color: Colors.white),
@@ -73,13 +74,13 @@ List<GridColumn> getColumnsLiquidacion() {
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
-        width: 40,
+        width: 60,
         columnName: 'expediente',
         label: Text('Exp.',
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
-        width: 60,
+        width: 70,
         columnName: 'fecha_expediente',
         label: Text('Fecha Exp.',
             style: TextStyle(fontSize: 10, color: Colors.white),
@@ -97,7 +98,7 @@ List<GridColumn> getColumnsLiquidacion() {
             textAlign: TextAlign.center),
         visible: false),
     GridColumn(
-        width: 70,
+        width: 80,
         columnName: 'dsc_certificado_devengado',
         label: Text('Certificado',
             style: TextStyle(fontSize: 10, color: Colors.white),
@@ -126,14 +127,14 @@ List<GridColumn> getColumnsLiquidacion() {
         visible: true),
     GridColumn(
         allowEditing: true,
-        width: 50,
+        width: 60,
         columnName: 'codigo_plaza',
         label: Text('Codigo \n AIRHSP',
             style: TextStyle(fontSize: 10, color: Colors.white),
             textAlign: TextAlign.center)),
     GridColumn(
         allowEditing: true,
-        width: 40,
+        width: 60,
         columnName: 'codigo_siga',
         label: Text('Codigo \n SIGA',
             style: TextStyle(fontSize: 10, color: Colors.white),

@@ -29,11 +29,8 @@ class HomeDevengadoTotalBloc
     emit(HomeDevengadoTotalLoading());
     var result = await this.getHomeDataInitialUseCase(NoParams());
     emit(result.fold((l) {
-      print(l.toString());
       return HomeDevengadoTotalError(message: l.toString());
     }, (r) {
-      //List<CapEstadoOppEntity> lista = List.from(r[1].data);
-      //List<CapEstadoOppEntity> sum = sumCapEstadoOpp(lista);
       return HomedevengadototalLoaded(
           devengadoTotal: r[0].data, capEstadoOpp: r[1].data);
     }));

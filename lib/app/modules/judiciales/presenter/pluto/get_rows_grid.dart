@@ -14,6 +14,5 @@ List<PlutoRow> getRowsGrid(List<JudicialEntity> judicialesEntity) {
             "destino": PlutoCell(value: e.detalle),
           }))
       .toList();
-  print('PlutoRow ' + rows.length.toString());
   return rows;
 }

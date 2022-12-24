@@ -5,7 +5,6 @@ class CalcularListBaseCapUseCase {
   List<BaseCapEntity> call(ParamsCalcularListBaseCap params) {
     for (final item in params.capEntityList) {
       item.copyWith(totalBasico: item.montoEscala + item.asigFam);
-      print(item);
       params.parameterCapEntityList.map((e) {
         if (e.detalle == 'PORCENTAJE_EPS_ESSALUD')
           item.copyWith(essalud: item.montoEscala * e.valor);

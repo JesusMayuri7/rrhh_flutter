@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -31,8 +32,7 @@ class _LiquidacionDetallePageState extends State<LiquidacionDetallePage> {
     return BlocConsumer<LiquidacionDetalleBloc, LiquidacionDetalleState>(
         listener: (context, newState) {
           if (newState is LiquidacionDetalleError)
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text('Error al grabar: ' + newState.message)));
+            showToastError(context, newState.message);
         },
         buildWhen: (previousState, newState) {
           if (newState is LiquidacionDetalleLoaded) return true;

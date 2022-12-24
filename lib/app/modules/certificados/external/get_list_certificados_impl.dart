@@ -20,12 +20,9 @@ class GetListCertificadoImpl implements IGetListCertificadosDatasource {
   @override
   Future<ResponseModel> getListCertificados(
       {String? certiificado, String? anio}) async {
-    //Map<String, String?> params = {"anio": anio};
-    // print('external ' + params.toString());
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
-      //print('list certificados' + response.toString());
 
       String bodyData = jsonEncode(response.data);
 

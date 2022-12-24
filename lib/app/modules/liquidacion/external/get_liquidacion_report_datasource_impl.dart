@@ -18,7 +18,7 @@ class GetLiquidacionReportDatasourceImpl
   @override
   Future<ResponseModel> getLiquidacionReport(String _anio) async {
     Uri url = Uri.http('rrhh.pvn.gob.pe',
-        '/api/liquidacion/report_siaf/' + _anio, {'q': '{http}'});
+        '/api/liquidacion/report_siaf_all/' + _anio, {'q': '{http}'});
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
@@ -27,7 +27,6 @@ class GetLiquidacionReportDatasourceImpl
 
       List<LiquidacionReportModel> result =
           liquidacionReportEntityFromJson(bodyData);
-      print('external report ' + result.length.toString());
       return ResponseModel(
           status: response.status, message: response.message, data: result);
     } on SocketException {

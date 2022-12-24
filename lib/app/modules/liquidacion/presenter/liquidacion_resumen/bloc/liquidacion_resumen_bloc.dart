@@ -19,7 +19,6 @@ class LiquidacionResumenBloc
 
   _onLiquidacionResumenLoadEventToState(LiquidacionResumenLoad event,
       Emitter<LiquidacionResumenState> emit) async {
-    print('resumen bloc ' + state.runtimeType.toString());
     //if (state is LiquidacionResumenLoaded)
     {
       var result = await this.gettLiquidacionResumenesUseCase(
@@ -28,7 +27,6 @@ class LiquidacionResumenBloc
               dscCertificado: event.dscCertificado,
               anio: event.anio));
       emit(result.fold((l) {
-        print(l.toString());
         return LiquidacionResumenError(message: l.toString());
       }, (r) {
         List<LiquidacionResumenEntity> listResumenLiquidacion =

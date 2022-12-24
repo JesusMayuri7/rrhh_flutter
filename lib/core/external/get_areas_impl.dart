@@ -15,7 +15,7 @@ class GetAreasImpl implements IAreasDatasourceApp {
 
   @override
   Future<ResponseModel> getAreas() async {
-    Uri url = Uri.http('rrhh.pvn.gob.pe', 'api/configuracion/areas');
+    Uri url = Uri.http('rrhh.pvn.gob.pe', 'api/configuracion/get_areas');
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
@@ -23,7 +23,6 @@ class GetAreasImpl implements IAreasDatasourceApp {
       String bodyData = jsonEncode(response.data);
 
       List<AreaModel> areas = areaModelFromJson(bodyData);
-      //print('areas ' + areas.toString());
       return ResponseModel(
           status: response.status, message: response.message, data: areas);
     } on SocketException {

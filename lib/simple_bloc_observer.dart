@@ -3,8 +3,6 @@ import 'package:bloc/bloc.dart';
 class SimpleBlocOBserver extends BlocObserver {
   @override
   void onError(BlocBase bloc, Object error, StackTrace stacktrace) {
-    print(error);
-
     super.onError(bloc, error, stacktrace);
   }
 

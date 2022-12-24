@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'bloc/parameter_cap_bloc.dart';
 
@@ -21,8 +22,7 @@ class ParameterCapPage extends StatelessWidget {
           listener: (context, state) {
             if (state is CapLoadedState) {
               if (state.statusCap == StatusCap.error)
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text('Error')));
+                showToastError(context, state.toString());
             }
           },
           bloc: this.blocParameter,

@@ -21,7 +21,6 @@ class NewJudicialBloc extends Bloc<NewJudicialEvent, NewJudicialState> {
       NewDocumentLoadEvent event, Emitter<NewJudicialState> emit) async {
     var result = await this.newJudicialUseCase(event.paramsNewJudicial);
     emit(result.fold((l) => NewJudicialError(message: l.toString()), (r) {
-      print('new judicial' + r.data.toString());
       return NewJudicialSaved(judicialEntity: r.data);
     }));
   }

@@ -9,8 +9,8 @@ import '../../../../core/errors/exceptions.dart';
 import '../data/datasource/get_area_datasource.dart';
 
 class GetListAreaDataSourceImpl implements IListAreaDataSource {
-  Uri url =
-      Uri.http('rrhh.pvn.gob.pe', '/api/configuracion/areas', {'q': 'http'});
+  Uri url = Uri.http(
+      'rrhh.pvn.gob.pe', '/api/configuracion/get_areas', {'q': 'http'});
 
   final IClientCustom httpCustom;
   GetListAreaDataSourceImpl({

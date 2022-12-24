@@ -5,12 +5,10 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class BaseCapDataSource extends DataGridSource {
   BaseCapDataSource(this.basecapList) {
-    //print(basecasList[0].nombres);
     buildDataGridRows();
   }
 
   void buildDataGridRows() {
-    //print(basecasList[0].fuenteBase);
     _baseCapDataGridRows = basecapList
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell(
@@ -304,7 +302,6 @@ class BaseCapDataSource extends DataGridSource {
   }
 
   void updateDataGrid() {
-    print('actualizando grid');
     notifyListeners();
   }
 }

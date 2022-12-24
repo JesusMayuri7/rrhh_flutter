@@ -20,20 +20,18 @@ class ListarPracDataSourceImpl implements IListarPracDataSource {
 
   @override
   Future<List<PracticanteModel>> listarPrac(String anio) async {
-    log('entardo al datasource');
-
     var url = Uri.http('rrhh.pvn.gob.pe',
         '/api/formativa/base_formativa_anio/' + anio, {'q': '{http}'});
+    log(url.toString());
 
     try {
       ResponseModel response = await this
           .httpCustom
           .request('GET', url.toString(), {}, (i) => responseFromJson(i));
-      print(response);
 
       String bodyData = jsonEncode(response.data);
       var result = practicanteModelFromJson(bodyData);
-      // print(result);
+
       return result;
     } on SocketException {
       throw ServerException('Sin conexion');

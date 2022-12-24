@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:window_manager/window_manager.dart';
+//import 'package:window_manager/window_manager.dart';
 import '../../bloc/app_bloc.dart';
 
 class StartPage extends StatefulWidget {
@@ -9,19 +9,21 @@ class StartPage extends StatefulWidget {
   _StartPageState createState() => _StartPageState();
 }
 
-class _StartPageState extends State<StartPage> with WindowListener {
+class _StartPageState extends State<StartPage>
+//with WindowListener
+{
   var blocApp = Modular.get<AppBloc>();
 
   @override
   void dispose() {
     blocApp.close();
-    windowManager.removeListener(this);
+    //windowManager.removeListener(this);
     super.dispose();
   }
 
   @override
   void initState() {
-    windowManager.addListener(this);
+    //windowManager.addListener(this);
     super.initState();
   }
 

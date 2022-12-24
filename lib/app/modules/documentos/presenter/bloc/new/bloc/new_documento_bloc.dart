@@ -20,7 +20,6 @@ class NewDocumentoBloc extends Bloc<NewDocumentoEvent, NewDocumentoState> {
       NewDocumentLoadEvent event, Emitter<NewDocumentoState> emit) async {
     var result = await this.newDocumentoUseCase(event.paramsNewDocumento);
     emit(result.fold((l) => NewDocumentoError(message: l.toString()), (r) {
-      print('new documento' + r.data.toString());
       return NewDocumentoSaved(documentoEntity: r.data);
     }));
   }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,7 +5,9 @@ import 'package:rrhh_clean/app/modules/liquidacion/bloc/liquidacion_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_detalle._entity.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_entity.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/list_liquidacion/bloc/liquidacion_list_bloc.dart';
+import 'package:rrhh_clean/core/uitls/widgets/dropdown_presupuestal.dart';
 import 'package:rrhh_clean/core/domain/entities/certificado_entity.dart';
+import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -128,8 +128,7 @@ class LiquidacionDataSource extends DataGridSource {
           if (e.columnName == 'finalidad' ||
               e.columnName == 'finalidad_devengado' ||
               e.columnName == 'nombres' ||
-              e.columnName == 'dsc_certificado' ||
-              e.columnName == 'dsc_certificado_devengado') {
+              e.columnName == 'dsc_certificado') {
             return Container(
                 padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
                 alignment: Alignment.centerLeft,
@@ -166,8 +165,6 @@ class LiquidacionDataSource extends DataGridSource {
         '';
     newCellValue = null;
 
-    print('display ' + displayText);
-
     if (column.columnName == 'dsc_certificado') {
       CertificadoEntity? selectedCertificado = displayText.isEmpty
           ? null
@@ -182,8 +179,25 @@ class LiquidacionDataSource extends DataGridSource {
                       .first
                       .value)
               .first;
-      return _buildDropDownCertificado(selectedCertificado, submitCell,
-          (this.blocLiquidacion.state as LiquidacionLoadedState).certificados);
+      return DropdownPresupuestal<CertificadoEntity>(
+          hint: 'Certificado',
+          dropdownWidth: 200,
+          value: selectedCertificado!,
+          dropDownMenuItems:
+              (this.blocLiquidacion.state as LiquidacionLoadedState)
+                  .certificados
+                  .map<DropdownMenuItem<CertificadoEntity>>(
+                      (CertificadoEntity value) {
+            return DropdownMenuItem<CertificadoEntity>(
+              child: Text('${value.id} - ${value.dscCertificado}',
+                  style: TextStyle(fontSize: 12)),
+              value: value,
+            );
+          }).toList(),
+          onChanged: (value) {
+            newCellValue = value;
+            submitCell();
+          });
     }
 
     if (column.columnName == 'dsc_certificado_devengado') {
@@ -200,8 +214,60 @@ class LiquidacionDataSource extends DataGridSource {
                       .first
                       .value)
               .first;
-      return _buildDropDownCertificado(selectedCertificado, submitCell,
-          (this.blocLiquidacion.state as LiquidacionLoadedState).certificados);
+      //return _buildDropDownCertificado(selectedCertificado, submitCell,(this.blocLiquidacion.state as LiquidacionLoadedState).certificados);
+      return DropdownPresupuestal<CertificadoEntity>(
+          hint: 'Certificado',
+          dropdownWidth: 200,
+          value: selectedCertificado!,
+          dropDownMenuItems:
+              (this.blocLiquidacion.state as LiquidacionLoadedState)
+                  .certificados
+                  .map<DropdownMenuItem<CertificadoEntity>>(
+                      (CertificadoEntity value) {
+            return DropdownMenuItem<CertificadoEntity>(
+              child: Text('${value.id} - ${value.dscCertificado}',
+                  style: TextStyle(fontSize: 12)),
+              value: value,
+            );
+          }).toList(),
+          onChanged: (value) {
+            newCellValue = value;
+            submitCell();
+          });
+    }
+
+    if (column.columnName == 'fuente_id') {
+      FuenteEntity? selectedFuente = displayText.isEmpty
+          ? null
+          : (this.blocLiquidacion.state as LiquidacionLoadedState)
+              .fuentes
+              .where((element) =>
+                  element.id ==
+                  dataGridRow
+                      .getCells()
+                      .where((element) => element.columnName == 'fuente_id')
+                      .first
+                      .value)
+              .first;
+      //return _buildDropDownCertificado(selectedCertificado, submitCell,(this.blocLiquidacion.state as LiquidacionLoadedState).certificados);
+      return DropdownPresupuestal<int>(
+          hint: 'Fuente',
+          value: selectedFuente!.id,
+          dropdownWidth: 350,
+          dropDownMenuItems:
+              (this.blocLiquidacion.state as LiquidacionLoadedState)
+                  .fuentes
+                  .map<DropdownMenuItem<int>>((FuenteEntity value) {
+            return DropdownMenuItem<int>(
+              child: Text('${value.id} - ${value.dscFuente}',
+                  style: TextStyle(fontSize: 12)),
+              value: value.id,
+            );
+          }).toList(),
+          onChanged: (value) {
+            newCellValue = value;
+            submitCell();
+          });
     }
 
     if (column.columnName == 'finalidad') {
@@ -217,8 +283,23 @@ class LiquidacionDataSource extends DataGridSource {
                       .first
                       .value)
               .first;
-      return _buildDropDownMetas(selectedMeta, submitCell,
-          (this.blocLiquidacion.state as LiquidacionLoadedState).metas);
+      return DropdownPresupuestal<MetaEntity>(
+          hint: 'Meta',
+          dropdownWidth: 350,
+          value: selectedMeta!,
+          dropDownMenuItems:
+              (this.blocLiquidacion.state as LiquidacionLoadedState)
+                  .metas
+                  .map<DropdownMenuItem<MetaEntity>>((MetaEntity value) {
+            return DropdownMenuItem<MetaEntity>(
+              child: Text('${value.finalidad}', style: TextStyle(fontSize: 12)),
+              value: value,
+            );
+          }).toList(),
+          onChanged: (value) {
+            newCellValue = value;
+            submitCell();
+          });
     }
 
     if (column.columnName == 'finalidad_devengado') {
@@ -235,8 +316,23 @@ class LiquidacionDataSource extends DataGridSource {
                       .first
                       .value)
               .first;
-      return _buildDropDownMetas(selectedMeta, submitCell,
-          (this.blocLiquidacion.state as LiquidacionLoadedState).metas);
+      return DropdownPresupuestal<MetaEntity>(
+          hint: 'Meta',
+          dropdownWidth: 350,
+          value: selectedMeta!,
+          dropDownMenuItems:
+              (this.blocLiquidacion.state as LiquidacionLoadedState)
+                  .metas
+                  .map<DropdownMenuItem<MetaEntity>>((MetaEntity value) {
+            return DropdownMenuItem<MetaEntity>(
+              child: Text('${value.finalidad}', style: TextStyle(fontSize: 12)),
+              value: value,
+            );
+          }).toList(),
+          onChanged: (value) {
+            newCellValue = value;
+            submitCell();
+          });
     }
 
     if (column.columnName == 'proceso') {
@@ -261,7 +357,6 @@ class LiquidacionDataSource extends DataGridSource {
         column.columnName == 'fecha_expediente' ||
         column.columnName == 'fuente_devengado_id' ||
         column.columnName == 'codigo_siga') {
-      print('antes de build ' + displayText);
       return _buildTextFieldWidget(displayText, column, submitCell);
     }
     return null;
@@ -283,8 +378,6 @@ class LiquidacionDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'dsc_certificado') {
-      print('newCellvalue ' + newCellValue.toString());
-
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: listLiquidacionFiltered,
           liquidacionId: listLiquidacionFiltered[dataRowIndex].id,
@@ -295,8 +388,6 @@ class LiquidacionDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'dsc_certificado_devengado') {
-      print('newCellvalue ' + newCellValue.toString());
-
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: listLiquidacionFiltered,
           liquidacionId: listLiquidacionFiltered[dataRowIndex].id,
@@ -304,8 +395,6 @@ class LiquidacionDataSource extends DataGridSource {
           valor: (newCellValue as CertificadoEntity).id));
     }
     if (column.columnName == 'finalidad') {
-      print('newCellvalue ' + newCellValue.toString());
-
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: listLiquidacionFiltered,
           liquidacionId: listLiquidacionFiltered[dataRowIndex].id,
@@ -314,8 +403,6 @@ class LiquidacionDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'finalidad_devengado') {
-      print('newCellvalue ' + newCellValue.toString());
-
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: listLiquidacionFiltered,
           liquidacionId: listLiquidacionFiltered[dataRowIndex].id,
@@ -323,9 +410,16 @@ class LiquidacionDataSource extends DataGridSource {
           valor: (newCellValue as MetaEntity).idmetaAnual));
     }
 
-    if (column.columnName == 'proceso') {
-      log('proceso ' + newCellValue.toString());
+    if (column.columnName == 'fuente_id') {
+      print(newCellValue);
+      this.blocLiquidacionList.add(UpdateLiquidacionEvent(
+          liquidacion: listLiquidacionFiltered,
+          liquidacionId: listLiquidacionFiltered[dataRowIndex].id,
+          campo: 'fuente_id',
+          valor: (newCellValue as int)));
+    }
 
+    if (column.columnName == 'proceso') {
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: listLiquidacionFiltered,
           liquidacionId: listLiquidacionFiltered[dataRowIndex].id,
@@ -422,10 +516,6 @@ class LiquidacionDataSource extends DataGridSource {
 
   Widget _buildDropDownCertificado(CertificadoEntity? _certificado,
       CellSubmit submitCell, List<CertificadoEntity> dropDownMenuItems) {
-    if (_certificado == null)
-      print('vacio');
-    else
-      print('selected ' + _certificado.toString());
     return Container(
       //alignedDropdown: true,
       padding: const EdgeInsets.all(2.0),
@@ -439,11 +529,7 @@ class LiquidacionDataSource extends DataGridSource {
           isExpanded: true,
           //style: textStyle,
           onChanged: (CertificadoEntity? value) {
-            print('onChanged 1' + newCellValue.toString());
             newCellValue = value;
-            print('onChanged 2' + value.toString());
-            submitCell();
-            print('onChanged 3' + newCellValue.toString());
             submitCell();
           },
           items: dropDownMenuItems.map<DropdownMenuItem<CertificadoEntity>>(
@@ -492,33 +578,27 @@ class LiquidacionDataSource extends DataGridSource {
 
   Widget _buildDropDownProceso(
       String? _proceso, CellSubmit submitCell, List<String> dropDownMenuItems) {
-    return Container(
-      //alignedDropdown: true,
-      padding: const EdgeInsets.all(2.0),
-      alignment: Alignment.centerLeft,
-      child: DropdownButton<String>(
-          value: _proceso,
-          autofocus: true,
-          focusColor: Colors.transparent,
-          underline: const SizedBox.shrink(),
-          icon: const Icon(Icons.arrow_drop_down_sharp),
-          isExpanded: true,
-          //style: textStyle,
-          onChanged: (String? value) {
-            newCellValue = value;
-            submitCell();
-          },
-          items:
-              dropDownMenuItems.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: TextStyle(fontSize: 10.0),
-              ),
-            );
-          }).toList()),
-    );
+    return DropdownButton<String>(
+        value: _proceso,
+        autofocus: true,
+        focusColor: Colors.transparent,
+        underline: const SizedBox.shrink(),
+        icon: const Icon(Icons.arrow_drop_down_sharp),
+        isExpanded: true,
+        //style: textStyle,
+        onChanged: (String? value) {
+          newCellValue = value;
+          submitCell();
+        },
+        items: dropDownMenuItems.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(
+              value,
+              style: TextStyle(fontSize: 10.0),
+            ),
+          );
+        }).toList());
   }
 
   void updateDataGrid() {

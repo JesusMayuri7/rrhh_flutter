@@ -39,7 +39,7 @@ class _MainCertificadoPage extends State<MainCertificadoPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         verticalDirection: VerticalDirection.down,
-                        children: [CertificadoPage()],
+                        children: [CertificadoPage(contextUp: context)],
                       ),
                     ),
                   ),
@@ -59,16 +59,5 @@ class _MainCertificadoPage extends State<MainCertificadoPage> {
             //FooterPage()
           ]),
     );
-  }
-
-  static Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      "currentUser": 1,
-      "winX": 2,
-      "winY": 3,
-      "winWidth": 4,
-      "winHeight": 5,
-      "enableTouchMode": 6,
-    };
   }
 }

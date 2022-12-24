@@ -40,13 +40,16 @@ class ListDocumentosDataSource extends DataGridSource {
               DataGridCell<String>(
                   columnName: 'numero_pvn', value: dataGridRow.numeroPvn),
               DataGridCell<String>(
-                  columnName: 'remite', value: dataGridRow.remite),
-              DataGridCell<String>(
                   columnName: 'asunto', value: dataGridRow.asunto),
               DataGridCell<String>(
-                  columnName: 'destino', value: dataGridRow.destino),
-              DataGridCell<String>(
                   columnName: 'fecha', value: dataGridRow.fecha),
+              DataGridCell<String>(
+                  columnName: 'fecha_derivacion',
+                  value: dataGridRow.fechaDerivacion),
+              DataGridCell<String>(
+                  columnName: 'remite', value: dataGridRow.remite),
+              DataGridCell<String>(
+                  columnName: 'destino', value: dataGridRow.destino),
               DataGridCell<String>(
                   columnName: 'expediente_mtc',
                   value: dataGridRow.expedienteMtc),
@@ -180,7 +183,7 @@ class ListDocumentosDataSource extends DataGridSource {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               child: Container(
-                  width: 380,
+                  width: 480,
                   height: 550,
                   child: NewDocumentoPage(
                     documentoEntity: row,
@@ -189,7 +192,6 @@ class ListDocumentosDataSource extends DataGridSource {
   }
 
   void updateDataGrid() {
-    print('actualizando Documentos');
     notifyListeners();
   }
 
@@ -271,7 +273,6 @@ class ListDocumentosDataSource extends DataGridSource {
                 dataGridCell.columnName == column.columnName)
             ?.value ??
         '';
-    final int dataRowIndex = _documentosDataGridRows.indexOf(dataGridRow);
 
     if (newCellValue == null || oldValue == newCellValue) {
       return;

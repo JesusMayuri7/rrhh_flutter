@@ -15,7 +15,6 @@ class PresupuestoBloc extends Bloc<PresupuestoEvent, PresupuestoState> {
 
   _onPresupuestoCasEventLoadingEventToState(
       PresupuestoCasEventLoading event, Emitter<PresupuestoState> emit) async {
-    print('event presupuesto');
     emit(PresupuestoLoading());
     var result = await _presupuestoCasUseCase(event.anio);
     emit(result.fold((l) {

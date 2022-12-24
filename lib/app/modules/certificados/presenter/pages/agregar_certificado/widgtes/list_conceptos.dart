@@ -28,8 +28,23 @@ class ListConceptos extends StatelessWidget {
                         children: [
                           Text(
                               '${stateListConceptos.clasificadorConcepto[index]['concepto_id'].toString()}:  ${stateListConceptos.clasificadorConcepto[index]['concepto'].toString()}'),
+                          Spacer(),
                           Text(
-                              '${stateListConceptos.clasificadorConcepto[index]['clasificador_id'].toString()}:  ${stateListConceptos.clasificadorConcepto[index]['clasificador'].toString()}'),
+                              '${stateListConceptos.clasificadorConcepto[index]['clasificador_id'].toString()}:  ${stateListConceptos.clasificadorConcepto[index]['clasificador'].toString()}',
+                              textAlign: TextAlign.right),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 1.0),
+                            child: IconButton(
+                                iconSize: 20,
+                                splashRadius: 16,
+                                padding: EdgeInsets.zero,
+                                icon: Icon(Icons.delete),
+                                onPressed: () => {
+                                      this.blocListConceptos.add(
+                                          DeleteCertificadosEvent(id: index))
+                                    }),
+                          )
                         ],
                       );
                     }),

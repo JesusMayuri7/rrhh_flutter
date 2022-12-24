@@ -34,12 +34,11 @@ class _SplashPageState extends State<SplashPage> {
     final bool status = preferences.getBool('status') ?? false;
     final bool isLogged = preferences.getBool('isLogged') ?? false;
     final int expiresIn = preferences.getInt('expiresIn') ?? 0;
-    print('${isLogged.toString()}');
+    final String email = preferences.getString('email') ?? '';
     //return Future.value(true);
 
     //if (auth.state.isLogged)
     if (isLogged) {
-      print('log');
       auth.add(LoadPreferencesAuthEvent(
           loginResponseEntity: LoginResponseEntity(
               anio: anio,
@@ -47,10 +46,10 @@ class _SplashPageState extends State<SplashPage> {
               isLogged: isLogged,
               message: message,
               status: status,
-              token: token)));
-      Modular.to.pushReplacementNamed('/start/home');
+              token: token,
+              email: email)));
+      Modular.to.pushReplacementNamed('/start/agenda/');
     } else {
-      print('login');
       Modular.to.pushReplacementNamed('/login/');
     }
   }

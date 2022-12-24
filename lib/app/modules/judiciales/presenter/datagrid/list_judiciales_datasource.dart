@@ -210,7 +210,6 @@ class ListJudicialesDataSource extends DataGridSource {
   }
 
   void updateDataGrid() {
-    print('actualizando Judiciales');
     notifyListeners();
   }
 
@@ -292,7 +291,7 @@ class ListJudicialesDataSource extends DataGridSource {
                 dataGridCell.columnName == column.columnName)
             ?.value ??
         '';
-    final int dataRowIndex = _judicialesDataGridRows.indexOf(dataGridRow);
+    //final int dataRowIndex = _judicialesDataGridRows.indexOf(dataGridRow);
 
     if (newCellValue == null || oldValue == newCellValue) {
       return;

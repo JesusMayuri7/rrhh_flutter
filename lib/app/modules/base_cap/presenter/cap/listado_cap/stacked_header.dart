@@ -1,29 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-Widget _getWidgetForStackedHeaderFuente(String title, Color color) {
-  return Container(
-    color: color,
-    child: DropdownButtonHideUnderline(
-      child: DropdownButton<String>(
-        isDense: true,
-        isExpanded: true,
-        value: title,
-        items: ['TODOS', 'RO', 'RDR']
-            .map((String item) => DropdownMenuItem<String>(
-                  value: item,
-                  child: Text(
-                    item,
-                    style: TextStyle(fontSize: 8),
-                  ),
-                ))
-            .toList(),
-        onChanged: (value) => {title = value!},
-      ),
-    ),
-  );
-}
-
 List<StackedHeaderRow> getStackedHeaderRows() {
   List<StackedHeaderRow> _stackedHeaderRows;
   _stackedHeaderRows = <StackedHeaderRow>[

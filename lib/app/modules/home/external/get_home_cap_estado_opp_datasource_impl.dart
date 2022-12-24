@@ -24,7 +24,6 @@ class GetHomeCapEstadoOppDatasourceImpl
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), null, (i) => responseFromJson(i));
 
-      //var body = jsonDecode(response.body);
       String bodyData = jsonEncode(response.data);
       List<CapEstadoOppModel> result = capEstadoOppModelFromJson(bodyData);
 

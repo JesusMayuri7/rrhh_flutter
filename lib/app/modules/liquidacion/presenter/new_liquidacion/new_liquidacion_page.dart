@@ -1,4 +1,3 @@
-import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,12 +10,12 @@ import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_d
 import 'package:rrhh_clean/app/modules/liquidacion/domain/usecases/add_liquidacion_usecase.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/new_liquidacion/bloc/new_liquidacion_bloc.dart';
 import 'package:rrhh_clean/core/domain/entities/clasificador_entity.dart';
-import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
-import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
+
 import 'package:rrhh_clean/core/uitls/constants/constants.dart';
 import 'package:rrhh_clean/core/uitls/widgets/dropdownmenuitem_presupuesto.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 class NewLiquidacionPage extends StatefulWidget {
   final String dscModalidad;
@@ -72,16 +71,14 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<NewLiquidacionBloc, NewLiquidacionState>(
       listener: (context, state) {
-        print((state as NewLiquidacionSuccessState).status);
-        if (state.status == AddLiquidacionStatus.Saved) {
-          ScaffoldMessenger.of(widget.contextLiq).showSnackBar(SnackBar(
-              backgroundColor: Colors.green,
-              content: Text('Operacon exitosa')));
-          Navigator.pop(context);
-        }
-        if (state.status == AddLiquidacionStatus.Failure) {
-          ScaffoldMessenger.of(widget.contextLiq).showSnackBar(SnackBar(
-              backgroundColor: Colors.red, content: Text('Error al grabar')));
+        if (state is NewLiquidacionSuccessState) {
+          if (state.status == AddLiquidacionStatus.Saved) {
+            showToastSuccess(context, 'Operacion exitosa');
+            Navigator.pop(context);
+          }
+          if (state.status == AddLiquidacionStatus.Failure) {
+            showToastError(context, state.toString());
+          }
         }
       },
       bloc: this.newLiquidacionBloc,
@@ -350,7 +347,6 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
   Widget _listClasificadores(stateClasificadores) {
     if ((stateClasificadores as NewLiquidacionSuccessState).status ==
         AddLiquidacionStatus.ClasificadorAded) {
-      print('listadoState ' + stateClasificadores.clasificadorMonto.toString());
       return (stateClasificadores.clasificadorMonto.length > 0)
           ? Column(
               children: [

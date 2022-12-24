@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:window_manager/window_manager.dart';
+import 'package:flutter/foundation.dart';
+//import 'package:window_manager/window_manager.dart';
 
 class WindowButtons extends StatelessWidget {
   const WindowButtons({Key? key}) : super(key: key);
@@ -11,10 +12,11 @@ class WindowButtons extends StatelessWidget {
     return SizedBox(
       width: 138,
       height: 50,
-      child: WindowCaption(
+      child: /* !kIsWeb ? WindowCaption(
         brightness: theme.brightness,
         backgroundColor: Colors.transparent,
-      ),
+      ) : */
+          Container(),
     );
   }
 }

@@ -39,7 +39,6 @@ class _SelectionAnioPageState extends State<SelectionAnioPage> {
                       value: value, child: Text(value));
                 }).toList(),
                 onChanged: (String? value) {
-                  print(value);
                   setState(() {
                     _anioSelected = value!;
                   });

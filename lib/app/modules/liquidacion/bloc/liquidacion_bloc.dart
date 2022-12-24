@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/domain/usecases/get_liquidacion_data_initial_usecase.dart';
 import 'package:rrhh_clean/core/domain/entities/certificado_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/clasificador_entity.dart';
+import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 
 part 'liquidacion_event.dart';
@@ -26,7 +27,10 @@ class LiquidacionBloc extends Bloc<LiquidacionEvent, LiquidacionState> {
       return LiquidacionError(message: l.toString());
     }, (r) {
       return LiquidacionLoadedState(
-          metas: r[0].data, certificados: r[1].data, clasificadores: r[2].data);
+          metas: r[0].data,
+          certificados: r[1].data,
+          clasificadores: r[2].data,
+          fuentes: r[3].data);
     }));
   }
 

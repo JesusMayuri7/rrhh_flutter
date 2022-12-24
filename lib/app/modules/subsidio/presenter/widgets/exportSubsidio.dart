@@ -22,7 +22,6 @@ Future<void> exportDevoluciontoExcel(
   // Data
   int rowNext = 3;
   for (int index = 0; index < params.length; index++) {
-    print(params[index].toMap().values.toList());
     sheet.importList(params[index].toMap().values.toList(), rowNext + index,
         firstColData, false);
   }

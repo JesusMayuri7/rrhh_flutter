@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import '../datasource/get_area_datasource.dart';
+import 'package:rrhh_clean/core/data/datasource/i_areas_datasource_app.dart';
 
 import '../datasource/get_confianza_datasource.dart';
 import '../datasource/post_confianza_datasource..dart';
@@ -13,7 +13,7 @@ import '../../../../../core/errors/failure.dart';
 
 class ConfianzaRepositoryImpl implements IConfianzaRepository {
   final IListConfianzaDataSource confianzaDataSource;
-  final IListAreaDataSource areaDataSource;
+  final IAreasDatasourceApp areaDataSource;
   final IPostConfianzaDataSource postConfianzaDataSource;
 
   ConfianzaRepositoryImpl(this.confianzaDataSource, this.areaDataSource,
@@ -32,7 +32,7 @@ class ConfianzaRepositoryImpl implements IConfianzaRepository {
   @override
   Future<Either<Failure, ResponseEntity>> getListAreas() async {
     try {
-      final result = await this.areaDataSource.getListAreas();
+      final result = await this.areaDataSource.getAreas();
       return Right(result);
     } on ServerException catch (e) {
       return Left(Error(e.message));
@@ -71,7 +71,7 @@ class ConfianzaRepositoryImpl implements IConfianzaRepository {
                 docCese: docCese,
                 direccion: direccion,
                 modalidad: modalidad,
-                orgAreaId: orgAreaId,
+                area_id: orgAreaId,
                 trabajadorId: trabajadorId,
                 detalle: detalle,
                 tipo: tipo,

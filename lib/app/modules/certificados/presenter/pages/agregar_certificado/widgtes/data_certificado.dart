@@ -151,7 +151,6 @@ class _DataCertificadoState extends State<DataCertificado> {
 
   List<DropdownMenuItem<ConceptoEntity>> _buildListConcepto(
       List conceptoModel) {
-    // print('list ' + conceptoModel.toString());
     List<DropdownMenuItem<ConceptoEntity>> listConcepto = [];
     for (ConceptoEntity item in conceptoModel) {
       listConcepto.add(DropdownMenuItem(
@@ -179,8 +178,6 @@ class _DataCertificadoState extends State<DataCertificado> {
 
 //  Limitar el tamaño del List.Builder a 300 como maximo
 Widget getTextWidgets3(List<String> strings, contexto) {
-  //var size = MediaQuery.of(contexto).size.height - 415;
-  //print(size.toString());
   return LimitedBox(
     maxHeight: 300,
     //constraints: BoxConstraints(maxHeight: 300),
@@ -205,7 +202,6 @@ Widget getTextWidgets3(List<String> strings, contexto) {
 Widget getTextWidgets4(List<String> strings, contexto) {
   return LayoutBuilder(builder: (_, constraints) {
     double viewSize = MediaQuery.of(contexto).size.height - 50 * 0.5;
-    //print(viewSize.toString());
     return Material(
       child: ConstrainedBox(
         constraints: BoxConstraints(

@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rrhh_clean/app/modules/judiciales/cubit/judiciales_bloc.dart';
 
 import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_entity.dart';
 import 'package:rrhh_clean/app/modules/judiciales/domain/judiciales_list_usecase.dart';

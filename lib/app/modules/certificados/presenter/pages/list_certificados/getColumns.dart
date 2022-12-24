@@ -9,6 +9,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Certificado',
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),

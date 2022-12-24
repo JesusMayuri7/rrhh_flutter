@@ -6,11 +6,9 @@ import 'package:rrhh_clean/core/errors/failure.dart';
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
 
 import '../datasource/i_documentos_new_datasource.dart';
-import '../datasource/i_documentos_update_datasource.dart';
 import '../domain/documentos_list_usecase.dart';
 import '../domain/i_documentos_repository.dart';
 import '../domain/new_documentos_use_case.dart';
-import '../domain/update_documentos_use_case.dart';
 
 class DocumentosRepositoryImpl implements IDocumentosRepository {
   final IDocumentosListDataSource iDocumentosListDataSource;

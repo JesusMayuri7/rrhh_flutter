@@ -11,6 +11,7 @@ class DocumentoEntity extends Equatable {
     required this.tipo,
     required this.numeroPvn,
     required this.fecha,
+    required this.fechaDerivacion,
     required this.destino,
     required this.remite,
     required this.detalle,
@@ -28,6 +29,7 @@ class DocumentoEntity extends Equatable {
   final String tipo;
   final String numeroPvn;
   final String fecha;
+  final String fechaDerivacion;
   final String destino;
   final String detalle;
   final String estado;
@@ -46,6 +48,7 @@ class DocumentoEntity extends Equatable {
       remite,
       numeroPvn,
       fecha,
+      fechaDerivacion,
       destino,
       remite,
       detalle,

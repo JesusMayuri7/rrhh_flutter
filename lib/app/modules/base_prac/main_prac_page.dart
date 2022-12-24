@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'bloc/base_prac_bloc.dart';
 import 'presenter/list_prac/list_prac_page.dart';
@@ -17,7 +18,11 @@ class _MainPracPageState extends State<MainPracPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BasePracBloc, BasePracState>(
+    return BlocConsumer<BasePracBloc, BasePracState>(
+      listener: (context, state) => {
+        if (state is BasePracErrorState)
+          {showToastError(context, state.message)}
+      },
       bloc: this.blocPrac,
       builder: (context, state) {
         return Column(

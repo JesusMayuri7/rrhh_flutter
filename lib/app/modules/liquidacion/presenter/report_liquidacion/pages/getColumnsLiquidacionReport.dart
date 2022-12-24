@@ -4,7 +4,8 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 List<GridColumn> getColumnsLiquidacionReport() {
   return ([
     GridColumn(
-        width: 40,
+        width: 60,
+        allowFiltering: false,
         columnName: 'anio',
         label: Container(
           alignment: Alignment.center,
@@ -26,7 +27,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
-        width: 65,
+        width: 80,
         columnName: 'dsc_certificado_devengado',
         label: Container(
           alignment: Alignment.center,
@@ -37,7 +38,7 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
-        width: 270,
+        width: 250,
         columnName: 'dsc_producto',
         label: Container(
           alignment: Alignment.center,
@@ -48,13 +49,24 @@ List<GridColumn> getColumnsLiquidacionReport() {
           ),
         )),
     GridColumn(
-        width: 40,
-        columnName: 'fuente_devengado_id',
+        width: 60,
+        columnName: 'abv_fuente',
         label: Container(
           alignment: Alignment.center,
           child: Text(
             'Fuente',
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 10, color: Colors.white),
+          ),
+        )),
+    GridColumn(
+        width: 80,
+        columnName: 'meta',
+        label: Container(
+          alignment: Alignment.center,
+          child: Text(
+            'Meta',
+            textAlign: TextAlign.left,
             style: TextStyle(fontSize: 10, color: Colors.white),
           ),
         )),
@@ -153,6 +165,17 @@ List<GridColumn> getColumnsLiquidacionReport() {
           alignment: Alignment.center,
           child: Text(
             'Saldo Dev.',
+            //textAlign: TextAlign.right,
+            style: TextStyle(fontSize: 10, color: Colors.white),
+          ),
+        )),
+    GridColumn(
+        width: 80,
+        columnName: 'estado',
+        label: Container(
+          alignment: Alignment.center,
+          child: Text(
+            'Estado Saldo',
             //textAlign: TextAlign.right,
             style: TextStyle(fontSize: 10, color: Colors.white),
           ),

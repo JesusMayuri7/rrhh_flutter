@@ -1,6 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class JudicialEntity extends Equatable {
@@ -81,7 +79,7 @@ class JudicialEntity extends Equatable {
         detalle: '',
         montoJudicial: 0,
         montoPlanilla: 0,
-        estadoProcesal: 'SEGUIMIENTO',
+        estadoProcesal: 'EJECUCION_MEDIDA',
         observacion: '',
         documentoOrh: '',
         codigoPlaza: '',

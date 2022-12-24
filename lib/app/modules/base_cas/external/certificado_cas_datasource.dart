@@ -21,7 +21,6 @@ class CertificadoCasDatasourceImpl implements ICertificadoCasDatasource {
     var url = Uri.http(
         'rrhh.pvn.gob.pe', '/api/cas/certificado/' + anio, {'q': '{http}'});
     try {
-      print('external ');
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
 

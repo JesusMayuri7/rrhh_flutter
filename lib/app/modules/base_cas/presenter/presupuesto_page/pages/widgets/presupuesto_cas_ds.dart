@@ -5,12 +5,10 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class PresupuestoCasDs extends DataGridSource {
   PresupuestoCasDs(this.presupuestoList) {
-    //print(presupuestoList[0].nombres);
     buildDataGridRows();
   }
 
   void buildDataGridRows() {
-    //print(presupuestoList[0].fuenteBase);
     _presupuestoCasDataGridRows = presupuestoList
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<int>(columnName: 'anio', value: dataGridRow.anoEje),
@@ -123,7 +121,6 @@ class PresupuestoCasDs extends DataGridSource {
   }
 
   void updateDataGrid() {
-    print('actualizando grid');
     notifyListeners();
   }
 }

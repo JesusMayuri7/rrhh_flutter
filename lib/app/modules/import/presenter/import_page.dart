@@ -3,15 +3,14 @@ import 'dart:io';
 import 'package:excel/excel.dart';
 
 import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:http/http.dart';
 import 'package:rrhh_clean/app/modules/import/presenter/import_grid_datasource.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-import 'package:filepicker_windows/filepicker_windows.dart';
+//import 'package:filepicker_windows/filepicker_windows.dart';
 
-import 'exportImportToExcelGrid.dart';
 import 'getColumnsAll.dart';
 
 import 'package:rrhh_clean/app/modules/import/presenter/bloc/import_bloc.dart';
@@ -31,24 +30,26 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
   @override
   void initState() {
     super.initState();
-
-    this.jsonDataGridSource = ImportDataSource(context, []);
-    this.jsonDataGridSource.buildDataGridRows();
-    this.jsonDataGridSource.updateDataGrid();
-    //this.bloc.add(GetListCertificadoEvent());
   }
 
   @override
   Widget build(BuildContext context) {
-    // print('reconstruyendo');
-    return BlocBuilder<ImportBloc, ImportState>(
+    return BlocConsumer<ImportBloc, ImportState>(
+        listener: (context, state) {
+          if (state is ImportFileLoaded) {
+            f.showSnackbar(
+              context,
+              f.Snackbar(
+                content: Text(state.message),
+              ),
+            );
+/*             this.jsonDataGridSource.listado = state.list;
+            this.jsonDataGridSource.buildDataGridRows();
+            this.jsonDataGridSource.updateDataGrid(); */
+          }
+        },
         bloc: this.bloc,
         builder: (cpmtext, state) {
-          if (state is ImportLoaded) {
-            this.jsonDataGridSource.listado = state.list;
-            this.jsonDataGridSource.buildDataGridRows();
-            this.jsonDataGridSource.updateDataGrid();
-          }
           return Column(children: [
             Row(
               children: [
@@ -56,20 +57,12 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
                     onPressed: () {
                       openFile();
                     },
-                    child: Text('Cargar')),
-                ElevatedButton(
-                    onPressed: () {
-                      if (state is ImportLoaded)
-                        // this.bloc.add(ImportExport(list: state.list));
-                        exportImporttoExcel(headings, state.list);
-                    },
-                    child: Text('Importar')),
+                    child: Text('Importar Documentos')),
               ],
             ),
 
             // CabeceraPage(),
-            (state is ImportLoaded) ? grid() : Container(),
-            (state is ImportLoading)
+            (state is ImportLoadingEvent)
                 ? Center(
                     child: Container(
                       alignment: Alignment.topCenter,
@@ -108,7 +101,7 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
 
   void openFile() {
     if (Platform.isWindows) {
-      final file = OpenFilePicker()
+      /*   final file = OpenFilePicker()
         ..filterSpecification = {
           'All Files': '*.*',
           'Xlsx Excel (*.xlsx)': '*.xlsx',
@@ -129,7 +122,7 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
 
         this.bloc.add(ImportLoadFile(bytes: result));
         //return result.;
-      }
+      } */
     }
   }
 
@@ -138,15 +131,12 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
     for (var table in _excel.tables.keys) {
       var itemRow = 0;
 
-      print(table); //sheet Name
-      print(_excel.tables[table]?.maxCols);
-      print(_excel.tables[table]?.maxRows);
       for (var row in _excel.tables[table]!.rows
           .sublist(3, _excel.tables[table]?.maxRows)) {
         List<String> listRow = [];
         for (var i = 0; i < row.length; i++) {
           String r = row[i]?.value.toString() ?? '';
-          print('row $i' + r.toString());
+
           if (itemRow == 0) {
             if (headings.contains('FUENTE')) r = r + i.toString();
             headings.add(r.toString());
@@ -156,7 +146,6 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
         if (itemRow > 0) dataList.add(listRow);
         itemRow++;
       }
-      print('data ' + dataList.toString());
     }
     return dataList;
   }
@@ -166,9 +155,6 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
     for (var table in _excel.tables.keys) {
       var itemRow = 0;
 
-      print(table); //sheet Name
-      print(_excel.tables[table]?.maxCols);
-      print(_excel.tables[table]?.maxRows);
       for (var row in _excel.tables[table]!.rows
           .sublist(3, _excel.tables[table]?.maxRows)) {
         List<String> listRow = [];
@@ -180,7 +166,6 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
         if (itemRow > 0) dataList.add(listRow);
         itemRow++;
       }
-      print('data ' + dataList.toString());
     }
     return dataList;
   }

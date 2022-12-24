@@ -46,7 +46,6 @@ class SaveCertificadoDatasourceImpl implements ISaveCertificadoDatasource {
     } on FormatException {
       throw ServerException("Formato incorrecto");
     } catch (e) {
-      // print(e);
       throw ServerException(e.toString());
     }
   }

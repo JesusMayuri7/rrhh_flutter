@@ -4,7 +4,6 @@ import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
 
 Future<void> exportReportToExcel(List<LiquidacionReportEntity> params) async {
-  print('compute calcular');
 // Create a new Excel Document.
   final Workbook workbook = Workbook();
 
@@ -21,10 +20,11 @@ Future<void> exportReportToExcel(List<LiquidacionReportEntity> params) async {
   sheet.importList(row, firstRowHeading - 1, firstColData, false);
 
   // Data
-  int rowNext = 3;
-  for (int index = firstRowHeading; index < params.length; index++) {
+  int rowIndex = 3;
+  for (int index = 0; index < params.length; index++) {
     sheet.importList(
-        params[index].toMap().values.toList(), index, firstColData, false);
+        params[index].toMap().values.toList(), rowIndex, firstColData, false);
+    rowIndex++;
   }
 
 // Save and dispose workbook.

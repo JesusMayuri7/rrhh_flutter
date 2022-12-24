@@ -15,10 +15,10 @@ class MacosWindowUtils {
       return _calculatedTitlebarHeight;
     }
     try {
-      final double h = await methodChannel.invokeMethod("getTitlebarHeight") as double;
+      final double h =
+          await methodChannel.invokeMethod("getTitlebarHeight") as double;
       _calculatedTitlebarHeight = max(h, kMinTitlebarHeight);
     } catch (e) {
-      print("MethodChannel error: $e");
       _calculatedTitlebarHeight = kDefaultTitlebarHeight;
     }
     return _calculatedTitlebarHeight;

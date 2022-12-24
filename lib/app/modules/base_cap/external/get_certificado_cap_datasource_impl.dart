@@ -21,13 +21,11 @@ class GetCertificadoCapDatasourceImpl implements ICertificadoCapDatasource {
     var url = Uri.http(
         'rrhh.pvn.gob.pe', '/api/cap/certificado/' + anio, {'q': '{http}'});
     try {
-      print('external ');
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
 
       String bodyData = jsonEncode(response.data);
 
-      print('certificados ' + response.message);
       return ResponseModel(
           status: response.status,
           message: response.message,

@@ -22,11 +22,8 @@ class BasePracBloc extends Bloc<BasePracEvent, BasePracState> {
     emit(BasePracLoadingState());
     var result = await this.getDataInitialPracUseCase('2021');
     emit(result.fold((l) {
-      print('error data inciial' + l.toString());
       return BasePracErrorState(message: l.toString());
     }, (r) {
-      print(r[0].data.toString());
-      print('data iniciol');
       return BasePracLoadedState(
           fuentes: r[0].data, metas: r[1].data, areas: r[2].data);
     }));

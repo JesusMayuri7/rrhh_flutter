@@ -80,18 +80,6 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 250,
-      columnName: 'remite',
-      label: Container(
-        alignment: Alignment.center,
-        child: Text(
-          'Remite',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
-        ),
-      ),
-    ),
-    GridColumn(
       allowEditing: false,
       width: 400,
       columnName: 'asunto',
@@ -105,12 +93,13 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 190,
-      columnName: 'destino',
+      allowEditing: false,
+      width: 110,
+      columnName: 'fecha',
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'Destino',
+          'Fec. Asig.',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
@@ -119,11 +108,35 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
     GridColumn(
       allowEditing: false,
       width: 110,
-      columnName: 'fecha',
+      columnName: 'fecha_derivacion',
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'Fec. Doc.',
+          'Fec. Deriv.',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+    GridColumn(
+      width: 250,
+      columnName: 'remite',
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Remite',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+    GridColumn(
+      width: 190,
+      columnName: 'destino',
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Destino',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),

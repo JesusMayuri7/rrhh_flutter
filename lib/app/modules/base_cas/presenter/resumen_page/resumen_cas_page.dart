@@ -42,7 +42,6 @@ class _ResumenCasPageState extends State<ResumenCasPage>
           _resumenCasDs.buildDataGridRows();
           _resumenCasDs.updateDataGrid();
         }
-        //print(resumenCas.toString());
         return Padding(
             padding: EdgeInsets.only(left: 10, right: 10, top: 70),
             child: Container(

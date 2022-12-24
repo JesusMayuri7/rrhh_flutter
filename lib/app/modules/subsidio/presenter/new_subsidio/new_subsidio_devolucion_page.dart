@@ -11,12 +11,11 @@ import 'package:rrhh_clean/app/modules/subsidio/domain/new_subsidio_devolucion_u
 import 'package:rrhh_clean/app/modules/subsidio/presenter/new_subsidio/bloc/new_subsidio_bloc.dart';
 import 'package:rrhh_clean/core/domain/entities/certificado_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/clasificador_entity.dart';
-import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
-import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 import 'package:rrhh_clean/core/uitls/widgets/dropdownmenuitem_presupuesto.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
 
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 class NewSubsidioDevolucionPage extends StatefulWidget {
   final String dscModalidad;
@@ -77,11 +76,9 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
     return BlocConsumer<NewSubsidioBloc, NewSubsidioState>(
       listener: (context, state) {
         if (state is NewSubsidioError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Error al grabar: ' + state.message)));
+          showToastError(context, state.message);
         }
         if (state is NewSubsidioAdded) {
-          print(state.runtimeType);
           Navigator.pop(context);
         }
       },

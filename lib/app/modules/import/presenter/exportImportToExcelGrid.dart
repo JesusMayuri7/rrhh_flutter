@@ -4,8 +4,6 @@ import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
 
 Future<void> exportImporttoExcel(
     List<String> head, List<List<Object>> params) async {
-  print(params[0]);
-
   final Workbook workbook = Workbook();
 
 // Accessing sheet via index.

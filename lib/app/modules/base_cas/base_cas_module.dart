@@ -6,7 +6,9 @@ import 'domain/usecases/certificado_cas_use_case.dart';
 import 'domain/usecases/initial_cas_use_case.dart';
 import 'domain/usecases/presupuesto_cas_use_case.dart';
 import 'external/certificado_cas_datasource.dart';
+import 'external/pim_cas_ley_datasource.dart';
 import 'external/presupuesto_cas_datasource.dart';
+import 'presenter/base_cas_page/listado/listado_cas_page/parameters_page/bloc/headparameters_bloc.dart';
 import 'presenter/main_base_cas_page.dart';
 
 import 'data/datasources/i_base_cas_datasource.dart';
@@ -23,9 +25,7 @@ import 'domain/usecases/resumen_cas_use_case.dart';
 import 'external/base_cas_datasource.dart';
 import 'external/initial_cas_datasource.dart';
 import 'external/listar_excel_datasource.dart';
-import 'external/pim_cas_datasource.dart';
 
-import 'presenter/base_cas_page/parameters_page/bloc/headparameters_bloc.dart';
 import 'presenter/presupuesto_page/bloc/presupuesto_bloc.dart';
 import 'presenter/resumen_page/bloc/resumen_bloc.dart';
 
@@ -36,7 +36,7 @@ class BaseCasModule extends Module {
     Bind((i) => BaseCasDatasourceImpl(httpCustom: i())),
     Bind((i) => BaseExcelDatasourceImpl(httpCustom: i())),
     Bind((i) => InitialCasDatasourceImpl(httpCustom: i())),
-    Bind((i) => PimCasDatasourceImpl(httpCustom: i())),
+    Bind((i) => PimCasLeyDatasourceImpl(httpCustom: i())),
     Bind((i) => CertificadoCasDatasourceImpl(httpCustom: i())),
     Bind((i) => PresupuestoCasDatasourceImpl(
         getCertificadosCasImpl: i(), getPimCasImpl: i())),

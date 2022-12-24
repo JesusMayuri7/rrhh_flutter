@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -29,6 +31,7 @@ class CertificadosBloc extends Bloc<CertificadosEvent, CertificadosState>
     on<GetDataInitial>(_getDataInitial);
     on<ValidarCertificadoEvent>(_validarCertificado);
     on<AgregarClasificadorEvent>(_agregarClasificador);
+    on<DeleteCertificadosEvent>(_deleteClasificadorEvent);
   }
 
   final ValidarCertificadoUseCase validarCertificadoUseCase;
@@ -39,6 +42,22 @@ class CertificadosBloc extends Bloc<CertificadosEvent, CertificadosState>
   String titleAppBar = 'Start';
 
   List<Map<String, dynamic>> listaActual = [];
+
+  FutureOr<void> _deleteClasificadorEvent(
+      DeleteCertificadosEvent event, Emitter<CertificadosState> emit) {
+    if (state is LoadedCertificadosState) {
+      final certificados = (state as LoadedCertificadosState);
+      List<Map<String, dynamic>> newCertificados =
+          certificados.clasificadorConcepto.where((e) {
+        int index = certificados.clasificadorConcepto.indexOf(e);
+        return (index != event.id);
+      }).toList();
+      emit((state as LoadedCertificadosState).copyWidth(
+          status: 'loaded',
+          message: 'Clasificador cargado',
+          clasificadorConcepto: newCertificados));
+    }
+  }
 
   _saveCertificado(SaveEvent event, Emitter<CertificadosState> emit) async {
     if (state is LoadedCertificadosState) {
@@ -72,7 +91,6 @@ class CertificadosBloc extends Bloc<CertificadosEvent, CertificadosState>
     emit(result.fold((l) {
       return ErrorCertificadoState(status: 'failure', message: 'Error');
     }, (r) {
-      print('clasificador bloc' + r.clasificador.toString());
       return ModalidadConceptoClasificadorState(
           modalidad: r.modalidad,
           concepto: r.concepto,
@@ -110,7 +128,6 @@ class CertificadosBloc extends Bloc<CertificadosEvent, CertificadosState>
     var result = await this.validarCertificadoUseCase(
         ParamsValidar(anio: event.anio, certificado: event.certificado));
     emit(result.fold((l) {
-      print(l.toString());
       return (state as LoadedCertificadosState).copyWidth(
           status: 'failure',
           message: 'Error al validar certificado',
@@ -122,7 +139,6 @@ class CertificadosBloc extends Bloc<CertificadosEvent, CertificadosState>
           montoCertificado: event.montoCertificado,
           clasificadorConcepto: []);
     }, (r) {
-      print(r.toString());
       if (r.status && r.data != null) {
         return (state as LoadedCertificadosState).copyWidth(
             status: 'valid',
@@ -145,7 +161,6 @@ class CertificadosBloc extends Bloc<CertificadosEvent, CertificadosState>
 
     if (state is LoadedCertificadosState) {
       lista = List.of((state as LoadedCertificadosState).clasificadorConcepto);
-      print('listado ' + lista.toString());
       if (lista
           .every((element) => element['concepto_id'] != event.concepto.id)) {
         if (lista.length == 0) {
@@ -169,7 +184,6 @@ class CertificadosBloc extends Bloc<CertificadosEvent, CertificadosState>
             clasificadorConcepto: lista));
       }
     }
-    print('listado ' + lista.toString());
   }
 
 /*

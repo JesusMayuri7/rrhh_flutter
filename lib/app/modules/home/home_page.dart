@@ -1,5 +1,5 @@
-import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' as m;
+import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
@@ -25,72 +25,71 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: BlocBuilder<HomeDevengadoTotalBloc, HomeDevengadoTotalState>(
-        bloc: blocHomeDevengadoTotal,
-        builder: (context, state) {
-          if (state is HomeDevengadoTotalLoading) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  m.CircularProgressIndicator(),
-                  Text('Cargando Datos...')
-                ],
-              ),
-            );
-          }
-          if (state is HomedevengadototalLoaded) {
-            return Container(
-              child: Column(
-                children: [
-                  Row(
+    return Material(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: BlocBuilder<HomeDevengadoTotalBloc, HomeDevengadoTotalState>(
+            bloc: blocHomeDevengadoTotal,
+            builder: (context, state) {
+              if (state is HomeDevengadoTotalLoading) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 10),
+                    Text('Cargando Datos...')
+                  ],
+                );
+              }
+              if (state is HomedevengadototalLoaded) {
+                return Container(
+                  width: double.infinity,
+                  child: Wrap(
                     children: [
-                      Button(
-                          child: Text('Actualizar'),
-                          onPressed: () => this
-                              .blocHomeDevengadoTotal
-                              .add(HomeDevengadoTotalLoad())),
+                      Container(
+                        child: Row(
+                          children: [
+                            fluentUi.Button(
+                                child: Text('Actualizar'),
+                                onPressed: () => this
+                                    .blocHomeDevengadoTotal
+                                    .add(HomeDevengadoTotalLoad())),
+                          ],
+                        ),
+                      ),
+                      Wrap(
+                        children: [
+                          Container(
+                              width: 250,
+                              height: 300,
+                              child: _buildChartCap(state.devengadoTotal)),
+                          Container(
+                              width: 250,
+                              height: 300,
+                              child: _buildChartCas(state.devengadoTotal)),
+                          Container(
+                              width: 250,
+                              height: 300,
+                              child: _buildChartPrac(state.devengadoTotal)),
+                          SizedBox(width: 10),
+                          HomeCapEstadoOppPage(
+                              capEstadoOppEntity: state.capEstadoOpp)
+                        ],
+                      ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                              width: 250,
-                              height: 300,
-                              child: _buildChartCap(state.devengadoTotal))
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                              width: 250,
-                              height: 300,
-                              child: _buildChartCas(state.devengadoTotal))
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                              width: 250,
-                              height: 300,
-                              child: _buildChartPrac(state.devengadoTotal))
-                        ],
-                      ),
-                      SizedBox(width: 10),
-                      HomeCapEstadoOppPage(
-                          capEstadoOppEntity: state.capEstadoOpp)
-                    ],
-                  ),
-                ],
-              ),
-            );
-          }
-          return Text('Error');
-        },
+                );
+              }
+              return fluentUi.FilledButton(
+                child: Text('Reintentar'),
+                onPressed: () =>
+                    this.blocHomeDevengadoTotal.add(HomeDevengadoTotalLoad()),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

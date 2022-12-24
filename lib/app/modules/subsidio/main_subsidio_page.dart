@@ -5,6 +5,7 @@ import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/subsidio/bloc/subsidio_bloc.dart';
 
 import 'package:rrhh_clean/app/modules/subsidio/presenter/subsidio_devolucion_page.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 class MainSubsidioPage extends StatelessWidget {
   MainSubsidioPage({Key? key}) : super(key: key);
@@ -21,8 +22,7 @@ class MainSubsidioPage extends StatelessWidget {
     return BlocConsumer<SubsidioBloc, SubsidioState>(
       listener: (context, state) {
         if (state is SubsidioError) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Error: ' + state.message)));
+          showToastError(context, state.message);
         }
       },
       bloc: this.blocSubsidio,

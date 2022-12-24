@@ -71,7 +71,6 @@ class ListarRepositoryImpl implements IListarRepository {
   Future<Either<Failure, ResponseEntity>> getPimCasRepository(
       String anio) async {
     try {
-      print('repos ');
       final list = await pimCasDatasource.getPimCas(anio);
       return Right(list);
     } on ServerException catch (e) {
@@ -83,7 +82,6 @@ class ListarRepositoryImpl implements IListarRepository {
   Future<Either<Failure, ResponseEntity>> getCerticadoCasRepository(
       String anio) async {
     try {
-      print('certificado cas');
       final list = await certificadoCasDatasource.getCertificadoCas(anio);
       return Right(list);
     } on ServerException catch (e) {
@@ -95,7 +93,6 @@ class ListarRepositoryImpl implements IListarRepository {
   Future<Either<Failure, List<ResponseEntity>>> getPresupuestoRepository(
       String anio) async {
     try {
-      print('repos ');
       final list = await presupuestoCasDatasource.getPresupuestoCas(anio);
       return Right(list);
     } on ServerException catch (e) {

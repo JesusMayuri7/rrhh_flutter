@@ -53,145 +53,153 @@ class _ListDocumentosPageState extends State<ListDocumentosPage> {
         }
       },
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      f.SizedBox(
-                        height: 25,
-                        width: 90,
-                        child: f.Combobox<String>(
-                            value: controlSelected,
-                            items: control
-                                .map((String e) => f.ComboboxItem<String>(
-                                      child: Text(
-                                        e,
-                                        style: TextStyle(fontSize: 11),
-                                      ),
-                                      value: e,
-                                    ))
-                                .toList(),
-                            onChanged: (value) {
-                              this.bloc.add(DocumentosListFilterEvent(
-                                  criterio: "",
-                                  control: value!,
-                                  estado: estadoSelected));
-                              controlSelected = value;
-                            }),
-                      ),
-                      f.SizedBox(
-                        height: 25,
-                        width: 100,
-                        child: f.Combobox<String>(
-                            value: estadoSelected,
-                            items: estado
-                                .map((String e) => f.ComboboxItem<String>(
-                                      child: Text(
-                                        e,
-                                        style: TextStyle(fontSize: 11),
-                                      ),
-                                      value: e,
-                                    ))
-                                .toList(),
-                            onChanged: (value) {
-                              this.bloc.add(DocumentosListFilterEvent(
-                                  criterio: "",
-                                  control: controlSelected,
-                                  estado: value!));
-                              estadoSelected = value;
-                            }),
-                      ),
-                      f.Button(
-                          onPressed: () {
-                            controlSelected = 'EXTERNO';
-                            this
-                                .bloc
-                                .add(DocumentosListLoad(anio: anioSelected!));
-                          },
-                          child: Text(
-                            'Actualizar',
-                            style: TextStyle(fontSize: 12),
-                          )),
-                      SizedBox(width: 5.0),
-                      f.Button(
-                          onPressed: () {
-                            exportDataGridToExcel();
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Exportar',
-                                style: TextStyle(fontSize: 12),
-                              ),
-                              ImageIcon(
-                                AssetImage('assets/images/ExcelExport.png'),
-                                color: Colors.white,
-                              ),
-                            ],
-                          )),
-                      f.Button(
-                          onPressed: () {
-                            _showModalDialog(context);
-                          },
-                          child: Text(
-                            'Nuevo',
-                            style: TextStyle(fontSize: 12),
-                          )),
-                      SizedBox(width: 5.0),
-                    ],
-                  ),
-                  Container(
-                    width: 400,
-                    child: TextFormField(
-                        textDirection: TextDirection.rtl,
-                        controller: textSearchController,
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        onFieldSubmitted: (value) {
-                          //this.bloc.add(FilterPracEvent(textFilter: value));
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Buscar',
-                          prefixIcon: textSearchController.text.length > 0
-                              ? Icon(Icons.close)
-                              : Icon(Icons.search_outlined),
-                          // set the prefix icon constraints
-                          prefixIconConstraints: BoxConstraints(
-                            minWidth: 25,
-                            minHeight: 25,
-                          ),
-                          border: OutlineInputBorder(),
-                          isDense: true, // Added this
-                          contentPadding: EdgeInsets.only(
-                              left: 5, top: 12, bottom: 0), // Added this
-                        )),
-                  ),
-                ],
-              ),
-              SizedBox(height: 5.0),
-              if (state is DocumentosListLoaded)
-                GridDocumentosPage(
-                  columns: getColumnsListDocumentos(context),
-                  data: state.documentosListFiltered,
-                  keyGrid: this.keyGrid,
-                ),
-              (state is DocumentosListLoading)
-                  ? Center(
-                      child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+        return Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
-                        CircularProgressIndicator(),
-                        Text('Cargando lista')
+                        f.SizedBox(
+                          height: 35,
+                          width: 100,
+                          child: f.ComboBox<String>(
+                              value: controlSelected,
+                              items: control
+                                  .map((String e) => f.ComboBoxItem<String>(
+                                        child: Text(
+                                          e,
+                                          style: TextStyle(fontSize: 11),
+                                        ),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                this.bloc.add(DocumentosListFilterEvent(
+                                    criterio: "",
+                                    control: value!,
+                                    estado: estadoSelected));
+                                controlSelected = value;
+                              }),
+                        ),
+                        SizedBox(
+                          height: 35,
+                          width: 110,
+                          child: f.ComboBox<String>(
+                              value: estadoSelected,
+                              items: estado
+                                  .map((String e) => f.ComboBoxItem<String>(
+                                        child: Text(
+                                          e,
+                                          style: TextStyle(fontSize: 11),
+                                        ),
+                                        value: e,
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                this.bloc.add(DocumentosListFilterEvent(
+                                    criterio: textSearchController.text,
+                                    control: controlSelected,
+                                    estado: value!));
+                                estadoSelected = value;
+                              }),
+                        ),
+                        f.Button(
+                            onPressed: () {
+                              controlSelected = 'EXTERNO';
+                              estadoSelected = 'PENDIENTE';
+                              textSearchController.text = '';
+                              this
+                                  .bloc
+                                  .add(DocumentosListLoad(anio: anioSelected!));
+                            },
+                            child: Text(
+                              'Actualizar',
+                              style: TextStyle(fontSize: 12),
+                            )),
+                        SizedBox(width: 5.0),
+                        f.Button(
+                            onPressed: () {
+                              exportDataGridToExcel();
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  'Exportar',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                ImageIcon(
+                                  AssetImage('assets/images/ExcelExport.png'),
+                                  color: Colors.white,
+                                ),
+                              ],
+                            )),
+                        f.Button(
+                            onPressed: () {
+                              _showModalDialog(context);
+                            },
+                            child: Text(
+                              'Nuevo',
+                              style: TextStyle(fontSize: 12),
+                            )),
+                        SizedBox(width: 5.0),
                       ],
-                    ))
-                  : Container()
-            ],
+                    ),
+                    Container(
+                      width: 400,
+                      child: TextFormField(
+                          textDirection: TextDirection.rtl,
+                          controller: textSearchController,
+                          textAlign: TextAlign.left,
+                          textCapitalization: TextCapitalization.characters,
+                          keyboardType: TextInputType.text,
+                          onFieldSubmitted: (value) {
+                            this.bloc.add(DocumentosListFilterEvent(
+                                criterio: value,
+                                control: controlSelected,
+                                estado: estadoSelected));
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Buscar',
+                            prefixIcon: textSearchController.text.length > 0
+                                ? Icon(Icons.close)
+                                : Icon(Icons.search_outlined),
+                            // set the prefix icon constraints
+                            prefixIconConstraints: BoxConstraints(
+                              minWidth: 25,
+                              minHeight: 25,
+                            ),
+                            border: OutlineInputBorder(),
+                            isDense: true, // Added this
+                            contentPadding: EdgeInsets.only(
+                                left: 5, top: 12, bottom: 0), // Added this
+                          )),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 5.0),
+                if (state is DocumentosListLoaded)
+                  GridDocumentosPage(
+                    columns: getColumnsListDocumentos(context),
+                    data: state.documentosListFiltered,
+                    keyGrid: this.keyGrid,
+                  ),
+                (state is DocumentosListLoading)
+                    ? Center(
+                        child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                          Text('Cargando lista')
+                        ],
+                      ))
+                    : Container()
+              ],
+            ),
           ),
         );
       },
@@ -235,6 +243,7 @@ class _ListDocumentosPageState extends State<ListDocumentosPage> {
                         expedienteMtc: '',
                         expedienteMef: '',
                         fecha: '',
+                        fechaDerivacion: '',
                         id: 0,
                         numeroPvn: '',
                         remite: '',

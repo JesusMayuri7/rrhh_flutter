@@ -9,10 +9,19 @@ abstract class ImportState extends Equatable {
 
 class ImportInitial extends ImportState {}
 
-class ImportLoaded extends ImportState {
+class ImportFileLoading extends ImportState {}
+
+class ImportListLoaded extends ImportState {
   final List<List<Object>> list;
-  ImportLoaded({
+  ImportListLoaded({
     required this.list,
+  });
+}
+
+class ImportFileLoaded extends ImportState {
+  final String message;
+  ImportFileLoaded({
+    required this.message,
   });
 }
 

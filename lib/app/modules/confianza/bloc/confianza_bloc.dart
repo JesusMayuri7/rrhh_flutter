@@ -22,10 +22,8 @@ class ConfianzaBloc extends Bloc<ConfianzaEvent, ConfianzaState> {
       emit(ConfianzaAreaStateLoading());
       var result = await this.getListAreaUseCase(NoParams());
       emit(result.fold((l) {
-        print('error ' + l.toString());
         return ConfianzaAreaStateError();
       }, (r) {
-        print('cargo areas ' + r.data.toString());
         return ConfianzaAreaStateLoaded(listAreas: r.data as List<AreaEntity>);
       }));
     }

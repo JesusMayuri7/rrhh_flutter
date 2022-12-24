@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../domain/entities/resumen_entity.dart';
@@ -6,12 +5,10 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class ResumenCasDs extends DataGridSource {
   ResumenCasDs(this.resumenList) {
-    //print(resumenList[0].nombres);
     buildDataGridRows();
   }
 
   void buildDataGridRows() {
-    //print(resumenList[0].fuenteBase);
     _resumenCasDataGridRows = resumenList
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<int>(
@@ -155,7 +152,6 @@ class ResumenCasDs extends DataGridSource {
   }
 
   void updateDataGrid() {
-    print('actualizando grid');
     notifyListeners();
   }
 }

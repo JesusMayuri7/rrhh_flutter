@@ -45,7 +45,7 @@ void certificadoCapSheet(Workbook workbook, int firstRowHeading,
     'TotalProyeccion',
     'Saldo',
   ];
-  print('Certificados ' + params.certificadoCap.length.toString());
+
   presupuestoSheet.importList(headerPresupuesto, firstRowHeading, 1, false);
 
   _fuenteMetaOfBase(params.certificadoCap);
@@ -53,12 +53,11 @@ void certificadoCapSheet(Workbook workbook, int firstRowHeading,
   for (int index = 0; index < params.certificadoCap.length; index++) {
     final List<Object> row =
         List.from(params.certificadoCap[index].toMap().values.toList());
-    print('row ' + row.toString());
+
     presupuestoSheet.importList(row, firstRowHeading + index + 1, 1, false);
   }
 
   final int _rowSum = presupuestoSheet.getLastRow();
-  print('Cap ' + _rowSum.toString());
 
   presupuestoSheet.getRangeByIndex(_rowSum + 1, 6).formula =
       'SUM(F6:F$_rowSum)';
@@ -134,11 +133,10 @@ _proyeccion(int _firstRowBase, int _column, Worksheet page, int _rowEnd,
   String colProyeccion = '\$AE';
   String colDevengado = '\$K';
   String colTotalAnual = '\$AF';
-  String colBaseEstadoOPP = '\$Y';
-  String colBaseFuente = '\$AL';
+  String colBaseEstadoOPP = '\$X';
+  String colBaseFuente = '\$AK';
   String colBaseProducto = '\$AS';
   String colBaseMeta = '\$AQ';
-  String colBaseClasificador = '\$EI\$2';
 
   int _firstRowCertificado = 6;
   for (int x = _firstRowBase; x < _rowEnd - 1; x++) {

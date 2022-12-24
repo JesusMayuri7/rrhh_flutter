@@ -1,17 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:mime/mime.dart';
 
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/import/presenter/domain/import_file_use_case.dart';
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
-
-import '../data/models/response_model.dart';
 
 class DioCustom implements IClientCustom {
   final bloc = Modular.get<AuthBloc>();
@@ -37,8 +32,6 @@ class DioCustom implements IClientCustom {
     _dio.interceptors.add(
         InterceptorsWrapper(onError: (error, errorInterceptorHandler) async {
       if (error.response?.statusCode == 401) {
-        log('ertron al error');
-        print(token);
         try {
           await _dio
               .post("http://rrhh.pvn.gob.pe/api/auth/refresh",
@@ -47,7 +40,6 @@ class DioCustom implements IClientCustom {
               .then((value) async {
             if (value.statusCode == 200) {
               token = Map<String, dynamic>.from(value.data)['token'];
-              print('nuevo token ' + token!);
               error.requestOptions.headers["Authorization"] =
                   "Bearer " + token!;
               final opts = new Options(
@@ -78,7 +70,6 @@ class DioCustom implements IClientCustom {
       request.headers["Authorization"] = "Bearer " + token!;
       return requestInterceptorHandler.next(request);
     }, onResponse: (response, responseInterceptorHandler) {
-      //print('${response.statusCode} ${response.data}');
       return responseInterceptorHandler.next(response);
     }));
   }
@@ -108,7 +99,6 @@ class DioCustom implements IClientCustom {
             return status! < 500;
           }),
     );
-    print(response.headers);
     return response;
   }
 
@@ -127,7 +117,6 @@ class DioCustom implements IClientCustom {
     var response = await _dio.request(url,
         data: formData,
         options: Options(contentType: "application/form-data", method: method));
-    print('dentro ' + response.toString());
     return response;
   }
 }

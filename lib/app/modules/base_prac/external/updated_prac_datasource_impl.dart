@@ -29,7 +29,6 @@ class UpdatedPracDataSourceImpl implements IUpdatedPracDataSource {
 
       PracticanteModel practicanteModel =
           PracticanteModel.fromJson(response.data);
-      print(response);
       return ResponseModel(
           data: practicanteModel,
           status: response.status,

@@ -104,17 +104,16 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
                             },
                           ), */
                           f.SizedBox(
-                            height: 25,
-                            child: f.Combobox<String>(
+                            height: 35,
+                            child: f.ComboBox<String>(
                               placeholder: const Text('Modalidad'),
                               value: modalidadSelected,
                               items: _modalidad
-                                  .map<f.ComboboxItem<String>>((String value) {
-                                return f.ComboboxItem<String>(
+                                  .map<f.ComboBoxItem<String>>((String value) {
+                                return f.ComboBoxItem<String>(
                                     value: value, child: Text(value));
                               }).toList(),
                               onChanged: (String? value) {
-                                print(value);
                                 setState(() {
                                   modalidadSelected = value!;
                                 });

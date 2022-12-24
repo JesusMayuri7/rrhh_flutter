@@ -28,11 +28,8 @@ class AddLiquidacionDatasourceImpl implements IAddLiquidacionDatasource {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           jsonEncode(params['liquidacion']), (i) => responseFromJson(i));
 
-      print('antes ' + response.toString());
-      //var body = jsonDecode(response.data);
-      //print('rdespues ' + body.toString());
       LiquidacionModel result = LiquidacionModel.fromJson(response.data);
-      print('despues ' + result.toString());
+
       return ResponseModel(
           status: response.status, message: response.message, data: result);
     } on SocketException {

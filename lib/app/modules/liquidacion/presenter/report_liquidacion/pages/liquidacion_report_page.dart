@@ -1,5 +1,5 @@
-import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,6 +10,7 @@ import 'package:rrhh_clean/app/modules/liquidacion/presenter/report_liquidacion/
 import 'package:rrhh_clean/core/domain/entities/certificado_entity.dart';
 import 'package:rrhh_clean/core/uitls/widgets/dropdownmenuitem_presupuesto.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
@@ -29,6 +30,8 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
   final blocApp = Modular.get<LiquidacionBloc>();
   CertificadoEntity? _certificadoEntity;
   final DataGridController _dataGridController = DataGridController();
+  var _modalidad = ['CAS', 'CAP'];
+  String modalidadSelected = 'CAS';
 
   late LiquidacionReportDatasource liquidacionReportDatasource;
   final String? anioSelected =
@@ -53,7 +56,34 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Container(
+              SizedBox(
+                height: 35,
+                width: 80,
+                child: fluentUi.ComboBox<String>(
+                    value:
+                        /* (this.blocLiquidacion.state is LiquidacionReportLoaded)
+                            ? (this.blocLiquidacion.state
+                                    as LiquidacionReportLoaded)
+                                .dscModalidad
+                            :  */
+                        modalidadSelected,
+                    items: _modalidad.map((String dropDownStringItem) {
+                      return fluentUi.ComboBoxItem<String>(
+                        child: Text(dropDownStringItem),
+                        value: dropDownStringItem,
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      this
+                          .blocLiquidacion
+                          .add(LiquidacionReportFilter(dscModalidad: value!));
+                      // modalidadSelected = value;
+                      setState(() {
+                        modalidadSelected = value;
+                      });
+                    }),
+              ),
+/*               Container(
                 width: 130,
                 child: LabelWithDropDown<CertificadoEntity>(
                     isExpanded: true,
@@ -70,15 +100,15 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
                           certificadoDevengadoId: _certificadoEntity?.id ?? 0));
                     },
                     title: 'Certificado'),
-              ),
+              ), */
               SizedBox(
                 width: 5,
               ),
               ElevatedButton(
                   onPressed: () {
-                    this
-                        .blocLiquidacion
-                        .add(LiquidacionReportLoad(anio: anioSelected!));
+                    liquidacionReportDatasource.clearFilters();
+                    this.blocLiquidacion.add(LiquidacionReportLoad(
+                        anio: anioSelected!, dscModalidad: modalidadSelected));
                     setState(() {
                       _certificadoEntity = null;
                     });
@@ -86,12 +116,14 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
                   child: Text('Actualizar')),
               Spacer(),
               ElevatedButton(
-                  onPressed: () => exportReportToExcel((this
+                  onPressed: () => exportReportToExcel(
+                      liquidacionReportDatasource.liquidacionReport),
+/*                   onPressed: () => exportReportToExcel((this
                           .blocLiquidacion
                           .state is LiquidacionReportLoaded)
                       ? (this.blocLiquidacion.state as LiquidacionReportLoaded)
                           .liquidacionReportFiltered
-                      : []),
+                      : []), */
                   child: Text('Exportar')),
             ],
           ),
@@ -101,8 +133,7 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
               bloc: this.blocLiquidacion,
               listener: (context, state) {
                 if (state is LiquidacionReportError) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Error: ' + state.message)));
+                  showToastError(context, state.message);
                 }
               },
               builder: (context, state) {
@@ -128,10 +159,11 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
                     navigationMode: GridNavigationMode.cell,
                     source: liquidacionReportDatasource,
                     columns: getColumnsLiquidacionReport(),
-                    headerRowHeight: 22,
+                    headerRowHeight: 32,
                     rowHeight: 20,
                     isScrollbarAlwaysShown: true,
-                    allowSorting: true,
+                    //allowSorting: true,
+                    allowFiltering: true,
                     allowMultiColumnSorting: true,
                     //allowTriStateSorting: true,
                     showSortNumbers: true,
@@ -143,6 +175,18 @@ class _LiquidacionReportPageState extends State<LiquidacionReportPage>
                           showSummaryInRow: false,
                           title: 'Total Salary: {Sum} for 20 employees',
                           columns: [
+                            GridSummaryColumn(
+                                name: 'Count',
+                                columnName: 'anio',
+                                summaryType: GridSummaryType.count),
+                            GridSummaryColumn(
+                                name: 'Sum',
+                                columnName: 'total_certificado',
+                                summaryType: GridSummaryType.sum),
+                            GridSummaryColumn(
+                                name: 'Sum',
+                                columnName: 'monto_certificado',
+                                summaryType: GridSummaryType.sum),
                             GridSummaryColumn(
                                 name: 'Sum',
                                 columnName: 'diff_devengado',

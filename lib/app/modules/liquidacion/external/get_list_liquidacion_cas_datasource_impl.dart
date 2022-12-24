@@ -22,8 +22,6 @@ class GetLiquidacionCasDatasourceImpl implements IGetLiquidacionCasDatasource {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
 
-      print(response.toString());
-
       String bodyData = jsonEncode(response.data);
 
       List<LiquidacionModel> liquidacionModel =

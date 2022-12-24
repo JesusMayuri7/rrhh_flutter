@@ -47,8 +47,8 @@ List<DropdownMenuItem<int>> buildAreas(List areaModel) {
   List<DropdownMenuItem<int>> listArea = [];
   for (AreaEntity item in areaModel) {
     listArea.add(DropdownMenuItem(
-      value: item.orgAreaId,
-      child: Text('${item.orgAreaId} : ${item.descArea}'),
+      value: item.id,
+      child: Text('${item.id} : ${item.descArea}'),
     ));
   }
   //_metaEntity = metaModel[0];
@@ -56,7 +56,14 @@ List<DropdownMenuItem<int>> buildAreas(List areaModel) {
 }
 
 List<DropdownMenuItem<int>> buildFuentes(List fuenteModel) {
-  List<DropdownMenuItem<int>> listFuente = [];
+  return fuenteModel
+      .map((item) => DropdownMenuItem<int>(
+            value: item.id,
+            child: Text('${item.id} : ${item.dscFuente}'),
+          ))
+      .toList();
+
+/*   List<DropdownMenuItem<int>> listFuente = [];
   for (FuenteEntity item in fuenteModel) {
     listFuente.add(DropdownMenuItem(
       value: item.id,
@@ -64,5 +71,17 @@ List<DropdownMenuItem<int>> buildFuentes(List fuenteModel) {
     ));
   }
 
-  return listFuente;
+  return listFuente; */
+}
+
+List<DropdownMenuItem<String>> buildItem(List itemModel) {
+  List<DropdownMenuItem<String>> listItem = [];
+  for (String item in itemModel) {
+    listItem.add(DropdownMenuItem(
+      value: item,
+      child: Text(item),
+    ));
+  }
+
+  return listItem;
 }

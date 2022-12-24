@@ -72,9 +72,11 @@ class LiquidacionModule extends Module {
     Bind((i) => UpdateLiquidacionDetalleDatasourceImpl(httpCustom: i())),
     Bind((i) => UpdateLiquidacionDatasourceImpl(httpCustom: i())),
     Bind((i) => GetDataInitialDatasourceImpl(
-        getCertificadosImpl: i(),
-        getMetasImpl: i(),
-        getClasificadoresImpl: i())),
+          getCertificadosImpl: i(),
+          getMetasImpl: i(),
+          getClasificadoresImpl: i(),
+          getFuentesImpl: i(),
+        )),
 
     // Use Case
     Bind((i) => GetListLiquidacionUseCase(repositoryLiquidacion: i())),
@@ -108,24 +110,20 @@ class SimpleBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-    print('${bloc.runtimeType} $change');
   }
 
   @override
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
-    print(event);
   }
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
-    print(transition);
   }
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    print(error);
     super.onError(bloc, error, stackTrace);
   }
 }

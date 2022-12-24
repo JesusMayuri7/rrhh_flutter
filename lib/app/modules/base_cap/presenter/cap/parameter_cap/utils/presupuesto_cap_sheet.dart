@@ -56,7 +56,6 @@ void presupuestoCapSheet(Workbook workbook, int firstRowHeading,
   }
 
   final int _rowSum = presupuestoSheet.getLastRow();
-  print(_rowSum);
 
   presupuestoSheet.getRangeByIndex(_rowSum + 1, 6).formula =
       'SUM(F6:F$_rowSum)';

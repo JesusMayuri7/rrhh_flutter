@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:rrhh_clean/app/modules/requerimientos/data/model/requerimiento_model.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_list_usecase.dart';
 
 import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
+
+import 'requerimiento_model.dart';
 
 abstract class IRequerimientoListDataSource {
   Future<ResponseModel> getListRequerimientos(ParamsRequerimiento params);
@@ -21,19 +22,19 @@ class GetListRequerimientos implements IRequerimientoListDataSource {
   @override
   Future<ResponseModel> getListRequerimientos(
       ParamsRequerimiento params) async {
-    Uri url = Uri.http('rrhh.pvn.gob.pe',
-        '/api/presupuesto/requerimiento/' + params.anio, {'q': 'http'});
+    Uri url = Uri.http(
+        'rrhh.pvn.gob.pe', '/api/requerimientos/' + params.anio, {'q': 'http'});
 
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
 
-      var body = jsonDecode(response.data);
-      String bodyData = jsonEncode(body);
+      //var body = jsonDecode(response.data);
+      String bodyData = jsonEncode(response.data);
 
       List<RequerimientoModel> result = requerimientoModelFromJson(bodyData);
       return ResponseModel(
-          data: result, status: body['status'], message: body['message']);
+          data: result, status: response.status, message: response.message);
     } on SocketException {
       throw ServerException('Sin Conexion');
     } on HttpException {

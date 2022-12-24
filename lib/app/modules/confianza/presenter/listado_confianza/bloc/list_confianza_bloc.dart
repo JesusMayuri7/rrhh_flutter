@@ -79,7 +79,6 @@ class ListConfianzaBloc
   // Event Created ConfianzaEntity to State
   _onNewSavedToState(ConfianzaEventEditCreate event,
       Emitter<ListConfianzaBlocState> emit) async {
-    print('nuevo');
     if (state is ListConfianzaBlocLoaded) {
       List<ConfianzaEntity> listaUpdated = [
         event.confianzaEntity,
@@ -100,9 +99,6 @@ class ListConfianzaBloc
             listConfianzaFiltered:
                 (state as ListConfianzaBlocLoaded).listConfianzaOriginal));
       } else {
-        print(event.textFilter);
-        print((state as ListConfianzaBlocLoaded).listConfianzaOriginal.length);
-        print((state as ListConfianzaBlocLoaded).listConfianzaFiltered.length);
         List<ConfianzaEntity> listFiltered = List.from(
             (state as ListConfianzaBlocLoaded)
                 .listConfianzaOriginal

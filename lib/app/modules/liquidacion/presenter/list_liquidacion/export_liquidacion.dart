@@ -5,7 +5,6 @@ import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
 
 Future<void> exportLiquidaciontoExcel(List<LiquidacionEntity> params) async {
-  print('compute calcular');
 // Create a new Excel Document.
   final Workbook workbook = Workbook();
 
@@ -47,9 +46,6 @@ Future<void> exportLiquidaciontoExcel(List<LiquidacionEntity> params) async {
       sheet.importList(params[index].toMap().values.toList(), rowNext + item,
           firstColData, false);
 
-    //List<dynamic> dataRepeat = params[index].toMap().values.toList();
-    //print(dataRepeat.toString());
-
     for (int item = 0; item < liquidacionDetalle.length; item++) {
       //sheet.importList(dataRepeat, rowNext, firstColData, false);
       sheet
@@ -70,9 +66,6 @@ Future<void> exportLiquidaciontoExcel(List<LiquidacionEntity> params) async {
       //sheet.importList(liquidacionDetalle[item].toMap().values.toList(), rowNext + item, 17, false);
     }
     rowNext = (rowNext + liquidacionDetalle.length);
-    //sheet.insertRow(rowNext, rowNext, ExcelInsertOptions.formatAsAfter);
-
-    // print(liquidacionDetalle.toString());
   }
 
 // Save and dispose workbook.

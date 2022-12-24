@@ -40,7 +40,6 @@ class CertificadosRepositoryImpl implements ICertificadosRepository {
   @override
   Future<Either<Failure, ModalidadConceptoClasificadorEntity>>
       modalidadConceptoClasificador() async {
-    print('entro al repositorio getModaldiadConceptoClasificador');
     try {
       final result = await this
           .modalidadConceptoDaatasource
@@ -73,7 +72,6 @@ class CertificadosRepositoryImpl implements ICertificadosRepository {
       required double montoCertificado,
       required int modalidadId,
       required List<Map<String, dynamic>> clasificadorConcepto}) async {
-    print('resposity ' + clasificadorConcepto.toString());
     try {
       final result = await this.saveCertificadoDatasource.saveCertificado(
           detalle: detalle,

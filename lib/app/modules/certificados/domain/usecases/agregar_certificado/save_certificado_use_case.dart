@@ -14,7 +14,6 @@ class SaveCertificadoUseCase implements UseCase<ResponseEntity, ParamsSave> {
 
   @override
   Future<Either<Failure, ResponseEntity>> call(ParamsSave params) async {
-    print('usecase ' + params.toString());
     final result = await repository.saveCertificado(
         detalle: params.detalle,
         tipo: params.tipo,

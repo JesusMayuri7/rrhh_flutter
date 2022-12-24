@@ -42,7 +42,6 @@ class ParameterCapBloc extends Bloc<ParameterCapEvent, ParameterCapState> {
     emit(CapLoadingState());
     var result = await this.getListBaseCapUseCase(event.anio);
     emit(result.fold((l) {
-      print(l.toString());
       return CapLoadedState(statusCap: StatusCap.error);
     }, (r) {
       List<BaseCapEntity> resultCalc = this.calcularListBaseCapUseCase(
@@ -72,15 +71,15 @@ class ParameterCapBloc extends Bloc<ParameterCapEvent, ParameterCapState> {
 
   _onExportCapEventToState(
       ExportCapEvent event, Emitter<ParameterCapState> emit) async {
-    print('entro...');
     var resultPresupuestoCas = await getPresupuestoBaseCapUseCase(event.anio);
     emit(resultPresupuestoCas.fold((l) {
-      print('Error Certiicado ' + l.toString());
+      print(l.toString());
       return (state as CapLoadedState).copyWith(statusCap: StatusCap.error);
     }, (r) {
       certificadoCap = List<PresupuestoEntity>.from(r[0].data);
-      print('Cert. ' + certificadoCap.length.toString());
       pimCap = List<PresupuestoEntity>.from(r[1].data);
+      print(pimCap.toString());
+
       return (state as CapLoadedState)
           .copyWith(statusCap: StatusCap.capLoading);
     }));

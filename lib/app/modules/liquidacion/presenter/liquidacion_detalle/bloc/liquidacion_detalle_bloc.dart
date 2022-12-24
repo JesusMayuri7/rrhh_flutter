@@ -24,10 +24,7 @@ class LiquidacionDetalleBloc
       : super(LiquidacionDetalleLoaded()) {
     liquidacionDetalleSubscripcion =
         liquidacionListBloc.stream.listen((stateList) {
-      print('detalle bloc ' + stateList.runtimeType.toString());
-
       if (stateList is LiquidacionListLoaded) {
-        print('detalle bloc ' + stateList.liquidacionDetalle.length.toString());
         //if (stateList.liquidacionDetalle.length > 0)
         add(SetLiquidacionDetalleEvent(
             dscCertificado: stateList.dscCertificado,
@@ -52,7 +49,6 @@ class LiquidacionDetalleBloc
   _onSetFocusLiquidacionDetalleEventToState(
       SetFocusLiquidacionDetalleEvent event,
       Emitter<LiquidacionDetalleState> emit) async {
-    print(event.excludeFocus.toString());
     emit((state as LiquidacionDetalleLoaded)
         .copyWith(excludeFocus: event.excludeFocus));
   }

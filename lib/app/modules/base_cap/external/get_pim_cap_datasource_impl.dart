@@ -25,7 +25,6 @@ class GetPimCapDatasourceImpl implements IPimCapDatasource {
           'GET', url.toString(), {}, (i) => responseFromJson(i));
 
       String bodyData = jsonEncode(response.data);
-      print('pim ' + response.message);
       return ResponseModel(
           status: true,
           message: 'Presupuesto CAP',

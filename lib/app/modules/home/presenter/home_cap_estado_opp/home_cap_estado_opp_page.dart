@@ -3,6 +3,8 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:rrhh_clean/app/modules/home/domain/cap_estado_opp_entity.dart';
 import 'package:rrhh_clean/app/modules/home/presenter/home_cap_estado_opp/getColumnsCapEstadoOpp.dart';
 import 'package:rrhh_clean/app/modules/home/presenter/home_cap_estado_opp/home_cap_estado_datasource.dart';
+import 'package:rrhh_clean/core/uitls/widgets/dropdownmenuitem_presupuesto.dart';
+import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -25,14 +27,11 @@ class _HomeCapEstadoOppPageState extends State<HomeCapEstadoOppPage> {
 
   @override
   void initState() {
-    print(widget.capEstadoOppEntity.toString());
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(estadoSelected);
     List<CapEstadoOppEntity> sumList = List.from(widget.capEstadoOppEntity);
 
     this.capEstadoOppDataSource = HomeCapEstadoOppDataSource(
@@ -40,31 +39,25 @@ class _HomeCapEstadoOppPageState extends State<HomeCapEstadoOppPage> {
             .where((element) => element.modalidad == estadoSelected)
             .toList()));
     this.capEstadoOppDataSource.buildDataGridRows();
-    return Expanded(
+    return Container(
+      width: 400,
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              SizedBox(
-                  height: 25,
-                  child: Combobox<String>(
-                    placeholder: Text('Tipo'),
-                    items: _estados.map<ComboboxItem<String>>((String value) {
-                      return ComboboxItem<String>(
-                        value: value,
-                        child: Container(
-                            width: 80,
-                            child: Text(value, style: TextStyle(fontSize: 10))),
-                      );
-                    }).toList(),
+              Container(
+                width: 110,
+                child: LabelWithDropDown<String>(
                     value: estadoSelected,
+                    dropdownMenuItemList: buildItem(_estados),
                     onChanged: (value) {
                       setState(() {
                         estadoSelected = value!;
                       });
-                      // this.blocApp.add(AppAnioSelectEvent(_anioSelected));
                     },
-                  )),
+                    title: 'Tipo'),
+              ),
               SizedBox(width: 10),
               Text('CAP PROVISIONAL 2022 - RM N°352-2021',
                   style: TextStyle(fontSize: 12))

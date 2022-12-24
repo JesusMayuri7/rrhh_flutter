@@ -9,13 +9,22 @@ class LogoutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final stateSuccess = (bloc.state as SuccessAuthState);
     return Container(
       alignment: Alignment.topCenter,
-      child: TextButton(
-        child: Text('Cerrar sesión'),
-        onPressed: () {
-          this.bloc.add(LogoutAuthEvent());
-        },
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(stateSuccess.loginResponseEntity.email),
+            TextButton(
+              child: Text(' Cerrar sesión'),
+              onPressed: () {
+                this.bloc.add(LogoutAuthEvent());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

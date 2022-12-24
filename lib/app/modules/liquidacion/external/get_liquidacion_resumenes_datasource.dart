@@ -33,7 +33,6 @@ class GetLiquidacionResumenesDatasourceImpl
 
       List<ResponseModel> listData =
           await Future.wait([responseResumenLiquidacion, responseResumenSiaf]);
-      // print('listadata ' + listData.toString());
       return listData;
     } on SocketException {
       throw ServerException('Sin Conexion');

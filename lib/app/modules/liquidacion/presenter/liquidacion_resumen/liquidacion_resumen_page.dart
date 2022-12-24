@@ -12,6 +12,7 @@ import 'package:rrhh_clean/core/domain/entities/certificado_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/clasificador_entity.dart';
 import 'package:rrhh_clean/core/uitls/widgets/dropdownmenuitem_presupuesto.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -58,8 +59,7 @@ class _LiquidacionResumenPageState extends State<LiquidacionResumenPage>
     return BlocConsumer<LiquidacionResumenBloc, LiquidacionResumenState>(
       listener: (_, state) {
         if (state is LiquidacionResumenError)
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('Error: ' + state.message)));
+          showToastError(context, state.message);
       },
       buildWhen: (previous, current) {
         if (current is LiquidacionResumenLoaded)

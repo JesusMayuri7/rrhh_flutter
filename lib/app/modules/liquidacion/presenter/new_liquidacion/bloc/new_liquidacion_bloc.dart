@@ -30,7 +30,6 @@ class NewLiquidacionBloc
     if (state is NewLiquidacionSuccessState) {
       var result = await this._addLiquidacionUseCase(event.liquidacionEntity);
       emit(result.fold((l) {
-        print(l.toString());
         return (state as NewLiquidacionSuccessState)
             .copyWith(status: AddLiquidacionStatus.Failure);
       }, (r) {

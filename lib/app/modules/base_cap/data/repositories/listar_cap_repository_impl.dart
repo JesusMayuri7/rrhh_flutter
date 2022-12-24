@@ -33,10 +33,8 @@ class BaseCapRepositoryImpl implements IBaseCapRepository {
   @override
   Future<Either<Failure, ResponseEntity>> getParameterBaseCap(
       String anio) async {
-    print('respository');
     try {
       final response = await this.iParameterCapDataSoruce.getParameters(anio);
-      print('repository' + response.data.toString());
       return Right(response);
     } on ServerException catch (e) {
       return Left(Error(e.message));

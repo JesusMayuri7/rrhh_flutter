@@ -2,21 +2,21 @@ import 'package:equatable/equatable.dart';
 
 class MetaEntity extends Equatable {
   final int idmetaAnual;
-  final int anio;
-  final String presupuesto;
-  final String meta;
   final String finalidad;
-  final String producto;
-  final String actividad;
+  final int? anio;
+  final String? presupuesto;
+  final String? meta;
+  final String? producto;
+  final String? actividad;
 
   MetaEntity({
     required this.idmetaAnual,
-    required this.anio,
-    required this.presupuesto,
-    required this.meta,
     required this.finalidad,
-    required this.producto,
-    required this.actividad,
+    this.anio,
+    this.presupuesto,
+    this.meta,
+    this.producto,
+    this.actividad,
   });
 
   @override
@@ -28,12 +28,7 @@ class MetaEntity extends Equatable {
   List<Object> get props {
     return [
       idmetaAnual,
-      anio,
-      presupuesto,
-      meta,
       finalidad,
-      producto,
-      actividad,
     ];
   }
 }

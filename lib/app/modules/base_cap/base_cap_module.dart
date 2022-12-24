@@ -9,6 +9,7 @@ import 'data/repositories/listar_cap_repository_impl.dart';
 import 'domain/use_cases/get_presupuesto_base_cap_usecase.dart';
 import 'external/get_list_cap_datasource_impl.dart';
 import 'external/get_pim_cap_datasource_impl.dart';
+import 'external/get_pim_cap_datasource_impl_2023.dart';
 import 'external/get_presupuesto_cap_impl.dart';
 import 'presenter/cap/listado_cap/bloc/listado_cap_bloc.dart';
 import 'presenter/cap/parameter_cap/bloc/parameter_cap_bloc.dart';
@@ -28,8 +29,10 @@ class BaseCapModule extends Module {
     Bind((i) => GetListCapDatasourceImpl(httpCustom: i())),
     Bind((i) => GetCertificadoCapDatasourceImpl(httpCustom: i())),
     Bind((i) => GetPimCapDatasourceImpl(httpCustom: i())),
+    //Bind((i) => GetPimCapDatasourceImpl2023(httpCustom: i())),
     Bind((i) => GetPresupuestoCapDatasourceImpl(
-        getCertificadoCapDatasourceImpl: i(), getPimCapDatasourceImpl: i())),
+        getCertificadoCapDatasourceImpl: i(),
+        getPimCapDatasourceImpl: i<GetPimCapDatasourceImpl>())),
 
     // REPOSITORY
     Bind((i) => BaseCapRepositoryImpl(

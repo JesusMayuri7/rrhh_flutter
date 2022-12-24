@@ -29,8 +29,9 @@ class LiquidacionReportDatasource extends DataGridSource {
                   value: dataGridRow.dscCertificado),
               DataGridCell<String>(
                   columnName: 'dsc_producto', value: dataGridRow.dscProducto),
-              DataGridCell<int>(
-                  columnName: 'meta_devengado_id', value: dataGridRow.fuenteId),
+              DataGridCell<String>(
+                  columnName: 'abv_fuente', value: dataGridRow.abvFuente),
+              DataGridCell<String>(columnName: 'meta', value: dataGridRow.meta),
               DataGridCell<String>(
                   columnName: 'finalidad_devengado',
                   value: dataGridRow.finalidad),
@@ -58,6 +59,8 @@ class LiquidacionReportDatasource extends DataGridSource {
               DataGridCell<double>(
                   columnName: 'saldo_devengado',
                   value: dataGridRow.saldoDevengado),
+              DataGridCell<String>(
+                  columnName: 'estado', value: dataGridRow.estado),
             ]))
         .toList();
   }
@@ -83,7 +86,8 @@ class LiquidacionReportDatasource extends DataGridSource {
 
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
-    final int rowIndex = _liquidacionReportDataGridRows.indexOf(row);
+    String estado = 'PENDIENTE';
+//    final int rowIndex = _liquidacionReportDataGridRows.indexOf(row);
 
     Color getRowBackgroundColor() {
       final double devengado = row
@@ -91,14 +95,37 @@ class LiquidacionReportDatasource extends DataGridSource {
           .where((element) => element.columnName == 'total_devengado')
           .first
           .value;
+
       final double liquidado = row
           .getCells()
           .where((element) => element.columnName == 'monto_liquidacion')
           .first
           .value;
-      if (devengado == liquidado && (devengado + liquidado) > 0)
+
+      final double totalCertificado = row
+          .getCells()
+          .where((element) => element.columnName == 'total_certificado')
+          .first
+          .value;
+
+      final double montoCertificado = row
+          .getCells()
+          .where((element) => element.columnName == 'monto_certificado')
+          .first
+          .value;
+      final double saldoDevengado = row
+          .getCells()
+          .where((element) => element.columnName == 'saldo_devengado')
+          .first
+          .value;
+      if (devengado == liquidado &&
+          (devengado + liquidado) > 0 &&
+          montoCertificado == totalCertificado) {
+        if (saldoDevengado == 0) estado = 'COMPLETADO';
         return Colors.green[100]!;
-      else if (devengado != liquidado && liquidado > 0)
+      } else if ((devengado != liquidado ||
+              montoCertificado != totalCertificado) &&
+          liquidado > 0)
         return Colors.amber[200]!;
       else
         return Colors.transparent;
@@ -141,6 +168,14 @@ class LiquidacionReportDatasource extends DataGridSource {
             );
           } else if (e.columnName == 'finalidad_devengado' ||
               e.columnName == 'dsc_producto') {
+            return Container(
+                padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  e.value.toString(),
+                  style: TextStyle(fontSize: 10),
+                ));
+          } else if (e.columnName == 'estado') {
             return Container(
                 padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
                 alignment: Alignment.centerLeft,

@@ -79,11 +79,9 @@ class ListPracBloc extends Bloc<ListarPracEvent, ListPracState> {
 
   FutureOr<void> _onListarPracEventToState(
       ListPracEvent event, Emitter<ListPracState> emit) async {
-    print('entrando al bloc');
     emit(ListPracLoading());
     var result = await this.listarPracUseCase(event.anio);
     emit(result.fold((l) => ErrorPracLoaded(message: l.toString()), (r) {
-      // print('blocv' + r.toString());
       return ListPracLoaded(
           listPracticanteFiltered: r, listPracticanteOriginal: r);
     }));
@@ -91,40 +89,32 @@ class ListPracBloc extends Bloc<ListarPracEvent, ListPracState> {
 
   FutureOr<void> _onUpdatedPracEventToState(
       UpdatedPracEvent event, Emitter<ListPracState> emit) async {
-    if (event is UpdatedPracEvent) {
-      print('event UpdateLiqudiacionEvent ' + event.practicanteId.toString());
-      print('event UpdateLiqudiacionEvent ' + event.campo.toString());
-      print('event UpdateLiqudiacionEvent ' + event.valor.toString());
-      //print('event UpdateLiqudiacionEvent ' + event.liquidacion.toString());
-      var updateLiquidacion = await this.updatedPracUseCase(UpdatedPracParams(
-          campo: event.campo,
-          valor: event.valor,
-          practicanteId: event.practicanteId));
+    var updateLiquidacion = await this.updatedPracUseCase(UpdatedPracParams(
+        campo: event.campo,
+        valor: event.valor,
+        practicanteId: event.practicanteId));
 
-      emit(updateLiquidacion.fold((l) {
-        print(l.toString());
-        return ErrorPracLoaded(message: l.toString());
-      }, (r) {
-        PracticanteEntity practicanteEntity = r.data;
-        print(r.data.toString());
-        return ListPracLoaded(listPracticanteFiltered: [
-          for (var item in (state as ListPracLoaded).listPracticanteFiltered)
-            if (item.id == practicanteEntity.id)
-              item.copyWith(
-                metaId: practicanteEntity.metaId,
-                finalidad: practicanteEntity.finalidad,
-                codigoPlaza: practicanteEntity.codigoPlaza,
-                dni: practicanteEntity.dni,
-                fechaAlta: practicanteEntity.fechaAlta,
-                fechaBaja: practicanteEntity.fechaBaja,
-                detalle: practicanteEntity.detalle,
-                nombres: practicanteEntity.nombres,
-              )
-            else
-              item
-        ]);
-      }));
-    }
+    emit(updateLiquidacion.fold((l) {
+      return ErrorPracLoaded(message: l.toString());
+    }, (r) {
+      PracticanteEntity practicanteEntity = r.data;
+      return ListPracLoaded(listPracticanteFiltered: [
+        for (var item in (state as ListPracLoaded).listPracticanteFiltered)
+          if (item.id == practicanteEntity.id)
+            item.copyWith(
+              metaId: practicanteEntity.metaId,
+              finalidad: practicanteEntity.finalidad,
+              codigoPlaza: practicanteEntity.codigoPlaza,
+              dni: practicanteEntity.dni,
+              fechaAlta: practicanteEntity.fechaAlta,
+              fechaBaja: practicanteEntity.fechaBaja,
+              detalle: practicanteEntity.detalle,
+              nombres: practicanteEntity.nombres,
+            )
+          else
+            item
+      ]);
+    }));
   }
 
   @override

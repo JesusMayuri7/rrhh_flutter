@@ -19,7 +19,6 @@ class ConceptosBloc extends Bloc<ConceptosEvent, ConceptosState> {
   }
 
   _conceptosAirhsp(ConceptosLoadEvent event, Emitter emit) async {
-    print('event concepto' + event.runtimeType.toString());
     emit(ConceptosLoadingState());
     var result = await _conceptosUseCase(ParamsConceptos(
         ejecutora: event.ejecutora,

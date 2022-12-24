@@ -4,7 +4,7 @@ import '../../domain/entities/modalidad_entity.dart';
 
 List<ModalidadModel> modalidadFromJson(String str) {
   List<dynamic> modalidadJson = json.decode(str);
-  print(modalidadJson.toString());
+
   return List<ModalidadModel>.from(
       (modalidadJson).map((x) => ModalidadModel.fromJson(x)));
 }

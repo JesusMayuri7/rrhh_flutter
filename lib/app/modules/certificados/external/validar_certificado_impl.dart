@@ -23,11 +23,10 @@ class ValidarCertificadoImpl implements IValidarDatasource {
       "dsc_certificado": certiificado,
       "anio": anio
     };
-    // print('external ' + params.toString());
+
     try {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           json.encode(params), (i) => responseFromJson(i));
-      // print(response.body.toString());
       return response;
     } on SocketException {
       throw ServerException('Sin conexion');
@@ -36,7 +35,6 @@ class ValidarCertificadoImpl implements IValidarDatasource {
     } on FormatException {
       throw ServerException("Formato incorrecto");
     } catch (e) {
-      print(e);
       throw ServerException(e.toString());
     }
   }

@@ -44,11 +44,9 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
 
     emit(result.fold(
       (failure) {
-        print(failure.toString());
         return ErrorAirhspState(message: failure.toString());
       },
       (data) {
-        print('ok airhsp');
         this.totalPlazas = data.length.toString();
         this.listadoActual = data;
         //this.appBloc.add(TotalPlazasAppEvent(this.totalPlazas));

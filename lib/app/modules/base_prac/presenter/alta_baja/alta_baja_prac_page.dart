@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,6 +8,7 @@ import 'package:rrhh_clean/app/modules/base_prac/domain/alta_baja_use_case.dart'
 import 'package:rrhh_clean/app/modules/base_prac/domain/practicante_entity.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/alta_baja/bloc/alta_baja_prac_bloc.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 class AltaBajaPracPage extends StatefulWidget {
   final PracticanteEntity practicanteEntity;
@@ -36,6 +38,17 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
         fechaBaja: widget.practicanteEntity.fechaBaja,
         fechaAlta: widget.practicanteEntity.fechaAlta,
         codigoBaja: widget.practicanteEntity.codigoPlaza,
+        plaza: widget.practicanteEntity.plaza,
+        descUnidad: widget.practicanteEntity.descUnidad,
+        descArea: widget.practicanteEntity.descArea,
+        dni: widget.practicanteEntity.dni,
+        nombres: widget.practicanteEntity.nombres,
+        estado: widget.practicanteEntity.estado,
+        estadoAir: widget.practicanteEntity.estadoAir,
+        estadoOpp: widget.practicanteEntity.estadoOpp,
+        estadoPap: widget.practicanteEntity.estadoPap,
+        estados: widget.practicanteEntity.estados,
+        tramite: widget.practicanteEntity.tramite,
         codigoAlta: '');
 
     super.initState();
@@ -50,12 +63,10 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
           listener: (context, state) {
             if (state is AltaBajaPracLoaded) {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text('Operacon exitosa')));
+              showToastSuccess(context, 'Operacion exitosa');
             }
             if (state is AltaBajaPracError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error al grabar: ' + state.message)));
+              showToastError(context, state.message);
             }
           },
           builder: (context, state) {
@@ -95,8 +106,8 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                       SizedBox(width: 25.0),
                                       Expanded(
                                         child: LabelWithFormFieldInitial(
-                                            initialValue: widget
-                                                .practicanteEntity.codigoPlaza,
+                                            initialValue:
+                                                paramsAltaBaja.codigoBaja,
                                             maxLength: 1,
                                             textAlign: TextAlign.center,
                                             title: 'Airhsp',
@@ -109,8 +120,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                       SizedBox(width: 25.0),
                                       Expanded(
                                         child: LabelWithFormFieldInitial(
-                                            initialValue:
-                                                widget.practicanteEntity.plaza,
+                                            initialValue: paramsAltaBaja.plaza,
                                             maxLength: 1,
                                             textAlign: TextAlign.center,
                                             title: 'Plaza',
@@ -120,32 +130,28 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                   ),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
-                                      initialValue:
-                                          widget.practicanteEntity.descUnidad,
+                                      initialValue: paramsAltaBaja.descUnidad,
                                       maxLength: 1,
                                       textAlign: TextAlign.left,
                                       title: 'Unidad',
                                       keyboardType: TextInputType.text),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
-                                      initialValue:
-                                          widget.practicanteEntity.descArea,
+                                      initialValue: paramsAltaBaja.descArea,
                                       maxLength: 1,
                                       textAlign: TextAlign.left,
                                       title: 'Area',
                                       keyboardType: TextInputType.text),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
-                                      initialValue:
-                                          widget.practicanteEntity.dni,
+                                      initialValue: paramsAltaBaja.dni,
                                       maxLength: 1,
                                       textAlign: TextAlign.left,
                                       title: 'Dni',
                                       keyboardType: TextInputType.text),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
-                                      initialValue:
-                                          widget.practicanteEntity.nombres,
+                                      initialValue: paramsAltaBaja.nombres,
                                       maxLength: 1,
                                       textAlign: TextAlign.left,
                                       title: 'Nombres',
@@ -173,23 +179,27 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                                 MainAxisAlignment.spaceAround,
                                             children: [
                                               Expanded(
-                                                child: LabelWithFormFieldInitial(
-                                                    initialValue: widget
-                                                        .practicanteEntity
-                                                        .tramite,
-                                                    maxLength: 1,
-                                                    textAlign: TextAlign.center,
-                                                    title: 'Tramite',
-                                                    keyboardType:
-                                                        TextInputType.text),
+                                                child:
+                                                    LabelWithFormFieldInitial(
+                                                        readOnly: true,
+                                                        initialValue:
+                                                            paramsAltaBaja
+                                                                .tramite,
+                                                        maxLength: 1,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        title: 'Tramite',
+                                                        keyboardType:
+                                                            TextInputType.text),
                                               ),
                                               SizedBox(width: 20.0),
                                               Expanded(
                                                 child:
                                                     LabelWithFormFieldInitial(
-                                                        initialValue: widget
-                                                            .practicanteEntity
-                                                            .estado,
+                                                        readOnly: true,
+                                                        initialValue:
+                                                            paramsAltaBaja
+                                                                .estado,
                                                         maxLength: 1,
                                                         textAlign:
                                                             TextAlign.center,
@@ -199,15 +209,18 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                               ),
                                               SizedBox(width: 20.0),
                                               Expanded(
-                                                child: LabelWithFormFieldInitial(
-                                                    initialValue: widget
-                                                        .practicanteEntity
-                                                        .estados,
-                                                    maxLength: 1,
-                                                    textAlign: TextAlign.center,
-                                                    title: 'SigaNet',
-                                                    keyboardType:
-                                                        TextInputType.text),
+                                                child:
+                                                    LabelWithFormFieldInitial(
+                                                        readOnly: true,
+                                                        initialValue:
+                                                            paramsAltaBaja
+                                                                .estados,
+                                                        maxLength: 1,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        title: 'SigaNet',
+                                                        keyboardType:
+                                                            TextInputType.text),
                                               ),
                                             ],
                                           ),
@@ -219,9 +232,10 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                               Expanded(
                                                 child:
                                                     LabelWithFormFieldInitial(
-                                                        initialValue: widget
-                                                            .practicanteEntity
-                                                            .estadoPap,
+                                                        readOnly: true,
+                                                        initialValue:
+                                                            paramsAltaBaja
+                                                                .estadoPap,
                                                         maxLength: 1,
                                                         textAlign:
                                                             TextAlign.center,
@@ -233,9 +247,10 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                               Expanded(
                                                 child:
                                                     LabelWithFormFieldInitial(
-                                                        initialValue: widget
-                                                            .practicanteEntity
-                                                            .estadoOpp,
+                                                        readOnly: true,
+                                                        initialValue:
+                                                            paramsAltaBaja
+                                                                .estadoOpp,
                                                         maxLength: 1,
                                                         textAlign:
                                                             TextAlign.center,
@@ -247,9 +262,10 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                               Expanded(
                                                 child:
                                                     LabelWithFormFieldInitial(
-                                                        initialValue: widget
-                                                            .practicanteEntity
-                                                            .estadoAir,
+                                                        readOnly: true,
+                                                        initialValue:
+                                                            paramsAltaBaja
+                                                                .estadoAir,
                                                         maxLength: 1,
                                                         textAlign:
                                                             TextAlign.center,
@@ -297,46 +313,32 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Expanded(
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                _formKey.currentState!.save();
-                                                print(
-                                                    paramsAltaBaja.toString());
-                                                this._bloc.add(
-                                                    AltaBajaPracEventLoad(
-                                                        params:
-                                                            paramsAltaBaja));
-                                              }
-                                            },
-                                            child:
-                                                false //(this.blocEdit.state is EditConfianzaSaving)
-                                                    ? Center(
-                                                        heightFactor: 1,
-                                                        widthFactor: 1,
-                                                        child: SizedBox(
-                                                          height: 16,
-                                                          width: 16,
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                            valueColor:
-                                                                AlwaysStoppedAnimation<
-                                                                        Color>(
-                                                                    Colors
-                                                                        .blue),
-                                                            strokeWidth: 1.5,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Text('Guardar'),
+                                          child: fluentUi.FilledButton(
+                                            child: Text('Guardar'),
+                                            onPressed: (paramsAltaBaja.estado ==
+                                                        'VACANTE' &&
+                                                    paramsAltaBaja.estadoAir ==
+                                                        'ELIMINADO')
+                                                ? () {
+                                                    if (_formKey.currentState!
+                                                        .validate()) {
+                                                      _formKey.currentState!
+                                                          .save();
+
+                                                      this._bloc.add(
+                                                          AltaBajaPracEventLoad(
+                                                              params:
+                                                                  paramsAltaBaja));
+                                                    }
+                                                  }
+                                                : null,
                                           ),
                                         ),
                                         SizedBox(
                                           width: 10,
                                         ),
                                         Expanded(
-                                            child: ElevatedButton(
+                                            child: fluentUi.FilledButton(
                                                 onPressed: () =>
                                                     Navigator.pop(context),
                                                 child: Text('Cancelar')))

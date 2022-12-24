@@ -6,7 +6,6 @@ import 'package:rrhh_clean/core/errors/exceptions.dart';
 
 import '../data/datasources/i_base_excel_datasource.dart';
 import '../data/model/cas_excel_model.dart';
-import '../../../../core/errors/exceptions.dart';
 
 class BaseExcelDatasourceImpl implements IBaseExcelDatasource {
   var url = Uri.https(

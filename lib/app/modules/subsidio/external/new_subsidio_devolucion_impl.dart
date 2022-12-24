@@ -29,8 +29,6 @@ class NewSubsidioDevolucionDatasourceImpl
       var response = await clientCustom.request('POST', url.toString(),
           jsonEncode(params.toMap()), (i) => responseFromJson(i));
 
-      Println('Nuevo ' + response.toString());
-
       SubsidioDevolucionModel result =
           SubsidioDevolucionModel.fromJson(response.data[0]);
       return result;

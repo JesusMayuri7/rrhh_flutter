@@ -2,16 +2,16 @@ import 'package:equatable/equatable.dart';
 
 class AreaEntity extends Equatable {
   AreaEntity({
-    required this.orgAreaId,
+    required this.id,
     required this.descArea,
   });
 
-  final int orgAreaId;
+  final int id;
   final String descArea;
 
   @override
-  String toString() => 'AreaEntity(orgAreaId: $orgAreaId, descArea: $descArea)';
+  String toString() => 'AreaEntity(orgAreaId: $id, descArea: $descArea)';
 
   @override
-  List<Object?> get props => [this.orgAreaId, this.descArea];
+  List<Object?> get props => [this.id, this.descArea];
 }

@@ -76,7 +76,6 @@ class ListCertificadoBloc
     emit(LoadingListCertificadoState());
     var result = await listarUseCase(NoParams());
     emit(result.fold((l) {
-      print(l.toString());
       return InitialListCertificadoState();
     }, (r) {
       return LoadedListCertificadoState(

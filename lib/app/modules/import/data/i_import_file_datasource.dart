@@ -18,8 +18,13 @@ class ImportFileDatasourceImpl implements IImportFileDatasource {
   @override
   Future<ResponseModel> importFile(ParamsInportFile params) async {
     var response = await httpCustom.load(url.toString(), params, 'POST');
-    print(response.toString());
-    return ResponseModel(status: true, message: '', data: response.toString());
+
+    ResponseModel responseModel = responseFromJson(response.toString());
+
+    return ResponseModel(
+        status: responseModel.status,
+        message: responseModel.message,
+        data: responseModel.data);
   }
 
   ver(String str) {}

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/foundation.dart';
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
 
 import '../../../../../../core/errors/failure.dart';

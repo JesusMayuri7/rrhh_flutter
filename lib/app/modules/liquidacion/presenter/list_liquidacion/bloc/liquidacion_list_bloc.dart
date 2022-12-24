@@ -113,7 +113,6 @@ class LiquidacionListBloc
   _onGetListLiquidacionEvent(
       GetListLiquidacionEvent event, Emitter<LiquidacionListState> emit) async {
     var result = await this.getListLiquidacionUseCase(event.anio);
-    print('solicitando liquidacioens');
     emit(result.fold((l) {
       if (state is LiquidacionListLoaded)
         return (state as LiquidacionListLoaded)
@@ -172,7 +171,6 @@ class LiquidacionListBloc
             liquidacionId: event.liquidacionId));
 
     emit(updateLiquidacion.fold((l) {
-      print('error ' + l.toString());
       return LiquidacionListInitial();
     }, (r) {
       LiquidacionEntity liquidacion = r['data'];
@@ -187,6 +185,7 @@ class LiquidacionListBloc
               if (item.id == liquidacion.id)
                 item.copyWith(
                     metaId: liquidacion.metaId,
+                    fuenteId: liquidacion.fuenteId,
                     finalidad: liquidacion.finalidad,
                     certificadoId: liquidacion.certificadoId,
                     dscCertificado: liquidacion.dscCertificado,
@@ -238,12 +237,9 @@ class LiquidacionListBloc
         //.map((key, value) => MapEntry(key, value.map((e) => {'finalidad': e['finalidad']})))
         ;
 
-    //  print('fuente ' + fuenteGroup.toString());
-
     Map<String, dynamic> finalMap = Map();
 
     for (var finalidad in (fuenteGroup.keys)) {
-      //print('finalidad ' + fuenteGroup[finalidad].toString());
       double totalFuente = 0;
       var map = Map();
       var finalidadGroup =
@@ -256,11 +252,7 @@ class LiquidacionListBloc
                     return e;
                   }).toList()));
 
-      // map[finalidad] = finalidadGroup[finalidad]; // Agrega un nuevo campo a la altura de finalidad
-
-      // print(finalidadGroup);
       for (var clasificador in finalidadGroup.keys) {
-        // print(finalidadGroup[clasificador].toString());
         var clasificadorGroup = finalidadGroup[clasificador];
         map[clasificador] = clasificadorGroup
             ?.map((e) => (e['liquidacionDetalle'] as List).where((element) {
@@ -273,7 +265,6 @@ class LiquidacionListBloc
           'montoDevolucion': 0
         }, (Map previousValue, element) {
           totalFuente += element.first['montoCertificado'].toDouble();
-          //print(element.first['montoCertificado'].toString());
           return {
             'montoCertificado': previousValue['montoCertificado'].toDouble() +
                 element.first['montoCertificado'].toDouble(),
@@ -287,18 +278,11 @@ class LiquidacionListBloc
         });
       }
       fuentes[finalidad] = totalFuente;
-      print('totalFuente ' + totalFuente.toString());
-      print('fuentes ' + fuentes.toString());
 
       map = {finalidad: map};
 
-      //print('finalMpa ' + finalMap.toString());
-
       finalMap = {...finalMap, ...map};
-      //finalMap[]
     }
-
-    print('finalMap ' + finalMap.toString());
 
     return finalMap;
 /*

@@ -161,12 +161,6 @@ class LiquidacionDetalleDataSource extends DataGridSource {
               columnName: 'monto_certificado', value: newCellValue);
 
 */
-      print('columname ' +
-          column.columnName +
-          ' ' +
-          newCellValue.toString() +
-          ' ' +
-          listLiquidacionDetalle[dataRowIndex].id.toString());
 
       this.bloc.add(UpdatedLiquidacionDetalleEvent(
           liquidacionDetalle: listLiquidacionDetalle,

@@ -1,21 +1,30 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
-class DocumentoDetalleEntity extends Equatable {
-  DocumentoDetalleEntity({
+class RequerimientoDetalleEntity extends Equatable {
+  RequerimientoDetalleEntity({
     required this.cargo,
     required this.monto,
     required this.cantidad,
     required this.subAreaId,
     required this.descSubarea,
-    required this.requerimientoId,
+    required this.id,
+    required this.fuenteId,
+    required this.descFuente,
+    required this.metaId,
+    required this.descMeta,
   });
 
   final String cargo;
-  final int monto;
+  final num monto;
   final int cantidad;
   final int subAreaId;
   final String descSubarea;
-  final int requerimientoId;
+  final int id;
+  final int fuenteId;
+  final String descFuente;
+  final int metaId;
+  final String descMeta;
 
   @override
   List<Object> get props {
@@ -25,7 +34,12 @@ class DocumentoDetalleEntity extends Equatable {
       cantidad,
       subAreaId,
       descSubarea,
-      requerimientoId,
+      id,
+      fuenteId,
+      descFuente,
     ];
   }
+
+  @override
+  bool get stringify => true;
 }

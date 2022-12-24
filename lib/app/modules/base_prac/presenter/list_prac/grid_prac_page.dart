@@ -12,11 +12,11 @@ class GridPracPage extends StatelessWidget {
   final List<PracticanteEntity> data;
   final GlobalKey<SfDataGridState> keyGrid;
 
-  EditingGestureType editingGestureType = EditingGestureType.doubleTap;
+  final EditingGestureType editingGestureType = EditingGestureType.doubleTap;
   late ListPracticanteDataSource listPracticanteDataSource;
 
   /// Default sorting operating in drop down widget
-  List<String> showMenuItems = <String>[
+  final List<String> showMenuItems = <String>[
     'Filter',
     'Clear filter',
   ];
@@ -107,12 +107,12 @@ class GridPracPage extends StatelessWidget {
       // Removed the extra pixels to aligned the pop up in the bottom of header cell.
       dy -= 0.0;
     }
-    print(listPracticanteDataSource.rows
+/*     print(listPracticanteDataSource.rows
         .firstWhereIndexedOrNull(
             (index, element) => index == details.rowColumnIndex.columnIndex)!
         .getCells()
         .first
-        .value);
+        .value); */
 
     showMenu(
         context: context,
@@ -122,9 +122,7 @@ class GridPracPage extends StatelessWidget {
 
   Widget buildMenuItem(GridColumn column, String value) {
     return GestureDetector(
-        onTap: () {
-          print('filtro ' + column.columnName);
-        },
+        onTap: () {},
         child: Container(width: 130, height: 30, child: Text(value)));
   }
 

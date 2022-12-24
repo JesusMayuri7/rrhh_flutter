@@ -21,7 +21,6 @@ class PimCasDatasourceImpl implements IPimCasDatasource {
     var url = Uri.http('rrhh.pvn.gob.pe',
         '/api/presupuestal/presupuesto_cas/' + anio, {'q': '{http}'});
     try {
-      print('external ');
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
 

@@ -28,4 +28,4 @@ class ImportExport extends ImportEvent {
   });
 }
 
-class ImportLoading extends ImportEvent {}
+class ImportLoadingEvent extends ImportEvent {}

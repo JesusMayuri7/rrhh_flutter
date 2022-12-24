@@ -12,11 +12,11 @@ class GridDocumentosPage extends StatelessWidget {
   final List<DocumentoEntity> data;
   final GlobalKey<SfDataGridState> keyGrid;
 
-  EditingGestureType editingGestureType = EditingGestureType.doubleTap;
+  final EditingGestureType editingGestureType = EditingGestureType.doubleTap;
   late ListDocumentosDataSource listDocumentosDataSource;
 
   /// Default sorting operating in drop down widget
-  List<String> showMenuItems = <String>[
+  final List<String> showMenuItems = <String>[
     'Filter',
     'Clear filter',
   ];
@@ -37,9 +37,9 @@ class GridDocumentosPage extends StatelessWidget {
                   currentCellStyle: DataGridCurrentCellStyle(
                       borderWidth: 2, borderColor: Colors.lightBlue[800]!),
                   rowHoverColor: Colors.blue,
-                  sortIconColor: Colors.redAccent,
+                  sortIconColor: Colors.white,
                   brightness: Theme.of(context).brightness,
-                  headerHoverColor: Colors.white.withOpacity(0.3),
+                  headerHoverColor: Colors.white.withOpacity(0.2),
                   headerColor: Colors.lightBlue[800],
                   rowHoverTextStyle: TextStyle(color: Colors.white)),
               child: ScrollConfiguration(
@@ -48,33 +48,46 @@ class GridDocumentosPage extends StatelessWidget {
                   PointerDeviceKind.touch,
                   PointerDeviceKind.mouse,
                 }),
-                child: SfDataGrid(
-                    key: this.keyGrid,
-                    footer: Container(),
-                    onCellSecondaryTap: (DataGridCellTapDetails details) {
-                      if (details.rowColumnIndex.rowIndex > 0) {
-                        buildShowMenu(context, details);
-                      }
-                    },
-                    footerHeight: 5,
-                    highlightRowOnHover: true,
-                    footerFrozenRowsCount: 0,
-                    footerFrozenColumnsCount: 1,
-                    source: listDocumentosDataSource,
-                    headerRowHeight: 21,
-                    rowHeight: 48,
-                    isScrollbarAlwaysShown: true,
-                    gridLinesVisibility: GridLinesVisibility.both,
-                    headerGridLinesVisibility: GridLinesVisibility.both,
-                    allowSorting: true,
-                    allowMultiColumnSorting: true,
-                    allowTriStateSorting: true,
-                    showSortNumbers: true,
-                    selectionMode: SelectionMode.single,
-                    navigationMode: GridNavigationMode.cell,
-                    allowEditing: true,
-                    editingGestureType: editingGestureType,
-                    columns: this.columns),
+                child: Container(
+                  child: SfDataGrid(
+                      key: this.keyGrid,
+                      footer: Container(),
+                      onCellSecondaryTap: (DataGridCellTapDetails details) {
+                        if (details.rowColumnIndex.rowIndex > 0) {
+                          buildShowMenu(context, details);
+                        }
+                      },
+                      footerHeight: 5,
+                      highlightRowOnHover: true,
+                      footerFrozenRowsCount: 0,
+                      footerFrozenColumnsCount: 1,
+                      source: listDocumentosDataSource,
+                      headerRowHeight: 21,
+                      rowHeight: 48,
+                      isScrollbarAlwaysShown: true,
+                      gridLinesVisibility: GridLinesVisibility.both,
+                      headerGridLinesVisibility: GridLinesVisibility.both,
+                      allowSorting: true,
+                      allowMultiColumnSorting: true,
+                      allowTriStateSorting: true,
+                      showSortNumbers: true,
+                      selectionMode: SelectionMode.single,
+                      navigationMode: GridNavigationMode.cell,
+                      allowEditing: true,
+                      editingGestureType: editingGestureType,
+                      columns: this.columns,
+                      tableSummaryRows: [
+                        GridTableSummaryRow(
+                            showSummaryInRow: false,
+                            columns: [
+                              GridSummaryColumn(
+                                  name: 'Count',
+                                  columnName: 'anio',
+                                  summaryType: GridSummaryType.count)
+                            ],
+                            position: GridTableSummaryRowPosition.bottom)
+                      ]),
+                ),
               ),
             ),
           ),
@@ -95,12 +108,12 @@ class GridDocumentosPage extends StatelessWidget {
       // Removed the extra pixels to aligned the pop up in the bottom of header cell.
       dy -= 0.0;
     }
-    print(listDocumentosDataSource.rows
+/*     print(listDocumentosDataSource.rows
         .firstWhereIndexedOrNull(
             (index, element) => index == details.rowColumnIndex.columnIndex)!
         .getCells()
         .first
-        .value);
+        .value); */
 
     showMenu(
         context: context,
@@ -110,9 +123,7 @@ class GridDocumentosPage extends StatelessWidget {
 
   Widget buildMenuItem(GridColumn column, String value) {
     return GestureDetector(
-        onTap: () {
-          print('filtro ' + column.columnName);
-        },
+        onTap: () {},
         child: Container(width: 130, height: 30, child: Text(value)));
   }
 

@@ -31,7 +31,7 @@ class GetListJudicialesImpl implements IJudicialesListDataSource {
       //String body = jsonDecode(response.data);
 
       List<JudicialModel> result = judicialModelFromJson(bodyData);
-      print('Judiciales model ' + result.toString());
+
       return ResponseModel(
           data: result, status: response.status, message: response.message);
     } on SocketException {

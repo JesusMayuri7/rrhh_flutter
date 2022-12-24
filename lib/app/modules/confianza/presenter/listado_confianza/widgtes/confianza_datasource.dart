@@ -154,7 +154,6 @@ class ConfianzaDataSource extends DataGridSource {
   }
 
   void updateDataGrid() {
-    print('actualizando confianza');
     notifyListeners();
   }
 }

@@ -37,7 +37,13 @@ class DocumentosListBloc
           .documentosListOriginal
           .where((element) =>
               element.control == event.control &&
-              element.estado == event.estado)
+              element.estado == event.estado &&
+              ((event.criterio.isEmpty
+                      ? true
+                      : element.asunto
+                          .toUpperCase()
+                          .contains(event.criterio.toUpperCase())) ||
+                  element.expedienteMef.contains(event.criterio)))
           .toList();
 
       emit((state as DocumentosListLoaded)

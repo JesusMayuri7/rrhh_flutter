@@ -32,7 +32,6 @@ class GetLiquidacionResumenSiafDatasourceImpl
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           jsonEncode(params), (i) => responseFromJson(i));
 
-      print(response);
       String bodyData = jsonEncode(response.data);
 
       List<LiquidacionResumenModel> liquidacionModel =

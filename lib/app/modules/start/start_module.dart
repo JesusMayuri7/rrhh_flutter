@@ -8,6 +8,7 @@ import 'package:rrhh_clean/app/modules/requerimientos/requerimientos_module.dart
 import 'package:rrhh_clean/app/modules/start/start_fluent.dart';
 import 'package:rrhh_clean/app/modules/subsidio/subsidio_module.dart';
 
+import '../agenda/agenda_module.dart';
 import '../airhsp/airhsp_module.dart';
 import '../base_cap/base_cap_module.dart';
 import '../base_cas/base_cas_module.dart';
@@ -25,19 +26,22 @@ class StartModule extends Module {
   @override
   List<Module> get imports => [
         //AuthModule(),
+        AgendaModule(),
         CertificadosModule(),
         BasePracModule(),
         BaseCasModule(),
         ConfianzaModule(),
         LiquidacionModule(),
         DocumentosModule(),
-        //JudicialesModule(),
+        JudicialesModule(),
+        RequerimientosModule(),
       ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => StartFluent(), children: [
       ModuleRoute('/home', module: HomeModule()),
+      ModuleRoute('/agenda', module: AgendaModule()),
       ModuleRoute('/base_prac', module: BasePracModule()),
       ModuleRoute('/base_cas', module: BaseCasModule()),
       ModuleRoute('/base_cap', module: BaseCapModule()),

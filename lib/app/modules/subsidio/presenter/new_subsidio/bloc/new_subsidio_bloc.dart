@@ -17,7 +17,6 @@ class NewSubsidioBloc extends Bloc<NewSubsidioEvent, NewSubsidioState> {
 
   _onAddSubsidioEventToState(
       AddSubsidioEvent event, Emitter<NewSubsidioState> emit) async {
-    print('event ' + event.params.toString());
     var result = await this.newSubsidioDevolucionUseCase(event.params);
     emit(result.fold((l) {
       return NewSubsidioError(message: l.toString());

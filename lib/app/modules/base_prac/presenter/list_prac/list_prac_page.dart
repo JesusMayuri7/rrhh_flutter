@@ -6,6 +6,7 @@ import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/bloc/list_prac_bloc.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/getColumnsListPrac.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/grid_prac_page.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
@@ -41,7 +42,10 @@ class _ListPracPageState extends State<ListPracPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListPracBloc, ListPracState>(
+    return BlocConsumer<ListPracBloc, ListPracState>(
+      listener: (context, state) => {
+        if (state is ErrorPracLoaded) {showToastError(context, state.message)}
+      },
       bloc: this.bloc,
       builder: (context, state) {
         return Padding(
@@ -70,7 +74,7 @@ class _ListPracPageState extends State<ListPracPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
-                                'Exportara',
+                                'Exportar',
                                 style: TextStyle(fontSize: 12),
                               ),
                               ImageIcon(

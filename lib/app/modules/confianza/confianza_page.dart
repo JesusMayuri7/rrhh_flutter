@@ -1,6 +1,10 @@
+import 'package:fluent_ui/fluent_ui.dart' as f hide Colors;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'presenter/listado_confianza/listado_confianza_page.dart';
 
@@ -30,7 +34,12 @@ class _ConfianzaPageState extends State<ConfianzaPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<ConfianzaBloc, ConfianzaState>(
+        child: BlocConsumer<ConfianzaBloc, ConfianzaState>(
+          listener: (context, state) {
+            if (state is ConfianzaAreaStateError) {
+              showToastError(context, state.toString());
+            }
+          },
           bloc: this.blocConfianza,
           builder: (context, state) {
             if (state is ConfianzaAreaStateLoaded) {
@@ -44,7 +53,12 @@ class _ConfianzaPageState extends State<ConfianzaPage> {
             } else if (state is ConfianzaAreaStateLoading) {
               return Center(child: CircularProgressIndicator());
             } else if (state is ConfianzaAreaStateError) {
-              return Text('Error de conexion');
+              return Center(
+                child: f.FilledButton(
+                    child: Text('Reintentar'),
+                    onPressed: () =>
+                        this.blocConfianza.add(ConfianzaAreaEventLoading())),
+              );
             } else
               return Center(
                 child: Text(

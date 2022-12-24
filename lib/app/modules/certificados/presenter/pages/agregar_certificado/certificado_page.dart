@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'add_certificado_page.dart';
 import 'widgtes/data_certificado.dart';
@@ -12,8 +15,12 @@ import 'widgtes/list_conceptos.dart';
 
 /// Renders column type data grid
 class CertificadoPage extends StatefulWidget {
+  const CertificadoPage({super.key, required this.contextUp});
+
   @override
   _JsonDataSourceDataGridState createState() => _JsonDataSourceDataGridState();
+
+  final BuildContext contextUp;
 }
 
 class _JsonDataSourceDataGridState extends State<CertificadoPage> {
@@ -33,20 +40,25 @@ class _JsonDataSourceDataGridState extends State<CertificadoPage> {
         bloc: this.bloc,
         listener: (previous, current) {
           if (current is LoadedCertificadosState) {
-            print(current.message);
             if (current.status == 'saved') {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.black,
-                content: Text(current.message),
-              ));
+              showToastSuccess(context, current.message);
               this.bloc.add(GetDataInitial());
             }
           }
           if (current is ErrorCertificadoState) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Colors.red,
-              content: Text(current.message),
-            ));
+            MotionToast(
+              height: 60,
+              width: 280,
+              primaryColor: Colors.black,
+              icon: Icons.error,
+              description: Flexible(
+                child: Text(current.message,
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+              position: MotionToastPosition.top,
+              animationType: AnimationType.fromTop,
+            ).show(context);
           }
         },
         builder: (context, stateTotal) {
@@ -83,5 +95,25 @@ class _JsonDataSourceDataGridState extends State<CertificadoPage> {
           } else
             return Center(child: Container(child: Text('Volver a cargar')));
         });
+  }
+
+  Widget toast(String message, bool isError) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: Colors.greenAccent,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(isError ? Icons.error : Icons.check),
+          SizedBox(
+            width: 12.0,
+          ),
+          Text(message),
+        ],
+      ),
+    );
   }
 }

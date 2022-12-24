@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pluto_grid/pluto_grid.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import '../bloc/list/judiciales_list_bloc.dart';
 import 'get_columns_grid.dart';
@@ -26,32 +26,29 @@ class _JudicialGridPageState extends State<JudicialGridPage> {
         bloc: this.blocList,
         listener: (context, state) {
           if (state is JudicialesListError) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(state.message)));
+            showToastError(context, state.message);
           }
         },
         builder: (context, state) {
           if (state is JudicialesListLoaded) {
             rowList.addAll(getRowsGrid(state.judicialesListOriginal));
             //stateManager.notifyListeners();
-            if (stateManager != null) {
-              //stateManager.removeAllRows();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                stateManager.appendRows([
-                  PlutoRow(cells: {
-                    "id": PlutoCell(value: 'e.id'),
-                    "anio": PlutoCell(value: 'e.anio'),
-                    "asunto": PlutoCell(value: 'e.asunto'),
-                    "expediente": PlutoCell(value: 'e.expediente'),
-                    "tipo": PlutoCell(value: 'e.tipo'),
-                    "fecha": PlutoCell(value: 'e.fecha'),
-                    "numero": PlutoCell(value: 'e.numero'),
-                    "destino": PlutoCell(value: 'e.destino'),
-                  })
-                ]);
-                stateManager.notifyListeners();
-              });
-            }
+            //stateManager.removeAllRows();
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              stateManager.appendRows([
+                PlutoRow(cells: {
+                  "id": PlutoCell(value: 'e.id'),
+                  "anio": PlutoCell(value: 'e.anio'),
+                  "asunto": PlutoCell(value: 'e.asunto'),
+                  "expediente": PlutoCell(value: 'e.expediente'),
+                  "tipo": PlutoCell(value: 'e.tipo'),
+                  "fecha": PlutoCell(value: 'e.fecha'),
+                  "numero": PlutoCell(value: 'e.numero'),
+                  "destino": PlutoCell(value: 'e.destino'),
+                })
+              ]);
+              stateManager.notifyListeners();
+            });
           }
           return Column(
             children: [
@@ -69,9 +66,7 @@ class _JudicialGridPageState extends State<JudicialGridPage> {
                       configuration: PlutoGridConfiguration(),
                       columns: columns,
                       rows: rowList,
-                      onChanged: (PlutoGridOnChangedEvent event) {
-                        print('cambio ' + event.toString());
-                      },
+                      onChanged: (PlutoGridOnChangedEvent event) {},
                       onLoaded: (PlutoGridOnLoadedEvent event) =>
                           stateManager = event.stateManager)),
             ],

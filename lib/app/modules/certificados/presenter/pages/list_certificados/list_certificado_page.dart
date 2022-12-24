@@ -48,13 +48,10 @@ class _JsonDataSourceDataGridState extends State<ListCertificadoPage> {
 
   @override
   Widget build(BuildContext context) {
-    // print('reconstruyendo');
     return BlocBuilder<ListCertificadoBloc, ListCertificadoState>(
         bloc: this.bloc,
         builder: (cpmtext, state) {
-          print(state.runtimeType);
           if (state is LoadedListCertificadoState) {
-            print(' si');
             this.jsonDataGridSource.listadoCertificados =
                 state.listCertificadoCur;
             this.jsonDataGridSource.buildDataGridRows();
@@ -122,6 +119,7 @@ class _JsonDataSourceDataGridState extends State<ListCertificadoPage> {
           PointerDeviceKind.mouse,
         }),
         child: SfDataGrid(
+          allowFiltering: true,
           highlightRowOnHover: true,
           footerHeight: 150,
           frozenColumnsCount: 1,
@@ -131,7 +129,6 @@ class _JsonDataSourceDataGridState extends State<ListCertificadoPage> {
           rowHeight: 22,
           gridLinesVisibility: GridLinesVisibility.both,
           headerGridLinesVisibility: GridLinesVisibility.both,
-          allowSorting: true,
           allowMultiColumnSorting: true,
           allowTriStateSorting: true,
           showSortNumbers: true,

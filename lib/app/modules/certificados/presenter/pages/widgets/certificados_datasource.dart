@@ -10,7 +10,6 @@ class CertififadosDataSource extends DataGridSource {
   }
 
   void buildDataGridRows() {
-    //print(basecasList[0].fuenteBase);
     _baseCasDataGridRows = listadoCertificados
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(

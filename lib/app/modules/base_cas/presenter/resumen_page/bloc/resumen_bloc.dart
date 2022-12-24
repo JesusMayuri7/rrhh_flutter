@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:rrhh_clean/app/modules/base_cas/presenter/base_cas_page/listado/listado_cas_page/parameters_page/bloc/headparameters_bloc.dart';
 import '../../../domain/entities/base_cas_entity.dart';
 import '../../../domain/entities/presupuesto_cas_entity.dart';
 import '../../../domain/entities/resumen_entity.dart';
 import '../../../domain/usecases/resumen_cas_use_case.dart';
 
-import '../../base_cas_page/parameters_page/bloc/headparameters_bloc.dart';
 import '../../presupuesto_page/bloc/presupuesto_bloc.dart';
 
 part 'resumen_event.dart';
@@ -27,17 +27,15 @@ class ResumenBloc extends Bloc<ResumenEvent, ResumenState> {
       : super(ResumenLoaded(resumenCasList: [])) {
     presupuestoSubscripcion = presupuestoBloc.stream.listen((state) {
       if (state is PresupuestoLoaded) {
-        print('entro a resumenBloc');
         //add(ResumenCasEventPresupuestoLoading(presupuestoCasList: (presupuestoBloc.state as PresupuestoLoaded).presupuestoCasList));
       }
     });
 
     baseSubscripcion = baseCasBloc.stream.listen((state) {
       if (state is HeadParametersSuccessState) {
-        print('entro a baseCasBloc');
         add(ResumenCasEventBaseCasLoading(
-            baseCasList:
-                (baseCasBloc.state as HeadParametersSuccessState).listadoCas));
+            baseCasList: (baseCasBloc.state as HeadParametersSuccessState)
+                .listadoCas as List<BaseCasEntity>));
       }
     });
 
@@ -172,6 +170,5 @@ class ResumenBloc extends Bloc<ResumenEvent, ResumenState> {
       }
       emit(ResumenLoaded(resumenCasList: resumen));
     }
-    //print(resumen.length.toString());
   }
 }

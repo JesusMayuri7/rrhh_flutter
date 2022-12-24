@@ -14,6 +14,7 @@ import 'package:rrhh_clean/core/external/get_certificados_impl.dart';
 import 'package:rrhh_clean/core/external/get_clasificadores_impl.dart';
 import 'package:rrhh_clean/core/external/get_fuentes_impl.dart';
 import 'package:rrhh_clean/core/external/get_metas_impl.dart';
+import 'package:rrhh_clean/core/external/get_modalidades_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'modules/auth/auth_module.dart';
@@ -44,6 +45,7 @@ class AppModule extends Module {
     Bind((i) => GetMetasImpl(httpCustom: i())),
     Bind((i) => GetAreasImpl(httpCustom: i())),
     Bind((i) => GetFuentesImpl(httpCustom: i())),
+    Bind((i) => GetModalidadesImpl(httpCustom: i())),
     Bind((i) => GetClasificadoresUseCase(repositoryApp: i())),
     Bind((i) => GetCertificadosUseCase(repositoryApp: i())),
     Bind((i) => GetMetasUseCase(repositoryApp: i())),

@@ -12,8 +12,6 @@ class ResumenCasUseCase implements UseCase<List<ResumenEntity>, ParamsResumen> {
   @override
   Future<Either<Failure, List<ResumenEntity>>> call(
       ParamsResumen params) async {
-    //print(params.lista[0].)
-
     double montoRoAcSueldo = 0;
     double montoRoAcEssalud = 0;
     double montoRoAcAguinaldo = 0;
@@ -35,7 +33,6 @@ class ResumenCasUseCase implements UseCase<List<ResumenEntity>, ParamsResumen> {
     int cantidadRdrCn = 0;
 
     if (params.baseCasList.length > 580) params.baseCasList.removeLast();
-    print('usecase ' + params.baseCasList.length.toString());
 
     params.baseCasList.map((e) {
       if ((e.estadoActual == 'OCUPADO') &&
@@ -91,8 +88,6 @@ class ResumenCasUseCase implements UseCase<List<ResumenEntity>, ParamsResumen> {
     result.addAll(_buildMontos(montoRdrCnSueldo, montoRdrCnEssalud,
         montoRdrCnAguinaldo, cantidadRdrCn, params.presupuestoList, 12));
 
-    print('result length' + result.length.toString());
-    print('result ' + result[11].especifica);
     double montoTotales = montoRoAcSueldo +
         montoRoAcEssalud +
         montoRoAcAguinaldo +
@@ -328,7 +323,7 @@ class ResumenCasUseCase implements UseCase<List<ResumenEntity>, ParamsResumen> {
       List<PresupuestoCasEntity> _presupuesto,
       int idxPresupuesto) {
     List<ResumenEntity> resultado = [];
-    print('buildMontos ' + _presupuesto[idxPresupuesto].producto);
+
     resultado.add(ResumenEntity(
         anoEje: _presupuesto[idxPresupuesto].anoEje,
         fuente: _presupuesto[idxPresupuesto].fuente,
@@ -345,7 +340,7 @@ class ResumenCasUseCase implements UseCase<List<ResumenEntity>, ParamsResumen> {
         cantidadTotal: 0,
         montoTotal: 0,
         saldo: 0));
-    print('buildMontos ' + _presupuesto[idxPresupuesto + 1].producto);
+
     resultado.add(ResumenEntity(
         anoEje: _presupuesto[idxPresupuesto + 1].anoEje,
         fuente: _presupuesto[idxPresupuesto + 1].fuente,
@@ -362,7 +357,7 @@ class ResumenCasUseCase implements UseCase<List<ResumenEntity>, ParamsResumen> {
         cantidadTotal: 0,
         montoTotal: 0,
         saldo: 0));
-    print('buildMontos ' + _presupuesto[idxPresupuesto + 2].producto);
+
     resultado.add(ResumenEntity(
         anoEje: _presupuesto[idxPresupuesto + 2].anoEje,
         fuente: _presupuesto[idxPresupuesto + 2].fuente,
@@ -379,7 +374,7 @@ class ResumenCasUseCase implements UseCase<List<ResumenEntity>, ParamsResumen> {
         cantidadTotal: 0,
         montoTotal: 0,
         saldo: 0));
-    print('buildMontos ' + _presupuesto[idxPresupuesto + 3].producto);
+
     resultado.add(ResumenEntity(
         anoEje: _presupuesto[idxPresupuesto + 3].anoEje,
         fuente: _presupuesto[idxPresupuesto + 3].fuente,

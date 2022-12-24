@@ -63,7 +63,6 @@ class ItemListPage extends StatelessWidget {
                   },
                   fullscreenDialog: true));
             } else {
-              print('click desktop');
               // Acuerdate que este bloc no es singleton, por lo tanto tiene que ser la misma instancia de la pagina principal, por eso viene como parametro
               this.blocConceptos.add(ConceptosLoadEvent(
                     ejecutora: '1078',

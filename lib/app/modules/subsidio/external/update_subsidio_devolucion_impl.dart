@@ -28,7 +28,6 @@ class UpdateSubsidioDevolucionDatasourceImpl
     try {
       var response = await clientCustom.request(
           'POST', url.toString(), map, (i) => responseFromJson(i));
-      print(response);
 
       //var body = jsonDecode(response.body);
 

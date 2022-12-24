@@ -24,7 +24,6 @@ class SubsidioDevolucionBloc
   _onSubsidioDevolucionLoadEventToState(SubsidioDevolucionLoad event,
       Emitter<SubsidioDevolucionState> emit) async {
     emit(SubsidioDevolucionLoading());
-    print('load');
     var result = await this.getSubsidioDevolucionUseCase(event.anio);
     emit(result.fold((l) {
       return SubsidioDevolucionError(message: l.toString());

@@ -23,7 +23,6 @@ class GetListCapDatasourceImpl implements IListCapDataSoruce {
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
-      print(response.data);
 
       String bodyData = jsonEncode(response.data);
 

@@ -18,9 +18,6 @@ class GetDownloadDatasourceImpl implements IGetDownloadDatasource {
 
   @override
   Future getDownloadDatasource() async {
-    //Map<String, String?> params = {"anio": anio};
-    // print('external ' + params.toString());
-    List<List<Object>> dataList = [];
     try {
       Response response = await iClientCustom.download(
           'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2022&tipoPersona=1&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
@@ -42,7 +39,6 @@ class GetDownloadDatasourceImpl implements IGetDownloadDatasource {
           if (itemRow > 0) dataList.add(listRow);
           itemRow++;
         }
-        print('data ' + dataList.toString());
       }
       return dataList;
     } on SocketException {

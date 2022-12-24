@@ -12,10 +12,10 @@ ConceptoEntity conceptoModelFromJson(String str) =>
 String conceptoModelToJson(ConceptoEntity data) => json.encode(data.toJson());
 
 class ConceptoEntity extends Equatable {
-  String concepto;
-  String descripcion;
-  String monto;
-  String fuente;
+  final String concepto;
+  final String descripcion;
+  final String monto;
+  final String fuente;
 
   ConceptoEntity({
     required this.concepto,

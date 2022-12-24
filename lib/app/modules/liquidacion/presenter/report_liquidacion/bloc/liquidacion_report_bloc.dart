@@ -22,22 +22,26 @@ class LiquidacionReportBloc
     var responseLiquidacionReport =
         await this.getLiquidacionReportUseCase(event.anio);
     emit(responseLiquidacionReport.fold((l) {
-      print(l.toString());
       return LiquidacionReportError(message: l.toString());
     }, (r) {
-      // print(r.data.toString());
+      List<LiquidacionReportEntity> result =
+          List<LiquidacionReportEntity>.of(r.data)
+              .where((element) => element.dscModalidad == event.dscModalidad)
+              .toList();
       return LiquidacionReportLoaded(
-          liquidacionReport: r.data, liquidacionReportFiltered: r.data);
+          liquidacionReport: r.data,
+          liquidacionReportFiltered: result,
+          dscModalidad: event.dscModalidad);
     }));
   }
 
-  _onLiquidacionReportFilterEventToState(
-      event, Emitter<LiquidacionReportState> emit) async {
+  _onLiquidacionReportFilterEventToState(LiquidacionReportFilter event,
+      Emitter<LiquidacionReportState> emit) async {
     emit((state as LiquidacionReportLoaded).copyWith(
+        dscModalidad: event.dscModalidad,
         liquidacionReportFiltered: (state as LiquidacionReportLoaded)
             .liquidacionReport
-            .where((element) =>
-                element.certificadoDevengadoId == event.certificadoDevengadoId)
+            .where((element) => element.dscModalidad == event.dscModalidad)
             .toList()));
   }
 }

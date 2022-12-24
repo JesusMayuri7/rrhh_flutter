@@ -21,14 +21,11 @@ class NewDocumentoDatasourceImpl implements IDocumentosNewDataSource {
 
   @override
   Future<ResponseModel> newDocumento(ParamsNewDocumento params) async {
-    print('intentar grabar ' + jsonEncode(params.toMap()));
     Uri url = Uri.http('rrhh.pvn.gob.pe', '/api/documentos', {'q': 'http'});
 
     try {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           jsonEncode(params.toMap()), (i) => responseFromJson(i));
-
-      print(response.toString());
 
       DocumentoModel result = DocumentoModel.fromJson(response.data);
       return ResponseModel(

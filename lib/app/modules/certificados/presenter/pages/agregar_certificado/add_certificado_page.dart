@@ -50,22 +50,6 @@ class _AddCertificadoPageState extends State<AddCertificadoPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Expanded(
-                      //flex: 3,
-                      child: LabelWithDropDown<String>(
-                        title: 'Año',
-                        dropdownMenuItemList:
-                            _buildListAnio(['2021', '2022', '2023']),
-                        onChanged: (String? value) {
-                          print(value);
-                          _anioValue = value!;
-                        },
-                        value: _anioValue,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
                     BlocConsumer<CertificadosBloc, CertificadosState>(
                         listener: (previous, current) {},
                         buildWhen: (previous, current) {
@@ -87,7 +71,6 @@ class _AddCertificadoPageState extends State<AddCertificadoPage> {
                                       : []
                                   : [],
                               onChanged: (ModalidadEntity? value) {
-                                print(value.toString());
                                 _modalidadValue = value;
                               },
                               value: _modalidadValue,
@@ -236,7 +219,7 @@ class _AddCertificadoPageState extends State<AddCertificadoPage> {
         child: Text(item),
       ));
     }
-    //_anioValue = anioModel[0];
+    _anioValue = anioModel[0];
     return listAnio;
   }
 

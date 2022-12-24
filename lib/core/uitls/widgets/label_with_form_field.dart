@@ -51,6 +51,7 @@ class LabelWithFormField extends StatelessWidget {
             ),
           ),
           TextFormField(
+            enabled: true,
             textCapitalization: TextCapitalization.characters,
             onSaved: this.onSaved,
             inputFormatters: this.inputFormatters,

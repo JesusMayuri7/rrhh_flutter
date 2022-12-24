@@ -2,8 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-import 'package:syncfusion_flutter_datagrid_export/export.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' hide Column, Row;
 import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
@@ -126,7 +124,6 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                         textAlign: TextAlign.left,
                         keyboardType: TextInputType.text,
                         onFieldSubmitted: (value) {
-                          print('criterio ' + value);
                           this
                               .blocJudicial
                               .add(JudicialesListFilter(criterio: value));

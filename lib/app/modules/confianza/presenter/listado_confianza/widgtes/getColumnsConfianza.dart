@@ -4,14 +4,19 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 List<GridColumn> getColumnsConfianza(BuildContext context) {
   return ([
     GridColumn(
-      width: 60,
+      width: 80,
       columnName: 'modalidad',
       label: Container(
-        alignment: Alignment.center,
-        child: Text(
-          'Modalidad',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        alignment: Alignment.centerLeft,
+        child: Tooltip(
+          message: 'Modalidad',
+          child: Text(
+            'Modalidad',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+          ),
         ),
       ),
     ),
@@ -21,6 +26,8 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
       label: Container(
         alignment: Alignment.center,
         child: Text(
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           'Tipo',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
@@ -28,14 +35,19 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 50,
+      width: 60,
       columnName: 'plaza',
       label: Container(
         alignment: Alignment.center,
-        child: Text(
-          'AIRHSP',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        child: Tooltip(
+          message: 'AIRHSP',
+          child: Text(
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            'AIRHSP',
+            style: TextStyle(
+                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+          ),
         ),
       ),
     ),

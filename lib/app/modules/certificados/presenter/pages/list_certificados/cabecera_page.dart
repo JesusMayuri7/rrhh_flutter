@@ -39,6 +39,7 @@ class _CabeceraPageState extends State<CabeceraPage> {
                   Container(
                     width: 200,
                     child: TextFormField(
+                        controller: textCertificado,
                         textAlign: TextAlign.right,
                         keyboardType: TextInputType.text,
                         onFieldSubmitted: (value) {
@@ -127,7 +128,6 @@ class _CabeceraPageState extends State<CabeceraPage> {
 
       sheet.importList(row, index + 2, 1, false);
     }
-    //print(sheet.toString());
 
 // Save and dispose workbook.
     final List<int> bytes = workbook.saveAsStream();

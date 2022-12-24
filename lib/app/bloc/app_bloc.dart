@@ -15,7 +15,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   _onAnioSelectedToState(
       AppAnioSelectEvent event, Emitter<AppState> emit) async {
-    print('emitiendo');
     emit(
         AppAnioSelectedState(anioSelected: event.anioSelected, isLogged: true));
   }

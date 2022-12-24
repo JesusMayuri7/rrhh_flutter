@@ -18,8 +18,6 @@ class UpdateLiquidacionDatasourceImpl implements IUpdateLiquidacionDatasource {
   @override
   Future<Map<String, dynamic>> upddateLiquidacion(
       ParamsUpdateLiquidacion paramsUpdateLiquidacion) async {
-    print(paramsUpdateLiquidacion.toString());
-
     Map<String, dynamic> params = {
       "liquidacion_id": paramsUpdateLiquidacion.liquidacionId,
       "campo": paramsUpdateLiquidacion.campo,

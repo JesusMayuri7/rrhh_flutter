@@ -1,17 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:collection/collection.dart';
 import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
-import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
-import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 import 'package:rrhh_clean/core/uitls/widgets/dropdownmenuitem_presupuesto.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import '../../cubit/judiciales_bloc.dart';
 import '../../domain/judicial_entity.dart';
@@ -40,18 +37,13 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
 
   List<String> _presupuesto = ['ACTIVO', 'PREVISTA', 'NO_PREVISTA'];
   List<String> _estadoProcesal = [
-    'SEGUIMIENTO',
-    'DEMANDA_ADMITIDA',
-    'MEDIDA_CAUTELAR',
-    'SENTENCIA_1RA_INSTANCIA',
-    'SENTENCIA_2DA_INSTANCIA',
-    'SENTENCIA_CASACION',
-    'TRIBUNAL_CONSTITUACIONAL',
+    'EJECUCION_SENTENCIA',
+    'EJECUCION_MEDIDA',
     'COSA_JUZGADA'
   ];
 
   String presupuestoSelected = 'NO_PREVISTA';
-  String estadoProcesalSelected = 'SEGUIMIENTO';
+  String estadoProcesalSelected = 'EJECUCION_MEDIDA';
   int? _fuenteEntity;
   int? _metaEntity;
   int? _areaEntity;
@@ -66,7 +58,7 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
         : widget.judicialEntity.fuenteId;
 
     _areaEntity = widget.judicialEntity.orgAreaId == 0
-        ? (this._blocJudicial.state as JudicialesLoaded).areas.first.orgAreaId
+        ? (this._blocJudicial.state as JudicialesLoaded).areas.first.id
         : widget.judicialEntity.orgAreaId;
 
     _metaEntity = widget.judicialEntity.metaId == 0
@@ -118,15 +110,7 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
               );
             }
             if (state is NewJudicialError) {
-              print(state.message);
-              f.showSnackbar(
-                context,
-                f.Snackbar(
-                  content: Text('Error: no se puede grabar! ' + state.message),
-                ),
-              );
-              /*      ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error al grabar: ' + state.message))); */
+              showToastError(context, state.message);
             }
           },
           builder: (context, state) {
@@ -416,23 +400,26 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                     ],
                                   ),
                                   SizedBox(height: 5.0),
-                                  LabelWithFormFieldInitial(
-                                    initialValue:
-                                        paramsAltaBaja.nroExpedienteJudicial,
-                                    maxLength: 100,
-                                    textAlign: TextAlign.right,
-                                    title: 'N° Exp. Judicial',
-                                    keyboardType: TextInputType.text,
-                                    onSaved: (value) {
-                                      paramsAltaBaja.nroExpedienteJudicial =
-                                          value!;
-                                    },
-                                  ),
-                                  SizedBox(height: 5.0),
                                   Row(
                                     children: [
                                       Expanded(
-                                          flex: 3,
+                                        flex: 5,
+                                        child: LabelWithFormFieldInitial(
+                                          initialValue: paramsAltaBaja
+                                              .nroExpedienteJudicial,
+                                          maxLength: 10,
+                                          textAlign: TextAlign.right,
+                                          title: 'N° Exp. Judicial',
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsAltaBaja
+                                                .nroExpedienteJudicial = value!;
+                                          },
+                                        ),
+                                      ),
+                                      SizedBox(width: 20.0),
+                                      Expanded(
+                                          flex: 2,
                                           child: LabelWithFormFieldInitial(
                                             initialValue: paramsAltaBaja
                                                 .montoJudicial
@@ -440,7 +427,7 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                             maxLength: 10,
                                             maxLines: 1,
                                             textAlign: TextAlign.right,
-                                            title: 'Monto Judicial',
+                                            title: 'Monto Jud.',
                                             keyboardType: TextInputType.text,
                                             onSaved: (value) {
                                               paramsAltaBaja.montoJudicial =
@@ -449,9 +436,9 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                           )),
                                       SizedBox(width: 20.0),
                                       Expanded(
-                                        flex: 4,
+                                        flex: 5,
                                         child: LabelWithDropDown<String>(
-                                          title: 'Presupuesto',
+                                          title: 'Estado Procesal',
                                           value: paramsAltaBaja.estadoProcesal,
                                           dropdownMenuItemList:
                                               buildCombo(_estadoProcesal),
@@ -481,7 +468,7 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                     maxLength: 255,
                                     textAlign: TextAlign.left,
                                     title: 'Observacion',
-                                    maxLines: 1,
+                                    maxLines: 3,
                                     keyboardType: TextInputType.text,
                                     onSaved: (value) {
                                       paramsAltaBaja.observacion = value!;
@@ -500,34 +487,13 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 _formKey.currentState!.save();
-                                                print(
-                                                    paramsAltaBaja.toString());
                                                 this._bloc.add(
                                                     NewDocumentLoadEvent(
                                                         paramsNewJudicial:
                                                             paramsAltaBaja));
                                               }
                                             },
-                                            child:
-                                                false //(this.blocEdit.state is EditConfianzaSaving)
-                                                    ? Center(
-                                                        heightFactor: 1,
-                                                        widthFactor: 1,
-                                                        child: SizedBox(
-                                                          height: 16,
-                                                          width: 16,
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                            valueColor:
-                                                                AlwaysStoppedAnimation<
-                                                                        Color>(
-                                                                    Colors
-                                                                        .blue),
-                                                            strokeWidth: 1.5,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Text('Guardar'),
+                                            child: Text('Guardar'),
                                           ),
                                         ),
                                         SizedBox(

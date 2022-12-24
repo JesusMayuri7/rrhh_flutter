@@ -7,6 +7,7 @@ import 'package:rrhh_clean/app/modules/documentos/domain/new_documentos_use_case
 import 'package:rrhh_clean/app/modules/documentos/presenter/bloc/new/bloc/new_documento_bloc.dart';
 
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import '../../domain/documento_entity.dart';
 
@@ -67,15 +68,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
               );
             }
             if (state is NewDocumentoError) {
-              print(state.message);
-              f.showSnackbar(
-                context,
-                f.Snackbar(
-                  content: Text('Error: no se puede grabar! ' + state.message),
-                ),
-              );
-              /*      ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error al grabar: ' + state.message))); */
+              showToastError(context, state.message);
             }
           },
           builder: (context, state) {
@@ -86,8 +79,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                   Text('Documentos'),
                   SizedBox(height: 10.0),
                   Expanded(
-                    child: Scrollbar(
-                      thumbVisibility: true,
+                    child: SingleChildScrollView(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Padding(
@@ -188,7 +180,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                                           child: LabelWithFormFieldInitial(
                                             initialValue: widget
                                                 .documentoEntity.numeroPvn,
-                                            maxLength: 15,
+                                            maxLength: 50,
                                             textAlign: TextAlign.center,
                                             title: 'N° Doc. PVN',
                                             keyboardType: TextInputType.text,
@@ -290,34 +282,13 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 _formKey.currentState!.save();
-                                                print(
-                                                    paramsAltaBaja.toString());
                                                 this._bloc.add(
                                                     NewDocumentLoadEvent(
                                                         paramsNewDocumento:
                                                             paramsAltaBaja));
                                               }
                                             },
-                                            child:
-                                                false //(this.blocEdit.state is EditConfianzaSaving)
-                                                    ? Center(
-                                                        heightFactor: 1,
-                                                        widthFactor: 1,
-                                                        child: SizedBox(
-                                                          height: 16,
-                                                          width: 16,
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                            valueColor:
-                                                                AlwaysStoppedAnimation<
-                                                                        Color>(
-                                                                    Colors
-                                                                        .blue),
-                                                            strokeWidth: 1.5,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Text('Guardar'),
+                                            child: Text('Guardar'),
                                           ),
                                         ),
                                         SizedBox(

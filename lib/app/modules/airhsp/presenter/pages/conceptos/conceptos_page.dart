@@ -17,8 +17,6 @@ class ConceptosPage extends StatelessWidget {
       {required this.codPlaza,
       required this.nombres,
       required this.tipoPersona}) {
-    print('Conceptos: codPlaza ' + this.codPlaza);
-    print('Concewptos: tipo de persona ' + this.tipoPersona);
     blocConceptos.add(ConceptosLoadEvent(
         ejecutora: '1078',
         codPlaza: this.codPlaza,
