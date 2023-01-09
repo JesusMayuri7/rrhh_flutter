@@ -4,7 +4,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 List<GridColumn> getColumnsCap(BuildContext context) {
   return ([
     GridColumn(
-      width: 55,
+      width: 85,
       label: Container(
         alignment: Alignment.center,
         child: Text(
@@ -17,7 +17,33 @@ List<GridColumn> getColumnsCap(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 50,
+      width: 90,
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Presupuesto',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'presupuesto',
+      //columnWidthMode: ColumnWidthMode.fill,
+    ),
+    GridColumn(
+      width: 65,
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Año',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'anio',
+      //columnWidthMode: ColumnWidthMode.fill,
+    ),
+    GridColumn(
+      width: 60,
       label: Container(
         alignment: Alignment.center,
         child: Text(
@@ -30,12 +56,11 @@ List<GridColumn> getColumnsCap(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 50,
+      width: 60,
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'Plaza Ant.',
-          overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
           maxLines: 1,
@@ -57,7 +82,7 @@ List<GridColumn> getColumnsCap(BuildContext context) {
         ),
       ),
       columnName: 'fuente_base',
-      width: 50,
+      width: 70,
       ////columnWidthMode: ColumnWidthMode.fill,
       //width: model.isWeb ? 135 : 90,
     ),
@@ -66,13 +91,12 @@ List<GridColumn> getColumnsCap(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Fuente PAP',
-          overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
       ),
       columnName: 'fuente_pap',
-      width: 50,
+      width: 70,
       ////columnWidthMode: ColumnWidthMode.fill,
       //width: model.isWeb ? 135 : 90,
     ),
@@ -103,7 +127,7 @@ List<GridColumn> getColumnsCap(BuildContext context) {
         ),
       ),
       columnName: 'actividad',
-      width: 65,
+      width: 70,
       ////columnWidthMode: ColumnWidthMode.fill,
       //width: model.isWeb ? 135 : 90,
     ),
@@ -131,7 +155,7 @@ List<GridColumn> getColumnsCap(BuildContext context) {
         ),
       ),
       columnName: 'meta',
-      width: 45,
+      width: 60,
     ),
     GridColumn(
       label: Container(
@@ -164,7 +188,6 @@ List<GridColumn> getColumnsCap(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Cargo PAP',
-          overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
@@ -177,7 +200,6 @@ List<GridColumn> getColumnsCap(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Estado OPP',
-          overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
@@ -436,12 +458,11 @@ List<GridColumn> getColumnsCap(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 40,
+      width: 70,
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'Eps ?',
-          overflow: TextOverflow.ellipsis,
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),

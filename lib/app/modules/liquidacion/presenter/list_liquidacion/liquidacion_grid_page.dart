@@ -11,6 +11,7 @@ import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_d
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_entity.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/list_liquidacion/bloc/liquidacion_list_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/new_liquidacion/new_liquidacion_page.dart';
+import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
@@ -84,28 +85,31 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
         },
         builder: (context, state) {
           if (state is LiquidacionListLoaded) {
-            liquidacionDataSource.listLiquidacionFiltered =
-                state.listLiquidacionFiltered;
-            liquidacionDataSource.buildDataGridRows();
-            liquidacionDataSource.updateDataGrid();
-            List<List<LiquidacionDetalleEntity>> data = liquidacionDataSource
-                .listLiquidacionFiltered
-                .map((e) => e.liquidacionDetalle)
-                .toList();
-            List<LiquidacionDetalleEntity> flat = data.flattened.toList();
-            resumenLiquidacionDetalle =
-                flat.reduce((value, element) => LiquidacionDetalleEntity(
-                      id: 0,
-                      clasificador: 'todos',
-                      montoCertificado:
-                          value.montoCertificado + element.montoCertificado,
-                      montoDevengado:
-                          value.montoDevengado + element.montoDevengado,
-                      montoDevolucion:
-                          value.montoDevolucion + element.montoDevolucion,
-                      montoLiquidacion:
-                          value.montoLiquidacion + element.montoLiquidacion,
-                    ));
+            if (state.status == LiquidacionStatus.LiquidacionLoaded &&
+                state.listLiquidacionFiltered.isNotEmpty) {
+              liquidacionDataSource.listLiquidacionFiltered =
+                  state.listLiquidacionFiltered;
+              liquidacionDataSource.buildDataGridRows();
+              liquidacionDataSource.updateDataGrid();
+              List<List<LiquidacionDetalleEntity>> data = liquidacionDataSource
+                  .listLiquidacionFiltered
+                  .map((e) => e.liquidacionDetalle)
+                  .toList();
+              List<LiquidacionDetalleEntity> flat = data.flattened.toList();
+              resumenLiquidacionDetalle =
+                  flat.reduce((value, element) => LiquidacionDetalleEntity(
+                        id: 0,
+                        clasificador: 'todos',
+                        montoCertificado:
+                            value.montoCertificado + element.montoCertificado,
+                        montoDevengado:
+                            value.montoDevengado + element.montoDevengado,
+                        montoDevolucion:
+                            value.montoDevolucion + element.montoDevolucion,
+                        montoLiquidacion:
+                            value.montoLiquidacion + element.montoLiquidacion,
+                      ));
+            }
           }
 
           return Scaffold(
@@ -149,21 +153,17 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                             ),
                             Container(
                               width: 200,
-                              child: TextField(
-                                maxLength: 50,
+                              child: TextFormField(
                                 textAlign: TextAlign.center,
                                 keyboardType: TextInputType.text,
-
-                                //textAlign: TextAlign.right,
-                                //keyboardType: TextInputType.text,
-                                /*onFieldSubmitted: (value) {
+                                onFieldSubmitted: (value) {
                                   this.listLiquidacionBloc.add(
                                       SetLiquidacionFilteredTextEvent(
                                           modalidad: modalidadSelected,
                                           anio: anioSelected!,
-                                          criterio: value)); 
-                                },*/
-                                /*                             decoration: InputDecoration(
+                                          criterio: value));
+                                },
+                                decoration: InputDecoration(
                                   hintText: 'Filtrar',
                                   prefixIcon: Icon(Icons.search_outlined),
                                   // set the prefix icon constraints
@@ -177,7 +177,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                                       left: 5,
                                       top: 12,
                                       bottom: 0), // Added this
-                                ), */
+                                ),
                               ),
                             ),
                             ElevatedButton(

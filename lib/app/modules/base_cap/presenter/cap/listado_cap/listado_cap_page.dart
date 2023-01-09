@@ -10,20 +10,23 @@ import 'stacked_header.dart';
 
 class ListadoCapPage extends StatelessWidget {
   final List<BaseCapEntity> listadoBaseCap;
-  const ListadoCapPage({
+  ListadoCapPage({
     Key? key,
     required this.listadoBaseCap,
   }) : super(key: key);
+
+  final DataGridController _dataGridController = DataGridController();
 
   @override
   Widget build(BuildContext context) {
     BaseCapDataSource baseCapDataSource =
         BaseCapDataSource(this.listadoBaseCap);
-
+    baseCapDataSource.buildDataGridRows();
+    baseCapDataSource.updateDataGrid();
     return Expanded(
       child: SfDataGridTheme(
         data: SfDataGridThemeData(
-          //gridLineColor: Colors.white,
+          filterIconColor: Colors.black,
           brightness: Theme.of(context).brightness,
           headerHoverColor: Colors.white.withOpacity(0.3),
           headerColor: Colors.lightBlue[800],
@@ -34,27 +37,41 @@ class ListadoCapPage extends StatelessWidget {
             PointerDeviceKind.mouse,
           }),
           child: SfDataGrid(
-            highlightRowOnHover: true,
-            // footerFrozenRowsCount: 1,
-            frozenColumnsCount: 1,
-            //footerFrozenColumnsCount: 1,
-            isScrollbarAlwaysShown: true,
-            source: baseCapDataSource,
-            headerRowHeight: 23,
-            rowHeight: 24,
-            gridLinesVisibility: GridLinesVisibility.both,
-            headerGridLinesVisibility: GridLinesVisibility.both,
+              footerHeight: 0,
 
-            allowSorting: true,
-            allowMultiColumnSorting: true,
-            allowTriStateSorting: true,
-            showSortNumbers: true,
-            selectionMode: SelectionMode.none,
-            navigationMode: GridNavigationMode.cell,
-            stackedHeaderRows: getStackedHeaderRows(),
-            //controller: this._dataGridController,
-            columns: getColumnsCap(context),
-          ),
+              //allowSorting: true,
+              allowFiltering: true,
+              highlightRowOnHover: true,
+              //footerFrozenRowsCount: 1,
+              //footer: Container(color: Colors.amber),
+              frozenColumnsCount: 1,
+              //footerFrozenColumnsCount: 1,
+              isScrollbarAlwaysShown: true,
+              source: baseCapDataSource,
+              headerRowHeight: 23,
+              rowHeight: 22,
+              gridLinesVisibility: GridLinesVisibility.both,
+              headerGridLinesVisibility: GridLinesVisibility.both,
+              selectionMode: SelectionMode.singleDeselect,
+              navigationMode: GridNavigationMode.cell,
+              stackedHeaderRows: getStackedHeaderRows(),
+              controller: this._dataGridController,
+              columns: getColumnsCap(context),
+              tableSummaryRows: [
+                GridTableSummaryRow(
+                    showSummaryInRow: false,
+                    columns: [
+                      GridSummaryColumn(
+                          name: 'Count',
+                          columnName: 'codigo_plaza',
+                          summaryType: GridSummaryType.count),
+                      GridSummaryColumn(
+                          name: 'Sum',
+                          columnName: 'total_basico',
+                          summaryType: GridSummaryType.sum),
+                    ],
+                    position: GridTableSummaryRowPosition.bottom)
+              ]),
         ),
       ),
     );

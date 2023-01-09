@@ -162,6 +162,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.4"
+  filepicker_windows:
+    dependency: "direct main"
+    description:
+      name: filepicker_windows
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   fluent_ui:
     dependency: "direct main"
     description:
@@ -409,7 +416,7 @@ packages:
     source: hosted
     version: "2.0.5"
   path_provider_windows:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider_windows
       url: "https://pub.dartlang.org"
@@ -492,6 +499,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.27.7"
+  screen_retriever:
+    dependency: transitive
+    description:
+      name: screen_retriever
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.4"
   scroll_pos:
     dependency: transitive
     description:
@@ -679,6 +693,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.7.0"
+  window_manager:
+    dependency: "direct main"
+    description:
+      name: window_manager
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.8"
   xdg_directories:
     dependency: transitive
     description:

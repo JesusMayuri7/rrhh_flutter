@@ -74,6 +74,8 @@ class ListPracticanteDataSource extends DataGridSource {
                   columnName: 'estados', value: dataGridRow.estados),
               DataGridCell<String>(
                   columnName: 'estado_air', value: dataGridRow.estadoAir),
+              DataGridCell<String>(
+                  columnName: 'modalidd', value: dataGridRow.modalidad),
               DataGridCell<PracticanteEntity>(
                   columnName: 'acciones', value: dataGridRow),
             ]))

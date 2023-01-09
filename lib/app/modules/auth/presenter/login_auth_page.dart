@@ -10,7 +10,7 @@ import 'package:rrhh_clean/core/uitls/widgets/windows_buttons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
-//import 'package:window_manager/window_manager.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'bloc/auth_bloc.dart';
 
@@ -21,9 +21,7 @@ class AuthPage extends StatefulWidget {
   _AuthPageState createState() => _AuthPageState();
 }
 
-class _AuthPageState extends State<AuthPage>
-//with WindowListener
-{
+class _AuthPageState extends State<AuthPage> with WindowListener {
   List<String> _anios = ['2020', '2021', '2022', '2023'];
   static final DateFormat formatter = DateFormat('yyyy');
   String _anioSelected = formatter.format(DateTime.now());
@@ -36,19 +34,19 @@ class _AuthPageState extends State<AuthPage>
 
   @override
   void dispose() {
-    //windowManager.removeListener(this);
+    windowManager.removeListener(this);
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    //windowManager.addListener(this);
+    windowManager.addListener(this);
   }
 
   @override
   void onWindowClose() async {
-    //windowManager.destroy();
+    await windowManager.destroy();
   }
 
   @override

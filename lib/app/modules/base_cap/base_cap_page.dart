@@ -16,10 +16,13 @@ class _BaseCapPageState extends State<BaseCapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: pageViewController,
-        onPageChanged: (a) => _selectedIndex,
-        children: [CapPage()],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: PageView(
+          controller: pageViewController,
+          onPageChanged: (a) => _selectedIndex,
+          children: [CapPage()],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,

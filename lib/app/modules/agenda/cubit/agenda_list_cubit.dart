@@ -19,8 +19,8 @@ class AgendaListCubit extends Cubit<AgendaListState> {
     required this.agendaSaveUseCase,
   }) : super(AgendaListInitial());
 
-  loaded() async {
-    var response = await this.agendaListUseCase('2022');
+  loaded(String anio) async {
+    var response = await this.agendaListUseCase(anio);
     emit(response.fold((l) => AgendaListError(message: l.toString()), (r) {
       return AgendaListLoaded(
           listAgendaFiltered: r.data, listAgendaOriginal: r.data);

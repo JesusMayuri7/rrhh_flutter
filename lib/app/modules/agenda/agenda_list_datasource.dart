@@ -8,7 +8,7 @@ import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 
 abstract class IAgendaListDatasource {
-  Future<ResponseModel> listarAgenda();
+  Future<ResponseModel> listarAgenda(String anio);
 }
 
 class AgendaListDatasourceImpl implements IAgendaListDatasource {
@@ -18,8 +18,9 @@ class AgendaListDatasourceImpl implements IAgendaListDatasource {
   });
 
   @override
-  Future<ResponseModel> listarAgenda() async {
-    var url = Uri.http('rrhh.pvn.gob.pe', '/api/todo_anio', {'q': '{http}'});
+  Future<ResponseModel> listarAgenda(String anio) async {
+    var url =
+        Uri.http('rrhh.pvn.gob.pe', '/api/todo_anio/${anio}', {'q': '{http}'});
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));

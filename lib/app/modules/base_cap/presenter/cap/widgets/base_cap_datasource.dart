@@ -11,8 +11,11 @@ class BaseCapDataSource extends DataGridSource {
   void buildDataGridRows() {
     _baseCapDataGridRows = basecapList
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
-              DataGridCell(
+              DataGridCell<String>(
                   columnName: 'codigo_plaza', value: dataGridRow.codigoPlaza),
+              DataGridCell(
+                  columnName: 'presupuesto', value: dataGridRow.presupuesto),
+              DataGridCell(columnName: 'anio', value: dataGridRow.anio),
               DataGridCell(columnName: 'plaza', value: dataGridRow.plaza),
               DataGridCell(
                   columnName: 'plaza_old', value: dataGridRow.plazaOld),
@@ -69,7 +72,7 @@ class BaseCapDataSource extends DataGridSource {
               DataGridCell(
                   columnName: 'monto_escala', value: dataGridRow.montoEscala),
               DataGridCell(columnName: 'asig_fam', value: dataGridRow.asigFam),
-              DataGridCell(
+              DataGridCell<double>(
                   columnName: 'total_basico', value: dataGridRow.totalBasico),
               DataGridCell(columnName: 'essalud', value: dataGridRow.essalud),
               DataGridCell(
@@ -250,6 +253,39 @@ class BaseCapDataSource extends DataGridSource {
 
   @override
   List<DataGridRow> get rows => _baseCapDataGridRows;
+
+  @override
+  Widget? buildTableSummaryCellWidget(
+      GridTableSummaryRow summaryRow,
+      GridSummaryColumn? summaryColumn,
+      RowColumnIndex rowColumnIndex,
+      String summaryValue) {
+    if (rowColumnIndex.columnIndex == 0) {
+      return Container(
+          padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
+          alignment: Alignment.center,
+          child: Text(
+            NumberFormat('0', 'en_US').format(
+              num.parse(summaryValue.isEmpty ? '0' : summaryValue),
+            ),
+            style: TextStyle(fontSize: 12),
+            //e.value.toString(),
+            maxLines: 1,
+          ));
+    } else {
+      return Container(
+          padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
+          alignment: Alignment.centerRight,
+          child: Text(
+            NumberFormat('#,##0.00', 'en_US').format(
+              num.parse(summaryValue.isEmpty ? '0' : summaryValue),
+            ),
+            style: TextStyle(fontSize: 12),
+            //e.value.toString(),
+            maxLines: 1,
+          ));
+    }
+  }
 
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {

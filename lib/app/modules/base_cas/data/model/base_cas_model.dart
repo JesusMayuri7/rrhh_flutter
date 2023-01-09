@@ -13,6 +13,12 @@ List<BaseCasModel> baseCasModelFromJson(String str) {
       (baseCasJson).map((x) => BaseCasModel.fromJson(x)));
 }
 
+List<BaseCasModel> baseCasModelFromJson2023(String str) {
+  List<dynamic> baseCasJson = json.decode(str);
+  return List<BaseCasModel>.from(
+      (baseCasJson).map((x) => BaseCasModel.fromJson2023(x)));
+}
+
 String baseCasModelToJson(List<BaseCasModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
@@ -108,6 +114,40 @@ class BaseCasModel extends BaseCasEntity {
         finLicencia: json['fin_licencia'] ?? '',
         detalle: json['detalle'] ?? '');
   }
+
+  factory BaseCasModel.fromJson2023(Map<String, dynamic> json) {
+    return BaseCasModel(
+        codigoPlaza: json["codigo_plaza"] ?? "000000",
+        presupuesto: json["presupuesto"] ?? '',
+        producto: cast<String>(json["producto"] ?? '')
+            .substring(9, cast<String>(json["producto"] ?? '').length),
+        descArea: json["desc_area_cert"] ?? '',
+        sede: json["sede"] ?? '',
+        fuenteBase: 'RO',
+        meta: json["meta"] ?? '',
+        meta2020: json["meta_2020"] ?? '',
+        unidad: json["unidad"] ?? '',
+        cargo: json["cargo_cert"] ?? '',
+        dni: json["dni"] ?? "00000000",
+        nombres: json["nombres"] ?? '',
+        monto: double.parse(json["monto_cert"] ?? 0),
+        modalidad: json["modalidad"] ?? '',
+        vigencia: json["fecha_fin_vigencia_cas"] ?? '',
+        estadoOpp: json["estado_opp"] ?? '',
+        estadoActual: json["estado_actual"] ?? '',
+        estadoAir: json["estado_air"] ?? '',
+        sustentoLegal: json["sustento_legal"] ?? '',
+        nroConvocatoria: json["convocatoria_nro"] ?? '',
+        estadoConvocatoria: json['estado_convocatoria'] ?? '',
+        fase: json['fase'] ?? '',
+        tipoIngreso: json['tipo_ingreso'] ?? '',
+        fechaAlta: json['fe_ingreso'] ?? '',
+        tipoSalida: json['tipo_salida'] ?? '',
+        fechaBaja: json['fe_salida'] ?? '',
+        finLicencia: json['fin_licencia'] ?? '',
+        detalle: json['detalle'] ?? '');
+  }
+
   Map<String, dynamic> toJson() => {
         "plaza": codigoPlaza,
         "presupuesto": presupuesto,

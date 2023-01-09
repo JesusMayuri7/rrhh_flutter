@@ -334,6 +334,18 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
       ),
     ),
     GridColumn(
+      width: 80,
+      columnName: 'modalidad',
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Modalidd',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+    GridColumn(
       width: 64,
       columnName: 'acciones',
       label: Container(

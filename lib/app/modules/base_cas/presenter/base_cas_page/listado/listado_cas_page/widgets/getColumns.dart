@@ -56,7 +56,7 @@ List<GridColumn> getColumns(BuildContext context) {
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
       ),
-      columnName: 'meta_base',
+      columnName: 'meta',
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
@@ -299,7 +299,7 @@ List<GridColumn> getColumns(BuildContext context) {
       width: 88,
     ),
     GridColumn(
-      width: 45,
+      width: 70,
       label: Container(
         alignment: Alignment.center,
         child: Text(
@@ -312,11 +312,11 @@ List<GridColumn> getColumns(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 45,
+      width: 65,
       label: Container(
         alignment: Alignment.center,
         child: Text(
-          'Termino',
+          'Fin',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 10.0),
         ),
@@ -338,7 +338,7 @@ List<GridColumn> getColumns(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 70,
+      width: 75,
       columnName: 'essalud',
       label: Container(
         alignment: Alignment.center,
@@ -366,7 +366,7 @@ List<GridColumn> getColumns(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 78,
+      width: 80,
       label: Container(
         alignment: Alignment.center,
         child: Text(
@@ -379,7 +379,7 @@ List<GridColumn> getColumns(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 70,
+      width: 80,
       label: Container(
         alignment: Alignment.center,
         child: Text(
@@ -407,7 +407,7 @@ List<GridColumn> getColumns(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 65,
+      width: 80,
       label: Container(
         alignment: Alignment.center,
         child: Text(
@@ -435,7 +435,7 @@ List<GridColumn> getColumns(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(
-      width: 65,
+      width: 80,
       label: Container(
         alignment: Alignment.center,
         child: Text(

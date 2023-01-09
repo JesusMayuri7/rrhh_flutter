@@ -13,7 +13,7 @@ class AgendaListUseCase extends UseCase<ResponseModel, String> {
   });
 
   @override
-  Future<Either<Failure, ResponseModel>> call(params) async {
-    return await this.iAgendaRepository.listarAgenda();
+  Future<Either<Failure, ResponseModel>> call(String anio) async {
+    return await this.iAgendaRepository.listarAgenda(anio);
   }
 }

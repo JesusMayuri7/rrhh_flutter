@@ -20,7 +20,7 @@ class BaseCasDataSource extends DataGridSource {
                   columnName: 'fuente_base', value: dataGridRow.fuenteBase),
               DataGridCell<String>(columnName: 'meta', value: dataGridRow.meta),
               DataGridCell<String>(
-                  columnName: 'desc_unidad', value: dataGridRow.producto),
+                  columnName: 'producto', value: dataGridRow.producto),
               DataGridCell<String>(
                   columnName: 'desc_area', value: dataGridRow.descArea),
               DataGridCell<String>(

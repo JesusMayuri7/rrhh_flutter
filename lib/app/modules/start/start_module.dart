@@ -6,6 +6,7 @@ import 'package:rrhh_clean/app/modules/import/import_module.dart';
 
 import 'package:rrhh_clean/app/modules/requerimientos/requerimientos_module.dart';
 import 'package:rrhh_clean/app/modules/start/start_fluent.dart';
+import 'package:rrhh_clean/app/modules/start/start_page.dart';
 import 'package:rrhh_clean/app/modules/subsidio/subsidio_module.dart';
 
 import '../agenda/agenda_module.dart';
@@ -39,7 +40,7 @@ class StartModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => StartFluent(), children: [
+    ChildRoute('/', child: (_, args) => StartPage(), children: [
       ModuleRoute('/home', module: HomeModule()),
       ModuleRoute('/agenda', module: AgendaModule()),
       ModuleRoute('/base_prac', module: BasePracModule()),

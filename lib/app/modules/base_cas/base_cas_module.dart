@@ -6,8 +6,10 @@ import 'domain/usecases/certificado_cas_use_case.dart';
 import 'domain/usecases/initial_cas_use_case.dart';
 import 'domain/usecases/presupuesto_cas_use_case.dart';
 import 'external/certificado_cas_datasource.dart';
+import 'external/pim_cas_datasource.dart';
 import 'external/pim_cas_ley_datasource.dart';
 import 'external/presupuesto_cas_datasource.dart';
+import 'external/presupuesto_cas_ley_datasource.dart';
 import 'presenter/base_cas_page/listado/listado_cas_page/parameters_page/bloc/headparameters_bloc.dart';
 import 'presenter/main_base_cas_page.dart';
 
@@ -34,21 +36,30 @@ class BaseCasModule extends Module {
   final List<Bind> binds = [
     // EXTERNAL
     Bind((i) => BaseCasDatasourceImpl(httpCustom: i())),
+    //Bind((i) => BaseCasDatasourceImpl2023(httpCustom: i())),
     Bind((i) => BaseExcelDatasourceImpl(httpCustom: i())),
     Bind((i) => InitialCasDatasourceImpl(httpCustom: i())),
     Bind((i) => PimCasLeyDatasourceImpl(httpCustom: i())),
     Bind((i) => CertificadoCasDatasourceImpl(httpCustom: i())),
+
+    //2022
     Bind((i) => PresupuestoCasDatasourceImpl(
-        getCertificadosCasImpl: i(), getPimCasImpl: i())),
+        getCertificadosCasImpl: i<CertificadoCasDatasourceImpl>(),
+        getPimCasImpl: i<PimCasDatasourceImpl>())),
+
+    //2023
+/*     Bind((i) => PresupuestoCasDatasourceImplLey(
+        getCertificadosCasImpl: i<PimCasLeyDatasourceImpl>(),
+        getPimCasImpl: i<PimCasLeyDatasourceImpl>())), */
 
     // REPOSITORY
     Bind((i) => ListarRepositoryImpl(
-        i<IBaseExcelDatasource>(),
-        i<IBaseCasDatasource>(),
-        i<IInitialCasDatasource>(),
-        i<IPimCasDatasource>(),
-        i<ICertificadoCasDatasource>(),
-        i<IPresupuestoCasDatasource>())),
+        baseExceldatasource: i<IBaseExcelDatasource>(),
+        baseCasdatasource: i<IBaseCasDatasource>(),
+        initialCasdatasource: i<IInitialCasDatasource>(),
+        pimCasDatasource: i<IPimCasDatasource>(),
+        certificadoCasDatasource: i<ICertificadoCasDatasource>(),
+        presupuestoCasDatasource: i<IPresupuestoCasDatasource>())),
 
     //USE CASE
     Bind((i) => ListarCasUseCase(i())),

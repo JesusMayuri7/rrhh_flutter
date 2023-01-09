@@ -10,7 +10,7 @@ import 'package:rrhh_clean/core/errors/failure.dart';
 import 'agenda_save_datasource.dart';
 
 abstract class IAgendaRepository {
-  Future<Either<Failure, ResponseModel>> listarAgenda();
+  Future<Either<Failure, ResponseModel>> listarAgenda(String anio);
   Future<Either<Failure, ResponseModel>> saveAgenda(AgendaParams params);
 }
 
@@ -23,10 +23,10 @@ class AgendaRepositoryImpl implements IAgendaRepository {
   });
 
   @override
-  Future<Either<Failure, ResponseModel>> listarAgenda() async {
+  Future<Either<Failure, ResponseModel>> listarAgenda(String anio) async {
     ResponseModel list;
     try {
-      list = await this.iAgendaListDatasource.listarAgenda();
+      list = await this.iAgendaListDatasource.listarAgenda(anio);
       return Right(list);
     } on ServerException catch (e) {
       return Left(Error(e.message));

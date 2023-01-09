@@ -13,6 +13,7 @@ import 'package:rrhh_clean/app/modules/base_prac/presenter/alta_baja/bloc/alta_b
 
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/bloc/list_prac_bloc.dart';
 
+import 'domain/export_prac_use_case.dart';
 import 'external/get_data_initial_prac_impl.dart';
 
 class BasePracModule extends Module {
@@ -23,6 +24,7 @@ class BasePracModule extends Module {
         export: true),
     Bind.lazySingleton(
         (i) => ListPracBloc(
+            exportPracUseCase: i(),
             altaBajaPracBloc: i(),
             listarPracUseCase: i(),
             updatedPracUseCase: i()),
@@ -47,6 +49,7 @@ class BasePracModule extends Module {
 
     //USECASE
     Bind((i) => ListarPracUseCase(iPracRepository: i())),
+    Bind((i) => ExportPracUseCase()),
     Bind((i) => AltaBajaPracUseCase(iPracRepository: i())),
     Bind((i) => GetDataInitialPracUseCase(iPracRepository: i())),
     Bind((i) => UpdatedPracUseCase(iPracRepository: i())),

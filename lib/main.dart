@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-//import 'package:window_manager/window_manager.dart';
+import 'package:window_manager/window_manager.dart';
 import 'app/app_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -10,7 +10,7 @@ import 'core/uitls/device_info.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-/*   await WindowManager.instance.ensureInitialized();
+  await WindowManager.instance.ensureInitialized();
   if (DeviceInfo.isDesktop) {
     windowManager.waitUntilReadyToShow().then((_) async {
       await windowManager.setTitleBarStyle(
@@ -25,7 +25,7 @@ void main() async {
       await windowManager.setPreventClose(true);
       await windowManager.setSkipTaskbar(false);
     });
-  } */
+  }
   await dotenv.load(fileName: ".env");
 
 /*

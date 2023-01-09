@@ -23,12 +23,12 @@ class ListarRepositoryImpl implements IListarRepository {
 
   //ListarRepositoryImpl(this.datasource);
   ListarRepositoryImpl(
-      this.baseExceldatasource,
-      this.baseCasdatasource,
-      this.initialCasdatasource,
-      this.pimCasDatasource,
-      this.certificadoCasDatasource,
-      this.presupuestoCasDatasource);
+      {required this.baseExceldatasource,
+      required this.baseCasdatasource,
+      required this.initialCasdatasource,
+      required this.pimCasDatasource,
+      required this.certificadoCasDatasource,
+      required this.presupuestoCasDatasource});
 
   @override
   Future<Either<Failure, List<CasExcelEntity>>> listarBaseExcel() async {

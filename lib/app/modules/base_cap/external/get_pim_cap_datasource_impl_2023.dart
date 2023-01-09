@@ -19,7 +19,7 @@ class GetPimCapDatasourceImpl2023 implements IPimCapDatasource {
   @override
   Future<ResponseModel> getPimCap(String anio) async {
     var url = Uri.http(
-        'rrhh.pvn.gob.pe', '/api/cap/presupuesto/2023', {'q': '{http}'});
+        'rrhh.pvn.gob.pe', '/api/cap/presupuesto_2023', {'q': '{http}'});
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));

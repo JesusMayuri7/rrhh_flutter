@@ -367,6 +367,13 @@ _fuenteMetaOfBase(
         addClasificadorInPresupuesto(
             _params, e.value[0], '23.28.14 - AGUINALDOS DE C.A.S.');
       }
+
+      final foundEspecifica34 =
+          e.value.where((element) => element.clasificador.contains('23.26.34'));
+      if (foundEspecifica34.isEmpty) {
+        addClasificadorInPresupuesto(
+            _params, e.value[0], '23.26.34 - SEGUROS PERSONALES');
+      }
     }
   });
 
@@ -391,6 +398,13 @@ _fuenteMetaOfBase(
       if (foundEspecifica14.isEmpty) {
         addClasificadorInPresupuesto(
             _params, e.value[0], '23.28.14 - AGUINALDOS DE C.A.S.');
+      }
+
+      final foundEspecifica34 =
+          e.value.where((element) => element.clasificador.contains('23.26.34'));
+      if (foundEspecifica34.isEmpty) {
+        addClasificadorInPresupuesto(
+            _params, e.value[0], '23.26.34 - SEGUROS PERSONALES');
       }
     }
   });

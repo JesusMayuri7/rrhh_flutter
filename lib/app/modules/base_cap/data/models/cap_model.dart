@@ -16,6 +16,7 @@ class CapModel extends BaseCapEntity {
   CapModel({
     required int id,
     required int anio,
+    required String presupuesto,
     required int orgAreaId,
     required String descArea,
     required int idpap,
@@ -67,6 +68,7 @@ class CapModel extends BaseCapEntity {
   }) : super(
             id: id,
             anio: anio,
+            presupuesto: presupuesto,
             orgAreaId: orgAreaId,
             descArea: descArea,
             idpap: idpap,
@@ -119,6 +121,7 @@ class CapModel extends BaseCapEntity {
   factory CapModel.fromJson(Map<String, dynamic> json) => CapModel(
         id: json["id"],
         anio: json["anio"] ?? 0,
+        presupuesto: json["presupuesto"] ?? '',
         orgAreaId: json["org_area_id"] ?? 0,
         descArea: json["desc_area"] ?? '',
         idpap: json["idpap"] ?? 0,
@@ -172,6 +175,7 @@ class CapModel extends BaseCapEntity {
   Map<String, dynamic> toJson() => {
         "id": id,
         "anio": anio,
+        "presupuesto": presupuesto,
         "org_area_id": orgAreaId,
         "desc_area": descArea,
         "idpap": idpap,

@@ -60,6 +60,7 @@ class ListadoCasPage extends StatelessWidget {
     return Expanded(
       child: SfDataGridTheme(
         data: SfDataGridThemeData(
+          filterIconColor: Colors.black,
           brightness: Theme.of(context).brightness,
           headerHoverColor: Colors.white.withOpacity(0.3),
           headerColor: Colors.lightBlue[800],
@@ -70,10 +71,8 @@ class ListadoCasPage extends StatelessWidget {
             PointerDeviceKind.mouse,
           }),
           child: SfDataGrid(
-              allowSorting: true,
-              allowMultiColumnSorting: true,
-              allowTriStateSorting: true,
-              showSortNumbers: true,
+              //allowSorting: true,
+              allowFiltering: true,
               highlightRowOnHover: true,
               //footerFrozenRowsCount: 1,
               //footer: Container(color: Colors.amber),
@@ -85,9 +84,6 @@ class ListadoCasPage extends StatelessWidget {
               rowHeight: 22,
               gridLinesVisibility: GridLinesVisibility.both,
               headerGridLinesVisibility: GridLinesVisibility.both,
-              //allowSorting: true,
-              //allowTriStateSorting: true,
-              //showSortNumbers: true,
               selectionMode: SelectionMode.singleDeselect,
               navigationMode: GridNavigationMode.cell,
               controller: this._dataGridController,
@@ -102,6 +98,10 @@ class ListadoCasPage extends StatelessWidget {
                 GridTableSummaryRow(
                     showSummaryInRow: false,
                     columns: [
+                      GridSummaryColumn(
+                          name: 'Count',
+                          columnName: 'codigo_plaza',
+                          summaryType: GridSummaryType.count),
                       GridSummaryColumn(
                           name: 'Sum',
                           columnName: 'monto',

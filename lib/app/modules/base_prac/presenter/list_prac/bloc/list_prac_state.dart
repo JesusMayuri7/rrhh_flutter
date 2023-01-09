@@ -9,6 +9,11 @@ class ListPracLoading extends ListPracState {
   List<Object> get props => [];
 }
 
+class ListPracExported extends ListPracState {
+  @override
+  List<Object> get props => [];
+}
+
 class ListPracLoaded extends ListPracState {
   final List<PracticanteEntity> listPracticanteFiltered;
   final List<PracticanteEntity> listPracticanteOriginal;

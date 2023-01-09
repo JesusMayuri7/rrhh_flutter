@@ -14,11 +14,17 @@ class LogoutWidget extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: IntrinsicHeight(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(stateSuccess.loginResponseEntity.email),
+            Text(
+              stateSuccess.loginResponseEntity.email,
+              style: TextStyle(fontSize: 13),
+            ),
             TextButton(
-              child: Text(' Cerrar sesión'),
+              child: Text(
+                ' Cerrar sesión',
+                style: TextStyle(color: Colors.white),
+              ),
               onPressed: () {
                 this.bloc.add(LogoutAuthEvent());
               },

@@ -9,9 +9,6 @@ import '../data/datasources/i_get_list_certificados.dart';
 import '../data/model/certificado_model.dart';
 
 class GetListCertificadoImpl implements IGetListCertificadosDatasource {
-  Uri url = Uri.http(
-      'rrhh.pvn.gob.pe', '/api/presupuestal/certificacion', {'q': '{http}'});
-
   final IClientCustom httpCustom;
   GetListCertificadoImpl({
     required this.httpCustom,
@@ -20,6 +17,8 @@ class GetListCertificadoImpl implements IGetListCertificadosDatasource {
   @override
   Future<ResponseModel> getListCertificados(
       {String? certiificado, String? anio}) async {
+    Uri url = Uri.http('rrhh.pvn.gob.pe',
+        '/api/presupuestal/certificacion/${anio}', {'q': '{http}'});
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));

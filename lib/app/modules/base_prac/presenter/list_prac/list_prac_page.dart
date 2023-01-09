@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
+import 'package:rrhh_clean/app/modules/base_prac/domain/export_prac_use_case.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/bloc/list_prac_bloc.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/getColumnsListPrac.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/grid_prac_page.dart';
@@ -68,7 +69,16 @@ class _ListPracPageState extends State<ListPracPage> {
                       SizedBox(width: 5.0),
                       f.Button(
                           onPressed: () {
-                            this.bloc.add(ListPracEvent(anio: anioSelected!));
+                            this.bloc.add(ExportPracEvent(
+                                paramsPracCalcular: ParamsPracCalcular(
+                                    lista: (state is ListPracLoaded)
+                                        ? state.listPracticanteOriginal
+                                        : [],
+                                    porcentajePrimaSctrPension: 0.35,
+                                    porcentajeComisionSctrPension: 3,
+                                    porcentajeIgv: 18,
+                                    mesInicio: 0,
+                                    mesFin: 11)));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,

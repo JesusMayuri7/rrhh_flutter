@@ -3,6 +3,7 @@ class BaseCapEntity {
   BaseCapEntity({
     required this.id,
     required this.anio,
+    required this.presupuesto,
     required this.orgAreaId,
     required this.descArea,
     required this.idpap,
@@ -130,6 +131,7 @@ class BaseCapEntity {
 
   final int id;
   final int anio;
+  final String presupuesto;
   final int orgAreaId;
   final String descArea;
   final int idpap;
@@ -256,6 +258,7 @@ class BaseCapEntity {
 
   BaseCapEntity copyWith({
     int? id,
+    String? presupuesto,
     int? anio,
     int? orgAreaId,
     String? descArea,
@@ -383,6 +386,7 @@ class BaseCapEntity {
   }) =>
       BaseCapEntity(
         id: id ?? this.id,
+        presupuesto: presupuesto ?? this.presupuesto,
         anio: anio ?? this.anio,
         orgAreaId: orgAreaId ?? this.orgAreaId,
         descArea: descArea ?? this.descArea,
@@ -511,6 +515,7 @@ class BaseCapEntity {
 
   factory BaseCapEntity.fromMap(Map<String, dynamic> json) => BaseCapEntity(
         id: json["id"],
+        presupuesto: json["presupuesto"],
         anio: json["anio"],
         orgAreaId: json["org_area_id"],
         descArea: json["desc_area"],
@@ -639,6 +644,7 @@ class BaseCapEntity {
 
   Map<String, dynamic> toMap() => {
         "id": id,
+        "presupuesto": presupuesto,
         "anio": anio,
         "org_area_id": orgAreaId,
         "desc_area": descArea,
@@ -782,6 +788,6 @@ class BaseCapEntity {
 
   @override
   String toString() {
-    return 'BaseCapEntity(id: $id, anio: $anio, orgAreaId: $orgAreaId, descArea: $descArea, idpap: $idpap, idcap: $idcap, pdId: $pdId, plaza: $plaza, plazaOld: $plazaOld, estadoActual: $estadoActual, estadoOpp: $estadoOpp, estadoPap: $estadoPap, estadoAir: $estadoAir, tipoIngreso: $tipoIngreso, feIngreso: $feIngreso, tipoSalida: $tipoSalida, feSalida: $feSalida, finLicencia: $finLicencia, dni: $dni, nombres: $nombres, modalidad: $modalidad, asigFam: $asigFam, uniforme: $uniforme, vale: $vale, sede: $sede, fuenteBase: $fuenteBase, fuentePap: $fuentePap, feNac: $feNac, cargocap: $cargocap, cargoPap: $cargoPap, metaId: $metaId, meta: $meta, finalidad: $finalidad, producto: $producto, nivelO: $nivelO, descNivel: $descNivel, idnivel: $idnivel, idescala: $idescala, descEscala: $descEscala, tipoEscala: $tipoEscala, codigoPlaza: $codigoPlaza, detalle: $detalle, capPvnId: $capPvnId, montoEscalaNext: $montoEscalaNext, ppto2021: $ppto2021, epsAporta: $epsAporta, montoBasico: $montoBasico, montoEscalaAnterior: $montoEscalaAnterior, montoEscala: $montoEscala, asigFamiliarAir: $asigFamiliarAir, totalBasico: $totalBasico, essalud: $essalud, epsSalud: $epsSalud, sctrSalud: $sctrSalud, sctrSaludGrati: $sctrSaludGrati, vidaLey: $vidaLey, sctrPension: $sctrPension, sctrPensionGrati: $sctrPensionGrati, eneMonto: $eneMonto, eneEssalud: $eneEssalud, eneSctrSalud: $eneSctrSalud, eneVidaley: $eneVidaley, eneSctrPension: $eneSctrPension, eneEscolaridad: $eneEscolaridad, febMonto: $febMonto, febEssalud: $febEssalud, febSctrSalud: $febSctrSalud, febVidaley: $febVidaley, febSctrPension: $febSctrPension, marMonto: $marMonto, marEssalud: $marEssalud, marSctrSalud: $marSctrSalud, marVidaley: $marVidaley, marSctrPension: $marSctrPension, abrMonto: $abrMonto, abrEssalud: $abrEssalud, abrSctrSalud: $abrSctrSalud, abrVidaley: $abrVidaley, abrSctrPension: $abrSctrPension, mayMonto: $mayMonto, mayEssalud: $mayEssalud, maySctrSalud: $maySctrSalud, mayVidaley: $mayVidaley, maySctrPension: $maySctrPension, mayCts: $mayCts, junMonto: $junMonto, junEssalud: $junEssalud, junSctrSalud: $junSctrSalud, junVidaley: $junVidaley, junSctrPension: $junSctrPension, julMonto: $julMonto, julEssalud: $julEssalud, julSctrSalud: $julSctrSalud, julVidaley: $julVidaley, julSctrPensionGrati: $julSctrPensionGrati, julBoni: $julBoni, julGrati: $julGrati, agoMonto: $agoMonto, agoEssalud: $agoEssalud, agoSctrSalud: $agoSctrSalud, agoVidaley: $agoVidaley, agoSctrPension: $agoSctrPension, setMonto: $setMonto, setEssalud: $setEssalud, setSctrSalud: $setSctrSalud, setVidaley: $setVidaley, setSctrPension: $setSctrPension, octMonto: $octMonto, octEssalud: $octEssalud, octSctrSalud: $octSctrSalud, octVidaley: $octVidaley, octSctrPension: $octSctrPension, novMonto: $novMonto, novEssalud: $novEssalud, novSctrSalud: $novSctrSalud, novVidaley: $novVidaley, novSctrPension: $novSctrPension, novCts: $novCts, dicMonto: $dicMonto, dicEssalud: $dicEssalud, dicSctrSalud: $dicSctrSalud, dicVidaley: $dicVidaley, dicSctrPensionGrati: $dicSctrPensionGrati, dicBoni: $dicBoni, dicGrati: $dicGrati)';
+    return 'BaseCapEntity(id: $id, anio: $anio, presupuesto: $presupuesto, orgAreaId: $orgAreaId, descArea: $descArea, idpap: $idpap, idcap: $idcap, pdId: $pdId, plaza: $plaza, plazaOld: $plazaOld, estadoActual: $estadoActual, estadoOpp: $estadoOpp, estadoPap: $estadoPap, estadoAir: $estadoAir, tipoIngreso: $tipoIngreso, feIngreso: $feIngreso, tipoSalida: $tipoSalida, feSalida: $feSalida, finLicencia: $finLicencia, dni: $dni, nombres: $nombres, modalidad: $modalidad, asigFam: $asigFam, uniforme: $uniforme, vale: $vale, sede: $sede, fuenteBase: $fuenteBase, fuentePap: $fuentePap, feNac: $feNac, cargocap: $cargocap, cargoPap: $cargoPap, metaId: $metaId, meta: $meta, finalidad: $finalidad, producto: $producto, nivelO: $nivelO, descNivel: $descNivel, idnivel: $idnivel, idescala: $idescala, descEscala: $descEscala, tipoEscala: $tipoEscala, codigoPlaza: $codigoPlaza, detalle: $detalle, capPvnId: $capPvnId, montoEscalaNext: $montoEscalaNext, ppto2021: $ppto2021, epsAporta: $epsAporta, montoBasico: $montoBasico, montoEscalaAnterior: $montoEscalaAnterior, montoEscala: $montoEscala, asigFamiliarAir: $asigFamiliarAir, totalBasico: $totalBasico, essalud: $essalud, epsSalud: $epsSalud, sctrSalud: $sctrSalud, sctrSaludGrati: $sctrSaludGrati, vidaLey: $vidaLey, sctrPension: $sctrPension, sctrPensionGrati: $sctrPensionGrati, eneMonto: $eneMonto, eneEssalud: $eneEssalud, eneSctrSalud: $eneSctrSalud, eneVidaley: $eneVidaley, eneSctrPension: $eneSctrPension, eneEscolaridad: $eneEscolaridad, febMonto: $febMonto, febEssalud: $febEssalud, febSctrSalud: $febSctrSalud, febVidaley: $febVidaley, febSctrPension: $febSctrPension, marMonto: $marMonto, marEssalud: $marEssalud, marSctrSalud: $marSctrSalud, marVidaley: $marVidaley, marSctrPension: $marSctrPension, abrMonto: $abrMonto, abrEssalud: $abrEssalud, abrSctrSalud: $abrSctrSalud, abrVidaley: $abrVidaley, abrSctrPension: $abrSctrPension, mayMonto: $mayMonto, mayEssalud: $mayEssalud, maySctrSalud: $maySctrSalud, mayVidaley: $mayVidaley, maySctrPension: $maySctrPension, mayCts: $mayCts, junMonto: $junMonto, junEssalud: $junEssalud, junSctrSalud: $junSctrSalud, junVidaley: $junVidaley, junSctrPension: $junSctrPension, julMonto: $julMonto, julEssalud: $julEssalud, julSctrSalud: $julSctrSalud, julVidaley: $julVidaley, julSctrPensionGrati: $julSctrPensionGrati, julBoni: $julBoni, julGrati: $julGrati, agoMonto: $agoMonto, agoEssalud: $agoEssalud, agoSctrSalud: $agoSctrSalud, agoVidaley: $agoVidaley, agoSctrPension: $agoSctrPension, setMonto: $setMonto, setEssalud: $setEssalud, setSctrSalud: $setSctrSalud, setVidaley: $setVidaley, setSctrPension: $setSctrPension, octMonto: $octMonto, octEssalud: $octEssalud, octSctrSalud: $octSctrSalud, octVidaley: $octVidaley, octSctrPension: $octSctrPension, novMonto: $novMonto, novEssalud: $novEssalud, novSctrSalud: $novSctrSalud, novVidaley: $novVidaley, novSctrPension: $novSctrPension, novCts: $novCts, dicMonto: $dicMonto, dicEssalud: $dicEssalud, dicSctrSalud: $dicSctrSalud, dicVidaley: $dicVidaley, dicSctrPensionGrati: $dicSctrPensionGrati, dicBoni: $dicBoni, dicGrati: $dicGrati)';
   }
 }

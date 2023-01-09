@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,6 +16,8 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  final auth = Modular.get<AuthBloc>();
+
   @override
   initState() {
     super.initState();
@@ -22,8 +25,6 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void checkToken() async {
-    final auth = Modular.get<AuthBloc>();
-
     await Modular.isModuleReady<AppModule>();
     final SharedPreferences preferences = Modular.get<SharedPreferences>();
 
@@ -48,7 +49,6 @@ class _SplashPageState extends State<SplashPage> {
               status: status,
               token: token,
               email: email)));
-      Modular.to.pushReplacementNamed('/start/agenda/');
     } else {
       Modular.to.pushReplacementNamed('/login/');
     }
@@ -61,9 +61,18 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('build splas');
     return Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
+      body: BlocListener<AuthBloc, AuthState>(
+        bloc: this.auth,
+        listener: (context, state) {
+          print(state.toString());
+          if (state is SuccessAuthState)
+            Modular.to.pushReplacementNamed('/start/agenda/');
+        },
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

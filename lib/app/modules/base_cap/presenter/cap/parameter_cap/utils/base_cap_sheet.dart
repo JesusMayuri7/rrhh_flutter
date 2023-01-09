@@ -22,7 +22,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
   sheet.importList(clasificador, firstRowHeading - 1, 72, false);
 
   // Cabeceras Data
-  final int firstColData = 14;
+  final int firstColData = 13;
   final List<Object> row = List.from(params.listCap[0].toMap().keys.toList());
   sheet.importList(row, firstRowHeading, firstColData, false);
 
