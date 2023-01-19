@@ -5,7 +5,7 @@ import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 class HttpCustom extends http.BaseClient {
   //SharedPreferences sharedPref;
 
-  final http.Client _client = http.Client();
+  http.Client _client = http.Client();
 
   HttpCustom();
   final authBloc = Modular.get<AuthBloc>();

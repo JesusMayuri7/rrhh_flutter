@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 
 import '../../../../core/errors/exceptions.dart';
@@ -15,8 +15,7 @@ class GetListCertificadoImpl implements IGetListCertificadosDatasource {
   });
 
   @override
-  Future<ResponseModel> getListCertificados(
-      {String? certiificado, String? anio}) async {
+  Future<ResponseModel> getListCertificados(String anio) async {
     Uri url = Uri.http('rrhh.pvn.gob.pe',
         '/api/presupuestal/certificacion/${anio}', {'q': '{http}'});
     try {

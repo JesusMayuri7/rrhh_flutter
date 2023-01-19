@@ -2,7 +2,9 @@ import 'package:equatable/equatable.dart';
 
 class ConfianzaEntity extends Equatable {
   ConfianzaEntity(
-      {required this.id,
+      {
+      required this.id,
+      required this.anio,
       required this.descArea,
       required this.cargo,
       required this.dni,
@@ -21,6 +23,7 @@ class ConfianzaEntity extends Equatable {
       required this.estado});
 
   final int id;
+  final String anio;
   final String descArea;
   final String cargo;
   final String dni;
@@ -47,6 +50,7 @@ class ConfianzaEntity extends Equatable {
   List<Object> get props {
     return [
       id,
+      anio,
       descArea,
       cargo,
       dni,
@@ -68,6 +72,7 @@ class ConfianzaEntity extends Equatable {
 
   ConfianzaEntity copyWith(
       {int? id,
+      String? anio,
       String? descArea,
       String? cargo,
       String? dni,
@@ -86,6 +91,7 @@ class ConfianzaEntity extends Equatable {
       String? estado}) {
     return ConfianzaEntity(
         id: id ?? this.id,
+        anio: anio ?? this.anio,
         descArea: descArea ?? this.descArea,
         cargo: cargo ?? this.cargo,
         dni: dni ?? this.dni,
@@ -106,6 +112,7 @@ class ConfianzaEntity extends Equatable {
 
   Map<String, dynamic> toMap() => {
         "modalidad": modalidad,
+        "anio": anio,
         "tipo": tipo,
         "estado": estado,
         "plaza": plaza,

@@ -22,6 +22,7 @@ List<ConfianzaModel> confianzaModelFromJson(String str) {
 class ConfianzaModel extends ConfianzaEntity {
   ConfianzaModel(
       {required id,
+      required anio,
       required descArea,
       required cargo,
       required dni,
@@ -40,6 +41,7 @@ class ConfianzaModel extends ConfianzaEntity {
       required estado})
       : super(
             id: id,
+            anio: anio,
             descArea: descArea,
             cargo: cargo,
             dni: dni,
@@ -60,6 +62,7 @@ class ConfianzaModel extends ConfianzaEntity {
   factory ConfianzaModel.fromJson(Map<String, dynamic> json) => ConfianzaModel(
       id: json["id"],
       descArea: json["desc_area"] ?? '',
+      anio: json["anio"] ?? '',
       cargo: json["cargo"] ?? '',
       dni: json["dni"] ?? '',
       nombres: json["nombres"] ?? '',
@@ -78,6 +81,7 @@ class ConfianzaModel extends ConfianzaEntity {
 
   factory ConfianzaModel.fromMap(Map<String, dynamic> json) => ConfianzaModel(
       id: json["id"],
+      anio: json["anio"],
       plaza: json["plaza"],
       descArea: json["desc_area"],
       cargo: json["cargo"],
@@ -97,6 +101,7 @@ class ConfianzaModel extends ConfianzaEntity {
 
   Map<String, dynamic> toMap() => {
         "id": id,
+        "anio": anio,
         "plaza": plaza,
         "desc_area": descArea,
         "cargo": cargo,
@@ -117,6 +122,7 @@ class ConfianzaModel extends ConfianzaEntity {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "anio": anio,
         "plaza": plaza,
         "desc_area": descArea,
         "cargo": cargo,

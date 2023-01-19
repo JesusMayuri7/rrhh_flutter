@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
@@ -10,7 +11,7 @@ import 'package:rrhh_clean/core/errors/exceptions.dart';
 import '../data/auth_response_model.dart';
 import '../data/i_auth_core_datasource.dart';
 
-class AuthCoreDataSourceImpl implements IAuthCoreDataSource {
+class AuthHttpDataSourceImpl implements IAuthCoreDataSource {
   Uri url = Uri.http('rrhh.pvn.gob.pe', '/api/auth/login', {'q': '{http}'});
 
   //final HttpClient http;
@@ -21,6 +22,8 @@ class AuthCoreDataSourceImpl implements IAuthCoreDataSource {
       var response = await http.post(url,
           headers: {'Content-Type': 'application/json'},
           body: json.encode(params.toMap()));
+
+      await Clipboard.setData(ClipboardData(text: response.body.toString()));
 
       var result = json.decode(response.body);
 

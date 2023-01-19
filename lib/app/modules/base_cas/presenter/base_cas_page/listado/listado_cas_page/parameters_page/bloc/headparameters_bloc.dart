@@ -17,9 +17,12 @@ part 'headparameters_state.dart';
 
 class HeadParametersBloc
     extends Bloc<HeadParametersEvent, HeadParametersState> {
-  HeadParametersBloc(this.initialUseCase, this.calcularCasUseCase,
-      this.listarUseCase, this.presupuestoCasUseCase)
-      : super(HeadParametersInitialState()) {
+  HeadParametersBloc({
+    required this.initialUseCase, 
+    required this.calcularCasUseCase,
+    required this.listarUseCase, 
+    required this.presupuestoCasUseCase})
+    :super(HeadParametersInitialState()) {
     on<HeadParametersListEvent>(_listaEventToBaseCasState);
     on<HeadParametersExportEvent>(_exportEventToHeadParametersState);
     on<HeadParametersCalcularEvent>(_calcularEventToBaseCasState);
@@ -113,8 +116,9 @@ class HeadParametersBloc
 
   _initialEventToHeadParametersState(HeadParametersFormLoadEvent event,
       Emitter<HeadParametersState> emit) async {
+        print('event initial '+event.toString());
     emit(HeadParametersLoadingState());
-
+     
     double uit = 0;
     double porcentajeMaximoEssalud = 0;
     double porcentajeDescEssalud = 0;

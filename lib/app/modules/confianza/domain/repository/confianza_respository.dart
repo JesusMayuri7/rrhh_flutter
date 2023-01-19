@@ -7,7 +7,9 @@ abstract class IConfianzaRepository {
   Future<Either<Failure, ResponseEntity>> getListConfianza(String anio);
   Future<Either<Failure, ResponseEntity>> getListAreas();
   Future<Either<Failure, ResponseEntity>> postConfianza(
-      {required int id,
+      {
+      required int id,
+      required String anio,
       required String cargo,
       required String detalle,
       required String direccion,

@@ -1,6 +1,6 @@
 import 'dart:convert' as convert;
 
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 

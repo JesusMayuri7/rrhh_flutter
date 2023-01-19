@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:rrhh_clean/app/modules/base_cap/data/datasource/i_certificado_cap_datasource.dart';
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/presupuesto_model.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 

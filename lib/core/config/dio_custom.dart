@@ -1,12 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 import 'package:dio/dio.dart';
+import 'package:dio/adapter.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http_parser/http_parser.dart';
 
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/import/presenter/domain/import_file_use_case.dart';
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 
 class DioCustom implements IClientCustom {
   final bloc = Modular.get<AuthBloc>();
@@ -18,6 +19,8 @@ class DioCustom implements IClientCustom {
   }
 
   void init() {
+
+
     token = (bloc.state as SuccessAuthState).loginResponseEntity.token;
     _dio = Dio(
       BaseOptions(
@@ -29,6 +32,14 @@ class DioCustom implements IClientCustom {
         },
       ),
     );
+
+  (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
+  // Hook into the findProxy callback to set the client's proxy.
+  client.findProxy = (url) {
+    return 'PROXY localhost:80';
+  };
+  };
+
     _dio.interceptors.add(
         InterceptorsWrapper(onError: (error, errorInterceptorHandler) async {
       if (error.response?.statusCode == 401) {
@@ -106,7 +117,7 @@ class DioCustom implements IClientCustom {
   Future<dynamic> load(
       String url, ParamsInportFile params, String method) async {
     FormData formData = FormData.fromMap({
-      "anio": "2022",
+      "anio": "2023",
       "file": await MultipartFile.fromFileSync(
         params.bytes!.path,
         filename: params.bytes!.path.split('/').last,

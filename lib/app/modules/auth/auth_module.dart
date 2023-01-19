@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 //import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
-import 'package:rrhh_clean/app/modules/auth/external/auth_core_datasource_impl.dart';
+import 'package:rrhh_clean/app/modules/auth/external/auth_http_datasource_impl.dart';
 import 'package:rrhh_clean/app/modules/auth/data/auth_repository_impl.dart';
 
 import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
@@ -19,7 +19,7 @@ class AuthModule extends Module {
     Bind((i) => LoginAuthUseCase(iAuthRepository: i())),
 
     //DATASOURCE
-    Bind((i) => AuthCoreDataSourceImpl()),
+    Bind((i) => AuthHttpDataSourceImpl()),
 
     //REPOSITORY
     Bind((i) => AuthRepositoyImpl(iAuthCoreDataSource: i())),

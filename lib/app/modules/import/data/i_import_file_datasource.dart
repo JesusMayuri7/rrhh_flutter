@@ -1,5 +1,5 @@
 import 'package:rrhh_clean/app/modules/import/presenter/domain/import_file_use_case.dart';
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 
 abstract class IImportFileDatasource {

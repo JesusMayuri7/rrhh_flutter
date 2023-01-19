@@ -35,24 +35,25 @@ class BaseCasModule extends Module {
   @override
   final List<Bind> binds = [
     // EXTERNAL
-    Bind((i) => BaseCasDatasourceImpl(httpCustom: i())),
-    //Bind((i) => BaseCasDatasourceImpl2023(httpCustom: i())),
+   //Bind((i) => BaseCasDatasourceImpl(httpCustom: i())),
+    Bind((i) => BaseCasDatasourceImpl2023(httpCustom: i())),
     Bind((i) => BaseExcelDatasourceImpl(httpCustom: i())),
     Bind((i) => InitialCasDatasourceImpl(httpCustom: i())),
     Bind((i) => PimCasLeyDatasourceImpl(httpCustom: i())),
     Bind((i) => CertificadoCasDatasourceImpl(httpCustom: i())),
 
-    //2022
-    Bind((i) => PresupuestoCasDatasourceImpl(
+    //2023
+     /*Bind((i) => PresupuestoCasDatasourceImpl(
         getCertificadosCasImpl: i<CertificadoCasDatasourceImpl>(),
-        getPimCasImpl: i<PimCasDatasourceImpl>())),
+        getPimCasImpl: i<PimCasDatasourceImpl>())), */
 
     //2023
-/*     Bind((i) => PresupuestoCasDatasourceImplLey(
+      Bind((i) => PresupuestoCasDatasourceImplLey(
         getCertificadosCasImpl: i<PimCasLeyDatasourceImpl>(),
-        getPimCasImpl: i<PimCasLeyDatasourceImpl>())), */
+        getPimCasImpl: i<PimCasLeyDatasourceImpl>())),  
 
     // REPOSITORY
+    
     Bind((i) => ListarRepositoryImpl(
         baseExceldatasource: i<IBaseExcelDatasource>(),
         baseCasdatasource: i<IBaseCasDatasource>(),
@@ -71,8 +72,12 @@ class BaseCasModule extends Module {
     Bind((i) => PresupuestoCasUseCase(i())),
 
     // BLOC
-    Bind.lazySingleton((i) => HeadParametersBloc(i(), i(), i(), i()),
-        export: true),
+    Bind.lazySingleton((i) => HeadParametersBloc(
+      initialUseCase: i(),
+      calcularCasUseCase: i(),
+      listarUseCase:  i(),
+      presupuestoCasUseCase:  i()),
+      export: true),
     Bind.lazySingleton((i) => ResumenBloc(i(), i(), i()), export: true),
     Bind.lazySingleton((i) => PresupuestoBloc(i()), export: true),
   ];

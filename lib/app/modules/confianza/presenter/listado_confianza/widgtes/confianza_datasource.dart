@@ -24,8 +24,8 @@ class ConfianzaDataSource extends DataGridSource {
   void buildDataGridRows() {
     _confianzaDataGridRows = listadoConfianza
         .map((dataGridRow) => DataGridRow(cells: [
-              DataGridCell<String>(
-                  columnName: 'modalidad', value: dataGridRow.modalidad),
+              DataGridCell<String>(                  columnName: 'anio', value: dataGridRow.anio),
+              DataGridCell<String>(                  columnName: 'modalidad', value: dataGridRow.modalidad),
               DataGridCell<String>(columnName: 'tipo', value: dataGridRow.tipo),
               DataGridCell<String>(
                   columnName: 'plaza', value: dataGridRow.plaza),

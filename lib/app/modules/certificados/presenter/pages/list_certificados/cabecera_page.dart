@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import '../../../domain/entities/certificado_entity.dart';
 
 import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
@@ -21,6 +22,7 @@ class CabeceraPage extends StatefulWidget {
 class _CabeceraPageState extends State<CabeceraPage> {
   TextEditingController textCertificado = TextEditingController();
   final bloc = Modular.get<ListCertificadoBloc>();
+  final blocAuth = Modular.get<AuthBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class _CabeceraPageState extends State<CabeceraPage> {
                 bloc: this.bloc,
                 builder: (context, state) {
                   return ElevatedButton(
-                      onPressed: () => this.bloc.add(GetListCertificadoEvent()),
+                      onPressed: () => this.bloc.add(GetListCertificadoEvent(anio: this.blocAuth.state.loginResponseEntity!.anio )),
                       child: Text('Actualizar'));
                 },
               ),

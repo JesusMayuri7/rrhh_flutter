@@ -49,7 +49,7 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
       'CodUser': env['cod_user']!,
       'filtro': "01",
       'subFiltro': "0",
-      'ejercicio': "2022",
+      'ejercicio': "2023",
       'RangoFinal': "2000",
       'RangoInicial': "1"
     };
@@ -79,7 +79,7 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
     var url = Uri.http(env['url_mef']!, _url, {'q': '{http}'});
     Map<String, String> param = {
       'tipo': '1',
-      'ejercicio': '2022',
+      'ejercicio': '2023',
       'mes': '01',
       'band': '1',
       'secEjec': _ejecutora,
@@ -88,7 +88,7 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
       'secuenc': '0',
       'cNumDocum': '00000000',
       'cTipDocum': '2',
-      'fechIni': '01/01/2022',
+      'fechIni': '01/01/2023',
       'tipoConsulta': '1',
       'numPla': '1',
       'expediente': '1',

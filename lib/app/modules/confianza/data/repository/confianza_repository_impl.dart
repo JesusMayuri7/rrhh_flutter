@@ -41,7 +41,9 @@ class ConfianzaRepositoryImpl implements IConfianzaRepository {
 
   @override
   Future<Either<Failure, ResponseEntity>> postConfianza(
-      {required int id,
+      {
+      required int id,
+      required String anio,
       required String cargo,
       required String detalle,
       required String direccion,
@@ -61,6 +63,7 @@ class ConfianzaRepositoryImpl implements IConfianzaRepository {
       final result =
           await this.postConfianzaDataSource.postConfianza(ConfianzaModel(
                 id: id,
+                anio: anio,
                 descArea: '',
                 cargo: cargo,
                 dni: dni,

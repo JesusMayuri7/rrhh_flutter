@@ -60,7 +60,7 @@ class JudicialEntity extends Equatable {
   factory JudicialEntity.empty() {
     return JudicialEntity(
         id: 0,
-        anio: "2022",
+        anio: "2023",
         presupuesto: 'NO_PREVISTA',
         fuente: '',
         fuenteId: 0,

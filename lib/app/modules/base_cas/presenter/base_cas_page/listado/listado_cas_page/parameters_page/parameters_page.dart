@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
+import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
+import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
 
-import '../../../../../../../core/uitls/widgets/label_with_dropdown.dart';
-import '../../../../../../../core/uitls/widgets/label_with_form_field.dart';
-import 'parameters_page/bloc/headparameters_bloc.dart';
+import 'bloc/headparameters_bloc.dart';
+
 
 class ParametersPage extends StatefulWidget {
   @override
@@ -25,10 +26,10 @@ class _HeadBaseCasPageState extends State<ParametersPage>
 
     anioSelected = authBloc.state.loginResponseEntity?.anio;
     if (this.bloc.state is HeadParametersInitialState) {
-      this.bloc.add(HeadParametersFormLoadEvent(
+       this.bloc.add(HeadParametersFormLoadEvent(
           dscVariable: 'CALCULAR_PROYECCION_CAS',
           modalidadId: 1,
-          anio: anioSelected!));
+          anio: anioSelected!)); 
     }
   }
 
@@ -86,7 +87,7 @@ class _HeadBaseCasPageState extends State<ParametersPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
+    
     double w = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),

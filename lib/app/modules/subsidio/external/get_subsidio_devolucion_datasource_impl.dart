@@ -7,7 +7,7 @@ import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/subsidio/data/i_subsidio_devolucion_datasource.dart';
 import 'package:rrhh_clean/app/modules/subsidio/data/subsidio_devolucion_model.dart';
 
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 

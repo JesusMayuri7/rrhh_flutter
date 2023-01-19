@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
 import 'package:rrhh_clean/app/modules/airhsp/data/datasources/i_download_file_datasource.dart';
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
@@ -25,7 +25,7 @@ class DownloadFileDatasourceImpl implements IDownloadFileDatasource {
     final String fechaActual = DateFormat('yyyy-MM-dd').format(DateTime.now());
     try {
       Response response = await iClientCustom.download(
-          'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2022&tipoPersona=$tipoPersona&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
+          'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2023&tipoPersona=$tipoPersona&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
 
       String modalidad = tipoPersonaToModalidad(tipoPersona);
       await FileSaveHelper.saveAndLaunchFile(response.data,

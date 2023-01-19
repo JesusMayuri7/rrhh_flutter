@@ -22,7 +22,7 @@ class _MainDocumentosPageState extends State<MainDocumentosPage> {
   void initState() {
     super.initState();
     if (requerimientosBloc.state is RequerimientosInitial) {
-      this.requerimientosBloc.add(RequerimientosLoadEvent(anio: '2022'));
+      this.requerimientosBloc.add(RequerimientosLoadEvent(anio: '2023'));
     }
   }
 
@@ -60,7 +60,7 @@ class _MainDocumentosPageState extends State<MainDocumentosPage> {
                     child: Text('Reintentar'),
                     onPressed: () => this
                         .requerimientosBloc
-                        .add(RequerimientosLoadEvent(anio: '2022')),
+                        .add(RequerimientosLoadEvent(anio: '2023')),
                   )),
               ],
             );

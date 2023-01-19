@@ -209,7 +209,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                               ),
                               LabelWithFormField(
                                 heightErroStyle: 0.5,
-                                hintText: '2022-01-01',
+                                hintText: '2023-01-01',
                                 maxLength: 20,
                                 textAlign: TextAlign.left,
                                 title: 'Inicio',
@@ -230,7 +230,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                               ),
                               LabelWithFormField(
                                 heightErroStyle: 0.5,
-                                hintText: '2022-01-01',
+                                hintText: '2023-01-01',
                                 maxLength: 20,
                                 textAlign: TextAlign.left,
                                 title: 'Fin',
@@ -284,6 +284,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                         this.blocEdit.add(EditConfianzaEventPost(
                                             confianza: ConfianzaEntity(
                                                 id: widget.confianzaEntity.id,
+                                                anio: widget.confianzaEntity.anio,
                                                 cargo: cargoController.text
                                                     .toUpperCase(),
                                                 descArea: widget

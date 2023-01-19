@@ -19,7 +19,7 @@ class DocumentosListBloc
   _onDocumentoListLoadToState(
       DocumentosListLoad event, Emitter<DocumentosListState> emit) async {
     var result =
-        await this.documentosListUseCase(ParamsDocumentos(anio: '2022'));
+        await this.documentosListUseCase(ParamsDocumentos(anio: '2023'));
     emit(result.fold((l) => DocumentosListError(message: l.toString()), (r) {
       List<DocumentoEntity> result = (r.data as List<DocumentoEntity>)
           .where((element) =>

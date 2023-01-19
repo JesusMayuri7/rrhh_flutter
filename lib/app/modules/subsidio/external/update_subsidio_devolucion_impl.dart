@@ -4,7 +4,7 @@ import 'package:rrhh_clean/app/modules/subsidio/data/i_update_subsidio_devolucio
 import 'package:rrhh_clean/app/modules/subsidio/data/subsidio_devolucion_model.dart';
 import 'package:rrhh_clean/app/modules/subsidio/domain/update_subsidio_devolucion_usecase.dart';
 import 'package:rrhh_clean/app/modules/subsidio/domain/subsidio_devolucion_entity.dart';
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 

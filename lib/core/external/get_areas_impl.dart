@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/datasource/i_areas_datasource_app.dart';
 import 'package:rrhh_clean/core/data/models/area_model.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';

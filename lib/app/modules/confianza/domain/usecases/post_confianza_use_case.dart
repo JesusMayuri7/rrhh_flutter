@@ -18,6 +18,7 @@ class PostConfianzaUseCase implements UseCase<ResponseEntity, ConfianzaEntity> {
   Future<Either<Failure, ResponseEntity>> call(ConfianzaEntity params) async {
     return await repository.postConfianza(
         id: params.id,
+        anio: params.anio,
         dni: params.dni,
         nombres: params.nombres,
         cargo: params.cargo,

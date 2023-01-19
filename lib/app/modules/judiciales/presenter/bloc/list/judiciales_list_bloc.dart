@@ -20,7 +20,7 @@ class JudicialesListBloc
   _onJudicialListLoadToState(
       JudicialesListLoad event, Emitter<JudicialesListState> emit) async {
     var result =
-        await this.judicialesListUseCase(ParamsJudiciales(anio: '2022'));
+        await this.judicialesListUseCase(ParamsJudiciales(anio: '2023'));
     emit(result.fold((l) => JudicialesListError(message: l.toString()), (r) {
       return JudicialesListLoaded(
           judicialesListOriginal: r.data, judicialesListFiltered: r.data);

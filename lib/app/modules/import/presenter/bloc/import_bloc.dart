@@ -22,7 +22,7 @@ class ImportBloc extends Bloc<ImportEvent, ImportState> {
   _importLoadFile(ImportLoadFile event, Emitter<ImportState> emit) async {
     emit(ImportFileLoading());
     var result = await this
-        .importFileUseCase(ParamsInportFile(anio: '2022', bytes: event.bytes));
+        .importFileUseCase(ParamsInportFile(anio: '2023', bytes: event.bytes));
     emit(result.fold((l) {
       return ImportLoadError(message: 'Error al importar');
     }, (r) {

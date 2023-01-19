@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_list_usecase.dart';
 
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 

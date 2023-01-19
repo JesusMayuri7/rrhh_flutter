@@ -23,8 +23,9 @@ class _HomeState extends State<MainBaseCasPage> {
         onPageChanged: (a) => _selectedIndex,
         children: [
           BaseCasPage(),
-          PresupuestoCasPage(),
-          ResumenCasPage(),
+          
+          //PresupuestoCasPage(),
+          //ResumenCasPage(),
           //AirhspPage(tipoPersona: '6'),
         ],
       ),

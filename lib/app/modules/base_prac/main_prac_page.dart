@@ -44,7 +44,7 @@ class _MainPracPageState extends State<MainPracPage> {
                           child: Text('Error, reintentar'),
                           onPressed: () => {
                                 (Modular.get<ListPracBloc>())
-                                    .add(ListPracEvent(anio: '2022'))
+                                    .add(ListPracEvent(anio: '2023'))
                               }))) */
           ],
         );

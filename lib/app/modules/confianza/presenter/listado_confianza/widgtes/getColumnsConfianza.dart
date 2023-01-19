@@ -3,6 +3,23 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 List<GridColumn> getColumnsConfianza(BuildContext context) {
   return ([
+       GridColumn(
+      width: 60,
+      columnName: 'anio',
+      label: Container(
+        alignment: Alignment.center,
+        child: Tooltip(
+          message: 'Año',
+          child: Text(
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            'Año',
+            style: TextStyle(
+                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+          ),
+        ),
+      ),
+    ),
     GridColumn(
       width: 80,
       columnName: 'modalidad',

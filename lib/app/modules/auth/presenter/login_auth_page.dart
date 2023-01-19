@@ -22,7 +22,7 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> with WindowListener {
-  List<String> _anios = ['2020', '2021', '2022', '2023'];
+  List<String> _anios = ['2020', '2021', '2023', '2023'];
   static final DateFormat formatter = DateFormat('yyyy');
   String _anioSelected = formatter.format(DateTime.now());
 

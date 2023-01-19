@@ -30,7 +30,7 @@ class BaseCapModule extends Module {
     Bind((i) => GetCertificadoCapDatasourceImpl(httpCustom: i())),
     Bind((i) => GetPimCapDatasourceImpl(httpCustom: i())),
 
-    //2022
+    //2023
     Bind((i) => GetPimCapDatasourceImpl(httpCustom: i())),
     Bind((i) => GetPresupuestoCapDatasourceImpl(
         getCertificadoCapDatasourceImpl: i<GetPimCapDatasourceImpl>(),

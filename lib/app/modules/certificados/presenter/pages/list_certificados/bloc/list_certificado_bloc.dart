@@ -72,9 +72,9 @@ class ListCertificadoBloc
     emit(ListDataAllState(event));
   }
 
-  _listaEventToBaseCasState(event, Emitter<ListCertificadoState> emit) async {
+  _listaEventToBaseCasState(GetListCertificadoEvent event, Emitter<ListCertificadoState> emit) async {
     emit(LoadingListCertificadoState());
-    var result = await listarUseCase(NoParams());
+    var result = await listarUseCase('2023');
     emit(result.fold((l) {
       return InitialListCertificadoState();
     }, (r) {

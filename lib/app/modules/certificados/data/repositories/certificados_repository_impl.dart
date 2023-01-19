@@ -52,10 +52,10 @@ class CertificadosRepositoryImpl implements ICertificadosRepository {
   }
 
   @override
-  Future<Either<Failure, ResponseEntity>> getListCertificados() async {
+  Future<Either<Failure, ResponseEntity>> getListCertificados(String anio) async {
     try {
       final result =
-          await this.getListCertificadosDatasource.getListCertificados();
+          await this.getListCertificadosDatasource.getListCertificados(anio);
 
       return Right(result);
     } on ServerException catch (e) {

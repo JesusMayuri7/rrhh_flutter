@@ -94,6 +94,7 @@ class _ListadoConfianzaPageState extends State<ListadoConfianzaPage> {
                             context,
                             ConfianzaEntity(
                                 id: 0,
+                                anio: anioSelected.toString(),
                                 descArea: '',
                                 cargo: '',
                                 dni: '',

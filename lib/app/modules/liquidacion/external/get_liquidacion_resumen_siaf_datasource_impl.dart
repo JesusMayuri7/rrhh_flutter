@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:rrhh_clean/app/modules/liquidacion/data/datasource/i_get_liquidacion_resumen_siaf_datasource.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/params_liquidacion_resumen.dart';
 
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 
 import '../data/models/liquidacion_resumen_model.dart';

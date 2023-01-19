@@ -89,7 +89,7 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
               element.id == widget.requerimientoEntity?.modalidadId);
 
       if (widget.requerimientoEntity == null)
-        paramsNewRequerimiento = NewParamsRequerimiento(anio: '2022');
+        paramsNewRequerimiento = NewParamsRequerimiento(anio: '2023');
     }
   }
 

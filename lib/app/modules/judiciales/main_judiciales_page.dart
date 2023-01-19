@@ -17,7 +17,7 @@ class _MainJudicialesPageState extends State<MainJudicialesPage> {
   @override
   void initState() {
     if (this.blocJudicial.state is JudicialesInitial) {
-      this.blocJudicial.add(JudicialesLoadEvent(anio: '2022'));
+      this.blocJudicial.add(JudicialesLoadEvent(anio: '2023'));
     }
     super.initState();
   }

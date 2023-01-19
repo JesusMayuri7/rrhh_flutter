@@ -21,7 +21,7 @@ class RequerimientoListBloc
       Emitter<RequerimientoListState> emit) async {
     emit(RequerimientoListLoading());
     var result = await this.requerimientoListUseCase(
-        ParamsRequerimiento(anio: '2022', dscModalidad: 'CAS'));
+        ParamsRequerimiento(anio: '2023', dscModalidad: 'CAS'));
     emit(result.fold((l) {
       return RequerimientoListLoaded(requerimientoList: []);
     }, (r) => RequerimientoListLoaded(requerimientoList: r.data)));

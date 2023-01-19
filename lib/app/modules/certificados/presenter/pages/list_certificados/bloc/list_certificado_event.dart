@@ -15,8 +15,12 @@ class ListarListCertificadoEvent implements ListCertificadoEvent {
 }
 
 class GetListCertificadoEvent implements ListCertificadoEvent {
+  final String anio;
+
+ GetListCertificadoEvent({required this.anio});
+
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [anio];
 
   @override
   bool get stringify => throw UnimplementedError();

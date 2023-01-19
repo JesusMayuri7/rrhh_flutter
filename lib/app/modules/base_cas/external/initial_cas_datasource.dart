@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 
 import '../../../../core/errors/exceptions.dart';
@@ -28,6 +28,7 @@ class InitialCasDatasourceImpl implements IInitialCasDatasource {
       "modalidadId": modalidadId,
       "anio": anio
     };
+    print(params.toString());
     try {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           json.encode(params), (i) => responseFromJson(i));

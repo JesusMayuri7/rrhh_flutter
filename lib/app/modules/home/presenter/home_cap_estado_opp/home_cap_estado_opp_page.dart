@@ -59,7 +59,7 @@ class _HomeCapEstadoOppPageState extends State<HomeCapEstadoOppPage> {
                     title: 'Tipo'),
               ),
               SizedBox(width: 10),
-              Text('CAP PROVISIONAL 2022 - RM N°352-2021',
+              Text('CAP PROVISIONAL 2023 - RM N°352-2021',
                   style: TextStyle(fontSize: 12))
             ],
           ),

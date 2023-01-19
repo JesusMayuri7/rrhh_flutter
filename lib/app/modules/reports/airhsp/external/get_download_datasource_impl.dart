@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:excel/excel.dart';
 import 'package:rrhh_clean/app/modules/reports/airhsp/data/i_get_download_datasource.dart';
-import 'package:rrhh_clean/core/data/datasource/i_client_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 
 class GetDownloadDatasourceImpl implements IGetDownloadDatasource {
@@ -20,7 +20,7 @@ class GetDownloadDatasourceImpl implements IGetDownloadDatasource {
   Future getDownloadDatasource() async {
     try {
       Response response = await iClientCustom.download(
-          'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2022&tipoPersona=1&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
+          'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2023&tipoPersona=1&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
 
       var _excel = Excel.decodeBytes(response.data);
 

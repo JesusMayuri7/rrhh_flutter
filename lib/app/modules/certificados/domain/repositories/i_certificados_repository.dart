@@ -21,5 +21,5 @@ abstract class ICertificadosRepository {
       required int modalidadId,
       required List<Map<String, dynamic>> clasificadorConcepto});
 
-  Future<Either<Failure, ResponseEntity>> getListCertificados();
+  Future<Either<Failure, ResponseEntity>> getListCertificados(String anio);
 }
