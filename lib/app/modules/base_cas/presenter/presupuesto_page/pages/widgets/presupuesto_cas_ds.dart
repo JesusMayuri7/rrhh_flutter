@@ -18,34 +18,34 @@ class PresupuestoCasDs extends DataGridSource {
                   columnName: 'producto', value: dataGridRow.producto),
               DataGridCell<String>(
                   columnName: 'clasificador', value: dataGridRow.clasificador),
-              DataGridCell<double>(columnName: 'pia', value: dataGridRow.pia),
-              DataGridCell<double>(columnName: 'pim', value: dataGridRow.pim),
-              DataGridCell<double>(
+              DataGridCell<num>(columnName: 'pia', value: dataGridRow.pia),
+              DataGridCell<num>(columnName: 'pim', value: dataGridRow.pim),
+              DataGridCell<num>(
                   columnName: 'certificado', value: dataGridRow.certificado),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'devengado', value: dataGridRow.devengado),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'enero', value: dataGridRow.enero),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'febrero', value: dataGridRow.febrero),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'marzo', value: dataGridRow.marzo),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'abril', value: dataGridRow.abril),
-              DataGridCell<double>(columnName: 'mayo', value: dataGridRow.mayo),
-              DataGridCell<double>(
+              DataGridCell<num>(columnName: 'mayo', value: dataGridRow.mayo),
+              DataGridCell<num>(
                   columnName: 'junio', value: dataGridRow.junio),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'julio', value: dataGridRow.julio),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'agosto', value: dataGridRow.agosto),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'setiembre', value: dataGridRow.setiembre),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'octubre', value: dataGridRow.octubre),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'noviembre', value: dataGridRow.noviembre),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'diciembre', value: dataGridRow.diciembre),
             ]))
         .toList();
@@ -91,7 +91,7 @@ class PresupuestoCasDs extends DataGridSource {
               alignment: Alignment.centerRight,
               child: Text(
                 NumberFormat('#,##0.00', 'en_US')
-                    .format(double.parse(e.value.toString())),
+                    .format(num.parse(e.value.toString())),
                 style: TextStyle(fontSize: 10.5),
               ),
               //e.value.toString(),

@@ -51,6 +51,7 @@ class _HeadBaseCasPageState extends State<ParametersPage>
   TextEditingController porcentajeComisionSctrPensionController =
       TextEditingController();
   TextEditingController porcentajeIgvController = TextEditingController();
+  TextEditingController incrementoCasController = TextEditingController();
 
   int mesInicio = 0;
   int mesFin = 11;
@@ -127,8 +128,8 @@ class _HeadBaseCasPageState extends State<ParametersPage>
                             state.porcentajePrimaSctrPension.toString();
                         porcentajeComisionSctrPensionController.text =
                             state.porcentajeComisionSctrPension.toString();
-                        porcentajeIgvController.text =
-                            state.porcentajeIgv.toString();
+                        porcentajeIgvController.text =                            state.porcentajeIgv.toString();
+                        incrementoCasController.text =                            state.incrementoCas.toString();
                         return Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -197,6 +198,15 @@ class _HeadBaseCasPageState extends State<ParametersPage>
                                     textAlign: TextAlign.center,
                                     title: 'Uit',
                                     textController: uitController,
+                                    keyboardType: TextInputType.number),
+                              ),
+                              Container(
+                                width: 80,
+                                child: LabelWithFormField(
+                                    maxLength: 12,
+                                    textAlign: TextAlign.center,
+                                    title: 'Incremento',
+                                    textController: incrementoCasController,
                                     keyboardType: TextInputType.number),
                               ),
                               SizedBox(width: 7),
@@ -292,6 +302,7 @@ class _HeadBaseCasPageState extends State<ParametersPage>
                                           porcentajePrimaSctrPension: double.parse(porcentajePrimaSctrPensionController.text),
                                           porcentajeComisionSctrPension: double.parse(porcentajeComisionSctrPensionController.text),
                                           porcentajeIgv: double.parse(porcentajeIgvController.text),
+                                          incrementoCas: double.parse(incrementoCasController.text),
                                           mesInicio: this.mesInicio,
                                           mesFin: this.mesFin))
                                       : null,
@@ -335,6 +346,7 @@ class _HeadBaseCasPageState extends State<ParametersPage>
                                               porcentajePrimaSctrPension: double.parse(porcentajePrimaSctrPensionController.text),
                                               porcentajeComisionSctrPension: double.parse(porcentajeComisionSctrPensionController.text),
                                               porcentajeIgv: double.parse(porcentajeIgvController.text),
+                                              incrementoCas: double.parse(incrementoCasController.text),
                                               mesInicio: mesInicio,
                                               mesFin: mesFin));
                                         }

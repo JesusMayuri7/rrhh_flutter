@@ -3,17 +3,17 @@ class ResumenEntity {
   String fuente;
   String producto;
   String especifica;
-  double pim;
-  double devengado;
+  num pim;
+  num devengado;
   int cantidadOcupado;
-  double montoOcupado;
+  num montoOcupado;
   int cantidadVacante;
-  double montoVacante;
+  num montoVacante;
   int cantidadProyectado;
-  double montoProyectado;
+  num montoProyectado;
   int cantidadTotal;
-  double montoTotal;
-  double saldo;
+  num montoTotal;
+  num saldo;
   ResumenEntity({
     required this.anoEje,
     required this.fuente,
@@ -37,17 +37,17 @@ class ResumenEntity {
     String? fuente,
     String? producto,
     String? especifica,
-    double? pim,
-    double? devengado,
+    num? pim,
+    num? devengado,
     int? cantidadOcupado,
-    double? montoOcupado,
+    num? montoOcupado,
     int? cantidadVacante,
-    double? montoVacante,
+    num? montoVacante,
     int? cantidadProyectado,
-    double? montoProyectado,
+    num? montoProyectado,
     int? cantidadTotal,
-    double? montoTotal,
-    double? saldo,
+    num? montoTotal,
+    num? saldo,
   }) {
     return ResumenEntity(
       anoEje: anoEje ?? this.anoEje,

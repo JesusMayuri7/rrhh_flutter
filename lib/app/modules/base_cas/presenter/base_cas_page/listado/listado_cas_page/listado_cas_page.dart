@@ -80,7 +80,7 @@ class ListadoCasPage extends StatelessWidget {
               //footerFrozenColumnsCount: 1,
               isScrollbarAlwaysShown: true,
               source: jsonDataGridSource,
-              headerRowHeight: 23,
+              headerRowHeight: 45,
               rowHeight: 22,
               gridLinesVisibility: GridLinesVisibility.both,
               headerGridLinesVisibility: GridLinesVisibility.both,

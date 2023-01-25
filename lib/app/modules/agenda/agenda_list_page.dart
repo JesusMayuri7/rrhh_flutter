@@ -27,7 +27,7 @@ class AgendaListPageState extends State<AgendaListPage> {
   final blocListAgenda = Modular.get<AgendaListCubit>();
   final blocAuth = Modular.get<AuthBloc>().state as SuccessAuthState;
   List<AgendaEntity> listAgenda = [];
-  final int crossAxisCount = 3;
+  final int crossAxisCount = 2;
 
   @override
   void initState() {
@@ -79,8 +79,8 @@ class AgendaListPageState extends State<AgendaListPage> {
               if (state is AgendaListLoaded) {
                 if (state.listAgendaFiltered.isNotEmpty) {
                   listAgenda = state.listAgendaFiltered;
-                  final rowSizes = listAgenda.length>=4? List.generate(
-                      listAgenda.length  ~/ crossAxisCount, (_) => auto) : [auto];
+                  final rowSizes = 
+                  listAgenda.length>4? List.generate(listAgenda.length  ~/ crossAxisCount, (_) => auto):[auto];                  
                   return Column(
                     children: [
                       Expanded(

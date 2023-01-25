@@ -65,6 +65,7 @@ class HeadParametersBloc
               porcentajeComisionSctrPension:
                   event.porcentajeComisionSctrPension,
               porcentajeIgv: event.porcentajeIgv,
+              incrementoCas: event.incrementoCas,
               mesInicio: event.mesInicio,
               mesFin: event.mesFin,
               pim: pimCas,
@@ -90,6 +91,7 @@ class HeadParametersBloc
           porcentajePrimaSctrPension: event.porcentajePrimaSctrPension,
           porcentajeComisionSctrPension: event.porcentajeComisionSctrPension,
           porcentajeIgv: event.porcentajeIgv,
+          incrementoCas: event.incrementoCas,
           mesInicio: event.mesInicio,
           mesFin: event.mesFin));
 
@@ -127,6 +129,7 @@ class HeadParametersBloc
     double porcentajePrimaSctrPension = 0;
     double porcentajeComisionSctrPension = 0;
     double porcentajeIgv = 0;
+    num incrementoCas = 0;
 
     var result = await initialUseCase(ParamsInitial(
         dscVariable: event.dscVariable,
@@ -150,6 +153,8 @@ class HeadParametersBloc
           porcentajePrimaSctrPension = double.parse(item['valor']);
         if (item['detalle'] == 'PORCENTAJE_COMISION_SCTR_PENSION')
           porcentajeComisionSctrPension = double.parse(item['valor']);
+          if (item['detalle'] == 'INCREMENTO_CAS')
+          incrementoCas = double.parse(item['valor']);
         if (item['detalle'] == 'PORCENTAJE_IGV')
           porcentajeIgv = double.parse(item['valor']);
       }
@@ -167,6 +172,7 @@ class HeadParametersBloc
           porcentajePrimaSctrPension: porcentajePrimaSctrPension,
           porcentajeComisionSctrPension: porcentajeComisionSctrPension,
           porcentajeIgv: porcentajeIgv,
+          incrementoCas:incrementoCas,
           isExportingData: false,
           listadoCas: []);
     }));

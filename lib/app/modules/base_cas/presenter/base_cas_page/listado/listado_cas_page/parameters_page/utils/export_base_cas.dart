@@ -19,11 +19,18 @@ Future<void> generateExcel(ParamsCalcular params) async {
 
   int firstRowHeading = 5;
 
+  sheet
+        .getRangeByName(ColumnBaseHeader.sueldoTopeValue.columnLetter + '${RowBaseHeader.rowDos.rowIndex}')
+        .setNumber(15600);
+
   String _fmesInicio =
       '\$${ColumnBaseHeader.mesInicioValue.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
   String _fmesFin =
       '\$${ColumnBaseHeader.mesFinValue.columnLetter}\$${RowBaseHeader.rowDos.rowIndex}';
-
+        String _incrementoCas =
+      '\$${ColumnBaseHeader.incrementoCasValue.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
+              String _sueldoTope =
+      '\$${ColumnBaseHeader.sueldoTopeValue.columnLetter}\$${RowBaseHeader.rowDos.rowIndex}';
   String _fuit =
       '\$${ColumnBaseHeader.uitValue.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
   String _fmaxSueldo =
@@ -52,14 +59,16 @@ Future<void> generateExcel(ParamsCalcular params) async {
       RowBaseHeader.rowTres.rowIndex,
       RowBaseHeader.rowCuatro.rowIndex);
 
+  final int firstColumnBase= 4;    
+
   final List<Object> heading = List.from(params.lista[0].toMap().keys.toList());
-  sheet.importList(heading, firstRowHeading, 1, false);
+  sheet.importList(heading, firstRowHeading, firstColumnBase, false);
 
   for (int index = 0; index < params.lista.length; index++) {
     final List<Object> row =
         List.from(params.lista[index].toMap().values.toList());
 
-    sheet.importList(row, firstRowHeading + index + 1, 1, false);
+    sheet.importList(row, firstRowHeading + index + 1, firstColumnBase, false);
     //final Range range1 = sheet.getRangeByName('S2:20');
   }
 
@@ -71,12 +80,28 @@ Future<void> generateExcel(ParamsCalcular params) async {
         .formula = _fmesInicio; // MesInicio
     sheet
         .getRangeByName(ColumnBaseTable.mesFin.columnLetter + '$rowIndex')
-        .formula = _fmesFin; // Mes Fin
+        .formula = _fmesFin; 
+
+          //Incremento Cas
+   sheet
+        .getRangeByName(ColumnBaseTable.incrementoCas.columnLetter + '$rowIndex')
+        .formula = '''IF((${ColumnBaseTable.monto.columnLetter}$rowIndex+$_incrementoCas)
+        >=$_sueldoTope,$_sueldoTope-${ColumnBaseTable.monto.columnLetter}$rowIndex,
+        $_incrementoCas)''';     
+
+        //=SI( (AF6 + $AG$1 )>= $AG$2;  $AG$2 -AF6; $AG$1)   
+
+   sheet
+        .getRangeByName(ColumnBaseTable.montoMensual.columnLetter + '$rowIndex')
+        .formula = '${ColumnBaseTable.monto.columnLetter}$rowIndex+${ColumnBaseTable.incrementoCas.columnLetter}$rowIndex';     
+
+        // Essalud Mensual
     sheet
             .getRangeByName(
                 ColumnBaseTable.essaludMensual.columnLetter + '$rowIndex')
             .formula =
         '=IF(\$${ColumnBaseTable.montoMensual.columnLetter}$rowIndex>=($_fuit*$_fmaxSueldo),($_fuit*$_fmaxSueldo*$_fmaxEssalud),${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*$_fmaxEssalud)';
+
     sheet
             .getRangeByName(ColumnBaseTable.montoAnual.columnLetter + '$rowIndex')
             .formula =
@@ -98,17 +123,23 @@ Future<void> generateExcel(ParamsCalcular params) async {
             .getRangeByName(ColumnBaseTable.total.columnLetter + '$rowIndex')
             .formula =
         '=SUM(${ColumnBaseTable.montoAnual.columnLetter}$rowIndex:${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowIndex)';
+
     sheet
             .getRangeByName(
                 ColumnBaseTable.sctrSaludMensual.columnLetter + '$rowIndex')
             .formula =
-        '=${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*($_fprimaSctrSalud)*($_figvSctrSalud)';
-    sheet
+        '=ROUND(${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*($_fprimaSctrSalud)*($_figvSctrSalud),2)';
+
+    sheet // Sctr Salud Anual
             .getRangeByName(
                 ColumnBaseTable.sctrSaludAnual.columnLetter + '$rowIndex')
             .formula =
-        '=IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,(\$${ColumnBaseTable.sctrSaludMensual.columnLetter}$rowIndex*IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+(${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowIndex*($_fprimaSctrSalud)*($_figvSctrSalud)),0)';
-    sheet
+        '''=ROUND(IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,(\$${ColumnBaseTable.sctrSaludMensual.columnLetter}$rowIndex*
+        IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-
+        \$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+(${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowIndex*
+        ($_fprimaSctrSalud)*($_figvSctrSalud)),0),2)''';
+
+    sheet  // Sctr Pension Mensual
             .getRangeByName(
                 ColumnBaseTable.sctrPensionMensual.columnLetter + '$rowIndex')
             .formula =
@@ -117,7 +148,7 @@ Future<void> generateExcel(ParamsCalcular params) async {
             .getRangeByName(
                 ColumnBaseTable.sctrPensionAnual.columnLetter + '$rowIndex')
             .formula =
-        '=ROUNDUP(IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,(\$${ColumnBaseTable.sctrPensionMensual.columnLetter}$rowIndex*IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+(\$${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowIndex*$_fprimaSctrPension*$_figvSctrPension*$_fcomisionSctrPension),0),2)';
+        '=ROUND(IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,(\$${ColumnBaseTable.sctrPensionMensual.columnLetter}$rowIndex*IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+(\$${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowIndex*$_fprimaSctrPension*$_figvSctrPension*$_fcomisionSctrPension),0),2)';
   }
 
   // Totales
@@ -195,12 +226,21 @@ void parameterBaseSheet(Worksheet sheet, ParamsCalcular params, int _rowUno,
   sheet
       .getRangeByName(ColumnBaseHeader.mesFinTitle.columnLetter + '$_rowDos')
       .setText('Mes Fin');
+
   sheet
       .getRangeByName(ColumnBaseHeader.mesInicioValue.columnLetter + '$_rowUno')
       .setNumber(params.mesInicio + 1);
   sheet
       .getRangeByName(ColumnBaseHeader.mesFinValue.columnLetter + '$_rowDos')
       .setNumber(params.mesFin + 1);
+
+//INCREMENTO
+  sheet
+      .getRangeByName(ColumnBaseHeader.incrementoCasTitle.columnLetter + '$_rowUno')
+      .setText('Incremento');
+        sheet
+      .getRangeByName(ColumnBaseHeader.incrementoCasValue.columnLetter + '$_rowUno')
+      .setNumber(params.incrementoCas.toDouble());
 
   // Essalud
   sheet

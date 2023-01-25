@@ -9,7 +9,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/import/presenter/import_grid_datasource.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-//import 'package:filepicker_windows/filepicker_windows.dart';
+import 'package:filepicker_windows/filepicker_windows.dart';
 
 import 'getColumnsAll.dart';
 
@@ -101,7 +101,7 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
 
   void openFile() {
     if (Platform.isWindows) {
-      /*   final file = OpenFilePicker()
+         final file = OpenFilePicker()
         ..filterSpecification = {
           'All Files': '*.*',
           'Xlsx Excel (*.xlsx)': '*.xlsx',
@@ -122,7 +122,7 @@ class _JsonDataSourceDataGridState extends State<ImportPage> {
 
         this.bloc.add(ImportLoadFile(bytes: result));
         //return result.;
-      } */
+      } 
     }
   }
 

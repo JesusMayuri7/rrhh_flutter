@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class BaseCasEntity extends Equatable {
   BaseCasEntity(
       {required this.codigoPlaza,
+      required this.anio,
       required this.presupuesto,
       required this.producto,
       required this.descArea,
@@ -30,7 +31,9 @@ class BaseCasEntity extends Equatable {
       required this.detalle,
       this.mesInicio = 0,
       this.mesFin = 0,
-      required this.monto,
+      this.monto = 0,
+      this.incrementoCas =0,
+      this.montoMensual=0,
       this.essalud = 0,
       this.montoAnual = 0,
       this.essaludAnual = 0,
@@ -43,6 +46,7 @@ class BaseCasEntity extends Equatable {
       this.uit = 0});
 
   final String codigoPlaza;
+  final String anio;
   final String presupuesto;
   final String producto;
   final String descArea;
@@ -70,6 +74,8 @@ class BaseCasEntity extends Equatable {
   final int mesInicio;
   final int mesFin;
   final double monto;
+  final double incrementoCas;
+  final double montoMensual;
   final double essalud;
   final double montoAnual;
   final double essaludAnual;
@@ -85,6 +91,7 @@ class BaseCasEntity extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'codigoPlaza': codigoPlaza,
+      'anio': anio,
       'presupuesto': presupuesto,
       'producto': producto,
       'descArea': descArea,
@@ -112,14 +119,16 @@ class BaseCasEntity extends Equatable {
       'mesIncio': mesInicio,
       'mesFin': mesFin,
       'monto': monto,
+      'incrementoCas':incrementoCas,
+      'montoMensual':montoMensual,
       'essalud': essalud,
       'montoAnual': montoAnual,
       'essaludAnual': essaludAnual,
       'aguinaldoAnual': aguinaldoAnual,
       'total': total,
-      'sctrSaludAnual': sctrSalud,
+      'sctrSaludMensual': sctrSalud,
       'totalSctrSaludAnual': sctrSaludAnual,
-      'sctrPensionAnual': sctrPension,
+      'sctrPensionMensual': sctrPension,
       'totalSctrPensionAnual': sctrPensionAnual,
       'detalle': detalle,
     };
@@ -127,6 +136,7 @@ class BaseCasEntity extends Equatable {
 
   BaseCasEntity copyWith({
     String? codigoPlaza,
+    String? anio,
     String? presupuesto,
     String? producto,
     String? descArea,
@@ -154,6 +164,8 @@ class BaseCasEntity extends Equatable {
     int? mesFin,
     String? finLicencia,
     double? monto,
+    double? incrementoCas,
+    double? montoMensual,
     double? essalud,
     double? montoAnual,
     double? essaludAnual,
@@ -168,6 +180,7 @@ class BaseCasEntity extends Equatable {
   }) {
     return BaseCasEntity(
       codigoPlaza: codigoPlaza ?? this.codigoPlaza,
+      anio: anio ?? this.anio,
       presupuesto: presupuesto ?? this.presupuesto,
       producto: producto ?? this.producto,
       descArea: descArea ?? this.descArea,
@@ -195,6 +208,8 @@ class BaseCasEntity extends Equatable {
       mesFin: mesFin ?? this.mesFin,
       finLicencia: finLicencia ?? this.finLicencia,
       monto: monto ?? this.monto,
+      incrementoCas: incrementoCas ?? this.incrementoCas,
+      montoMensual: montoMensual ?? this.montoMensual,
       essalud: essalud ?? this.essalud,
       montoAnual: montoAnual ?? this.montoAnual,
       essaludAnual: essaludAnual ?? this.essaludAnual,
@@ -210,7 +225,9 @@ class BaseCasEntity extends Equatable {
   }
 
   BaseCasEntity calcular(
-      {String? codigoPlaza,
+      {
+        String? codigoPlaza,
+        String? anio,
       String? presupuesto,
       String? producto,
       String? descArea,
@@ -243,6 +260,8 @@ class BaseCasEntity extends Equatable {
       final double porcentajeMaximoEssalud = 0,
       final double aguinaldoSemestral = 0,
       final double porcentajeIgv = 0,
+      final double incrementoCas = 0,
+      final double montoMensual =0,
       final double porcentajeEssalud = 0,
       final double porcentajePrimaSctrSalud = 0,
       final double porcentajePrimaSctrPension = 0,
@@ -261,25 +280,27 @@ class BaseCasEntity extends Equatable {
 
     int _meses = (mesFin - mesInicio) + 1;
 
+    double _montoMensual = this.monto + this.incrementoCas;
+
     //Essalud Mensual
     double _essalud = double.parse(
-        (this.monto >= (uit * (porcentajeMaximoEssalud / 100))
+        (_montoMensual >= (uit * (porcentajeMaximoEssalud / 100))
                 ? (uit *
                     (porcentajeMaximoEssalud / 100) *
                     (porcentajeEssalud / 100))
-                : (this.monto * (porcentajeEssalud / 100)))
+                : (_montoMensual * (porcentajeEssalud / 100)))
             .toStringAsFixed(2));
 
     //SctrSalud Mensual
     double _sctrSalud = (porcentajePrimaSctrSalud / 100) *
         ((porcentajeIgv / 100) + 1) *
-        this.monto;
+        _montoMensual;
 
     // SctrPension Mensual
     double _sctrPension = double.parse(((porcentajePrimaSctrPension / 100) *
             ((porcentajeIgv / 100) + 1) *
             ((porcentajeComisionSctrPension / 100) + 1) *
-            this.monto)
+            _montoMensual)
         .toStringAsFixed(2));
 
     //Aguinaldo Semestral
@@ -297,7 +318,7 @@ class BaseCasEntity extends Equatable {
     }
 
     // Montos Anuales
-    _totalMonto = this.monto * _meses;
+    _totalMonto = _montoMensual * _meses;
     _totalEssalud = _essalud * _meses;
     _aguinaldoAnual = _aguinaldoPrimerSemestre + _aguinaldoSegundoSemestre;
 
@@ -318,6 +339,7 @@ class BaseCasEntity extends Equatable {
 
     return BaseCasEntity(
       codigoPlaza: codigoPlaza ?? this.codigoPlaza,
+      anio: anio ?? this.anio,
       presupuesto: presupuesto ?? this.presupuesto,
       producto: producto ?? this.producto,
       descArea: descArea ?? this.descArea,
@@ -344,7 +366,9 @@ class BaseCasEntity extends Equatable {
       mesInicio: _mesInicio,
       mesFin: _mesFin,
       finLicencia: finLicencia ?? this.finLicencia,
-      monto: monto ?? this.monto,
+      monto: monto ?? _montoMensual,
+      incrementoCas: incrementoCas,
+      montoMensual: _montoMensual,
       essalud: _essalud,
       montoAnual: _totalMonto,
       essaludAnual: _totalEssalud,
@@ -362,6 +386,7 @@ class BaseCasEntity extends Equatable {
   List<Object> get props {
     return [
       codigoPlaza,
+      anio,
       presupuesto,
       producto,
       descArea,

@@ -24,7 +24,6 @@ class BaseCasDatasourceImpl implements IBaseCasDatasource {
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
-      print(response.toString());
 
       String bodyData = jsonEncode(response.data);
 

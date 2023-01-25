@@ -19,31 +19,31 @@ class ResumenCasDs extends DataGridSource {
                   columnName: 'producto', value: dataGridRow.producto),
               DataGridCell<String>(
                   columnName: 'especifica', value: dataGridRow.especifica),
-              DataGridCell<double>(columnName: 'pim', value: dataGridRow.pim),
-              DataGridCell<double>(
+              DataGridCell<num>(columnName: 'pim', value: dataGridRow.pim),
+              DataGridCell<num>(
                   columnName: 'devengado', value: dataGridRow.devengado),
               DataGridCell<int>(
                   columnName: 'cantidadOcupado',
                   value: dataGridRow.cantidadOcupado),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'montoOcupado', value: dataGridRow.montoOcupado),
               DataGridCell<int>(
                   columnName: 'cantidadVacante',
                   value: dataGridRow.cantidadVacante),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'montoVacante', value: dataGridRow.montoVacante),
               DataGridCell<int>(
                   columnName: 'cantidadProyectado',
                   value: dataGridRow.cantidadProyectado),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'montoProyectado',
                   value: dataGridRow.montoProyectado),
               DataGridCell<int>(
                   columnName: 'cantidadTotal',
                   value: dataGridRow.cantidadTotal),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'montoTotal', value: dataGridRow.montoTotal),
-              DataGridCell<double>(
+              DataGridCell<num>(
                   columnName: 'saldo', value: dataGridRow.saldo),
             ]))
         .toList();
@@ -81,7 +81,7 @@ class ResumenCasDs extends DataGridSource {
               alignment: Alignment.centerRight,
               child: Text(
                 NumberFormat('#,##0.00', 'en_US')
-                    .format(double.parse(e.value.toString())),
+                    .format(num.parse(e.value.toString())),
                 style: TextStyle(fontSize: 10.5),
               ),
               //e.value.toString(),
@@ -120,7 +120,7 @@ class ResumenCasDs extends DataGridSource {
                 alignment: Alignment.centerRight,
                 child: Text(
                   NumberFormat('#,##0.00', 'en_US')
-                      .format(double.parse(e.value.toString())),
+                      .format(num.parse(e.value.toString())),
                   style: TextStyle(fontSize: 10),
                 ),
                 //e.value.toString(),
@@ -131,7 +131,7 @@ class ResumenCasDs extends DataGridSource {
                 alignment: Alignment.centerRight,
                 child: Text(
                   NumberFormat('#,##0.00', 'en_US')
-                      .format(double.parse(e.value.toString())),
+                      .format(num.parse(e.value.toString())),
                   style: TextStyle(fontSize: 10, color: Colors.red),
                 ),
                 //e.value.toString(),

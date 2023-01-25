@@ -230,6 +230,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.2"
+  flutter_system_proxy:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: a18c8f364de636fd235ccb6d035271370dcc4148
+      url: "https://github.com/BrowserStackCE/flutter_system_proxy.git"
+    source: git
+    version: "0.0.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter

@@ -97,6 +97,7 @@ class BaseCasBloc extends Bloc<BaseCasEvent, BaseCasState>
               porcentajeComisionSctrPension:
                   event.porcentajeComisionSctrPension,
               porcentajeIgv: event.porcentajeIgv,
+              incrementoCas: event.incrementoCas,
               mesInicio: event.mesInicio,
               mesFin: event.mesFin));
       /*  generateExcel(ParamsCalcular(
@@ -129,6 +130,7 @@ class BaseCasBloc extends Bloc<BaseCasEvent, BaseCasState>
           porcentajePrimaSctrPension: event.porcentajePrimaSctrPension,
           porcentajeComisionSctrPension: event.porcentajeComisionSctrPension,
           porcentajeIgv: event.porcentajeIgv,
+          incrementoCas: event.incrementoCas,
           mesInicio: event.mesInicio,
           mesFin: event.mesFin));
 

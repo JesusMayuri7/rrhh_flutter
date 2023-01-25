@@ -1,36 +1,44 @@
 enum ColumnBaseHeader {
-  mesInicioTitle('Y'),
-  mesFinTitle('Y'),
-  mesInicioValue('Z'),
-  mesFinValue('Z'),
+  mesInicioTitle('AD'),
+  mesFinTitle('AD'),
+  mesInicioValue('AE'),
+  mesFinValue('AE'),
 
-  uitTitle('AB'),
-  uitValue('AC'),
+  incrementoCasTitle('AF'),
+  incrementoCasValue('AG'),
 
-  porcentajeMaxSueldoTitle('AB'),
-  porcentajeMaxSueldoValue('AC'),
-  porcentajeEssaludTitle('AB'),
-  porcentajeEssaludValue('AC'),
+  sueldoTopeTitle('AF'),
+  sueldoTopeValue('AG'),
 
-  aguinaldoSemestralTitle('AE'),
-  aguinaldoSemestralValue('AF'),
+  uitTitle('AH'),
+  porcentajeMaxSueldoTitle('AH'),
+  porcentajeEssaludTitle('AH'),
 
-  primaSctrSaludTitle('AH'),
-  primaSctrSaludValue('AI'),
-  igvAdicionalSctrSaludTitle('AH'),
-  igvAdicionalSctrSaludValue('AI'),
+  uitValue('AI'),
+  porcentajeMaxSueldoValue('AI'),
+  porcentajeEssaludValue('AI'),
 
-  primaSctrPensionTitle('AJ'),
-  primaSctrPensionValue('AK'),
-  igvAdicionalSctrPensionTitle('AJ'),
-  igvAdicionalSctrPensionValue('AK'),
-  comisionSctrPensionTitle('AJ'),
-  comisionSctrPensionValue('AK'),
+  aguinaldoSemestralTitle('AK'),
+  aguinaldoSemestralValue('AL'),
 
-  clasificadorSueldoValue('AD'),
-  clasificadorEssaludValue('AE'),
-  clasificadorAguinaldoValue('AF'),
-  clasificadorSctrSaludValue('AI');
+  primaSctrSaludTitle('AM'),
+  igvAdicionalSctrSaludTitle('AM'),
+
+  primaSctrSaludValue('AN'),
+  igvAdicionalSctrSaludValue('AN'),
+
+  primaSctrPensionTitle('AP'),
+  igvAdicionalSctrPensionTitle('AP'),
+  comisionSctrPensionTitle('AP'),
+
+  primaSctrPensionValue('AQ'),
+  igvAdicionalSctrPensionValue('AQ'),
+  comisionSctrPensionValue('AQ'),
+
+  clasificadorSueldoValue('AJ'),
+  clasificadorEssaludValue('AK'),
+  clasificadorAguinaldoValue('AL'),
+  clasificadorSctrSaludValue('AO');
 
   final String columnLetter;
 
@@ -38,22 +46,24 @@ enum ColumnBaseHeader {
 }
 
 enum ColumnBaseTable {
-  producto('C'),
-  fuente('F'),
-  meta('G'),
-  estadoOpp('N'),
-  mesInicio('Z'),
-  mesFin('AA'),
-  montoMensual('AB'),
-  essaludMensual('AC'),
-  montoAnual('AD'),
-  essaludAnual('AE'),
-  aguinaldoAnual('AF'),
-  total('AG'),
-  sctrSaludMensual('AH'),
-  sctrSaludAnual('AI'),
-  sctrPensionMensual('AJ'),
-  sctrPensionAnual('AK');
+  producto('G'),
+  fuente('J'),
+  meta('K'),
+  estadoOpp('R'),
+  mesInicio('AD'),
+  mesFin('AE'),
+  monto('AF'),
+  incrementoCas('AG'),
+  montoMensual('AH'),
+  essaludMensual('AI'),
+  montoAnual('AJ'),
+  essaludAnual('AK'),
+  aguinaldoAnual('AL'),
+  total('AM'),
+  sctrSaludMensual('AN'),
+  sctrSaludAnual('AO'),
+  sctrPensionMensual('AP'),
+  sctrPensionAnual('AQ');
 
   final String columnLetter;
 

@@ -43,6 +43,7 @@ class ParamsCalcular extends Equatable {
   final double porcentajeMaximoEssalud;
   final double aguinaldoSemestral;
   final double porcentajeIgv;
+  final num incrementoCas;
   final double porcentajeEssalud;
   final double porcentajePrimaSctrSalud;
   final double porcentajePrimaSctrPension;
@@ -61,6 +62,7 @@ class ParamsCalcular extends Equatable {
     required this.porcentajePrimaSctrPension,
     required this.porcentajeComisionSctrPension,
     required this.porcentajeIgv,
+    required this.incrementoCas,
     required this.mesInicio,
     required this.mesFin,
     this.pim = const [],
@@ -78,6 +80,7 @@ class ParamsCalcular extends Equatable {
         porcentajePrimaSctrPension,
         porcentajeComisionSctrPension,
         porcentajeIgv,
+        incrementoCas,
         mesInicio,
         mesFin,
         pim,

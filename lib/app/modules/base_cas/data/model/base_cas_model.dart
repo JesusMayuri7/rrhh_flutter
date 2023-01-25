@@ -25,6 +25,7 @@ String baseCasModelToJson(List<BaseCasModel> data) =>
 class BaseCasModel extends BaseCasEntity {
   BaseCasModel({
     required String codigoPlaza,
+    required String anio,
     required String presupuesto,
     required String producto,
     required String descArea,
@@ -54,6 +55,7 @@ class BaseCasModel extends BaseCasEntity {
     required String detalle,
   }) : super(
           codigoPlaza: codigoPlaza,
+          anio: anio,
           presupuesto: presupuesto,
           producto: producto,
           descArea: descArea,
@@ -85,6 +87,7 @@ class BaseCasModel extends BaseCasEntity {
   factory BaseCasModel.fromJson(Map<String, dynamic> json) {
     return BaseCasModel(
         codigoPlaza: json["codigo_plaza"] ?? "000000",
+        anio: json["anio"].toString(),
         presupuesto: json["presupuesto"] ?? '',
         producto: cast<String>(json["producto"] ?? '')
             .substring(9, cast<String>(json["producto"] ?? '').length),
@@ -118,6 +121,7 @@ class BaseCasModel extends BaseCasEntity {
   factory BaseCasModel.fromJson2023(Map<String, dynamic> json) {
     return BaseCasModel(
         codigoPlaza: json["codigo_plaza"] ?? "000000",
+        anio: json["anio"] ?? "anio",
         presupuesto: json["presupuesto"] ?? '',
         producto: cast<String>(json["producto"] ?? '')
             .substring(9, cast<String>(json["producto"] ?? '').length),
@@ -128,7 +132,7 @@ class BaseCasModel extends BaseCasEntity {
         meta2020: json["meta_2020"] ?? '',
         unidad: json["unidad"] ?? '',
         cargo: json["cargo_cert"] ?? '',
-        dni: json["dni"] ?? "00000000",
+        dni: json["dni"] ?? "",
         nombres: json["nombres"] ?? '',
         monto: double.parse(json["monto_cert"] ?? 0),
         modalidad: json["modalidad"] ?? '',
@@ -150,6 +154,7 @@ class BaseCasModel extends BaseCasEntity {
 
   Map<String, dynamic> toJson() => {
         "plaza": codigoPlaza,
+        "anio": anio,
         "presupuesto": presupuesto,
         "producto": producto,
         "sede": sede,

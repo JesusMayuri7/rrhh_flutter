@@ -44,6 +44,7 @@ class HeadParametersSuccessState extends HeadParametersState {
   final double porcentajePrimaSctrPension;
   final double porcentajeComisionSctrPension;
   final double porcentajeIgv;
+  final num incrementoCas;
   final bool isExportingData;
   final List<BaseCasEntity> listadoCas;
   HeadParametersSuccessState({
@@ -60,6 +61,7 @@ class HeadParametersSuccessState extends HeadParametersState {
     this.porcentajePrimaSctrPension = 0,
     this.porcentajeComisionSctrPension = 0,
     this.porcentajeIgv = 0,
+    this.incrementoCas = 0,
     this.listadoCas = const [],
   });
 
@@ -76,6 +78,7 @@ class HeadParametersSuccessState extends HeadParametersState {
     double? porcentajePrimaSctrPension,
     double? porcentajeComisionSctrPension,
     double? porcentajeIgv,
+    num? incrementoCas,
     bool? isExportingData,
     List<BaseCasEntity>? listadoCas,
   }) =>
@@ -96,6 +99,7 @@ class HeadParametersSuccessState extends HeadParametersState {
           porcentajeComisionSctrPension: porcentajeComisionSctrPension ??
               this.porcentajeComisionSctrPension,
           porcentajeIgv: porcentajeIgv ?? this.porcentajeIgv,
+          incrementoCas: incrementoCas ?? this.incrementoCas,
           isExportingData: isExportingData ?? this.isExportingData,
           listadoCas: listadoCas ?? this.listadoCas);
   @override
@@ -110,6 +114,7 @@ class HeadParametersSuccessState extends HeadParametersState {
         porcentajePrimaSctrPension,
         porcentajeComisionSctrPension,
         porcentajeIgv,
+        incrementoCas,
         isExportingData,
         listadoCas,
         message,
@@ -127,6 +132,7 @@ class HeadParametersInitialState extends HeadParametersState {
   final double porcentajeSctrSalud;
   final double porcentajeSctrPension;
   final double porcentajeIgv;
+  final num incrementoCas;
 
   final bool isExportingData;
   HeadParametersInitialState({
@@ -140,6 +146,7 @@ class HeadParametersInitialState extends HeadParametersState {
     this.porcentajeSctrSalud = 0,
     this.porcentajeSctrPension = 0,
     this.porcentajeIgv = 0,
+    this.incrementoCas=0
   });
 
   HeadParametersInitialState copyWith(
@@ -152,6 +159,7 @@ class HeadParametersInitialState extends HeadParametersState {
     double? porcentajeSctrSalud,
     double? porcentajeSctrPension,
     double? porcentajeIgv,
+    num? incrementoCas,
     bool? isExportingData,
   ) =>
       HeadParametersInitialState(
@@ -167,6 +175,7 @@ class HeadParametersInitialState extends HeadParametersState {
           porcentajeSctrPension:
               porcentajeSctrPension ?? this.porcentajeSctrPension,
           porcentajeIgv: porcentajeIgv ?? this.porcentajeIgv,
+          incrementoCas: incrementoCas ?? this.incrementoCas,
           isExportingData: isExportingData ?? this.isExportingData);
 
   @override
@@ -180,6 +189,7 @@ class HeadParametersInitialState extends HeadParametersState {
         porcentajeSctrSalud,
         porcentajeSctrPension,
         porcentajeIgv,
+        incrementoCas,
         isExportingData
       ];
 }

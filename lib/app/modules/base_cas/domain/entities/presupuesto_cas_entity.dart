@@ -41,22 +41,22 @@ class PresupuestoCasEntity {
   final String producto;
   final String meta;
   final String clasificador;
-  final double pia;
-  final double pim;
-  final double certificado;
-  final double devengado;
-  final double enero;
-  final double febrero;
-  final double marzo;
-  final double abril;
-  final double mayo;
-  final double junio;
-  final double julio;
-  final double agosto;
-  final double setiembre;
-  final double octubre;
-  final double noviembre;
-  final double diciembre;
+  final num pia;
+  final num pim;
+  final num certificado;
+  final num devengado;
+  final num enero;
+  final num febrero;
+  final num marzo;
+  final num abril;
+  final num mayo;
+  final num junio;
+  final num julio;
+  final num agosto;
+  final num setiembre;
+  final num octubre;
+  final num noviembre;
+  final num diciembre;
 
   factory PresupuestoCasEntity.fromMap(Map<String, dynamic> json) =>
       PresupuestoCasEntity(
@@ -118,22 +118,22 @@ class PresupuestoCasEntity {
     String? producto,
     String? meta,
     String? especifica3,
-    double? pia,
-    double? pim,
-    double? certificado,
-    double? devengado,
-    double? enero,
-    double? febrero,
-    double? marzo,
-    double? abril,
-    double? mayo,
-    double? junio,
-    double? julio,
-    double? agosto,
-    double? setiembre,
-    double? octubre,
-    double? noviembre,
-    double? diciembre,
+    num? pia,
+    num? pim,
+    num? certificado,
+    num? devengado,
+    num? enero,
+    num? febrero,
+    num? marzo,
+    num? abril,
+    num? mayo,
+    num? junio,
+    num? julio,
+    num? agosto,
+    num? setiembre,
+    num? octubre,
+    num? noviembre,
+    num? diciembre,
   }) {
     return PresupuestoCasEntity(
       anoEje: anoEje ?? this.anoEje,

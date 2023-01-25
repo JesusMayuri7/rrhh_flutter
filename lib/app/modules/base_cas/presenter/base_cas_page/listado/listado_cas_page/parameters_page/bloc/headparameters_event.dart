@@ -13,6 +13,7 @@ class HeadParametersExportEvent extends HeadParametersEvent {
   final double porcentajePrimaSctrPension;
   final double porcentajeComisionSctrPension;
   final double porcentajeIgv;
+  final num incrementoCas;
   final int mesInicio;
   final int mesFin;
   final String anio;
@@ -25,6 +26,7 @@ class HeadParametersExportEvent extends HeadParametersEvent {
       required this.porcentajePrimaSctrPension,
       required this.porcentajeComisionSctrPension,
       required this.porcentajeIgv,
+      required this.incrementoCas,
       required this.mesInicio,
       required this.mesFin,
       required this.anio});
@@ -39,6 +41,7 @@ class HeadParametersExportEvent extends HeadParametersEvent {
         porcentajePrimaSctrPension,
         porcentajeComisionSctrPension,
         porcentajeIgv,
+        incrementoCas,
         mesInicio,
         mesFin,
         anio
@@ -57,6 +60,7 @@ class HeadParametersCalcularEvent extends HeadParametersEvent {
   final double porcentajePrimaSctrPension;
   final double porcentajeComisionSctrPension;
   final double porcentajeIgv;
+  final num incrementoCas;
   final int mesInicio;
   final int mesFin;
   final String anio;
@@ -70,6 +74,7 @@ class HeadParametersCalcularEvent extends HeadParametersEvent {
       required this.porcentajePrimaSctrPension,
       required this.porcentajeComisionSctrPension,
       required this.porcentajeIgv,
+      required this.incrementoCas,
       required this.mesInicio,
       required this.mesFin,
       required this.anio});
@@ -84,6 +89,7 @@ class HeadParametersCalcularEvent extends HeadParametersEvent {
         porcentajePrimaSctrPension,
         porcentajeComisionSctrPension,
         porcentajeIgv,
+        incrementoCas,
         mesInicio,
         mesFin,
         anio

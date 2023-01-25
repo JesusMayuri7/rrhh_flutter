@@ -18,7 +18,22 @@ List<GridColumn> getColumns(BuildContext context) {
       //columnWidthMode: ColumnWidthMode.fill,
       //width: model.isWeb ? 135 : 90,
     ),
-    GridColumn(
+        GridColumn(
+      width: 54,
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Año',
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'anio',
+      //columnWidthMode: ColumnWidthMode.fill,
+      //width: model.isWeb ? 135 : 90,
+    ),
+        GridColumn(
       label: Container(
         alignment: Alignment.center,
         child: Text(
@@ -33,7 +48,7 @@ List<GridColumn> getColumns(BuildContext context) {
       ////columnWidthMode: ColumnWidthMode.fill,
       //width: model.isWeb ? 135 : 90,
     ),
-    GridColumn(
+        GridColumn(
       width: 50,
       label: Container(
         alignment: Alignment.center,
@@ -46,20 +61,7 @@ List<GridColumn> getColumns(BuildContext context) {
       columnName: 'fuente_base',
       //columnWidthMode: ColumnWidthMode.fill,
     ),
-    GridColumn(
-      width: 43,
-      label: Container(
-        alignment: Alignment.center,
-        child: Text(
-          'Meta',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
-        ),
-      ),
-      columnName: 'meta',
-      //columnWidthMode: ColumnWidthMode.fill,
-    ),
-    GridColumn(
+            GridColumn(
       label: Container(
         alignment: Alignment.center,
         child: Text(
@@ -75,6 +77,36 @@ List<GridColumn> getColumns(BuildContext context) {
       ////columnWidthMode: ColumnWidthMode.fill,
       //width: model.isWeb ? 135 : 90,
     ),
+
+
+
+    GridColumn(
+      width: 43,
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Meta',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'meta',
+      //columnWidthMode: ColumnWidthMode.fill,
+    ),
+        GridColumn(
+      width: 250,
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Finalidad',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'meta2020',
+      //columnWidthMode: ColumnWidthMode.fill,
+    ),
+
     GridColumn(
       label: Container(
         alignment: Alignment.center,
@@ -101,6 +133,38 @@ List<GridColumn> getColumns(BuildContext context) {
           ),
         ),
         columnName: 'cargo',
+        width: 300
+        // columnWidthMode: ColumnWidthMode.lastColumnFill,
+        //columnWidthMode: ColumnWidthMode.fill,
+        //width: model.isWeb ? 135 : 90,
+        ),
+                    GridColumn(
+        label: Container(
+          alignment: Alignment.center,
+          child: Text(
+            'Dni',
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+          ),
+        ),
+        columnName: 'dni',
+        width: 70
+        // columnWidthMode: ColumnWidthMode.lastColumnFill,
+        //columnWidthMode: ColumnWidthMode.fill,
+        //width: model.isWeb ? 135 : 90,
+        ),
+            GridColumn(
+        label: Container(
+          alignment: Alignment.center,
+          child: Text(
+            'Nombres',
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+          ),
+        ),
+        columnName: 'nombres',
         width: 300
         // columnWidthMode: ColumnWidthMode.lastColumnFill,
         //columnWidthMode: ColumnWidthMode.fill,
@@ -335,6 +399,32 @@ List<GridColumn> getColumns(BuildContext context) {
         ),
       ),
       columnName: 'monto',
+      //columnWidthMode: ColumnWidthMode.fill,
+    ),
+        GridColumn(
+      width: 80,
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Incremento',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'incrementoCas',
+      //columnWidthMode: ColumnWidthMode.fill,
+    ),
+        GridColumn(
+      width: 80,
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Monto Mensual',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+      columnName: 'montoMensual',
       //columnWidthMode: ColumnWidthMode.fill,
     ),
     GridColumn(

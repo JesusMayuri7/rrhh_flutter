@@ -14,17 +14,18 @@ class BaseCasDataSource extends DataGridSource {
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(
                   columnName: 'codigo_plaza', value: dataGridRow.codigoPlaza),
-              DataGridCell<String>(
-                  columnName: 'presupuesto', value: dataGridRow.presupuesto),
+              DataGridCell<String>(                  columnName: 'anio', value: dataGridRow.anio),
+              DataGridCell<String>(                  columnName: 'presupuesto', value: dataGridRow.presupuesto),
               DataGridCell<String>(
                   columnName: 'fuente_base', value: dataGridRow.fuenteBase),
+              DataGridCell<String>(                  columnName: 'producto', value: dataGridRow.producto),
               DataGridCell<String>(columnName: 'meta', value: dataGridRow.meta),
-              DataGridCell<String>(
-                  columnName: 'producto', value: dataGridRow.producto),
+              DataGridCell<String>(columnName: 'meta2020', value: dataGridRow.meta2020),
               DataGridCell<String>(
                   columnName: 'desc_area', value: dataGridRow.descArea),
-              DataGridCell<String>(
-                  columnName: 'cargo', value: dataGridRow.cargo),
+              DataGridCell<String>(                  columnName: 'cargo', value: dataGridRow.cargo),
+              DataGridCell<String>(                  columnName: 'dni', value: dataGridRow.dni),
+              DataGridCell<String>(                  columnName: 'nombres', value: dataGridRow.nombres),
               DataGridCell<String>(
                   columnName: 'estado_opp', value: dataGridRow.estadoOpp),
               DataGridCell<String>(
@@ -59,8 +60,9 @@ class BaseCasDataSource extends DataGridSource {
                   columnName: 'mesInicio', value: dataGridRow.mesInicio),
               DataGridCell<int>(
                   columnName: 'mesFin', value: dataGridRow.mesFin),
-              DataGridCell<double>(
-                  columnName: 'monto', value: dataGridRow.monto),
+              DataGridCell<double>(                  columnName: 'monto', value: dataGridRow.monto),
+              DataGridCell<double>(                  columnName: 'incrementoCas', value: dataGridRow.incrementoCas),
+              DataGridCell<double>(                  columnName: 'montoMensual', value: dataGridRow.montoMensual),
               DataGridCell<double>(
                   columnName: 'essalud', value: dataGridRow.essalud),
               DataGridCell<double>(
