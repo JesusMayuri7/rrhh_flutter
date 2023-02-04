@@ -15,7 +15,7 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> with WindowListener {
   final blocApp = Modular.get<AuthBloc>();
-  final SharedPreferences preferences = Modular.get<SharedPreferences>();
+  //final  preferences = Modular.getAsync<SharedPreferences>();
 
   @override
   void initState() {
@@ -62,6 +62,7 @@ class _StartPageState extends State<StartPage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
+    final SharedPreferences preferences = Modular.get<SharedPreferences>();
     final String anioSelected = preferences.getString('anio').toString();
     return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {

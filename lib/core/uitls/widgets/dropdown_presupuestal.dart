@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class DropdownPresupuestal<T> extends StatefulWidget {
   final Function(T?)? onChanged;
   final List<DropdownMenuItem<T>> dropDownMenuItems;
-  final T value;
+  final T? value;
   final double dropdownWidth;
   final String hint;
 
@@ -36,6 +36,8 @@ class _DropdownPresupuestalState<T> extends State<DropdownPresupuestal<T>> {
 
   @override
   Widget build(BuildContext context) {
+    print('build ' + widget.dropDownMenuItems.first.value.toString());
+
     return Container(
       //color: Colors.amber,
       child: DropdownButton2<T>(
@@ -51,6 +53,7 @@ class _DropdownPresupuestalState<T> extends State<DropdownPresupuestal<T>> {
         isExpanded: true,
         autofocus: true,
         itemHeight: 30,
+        value: widget.value,
         offset: const Offset(0, 0),
         onChanged: widget.onChanged,
         items: widget.dropDownMenuItems,

@@ -174,36 +174,60 @@ class LiquidacionListBloc
       return LiquidacionListInitial();
     }, (r) {
       LiquidacionEntity liquidacion = r['data'];
-
+      print('data ' + liquidacion.dscCertificado);
       return LiquidacionListLoaded(
-          anio: liquidacion.anio,
-          modalidad: liquidacion.dscModalidad,
-          listLiquidacion: event.liquidacion,
-          status: LiquidacionStatus.LiquidacionUpdated,
-          listLiquidacionFiltered: [
-            for (var item in event.liquidacion)
-              if (item.id == liquidacion.id)
-                item.copyWith(
-                    metaId: liquidacion.metaId,
-                    fuenteId: liquidacion.fuenteId,
-                    finalidad: liquidacion.finalidad,
-                    certificadoId: liquidacion.certificadoId,
-                    dscCertificado: liquidacion.dscCertificado,
-                    codigoPlaza: liquidacion.codigoPlaza,
-                    codigoSiga: liquidacion.codigoSiga,
-                    expediente: liquidacion.expediente,
-                    fechaExpediente: liquidacion.fechaExpediente,
-                    dni: liquidacion.dni,
-                    nombres: liquidacion.nombres,
-                    certificadoDevengadoId: liquidacion.certificadoDevengadoId,
-                    dscCertificadoDevengado: liquidacion.dscCertificado,
-                    fuenteDevengadoId: liquidacion.fuenteDevengadoId,
-                    metaDevengadoId: liquidacion.metaDevengadoId,
-                    finalidadDevengado: liquidacion.finalidadDevengado,
-                    proceso: liquidacion.proceso)
-              else
-                item
-          ]);
+        anio: liquidacion.anio,
+        modalidad: liquidacion.dscModalidad,
+        status: LiquidacionStatus.LiquidacionUpdated,
+        listLiquidacionFiltered: [
+          for (var item in event.liquidacion)
+            if (item.id == liquidacion.id)
+              item.copyWith(
+                  metaId: liquidacion.metaId,
+                  fuenteId: liquidacion.fuenteId,
+                  finalidad: liquidacion.finalidad,
+                  certificadoId: liquidacion.certificadoId,
+                  dscCertificado: liquidacion.dscCertificado,
+                  codigoPlaza: liquidacion.codigoPlaza,
+                  codigoSiga: liquidacion.codigoSiga,
+                  expediente: liquidacion.expediente,
+                  fechaExpediente: liquidacion.fechaExpediente,
+                  dni: liquidacion.dni,
+                  nombres: liquidacion.nombres,
+                  certificadoDevengadoId: liquidacion.certificadoDevengadoId,
+                  dscCertificadoDevengado: liquidacion.dscCertificado,
+                  fuenteDevengadoId: liquidacion.fuenteDevengadoId,
+                  metaDevengadoId: liquidacion.metaDevengadoId,
+                  finalidadDevengado: liquidacion.finalidadDevengado,
+                  proceso: liquidacion.proceso)
+            else
+              item
+        ],
+        listLiquidacion: [
+          for (var item in event.liquidacion)
+            if (item.id == liquidacion.id)
+              item.copyWith(
+                  metaId: liquidacion.metaId,
+                  fuenteId: liquidacion.fuenteId,
+                  finalidad: liquidacion.finalidad,
+                  certificadoId: liquidacion.certificadoId,
+                  dscCertificado: liquidacion.dscCertificado,
+                  codigoPlaza: liquidacion.codigoPlaza,
+                  codigoSiga: liquidacion.codigoSiga,
+                  expediente: liquidacion.expediente,
+                  fechaExpediente: liquidacion.fechaExpediente,
+                  dni: liquidacion.dni,
+                  nombres: liquidacion.nombres,
+                  certificadoDevengadoId: liquidacion.certificadoDevengadoId,
+                  dscCertificadoDevengado: liquidacion.dscCertificado,
+                  fuenteDevengadoId: liquidacion.fuenteDevengadoId,
+                  metaDevengadoId: liquidacion.metaDevengadoId,
+                  finalidadDevengado: liquidacion.finalidadDevengado,
+                  proceso: liquidacion.proceso)
+            else
+              item
+        ],
+      );
     }));
   }
 

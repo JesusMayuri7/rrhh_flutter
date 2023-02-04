@@ -14,6 +14,8 @@ import 'presenter/pages/conceptos/conceptos_page.dart';
 class AirhspModule extends Module {
   @override
   final List<Bind> binds = [
+    Bind.factory((i) => AirhspBloc(i(), i(), i())),
+    Bind.factory((i) => ConceptosBloc((i()))),
     Bind((i) => ListarDatasourceImpl(httpCustom: i())),
     Bind((i) => DownloadFileDatasourceImpl(iClientCustom: i())),
     Bind((i) =>
@@ -21,8 +23,6 @@ class AirhspModule extends Module {
     Bind((i) => ListarUseCase(i())),
     Bind((i) => DownloadFileUseCase(repository: i())),
     Bind((i) => ConceptosUseCase(i())),
-    Bind.factory((i) => AirhspBloc(i(), i(), i())),
-    Bind.factory((i) => ConceptosBloc((i()))),
   ];
 
   @override

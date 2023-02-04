@@ -59,8 +59,8 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
   @override
   void initState() {
     super.initState();
-    this.liquidacionDataSource =
-        LiquidacionDataSource(listLiquidacionFiltered: []);
+    this.liquidacionDataSource = LiquidacionDataSource(
+        listLiquidacionFiltered: [], listLiquidacionOriginal: []);
     if ((this.listLiquidacionBloc.state is LiquidacionListInitial)) {
       this.listLiquidacionBloc.add(GetListLiquidacionEvent(
           anio: anioSelected!, modalidad: modalidadSelected));
@@ -73,7 +73,10 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
 
     return BlocConsumer<LiquidacionListBloc, LiquidacionListState>(
         buildWhen: (previousState, newState) {
-          if (newState is LiquidacionListLoaded) return true;
+          if (newState is LiquidacionListLoaded) {
+            print('aja');
+            return true;
+          }
           return false;
         },
         bloc: this.listLiquidacionBloc,
@@ -85,10 +88,13 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
         },
         builder: (context, state) {
           if (state is LiquidacionListLoaded) {
-            if (state.status == LiquidacionStatus.LiquidacionLoaded &&
+            if ((state.status == LiquidacionStatus.LiquidacionLoaded ||
+                    state.status == LiquidacionStatus.LiquidacionUpdated) &&
                 state.listLiquidacionFiltered.isNotEmpty) {
               liquidacionDataSource.listLiquidacionFiltered =
                   state.listLiquidacionFiltered;
+              liquidacionDataSource.listLiquidacionOriginal =
+                  state.listLiquidacion;
               liquidacionDataSource.buildDataGridRows();
               liquidacionDataSource.updateDataGrid();
               List<List<LiquidacionDetalleEntity>> data = liquidacionDataSource

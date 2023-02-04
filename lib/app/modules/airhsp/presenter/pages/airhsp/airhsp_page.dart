@@ -74,21 +74,6 @@ class _AirhspPageState extends State<AirhspPage>
   Widget build(BuildContext context) {
     super.build(context);
 
-    /*return BlocConsumer<AirhspBloc, AirhspState>(
-        listener: (context, _state) {
-          print('listener ' + _state.runtimeType.toString());
-          if (_state is ErrorAirhspState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                backgroundColor: Colors.black,
-                content: Text(_state.message),
-              ),
-            );
-          }
-        },
-        bloc: this.bloc,
-        builder: (context, state) {*/
-
     return BlocListener<AirhspBloc, AirhspState>(
       bloc: this.bloc,
       listener: (context, state) {
@@ -107,15 +92,6 @@ class _AirhspPageState extends State<AirhspPage>
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                    /*   ElevatedButton(
-                      onPressed: () {
-                        this.bloc.add(SelectedItemEvent(
-                            ejecutora: '1078',
-                            codPlaza: '000003',
-                            tipoPersona: '1',
-                            nombres: 'NOMBRES'));
-                      },
-                      child: Text('hola')),*/
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                       Expanded(
                           child: TextFieldSearch(
@@ -151,25 +127,6 @@ class _AirhspPageState extends State<AirhspPage>
                   ]));
             },
           ),
-
-          /*  BlocBuilder<AirhspBloc, AirhspState>(
-                bloc: this.bloc,
-                builder: (context, _state) {
-                  return Expanded(
-                    child: Column(
-                      children: [
-                        if (_state is LoadingAirhspState)
-                          Expanded(
-                              child: Center(child: CircularProgressIndicator())),
-                        if (_state is LoadedAirhspState)
-                          itemConceptoPage(_state.conceptos, '00000', 'NOMBRES')
-                      ],
-                    ),
-                  );
-                })
-    
-                */
-
           BlocBuilder<ConceptosBloc, ConceptosState>(
               bloc: this.blocConcepto,
               builder: (context, _state) {

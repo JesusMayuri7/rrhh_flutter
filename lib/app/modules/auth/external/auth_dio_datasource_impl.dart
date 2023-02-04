@@ -20,31 +20,32 @@ class AuthDioDataSourceImpl implements IAuthCoreDataSource {
 
   @override
   Future<LoginResponseModel> login(AuthCoreParams params) async {
-Dio dio = Dio();
+    Dio dio = Dio();
 
-  (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
+/*   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
   // Hook into the findProxy callback to set the client's proxy.
   client.findProxy = (url) {
     return 'PROXY localhost:80';
   };
-  };
+  }; */
 
     try {
-      var response = await dio.post(url.toString(),
-  options: Options(headers: {
-    HttpHeaders.contentTypeHeader: "application/json",
-  }),
-  data:  json.encode(params.toMap()),
-);
-           
-       Clipboard.setData(ClipboardData(text: response.data.toString()));
+      var response = await dio.post(
+        url.toString(),
+        options: Options(headers: {
+          HttpHeaders.contentTypeHeader: "application/json",
+        }),
+        data: json.encode(params.toMap()),
+      );
+
+      Clipboard.setData(ClipboardData(text: response.data.toString()));
 
       //var result = json.decode(response.data);
 
       //if (response.statusCode == 200)
-        return loginResponseModelFromJson(json.encode(response.data));
-      
-     // throw Exception('Error desconocido');
+      return loginResponseModelFromJson(json.encode(response.data));
+
+      // throw Exception('Error desconocido');
     } on SocketException {
       throw ServerException('Sin conexion');
     } on HttpException {

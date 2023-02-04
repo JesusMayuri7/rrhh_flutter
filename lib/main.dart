@@ -10,8 +10,8 @@ import 'core/uitls/device_info.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await WindowManager.instance.ensureInitialized();
   if (DeviceInfo.isDesktop) {
+    await WindowManager.instance.ensureInitialized();
     windowManager.waitUntilReadyToShow().then((_) async {
       await windowManager.setTitleBarStyle(
         TitleBarStyle.hidden,

@@ -1,20 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+
 import 'package:rrhh_clean/app/modules/liquidacion/bloc/liquidacion_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_detalle._entity.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_entity.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/list_liquidacion/bloc/liquidacion_list_bloc.dart';
-import 'package:rrhh_clean/core/uitls/widgets/dropdown_presupuestal.dart';
 import 'package:rrhh_clean/core/domain/entities/certificado_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
-
-import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-import 'package:collection/collection.dart';
+import 'package:rrhh_clean/core/uitls/widgets/dropdown_presupuestal.dart';
 
 class LiquidacionDataSource extends DataGridSource {
   List<LiquidacionEntity> listLiquidacionFiltered = [];
+  List<LiquidacionEntity> listLiquidacionOriginal = [];
   List<DataGridRow> _liquidacionDataGridRows = [];
 
   final blocLiquidacion = Modular.get<LiquidacionBloc>();
@@ -30,6 +32,7 @@ class LiquidacionDataSource extends DataGridSource {
 
   LiquidacionDataSource({
     required this.listLiquidacionFiltered,
+    required this.listLiquidacionOriginal,
   }) {
     buildDataGridRows();
   }
@@ -182,7 +185,7 @@ class LiquidacionDataSource extends DataGridSource {
       return DropdownPresupuestal<CertificadoEntity>(
           hint: 'Certificado',
           dropdownWidth: 200,
-          value: selectedCertificado!,
+          value: selectedCertificado,
           dropDownMenuItems:
               (this.blocLiquidacion.state as LiquidacionLoadedState)
                   .certificados
@@ -201,7 +204,7 @@ class LiquidacionDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'dsc_certificado_devengado') {
-      CertificadoEntity? selectedCertificado = displayText.isEmpty
+      CertificadoEntity? selectedCertificadoDev = displayText.isEmpty
           ? null
           : (this.blocLiquidacion.state as LiquidacionLoadedState)
               .certificados
@@ -218,7 +221,7 @@ class LiquidacionDataSource extends DataGridSource {
       return DropdownPresupuestal<CertificadoEntity>(
           hint: 'Certificado',
           dropdownWidth: 200,
-          value: selectedCertificado!,
+          value: selectedCertificadoDev,
           dropDownMenuItems:
               (this.blocLiquidacion.state as LiquidacionLoadedState)
                   .certificados
@@ -383,8 +386,6 @@ class LiquidacionDataSource extends DataGridSource {
           liquidacionId: listLiquidacionFiltered[dataRowIndex].id,
           campo: 'certificado_id',
           valor: (newCellValue as CertificadoEntity).id));
-
-      //buildDataGridRows();
     }
 
     if (column.columnName == 'dsc_certificado_devengado') {
@@ -394,6 +395,7 @@ class LiquidacionDataSource extends DataGridSource {
           campo: 'certificado_devengado_id',
           valor: (newCellValue as CertificadoEntity).id));
     }
+
     if (column.columnName == 'finalidad') {
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: listLiquidacionFiltered,

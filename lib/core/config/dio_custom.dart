@@ -20,7 +20,6 @@ class DioCustom implements IClientCustom {
   }
 
   Future<void> init() async {
-
     token = (bloc.state as SuccessAuthState).loginResponseEntity.token;
     _dio = Dio(
       BaseOptions(
@@ -33,7 +32,7 @@ class DioCustom implements IClientCustom {
       ),
     );
 
-  var uri = _dio.options.baseUrl;
+/*   var uri = _dio.options.baseUrl;
   var proxy = await FlutterSystemProxy.findProxyFromEnvironment('http://172.23.28.26:80'); 
 
     (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
@@ -41,8 +40,8 @@ class DioCustom implements IClientCustom {
   client.findProxy = (url) {
     return proxy;
   };
-  return client;
-  }; 
+  return client;|
+  };  */
 
     _dio.interceptors.add(
         InterceptorsWrapper(onError: (error, errorInterceptorHandler) async {

@@ -128,10 +128,7 @@ class _RequerimientosListPageState extends State<RequerimientosListPage> {
                     onChanged: (PlutoGridOnChangedEvent event) {
                       print(event.rowIdx);
                     },
-                    onRowSecondaryTap: (e) {
-                      print('Secondary click A Row.(${e.offset})');
-                      print(e.row?.cells['column1']?.value);
-                    },
+                    onRowSecondaryTap: (e) {},
                     onLoaded: (PlutoGridOnLoadedEvent event) {
                       stateManager = event.stateManager;
                       stateManager!
