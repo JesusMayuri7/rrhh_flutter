@@ -80,6 +80,16 @@ void parameterBasePracSheet(Worksheet _sheet, ParamsPracCalcular _params) {
           ParameterPracBaseHeader.rowDos.columnLetter)
       .setNumber(0);
 
+       _sheet
+      .getRangeByName(ParameterPracBaseHeader.clasificadorSubvencion.columnLetter +
+          ParameterPracBaseHeader.rowCuatro.columnLetter)
+      .setText('23.27.52');
+
+      _sheet
+      .getRangeByName(ParameterPracBaseHeader.clasificadorMediaSubvencion.columnLetter +
+          ParameterPracBaseHeader.rowCuatro.columnLetter)
+      .setText('23.27.510');
+
   // Sctr Pension
   /* sheet
       .getRangeByName(
@@ -173,16 +183,17 @@ void calcularPracBaseSheet(Worksheet _sheet, int _firstRowHeading,
             .formula =
         '''=${ColumnPracBaseTable.mediaSubvencionMensual.columnLetter}$rowIndex*${ColumnPracBaseTable.cantidadMediaSubvencion.columnLetter}$rowIndex''';
 
-    _sheet
+ _sheet
+            .getRangeByName(ColumnPracBaseTable
+                    .total.columnLetter +
+                '$rowIndex')
+            .formula =
+        '''=${ColumnPracBaseTable.mediaSubvencionAnual.columnLetter}$rowIndex + ${ColumnPracBaseTable.subvencionAnual.columnLetter}$rowIndex'''; 
+ _sheet
             .getRangeByName(ColumnPracBaseTable
                     .mediaSubvencionAnual.columnLetter +
                 '$rowIndex')
             .formula =
-        '''=${ColumnPracBaseTable.mediaCalculo.columnLetter}$rowIndex + ${ColumnPracBaseTable.pagoMediaSubvencion.columnLetter}$rowIndex''';
-
-    _sheet
-            .getRangeByName(ColumnPracBaseTable.total.columnLetter + '$rowIndex')
-            .formula =
-        '${ColumnPracBaseTable.subvencionAnual.columnLetter}$rowIndex + ${ColumnPracBaseTable.mediaSubvencionAnual.columnLetter}$rowIndex';
-  }
+        '''=${ColumnPracBaseTable.mediaCalculo.columnLetter}$rowIndex + ${ColumnPracBaseTable.pagoMediaSubvencion.columnLetter}$rowIndex'''; 
+      }
 }

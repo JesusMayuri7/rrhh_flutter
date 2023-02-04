@@ -186,11 +186,12 @@ Future<void> generateExcel(ParamsCalcular params) async {
               '${ColumnBaseTable.sctrSaludMensual.columnLetter}$rowSummary')
           .formula =
       '=SUM(${ColumnBaseTable.sctrSaludMensual.columnLetter}$firstRow:${ColumnBaseTable.sctrSaludMensual.columnLetter}$rowLastData)';
-  sheet
-          .getRangeByName(
-              '${ColumnBaseTable.sctrSaludAnual.columnLetter}$rowSummary')
-          .formula =
-      '=SUM(${ColumnBaseTable.sctrSaludAnual.columnLetter}$firstRow:${ColumnBaseTable.sctrSaludAnual.columnLetter}$rowLastData)';
+  //sheet
+          //.getRangeByName(
+          //     '${ColumnBaseTable.sctrSaludAnual.columnLetter}$rowSummary')
+          //.formula =
+     // '=SUM(${ColumnBaseTable.sctrSaludAnual.columnLetter}$firstRow:${ColumnBaseTable.sctrSaludAnual.columnLetter}$rowLastData)';
+      
   sheet
           .getRangeByName(
               '${ColumnBaseTable.sctrPensionMensual.columnLetter}$rowSummary')
@@ -199,17 +200,14 @@ Future<void> generateExcel(ParamsCalcular params) async {
   sheet
           .getRangeByName(
               '${ColumnBaseTable.sctrPensionAnual.columnLetter}$rowSummary')
-          .formula =
-      '=SUM(${ColumnBaseTable.sctrPensionAnual.columnLetter}$firstRow:${ColumnBaseTable.sctrPensionAnual.columnLetter}$rowLastData)';
+          .formula ='=SUM(${ColumnBaseTable.sctrPensionAnual.columnLetter}$firstRow:${ColumnBaseTable.sctrPensionAnual.columnLetter}$rowLastData)';
 
   Range range = sheet.getRangeByName(
       '${ColumnBaseTable.montoMensual.columnLetter}$firstRow:${ColumnBaseTable.sctrPensionAnual.columnLetter}$rowSummary');
   range.numberFormat = '#,##0.00';
 
-  sheetPresupuestoExtend(
-      workbook, firstRowHeading, params, sheet, params.lista);
-  sheetCertificado(
-      workbook, firstRowHeading, params, sheet.getLastRow() - 1, params.lista);
+  sheetPresupuestoExtend(workbook, firstRowHeading, params, sheet, params.lista);
+  sheetCertificado(workbook, firstRowHeading, params, sheet.getLastRow() - 1, params.lista);
 
 // Save and dispose workbook.
   final List<int> bytes = workbook.saveAsStream();

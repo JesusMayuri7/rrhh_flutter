@@ -33,13 +33,10 @@ class DioCustom implements IClientCustom {
       ),
     );
 
-  var uri = _dio.options.baseUrl;
-  var proxy = await FlutterSystemProxy.findProxyFromEnvironment('http://172.23.28.26:80'); 
 
-    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
-  // Hook into the findProxy callback to set the client's proxy.
+   (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
   client.findProxy = (url) {
-    return proxy;
+    return 'PROXY localhost:80';
   };
   return client;
   }; 

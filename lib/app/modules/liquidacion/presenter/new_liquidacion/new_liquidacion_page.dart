@@ -53,7 +53,7 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
 
     newLiquidacion = ParamsAddLiquidacion(
         anio: widget.anioSelected,
-        modalidadId: widget.dscModalidad == 'CAS' ? 1 : 3,
+        modalidadId: widget.dscModalidad == 'CAS' ? 6 : 8,
         dscCertificado: '',
         fuenteId: 1,
         metaId: 0,

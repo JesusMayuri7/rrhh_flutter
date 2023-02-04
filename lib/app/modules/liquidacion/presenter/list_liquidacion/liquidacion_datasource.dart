@@ -179,18 +179,16 @@ class LiquidacionDataSource extends DataGridSource {
                       .first
                       .value)
               .first;
-      return DropdownPresupuestal<CertificadoEntity>(
+                return DropdownPresupuestal<CertificadoEntity>(
           hint: 'Certificado',
-          dropdownWidth: 200,
-          value: selectedCertificado!,
+          dropdownWidth: 350,
+          value: selectedCertificado,
           dropDownMenuItems:
               (this.blocLiquidacion.state as LiquidacionLoadedState)
                   .certificados
-                  .map<DropdownMenuItem<CertificadoEntity>>(
-                      (CertificadoEntity value) {
+                  .map<DropdownMenuItem<CertificadoEntity>>((CertificadoEntity value) {
             return DropdownMenuItem<CertificadoEntity>(
-              child: Text('${value.id} - ${value.dscCertificado}',
-                  style: TextStyle(fontSize: 12)),
+              child: Text('${value.id} - ${value.dscCertificado}', style: TextStyle(fontSize: 12)),
               value: value,
             );
           }).toList(),
@@ -201,7 +199,7 @@ class LiquidacionDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'dsc_certificado_devengado') {
-      CertificadoEntity? selectedCertificado = displayText.isEmpty
+      CertificadoEntity? selectedCertificadoDev = displayText.isEmpty
           ? null
           : (this.blocLiquidacion.state as LiquidacionLoadedState)
               .certificados
@@ -218,7 +216,7 @@ class LiquidacionDataSource extends DataGridSource {
       return DropdownPresupuestal<CertificadoEntity>(
           hint: 'Certificado',
           dropdownWidth: 200,
-          value: selectedCertificado!,
+          value: selectedCertificadoDev,
           dropDownMenuItems:
               (this.blocLiquidacion.state as LiquidacionLoadedState)
                   .certificados
@@ -286,7 +284,7 @@ class LiquidacionDataSource extends DataGridSource {
       return DropdownPresupuestal<MetaEntity>(
           hint: 'Meta',
           dropdownWidth: 350,
-          value: selectedMeta!,
+          value: selectedMeta,
           dropDownMenuItems:
               (this.blocLiquidacion.state as LiquidacionLoadedState)
                   .metas
@@ -303,7 +301,7 @@ class LiquidacionDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'finalidad_devengado') {
-      MetaEntity? selectedMeta = displayText.isEmpty
+       MetaEntity? selectedMetaDev = displayText.isEmpty
           ? null
           : (this.blocLiquidacion.state as LiquidacionLoadedState)
               .metas
@@ -311,15 +309,14 @@ class LiquidacionDataSource extends DataGridSource {
                   element.idmetaAnual ==
                   dataGridRow
                       .getCells()
-                      .where((element) =>
-                          element.columnName == 'meta_devengado_id')
+                      .where((element) => element.columnName == 'meta_devengado_id')
                       .first
                       .value)
               .first;
       return DropdownPresupuestal<MetaEntity>(
           hint: 'Meta',
           dropdownWidth: 350,
-          value: selectedMeta!,
+          value: selectedMetaDev,
           dropDownMenuItems:
               (this.blocLiquidacion.state as LiquidacionLoadedState)
                   .metas

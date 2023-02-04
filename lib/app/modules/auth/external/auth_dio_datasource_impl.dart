@@ -22,11 +22,13 @@ class AuthDioDataSourceImpl implements IAuthCoreDataSource {
   Future<LoginResponseModel> login(AuthCoreParams params) async {
 Dio dio = Dio();
 
+
   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
   // Hook into the findProxy callback to set the client's proxy.
   client.findProxy = (url) {
     return 'PROXY localhost:80';
   };
+  return client;
   };
 
     try {

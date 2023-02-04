@@ -315,11 +315,8 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                         Expanded(
                                           child: fluentUi.FilledButton(
                                             child: Text('Guardar'),
-                                            onPressed: (paramsAltaBaja.estado ==
-                                                        'VACANTE' &&
-                                                    paramsAltaBaja.estadoAir ==
-                                                        'ELIMINADO')
-                                                ? () {
+                                            onPressed: // (paramsAltaBaja.estado == 'VACANTE' && paramsAltaBaja.estadoAir =='ELIMINADO') ?
+                                             () {
                                                     if (_formKey.currentState!
                                                         .validate()) {
                                                       _formKey.currentState!
@@ -331,7 +328,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                                                   paramsAltaBaja));
                                                     }
                                                   }
-                                                : null,
+                                               // : null,
                                           ),
                                         ),
                                         SizedBox(

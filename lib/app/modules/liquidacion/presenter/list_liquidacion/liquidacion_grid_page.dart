@@ -43,7 +43,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
   final String? anioSelected =
       (Modular.get<AuthBloc>().state).loginResponseEntity!.anio;
 
-  String modalidadSelected = 'CAS';
+  String modalidadSelected = 'CAP';
 
   late LiquidacionDataSource liquidacionDataSource;
   LiquidacionDetalleEntity resumenLiquidacionDetalle = LiquidacionDetalleEntity(
@@ -85,7 +85,8 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
         },
         builder: (context, state) {
           if (state is LiquidacionListLoaded) {
-            if (state.status == LiquidacionStatus.LiquidacionLoaded &&
+             if ((state.status == LiquidacionStatus.LiquidacionLoaded ||
+                    state.status == LiquidacionStatus.LiquidacionUpdated) &&
                 state.listLiquidacionFiltered.isNotEmpty) {
               liquidacionDataSource.listLiquidacionFiltered =
                   state.listLiquidacionFiltered;
