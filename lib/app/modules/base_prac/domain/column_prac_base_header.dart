@@ -12,7 +12,11 @@ enum ParameterPracBaseHeader {
 
   // Row init parameter
   rowUno('1'),
-  rowDos('2');
+  rowDos('2'),
+  rowCuatro('4'),
+
+  clasificadorSubvencion('AN'),
+  clasificadorMediaSubvencion('AR');
 
   final String columnLetter;
 

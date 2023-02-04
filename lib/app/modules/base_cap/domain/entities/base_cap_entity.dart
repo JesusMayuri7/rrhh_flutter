@@ -44,22 +44,27 @@ class BaseCapEntity {
     required this.tipoEscala,
     required this.codigoPlaza,
     required this.detalle,
-    required this.capPvnId,
-    required this.montoEscalaNext,
+    required this.capPvnId,    
     required this.ppto2021,
     required this.epsAporta,
     required this.montoBasico,
+    required this.incremento,
+    required this.montoMensual,
     required this.montoEscalaAnterior,
+    required this.porcentajeEscalaAnterior,
+    required this.porcentajeEscala,
+    required this.porcentajeEscalaNext,
+    required this.montoEscalaNext,
     required this.montoEscala,
     required this.asigFam,
+    this.totalBasico = 0,
     this.essalud = 0,
     this.epsSalud = 0,
     this.sctrSalud = 0,
     this.sctrSaludGrati = 0,
     this.vidaLey = 0,
     this.sctrPension = 0,
-    this.sctrPensionGrati = 0,
-    this.totalBasico = 0,
+    this.sctrPensionGrati = 0,    
     this.eneMonto = 0,
     this.eneEssalud = 0,
     this.eneSctrSalud = 0,
@@ -177,10 +182,15 @@ class BaseCapEntity {
   final String ppto2021;
   final int epsAporta;
   final double montoBasico;
+  final double incremento;
+  final double montoMensual;
   final double montoEscalaAnterior;
   final double montoEscala;
   final double asigFamiliarAir;
   final double totalBasico;
+  final double porcentajeEscala;
+  final double porcentajeEscalaAnterior;
+  final double porcentajeEscalaNext;
   final double essalud;
   final double epsSalud;
   final double sctrSalud;
@@ -256,6 +266,7 @@ class BaseCapEntity {
   final double dicBoni;
   final double dicGrati;
 
+
   BaseCapEntity copyWith({
     int? id,
     String? presupuesto,
@@ -308,6 +319,7 @@ class BaseCapEntity {
     double? montoEscalaAnterior,
     String? ppto2021,
     double? totalBasico,
+    double? montoMensual,
     int? epsAporta,
     double? essalud,
     double? epsSalud,
@@ -316,6 +328,10 @@ class BaseCapEntity {
     double? vidaLey,
     double? sctrPension,
     double? sctrPensionGrati,
+    double? incremento,
+    double? porcentajeEscala,
+    double? porcentajeEscalaAnterior,
+    double? porcentajeEscalaNext,
     double? eneMonto,
     double? eneEssalud,
     double? eneSctrSalud,
@@ -439,9 +455,14 @@ class BaseCapEntity {
         sctrPension: sctrPension ?? this.sctrPension,
         sctrPensionGrati: sctrPensionGrati ?? this.sctrPensionGrati,
         montoEscala: montoEscala ?? this.montoEscala,
+        incremento: incremento ?? this.incremento,
+        porcentajeEscala: porcentajeEscala ?? this.porcentajeEscala,
+        porcentajeEscalaAnterior: porcentajeEscalaAnterior ?? this.porcentajeEscalaAnterior,
+        porcentajeEscalaNext: porcentajeEscalaNext ?? this.porcentajeEscalaNext,
         montoEscalaAnterior: montoEscalaAnterior ?? this.montoEscalaAnterior,
         montoBasico: montoBasico ?? this.montoBasico,
         asigFamiliarAir: asigFamiliarAir ?? this.asigFamiliarAir,
+        montoMensual: montoMensual ?? this.montoMensual,
         totalBasico: totalBasico ?? this.totalBasico,
         epsAporta: epsAporta ?? this.epsAporta,
         eneMonto: eneMonto ?? this.eneMonto,
@@ -559,13 +580,18 @@ class BaseCapEntity {
         detalle: json["detalle"],
         capPvnId: json["cap_pvn_id"],
         montoEscalaAnterior: json["monto_escala_anterior"],
-        montoEscalaNext: json["monto_escala_next"],
+        montoEscalaNext: json["monto_escala_next"],        
+        incremento: json["incremento"],        
+        porcentajeEscala: json["porcentaje_escala"],
+        porcentajeEscalaAnterior: json["porcentaje_escala_anterior"],
+        porcentajeEscalaNext: json["porcentaje_escala_next"],
         ppto2021: json["ppto_2021"],
         epsAporta: json['eps_aporta'],
         montoBasico: json["monto_basico"],
         montoEscala: json["monto_escala"],
         asigFam: json["asig_fam"],
         totalBasico: json["total_basico"],
+        montoMensual: json["monto_mensual"],
         essalud: json['essalud'],
         epsSalud: json['epsSalud'],
         sctrSalud: json['sctrSalud'],
@@ -665,7 +691,7 @@ class BaseCapEntity {
         "dni": dni,
         "nombres": nombres,
         "modalidad": modalidad,
-        "asig_fam": asigFam,
+        "asig_familiar_air": asigFamiliarAir,
         "sede": sede,
         "fuente_base": fuenteBase,
         "fuente_pap": fuentePap,
@@ -684,16 +710,21 @@ class BaseCapEntity {
         "tipo_escala": tipoEscala,
         "codigo_plaza": codigoPlaza,
         "detalle": detalle,
-        "cap_pvn_id": capPvnId,
-        "monto_escala_anterior": montoEscalaAnterior,
-        "monto_escala_next": montoEscalaNext,
+        "cap_pvn_id": capPvnId,        
         "ppto_2021": ppto2021,
         "uniforme": uniforme,
         "vale": vale,
         "eps_aporta": epsAporta,
         "monto_basico": montoBasico,
+        "incremento":incremento,
+        "monto_mensual": montoMensual,
+        "porcentaje_escala_anterior": porcentajeEscalaAnterior,
+        "monto_escala_anterior": montoEscalaAnterior,
+        "porcentaje_escala": porcentajeEscala,
         "monto_escala": montoEscala,
-        "asig_familiar_air": asigFamiliarAir,
+        "porcentaje_escala_next": porcentajeEscalaNext,
+        "monto_escala_next": montoEscalaNext,
+        "asig_fam": asigFam,
         "total_basico": totalBasico,
         'essalud': essalud,
         'epsSalud': epsSalud,

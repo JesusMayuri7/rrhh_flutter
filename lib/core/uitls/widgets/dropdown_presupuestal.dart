@@ -58,6 +58,7 @@ class _DropdownPresupuestalState<T> extends State<DropdownPresupuestal<T>> {
         onChanged: widget.onChanged,
         items: widget.dropDownMenuItems,
         searchController: textEditingController,
+        //value: widget.value,
         searchInnerWidget: Padding(
           padding: const EdgeInsets.only(
             top: 8,

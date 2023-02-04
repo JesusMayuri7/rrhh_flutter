@@ -80,7 +80,7 @@ class AgendaListPageState extends State<AgendaListPage> {
                 if (state.listAgendaFiltered.isNotEmpty) {
                   listAgenda = state.listAgendaFiltered;
                   final rowSizes = 
-                  listAgenda.length>4? List.generate(listAgenda.length  ~/ crossAxisCount, (_) => auto):[auto];                  
+                  listAgenda.length > 4? List.generate(listAgenda.length  ~/ crossAxisCount, (_) => auto):[auto];                  
                   return Column(
                     children: [
                       Expanded(

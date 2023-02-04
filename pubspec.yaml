@@ -52,7 +52,7 @@ dependencies:
   window_manager: ^0.3.0
   flutter_dotenv: ^5.0.2    
   motion_toast: ^2.6.4  
-  mime: ^1.0.2  
+  mime: ^1.0.2
   auto_divider: ^1.0.0
   dropdown_button2: ^1.9.2
   flutter_system_proxy:

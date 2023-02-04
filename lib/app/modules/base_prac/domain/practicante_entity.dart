@@ -298,9 +298,7 @@ class PracticanteEntity {
       'media_calculo': '',
       'pago_media_subvencion': '',
       'media_anual': '',
-      'total': '',
-      '23.27.52': '',
-      '23.27.510': '',
+      'total': ''
     };
   }
 

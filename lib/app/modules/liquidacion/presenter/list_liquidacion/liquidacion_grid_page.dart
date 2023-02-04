@@ -43,7 +43,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
   final String? anioSelected =
       (Modular.get<AuthBloc>().state).loginResponseEntity!.anio;
 
-  String modalidadSelected = 'CAS';
+  String modalidadSelected = 'CAP';
 
   late LiquidacionDataSource liquidacionDataSource;
   LiquidacionDetalleEntity resumenLiquidacionDetalle = LiquidacionDetalleEntity(

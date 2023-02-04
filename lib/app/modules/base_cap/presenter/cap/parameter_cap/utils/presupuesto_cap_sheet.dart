@@ -3,6 +3,7 @@ import 'package:rrhh_clean/app/modules/base_cap/domain/entities/params_cap_calcu
 import 'package:rrhh_clean/core/domain/entities/presupuesto_entity.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 
+import 'columnBaseCap.dart';
 import 'functions_custom_cap.dart';
 
 void presupuestoCapSheet(Workbook workbook, int firstRowHeading,
@@ -129,10 +130,10 @@ String colCertificado = '\$J';
 String colProyeccion = '\$AE';
 String colDevengado = '\$K';
 String colTotalAnual = '\$AF';
-String colBaseEstadoOPP = '\$X';
-String colBaseFuente = '\$AK';
-String colBaseProducto = '\$AS';
-String colBaseMeta = '\$AQ';
+String colBaseEstadoOPP = '\$${ColumnBaseCap.estadoOpp.columnLetter}';
+String colBaseFuente = '\$${ColumnBaseCap.fuente.columnLetter}';
+String colBaseProducto = '\$${ColumnBaseCap.producto.columnLetter}';
+String colBaseMeta = '\$${ColumnBaseCap.meta.columnLetter}';
 
 String colPim = '\$I';
 

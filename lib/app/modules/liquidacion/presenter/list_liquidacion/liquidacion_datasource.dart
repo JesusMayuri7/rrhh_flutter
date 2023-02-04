@@ -289,7 +289,7 @@ class LiquidacionDataSource extends DataGridSource {
       return DropdownPresupuestal<MetaEntity>(
           hint: 'Meta',
           dropdownWidth: 350,
-          value: selectedMeta!,
+          value: selectedMeta,
           dropDownMenuItems:
               (this.blocLiquidacion.state as LiquidacionLoadedState)
                   .metas
@@ -306,7 +306,7 @@ class LiquidacionDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'finalidad_devengado') {
-      MetaEntity? selectedMeta = displayText.isEmpty
+      MetaEntity? selectedMetaDev = displayText.isEmpty
           ? null
           : (this.blocLiquidacion.state as LiquidacionLoadedState)
               .metas
@@ -322,7 +322,7 @@ class LiquidacionDataSource extends DataGridSource {
       return DropdownPresupuestal<MetaEntity>(
           hint: 'Meta',
           dropdownWidth: 350,
-          value: selectedMeta!,
+          value: selectedMetaDev,
           dropDownMenuItems:
               (this.blocLiquidacion.state as LiquidacionLoadedState)
                   .metas
