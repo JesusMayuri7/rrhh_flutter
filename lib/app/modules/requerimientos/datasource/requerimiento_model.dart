@@ -19,8 +19,8 @@ class RequerimientoModel extends RequerimientoEntity {
       required nroExpediente,
       required dctoSolicitud,
       required fechaSolicitud,
-      required areaId,
-      required descArea,
+      required unidadId,
+      required descUnidad,
       required metaId,
       required descMeta,
       required fuenteId,
@@ -34,8 +34,8 @@ class RequerimientoModel extends RequerimientoEntity {
             nroExpediente: nroExpediente,
             dctoSolicitud: dctoSolicitud,
             fechaSolicitud: fechaSolicitud,
-            descArea: descArea,
-            areaId: areaId,
+            descUnidad: descUnidad,
+            unidadId: unidadId,
             metaId: metaId,
             descMeta: descMeta,
             fuenteId: fuenteId,
@@ -45,23 +45,22 @@ class RequerimientoModel extends RequerimientoEntity {
 
   factory RequerimientoModel.fromJson(Map<String, dynamic> json) =>
       RequerimientoModel(
-          anio: json["anio"],
-          id: json["id"],
-          dscModalidad: json["dsc_modalidad"] ?? '',
-          nroExpediente: json["nro_expediente"] ?? '',
-          dctoSolicitud: json["dcto_solicitud"] ?? '',
-          fechaSolicitud: json["fecha_solicitud"] ?? '',
-          descArea: json["desc_area"] ?? '',
-          areaId: json['area_id'] ?? 0,
-          requerimientoDetalle: requerimientoDetalleModelFromJson(
-              json["requerimiento_detalle"] ?? []),
-          descFuente: json['desc_fuente'] ?? '',
-          descMeta: json['desc_metaa'] ?? '',
-          fuenteId: json['fuente_id'] ?? 0,
-          metaId: json['meta_id'] ?? 0,
-          modalidadId: json['modalidad_id'] ?? 0,
-          
-          );
+        anio: json["anio"],
+        id: json["id"],
+        dscModalidad: json["dsc_modalidad"] ?? '',
+        nroExpediente: json["nro_expediente"] ?? '',
+        dctoSolicitud: json["dcto_solicitud"] ?? '',
+        fechaSolicitud: json["fecha_solicitud"] ?? '',
+        descUnidad: json["desc_unidad"] ?? '',
+        unidadId: json['unidad_id'] ?? 0,
+        requerimientoDetalle: requerimientoDetalleModelFromJson(
+            json["requerimiento_detalle"] ?? []),
+        descFuente: json['desc_fuente'] ?? '',
+        descMeta: json['desc_metaa'] ?? '',
+        fuenteId: json['fuente_id'] ?? 0,
+        metaId: json['meta_id'] ?? 0,
+        modalidadId: json['modalidad_id'] ?? 0,
+      );
 
   Map<String, dynamic> toJson() => {
         "anio": anio,
@@ -70,8 +69,8 @@ class RequerimientoModel extends RequerimientoEntity {
         "nro_expediente": nroExpediente,
         "dcto_solicitud": dctoSolicitud,
         "fecha_solicitud": fechaSolicitud,
-        "desc_area": descArea,
-        "area_id": areaId,
+        "desc_area": descUnidad,
+        "unidad_id": unidadId,
         "requerimientoDetalle": requerimientoDetalle
       };
 }

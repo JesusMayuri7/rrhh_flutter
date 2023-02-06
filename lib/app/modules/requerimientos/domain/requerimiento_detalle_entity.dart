@@ -6,8 +6,8 @@ class RequerimientoDetalleEntity extends Equatable {
     required this.cargo,
     required this.monto,
     required this.cantidad,
-    required this.subAreaId,
-    required this.descSubarea,
+    required this.areaId,
+    required this.descArea,
     required this.id,
     required this.fuenteId,
     required this.descFuente,
@@ -18,10 +18,10 @@ class RequerimientoDetalleEntity extends Equatable {
   final String cargo;
   final num monto;
   final int cantidad;
-  final int subAreaId;
-  final String descSubarea;
+  final int areaId;
+  final String descArea;
   final int id;
-  final int fuenteId;
+  final String fuenteId;
   final String descFuente;
   final int metaId;
   final String descMeta;
@@ -32,8 +32,8 @@ class RequerimientoDetalleEntity extends Equatable {
       cargo,
       monto,
       cantidad,
-      subAreaId,
-      descSubarea,
+      areaId,
+      descArea,
       id,
       fuenteId,
       descFuente,

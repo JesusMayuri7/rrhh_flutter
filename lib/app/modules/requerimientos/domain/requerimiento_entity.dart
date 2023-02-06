@@ -11,8 +11,8 @@ class RequerimientoEntity extends Equatable {
     required this.nroExpediente,
     required this.dctoSolicitud,
     required this.fechaSolicitud,
-    required this.areaId,
-    required this.descArea,
+    required this.unidadId,
+    required this.descUnidad,
     required this.metaId,
     required this.descMeta,
     required this.fuenteId,
@@ -27,8 +27,8 @@ class RequerimientoEntity extends Equatable {
   final String nroExpediente;
   final String dctoSolicitud;
   final String fechaSolicitud;
-  final String descArea;
-  final int areaId;
+  final String descUnidad;
+  final int unidadId;
   final String descMeta;
   final int metaId;
   final String descFuente;
@@ -45,8 +45,8 @@ class RequerimientoEntity extends Equatable {
       nroExpediente,
       dctoSolicitud,
       fechaSolicitud,
-      descArea,
-      areaId,
+      descUnidad,
+      unidadId,
       descMeta,
       metaId,
       descFuente,

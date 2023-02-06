@@ -5,8 +5,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 import 'package:rrhh_clean/app/modules/requerimientos/presenter/get_columns_grid.dart';
+import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
+import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
+import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
+import 'package:rrhh_clean/core/domain/entities/modalidad_entity.dart';
 
 import '../../domain/requerimiento_detalle_entity.dart';
+import '../bloc/requerimientos_bloc.dart';
 import 'bloc/requerimiento_detail_bloc.dart';
 
 class RequerimientoListDetailPage extends StatefulWidget {
@@ -22,7 +27,30 @@ class RequerimientoListDetailPage extends StatefulWidget {
 class _RequerimientoListDetailPageState
     extends State<RequerimientoListDetailPage> {
   List<RequerimientoDetalleEntity> listDetail = [];
-  static PlutoGridStateManager? stateManagerDetail = null;
+  //static PlutoGridStateManager? stateManagerDetail = null;
+  late PlutoGridStateManager stateManagerDetail;
+
+  final _blocRequerimiento = Modular.get<RequerimientosBloc>();
+
+  List<FuenteEntity> fuentes = [];
+  List<MetaEntity> metas = [];
+  List<AreaEntity> areas = [];
+  List<ModalidadEntity> modalidades = [];
+
+  @override
+  void initState() {
+    super.initState();
+    if (this._blocRequerimiento.state is RequerimientosLoaded) {
+      this.fuentes =
+          (this._blocRequerimiento.state as RequerimientosLoaded).fuentes;
+      this.metas =
+          (this._blocRequerimiento.state as RequerimientosLoaded).metas;
+      this.areas =
+          (this._blocRequerimiento.state as RequerimientosLoaded).areas;
+      this.modalidades =
+          (this._blocRequerimiento.state as RequerimientosLoaded).modalidades;
+    }
+  }
 
   List<PlutoRow> rowsDetail = [];
 
@@ -38,16 +66,16 @@ class _RequerimientoListDetailPageState
           rowsDetail = state.requerimientoDetail
               .map((e) => PlutoRow(
                     cells: {
-                      'desc_subarea': PlutoCell(value: e.descSubarea),
-                      'cantidad': PlutoCell(value: e.cantidad),
+                      'desc_area': PlutoCell(value: e.descArea),
                       'cargo': PlutoCell(value: e.cargo),
+                      'cantidad': PlutoCell(value: e.cantidad),
                       'monto': PlutoCell(value: e.monto),
                     },
                   ))
               .toList();
-          stateManagerDetail!.removeRows(stateManagerDetail!.rows);
-          stateManagerDetail!.resetCurrentState();
-          stateManagerDetail!.appendRows(rowsDetail);
+          stateManagerDetail.removeRows(stateManagerDetail.rows);
+          stateManagerDetail.resetCurrentState();
+          stateManagerDetail.appendRows(rowsDetail);
         }
         return Expanded(
           child: PlutoGrid(
@@ -64,7 +92,7 @@ class _RequerimientoListDetailPageState
                   enableGridBorderShadow: true,
                 ),
               ),
-              columns: columnsDetail,
+              columns: columnsDetail(this.areas),
               rows: rowsDetail,
               onChanged: (PlutoGridOnChangedEvent event) {},
               onLoaded: (PlutoGridOnLoadedEvent event) {

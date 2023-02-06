@@ -47,9 +47,9 @@ class _RequerimientosListPageState extends State<RequerimientosListPage> {
                       'id': PlutoCell(value: e.id),
                       'anio': PlutoCell(value: e.anio),
                       'dsc_modalidad': PlutoCell(value: e.dscModalidad),
+                      'desc_area': PlutoCell(value: e.descUnidad),
                       'nro_expediente': PlutoCell(value: e.nroExpediente),
                       'dcto_solicitud': PlutoCell(value: e.dctoSolicitud),
-                      'desc_area': PlutoCell(value: e.descArea),
                       'fecha_solicitud': PlutoCell(value: e.fechaSolicitud),
                     },
                   ))
@@ -79,7 +79,7 @@ class _RequerimientosListPageState extends State<RequerimientosListPage> {
                       {
                         showModalDialogWidget(
                             contextDialog: context,
-                            width: 600,
+                            width: 800,
                             height: 550,
                             pageDetail: NewRequerimientoPage(
                                 contextReq: context,

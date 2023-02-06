@@ -79,8 +79,10 @@ class AgendaListPageState extends State<AgendaListPage> {
               if (state is AgendaListLoaded) {
                 if (state.listAgendaFiltered.isNotEmpty) {
                   listAgenda = state.listAgendaFiltered;
-                  final rowSizes = 
-                  listAgenda.length > 4? List.generate(listAgenda.length  ~/ crossAxisCount, (_) => auto):[auto];                  
+                  final rowSizes = listAgenda.length > 4
+                      ? List.generate(
+                          listAgenda.length ~/ crossAxisCount, (_) => auto)
+                      : [auto];
                   return Column(
                     children: [
                       Expanded(
@@ -117,7 +119,7 @@ class AgendaListPageState extends State<AgendaListPage> {
                                                   color: Colors.blueAccent,
                                                   borderRadius:
                                                       BorderRadius.circular(5)),
-                                              child: Text(
+                                              child: SelectableText(
                                                   '${listAgenda[index].titulo}',
                                                   style: TextStyle(
                                                       color: Colors.white,
@@ -126,7 +128,7 @@ class AgendaListPageState extends State<AgendaListPage> {
                                             SizedBox(height: 5),
                                             Container(
                                               alignment: Alignment.centerLeft,
-                                              child: Text(
+                                              child: SelectableText(
                                                 '${listAgenda[index].texto}',
                                                 textAlign: TextAlign.left,
                                                 style: TextStyle(
@@ -137,7 +139,7 @@ class AgendaListPageState extends State<AgendaListPage> {
                                             Spacer(),
                                             Row(
                                               children: [
-                                                Text(
+                                                SelectableText(
                                                   'Fecha: ${listAgenda[index].fecha}',
                                                   style: TextStyle(
                                                       color: Colors.black,

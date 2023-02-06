@@ -40,7 +40,7 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
   final _blocNew = Modular.get<RequerimientoNewBloc>();
   final _blocRequerimiento = Modular.get<RequerimientosBloc>();
 
-  static PlutoGridStateManager? stateManagerDetail = null;
+  PlutoGridStateManager? stateManagerDetail;
   List<PlutoRow> rowsDetail = [];
 
   FuenteEntity? _fuenteEntity;
@@ -71,7 +71,7 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
       _areaEntity = widget.requerimientoEntity == null
           ? areas.first
           : areas.firstWhere(
-              (element) => element.id == widget.requerimientoEntity?.areaId);
+              (element) => element.id == widget.requerimientoEntity?.unidadId);
 
       _metaEntity = widget.requerimientoEntity == null
           ? metas.first
@@ -426,7 +426,7 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
                                                 enableGridBorderShadow: true,
                                               ),
                                             ),
-                                            columns: columnsDetail,
+                                            columns: columnsDetail(this.areas),
                                             rows: [],
                                             onChanged: (PlutoGridOnChangedEvent
                                                 event) {},
