@@ -18,6 +18,7 @@ class RequerimientoEntity extends Equatable {
     required this.fuenteId,
     required this.modalidadId,
     required this.descFuente,
+    required this.cantidad,
     required this.requerimientoDetalle,
   });
 
@@ -34,6 +35,7 @@ class RequerimientoEntity extends Equatable {
   final String descFuente;
   final int fuenteId;
   final int modalidadId;
+  final int cantidad;
   final List<RequerimientoDetalleEntity> requerimientoDetalle;
 
   @override
@@ -52,6 +54,7 @@ class RequerimientoEntity extends Equatable {
       descFuente,
       fuenteId,
       modalidadId,
+      cantidad,
       requerimientoDetalle,
     ];
   }

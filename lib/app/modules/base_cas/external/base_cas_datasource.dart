@@ -18,9 +18,8 @@ class BaseCasDatasourceImpl implements IBaseCasDatasource {
 
   @override
   Future<List<BaseCasModel>> listar(String anio) async {
-    
-    var url = Uri.http(
-        'rrhh.pvn.gob.pe', '/api/cas/base_cas/' + anio, {'q': '{http}'});
+    var url = Uri.http('rrhh.pvn.gob.pe',
+        '/api/cas/base_cas_proyeccion/' + anio, {'q': '{http}'});
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));

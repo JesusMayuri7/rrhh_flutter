@@ -14,8 +14,10 @@ class LabelWithFormFieldInitial extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String hintText;
   final String initialValue;
+  final TextInputAction textInputAction;
   final int maxLines;
   final bool readOnly;
+  final bool autofocus;
 
   const LabelWithFormFieldInitial(
       {required this.maxLength,
@@ -31,7 +33,9 @@ class LabelWithFormFieldInitial extends StatelessWidget {
       this.hintText = '',
       this.initialValue = '',
       this.maxLines = 1,
-      this.readOnly = false
+      this.readOnly = false,
+      this.textInputAction = TextInputAction.none,
+      this.autofocus = true
 
       // this.inputFormatter = const FilteringTextInputFormatter.,
       });

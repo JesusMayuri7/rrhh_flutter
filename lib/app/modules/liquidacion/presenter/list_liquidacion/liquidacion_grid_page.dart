@@ -11,8 +11,6 @@ import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_d
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_entity.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/list_liquidacion/bloc/liquidacion_list_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/new_liquidacion/new_liquidacion_page.dart';
-import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
-import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -89,8 +87,10 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
         builder: (context, state) {
           if (state is LiquidacionListLoaded) {
             if ((state.status == LiquidacionStatus.LiquidacionLoaded ||
-                    state.status == LiquidacionStatus.LiquidacionUpdated) &&
-                state.listLiquidacionFiltered.isNotEmpty) {
+                    state.status == LiquidacionStatus.LiquidacionUpdated)
+                //&& state.listLiquidacionFiltered.isNotEmpty
+                ) {
+              modalidadSelected = state.modalidad;
               liquidacionDataSource.listLiquidacionFiltered =
                   state.listLiquidacionFiltered;
               liquidacionDataSource.listLiquidacionOriginal =
@@ -102,8 +102,16 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                   .map((e) => e.liquidacionDetalle)
                   .toList();
               List<LiquidacionDetalleEntity> flat = data.flattened.toList();
-              resumenLiquidacionDetalle =
-                  flat.reduce((value, element) => LiquidacionDetalleEntity(
+              resumenLiquidacionDetalle = flat.isEmpty
+                  ? LiquidacionDetalleEntity(
+                      id: 0,
+                      clasificador: 'todos',
+                      montoCertificado: 0,
+                      montoDevengado: 0,
+                      montoDevolucion: 0,
+                      montoLiquidacion: 0,
+                    )
+                  : flat.reduce((value, element) => LiquidacionDetalleEntity(
                         id: 0,
                         clasificador: 'todos',
                         montoCertificado:
@@ -154,7 +162,8 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                                         SetLiquidacionFilteredModalidadEvent(
                                             dscModalidad: value!));
                                     // modalidadSelected = value;
-                                    modalidadSelected = value;
+
+                                    //  modalidadSelected = value;
                                   }),
                             ),
                             Container(

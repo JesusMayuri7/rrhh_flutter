@@ -5,6 +5,7 @@ class BaseCasEntity extends Equatable {
       {required this.codigoPlaza,
       required this.anio,
       required this.presupuesto,
+      required this.certificado,
       required this.producto,
       required this.descArea,
       required this.sede,
@@ -32,8 +33,8 @@ class BaseCasEntity extends Equatable {
       this.mesInicio = 0,
       this.mesFin = 0,
       this.monto = 0,
-      this.incrementoCas =0,
-      this.montoMensual=0,
+      this.incrementoCas = 0,
+      this.montoMensual = 0,
       this.essalud = 0,
       this.montoAnual = 0,
       this.essaludAnual = 0,
@@ -48,6 +49,7 @@ class BaseCasEntity extends Equatable {
   final String codigoPlaza;
   final String anio;
   final String presupuesto;
+  final String certificado;
   final String producto;
   final String descArea;
   final String sede;
@@ -93,6 +95,7 @@ class BaseCasEntity extends Equatable {
       'codigoPlaza': codigoPlaza,
       'anio': anio,
       'presupuesto': presupuesto,
+      'certificado': certificado,
       'producto': producto,
       'descArea': descArea,
       'sede': sede,
@@ -119,8 +122,8 @@ class BaseCasEntity extends Equatable {
       'mesIncio': mesInicio,
       'mesFin': mesFin,
       'monto': monto,
-      'incrementoCas':incrementoCas,
-      'montoMensual':montoMensual,
+      'incrementoCas': incrementoCas,
+      'montoMensual': montoMensual,
       'essalud': essalud,
       'montoAnual': montoAnual,
       'essaludAnual': essaludAnual,
@@ -138,6 +141,7 @@ class BaseCasEntity extends Equatable {
     String? codigoPlaza,
     String? anio,
     String? presupuesto,
+    String? certificado,
     String? producto,
     String? descArea,
     String? sede,
@@ -182,6 +186,7 @@ class BaseCasEntity extends Equatable {
       codigoPlaza: codigoPlaza ?? this.codigoPlaza,
       anio: anio ?? this.anio,
       presupuesto: presupuesto ?? this.presupuesto,
+      certificado: certificado ?? this.certificado,
       producto: producto ?? this.producto,
       descArea: descArea ?? this.descArea,
       sede: sede ?? this.sede,
@@ -225,10 +230,10 @@ class BaseCasEntity extends Equatable {
   }
 
   BaseCasEntity calcular(
-      {
-        String? codigoPlaza,
-        String? anio,
+      {String? codigoPlaza,
+      String? anio,
       String? presupuesto,
+      String? certificado,
       String? producto,
       String? descArea,
       String? sede,
@@ -261,7 +266,7 @@ class BaseCasEntity extends Equatable {
       final double aguinaldoSemestral = 0,
       final double porcentajeIgv = 0,
       final double incrementoCas = 0,
-      final double montoMensual =0,
+      final double montoMensual = 0,
       final double porcentajeEssalud = 0,
       final double porcentajePrimaSctrSalud = 0,
       final double porcentajePrimaSctrPension = 0,
@@ -341,6 +346,7 @@ class BaseCasEntity extends Equatable {
       codigoPlaza: codigoPlaza ?? this.codigoPlaza,
       anio: anio ?? this.anio,
       presupuesto: presupuesto ?? this.presupuesto,
+      certificado: certificado ?? this.certificado,
       producto: producto ?? this.producto,
       descArea: descArea ?? this.descArea,
       sede: sede ?? this.sede,
@@ -388,6 +394,7 @@ class BaseCasEntity extends Equatable {
       codigoPlaza,
       anio,
       presupuesto,
+      certificado,
       producto,
       descArea,
       sede,

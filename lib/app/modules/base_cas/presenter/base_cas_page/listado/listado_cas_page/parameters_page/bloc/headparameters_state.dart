@@ -47,41 +47,43 @@ class HeadParametersSuccessState extends HeadParametersState {
   final num incrementoCas;
   final bool isExportingData;
   final List<BaseCasEntity> listadoCas;
-  HeadParametersSuccessState({
-    this.status = StatusCas.initial,
-    this.message = 'Loading',
-    this.isExportingData = false,
-    this.mesInicio = 0,
-    this.mesFin = 11,
-    this.uit = 0,
-    this.porcentajeMaximoEssalud = 0,
-    this.porcentajeDescEssalud = 0,
-    this.aguinaldoSemestral = 0,
-    this.porcentajeSctrSalud = 0,
-    this.porcentajePrimaSctrPension = 0,
-    this.porcentajeComisionSctrPension = 0,
-    this.porcentajeIgv = 0,
-    this.incrementoCas = 0,
-    this.listadoCas = const [],
-  });
+  final bool calcularMesesIniciales;
 
-  HeadParametersSuccessState copyWith({
-    String? message,
-    StatusCas? status,
-    int? mesInicio,
-    int? mesFin,
-    double? uit,
-    double? porcentajeMaximoEssalud,
-    double? porcentajeDescEssalud,
-    double? aguinaldoSemestral,
-    double? porcentajeSctrSalud,
-    double? porcentajePrimaSctrPension,
-    double? porcentajeComisionSctrPension,
-    double? porcentajeIgv,
-    num? incrementoCas,
-    bool? isExportingData,
-    List<BaseCasEntity>? listadoCas,
-  }) =>
+  HeadParametersSuccessState(
+      {this.status = StatusCas.initial,
+      this.message = 'Loading',
+      this.isExportingData = false,
+      this.mesInicio = 0,
+      this.mesFin = 11,
+      this.uit = 0,
+      this.porcentajeMaximoEssalud = 0,
+      this.porcentajeDescEssalud = 0,
+      this.aguinaldoSemestral = 0,
+      this.porcentajeSctrSalud = 0,
+      this.porcentajePrimaSctrPension = 0,
+      this.porcentajeComisionSctrPension = 0,
+      this.porcentajeIgv = 0,
+      this.incrementoCas = 0,
+      this.listadoCas = const [],
+      this.calcularMesesIniciales = false});
+
+  HeadParametersSuccessState copyWith(
+          {String? message,
+          StatusCas? status,
+          int? mesInicio,
+          int? mesFin,
+          double? uit,
+          double? porcentajeMaximoEssalud,
+          double? porcentajeDescEssalud,
+          double? aguinaldoSemestral,
+          double? porcentajeSctrSalud,
+          double? porcentajePrimaSctrPension,
+          double? porcentajeComisionSctrPension,
+          double? porcentajeIgv,
+          num? incrementoCas,
+          bool? isExportingData,
+          List<BaseCasEntity>? listadoCas,
+          bool? calcularMesesIniciales}) =>
       HeadParametersSuccessState(
           status: status ?? this.status,
           message: message ?? this.message,
@@ -101,7 +103,9 @@ class HeadParametersSuccessState extends HeadParametersState {
           porcentajeIgv: porcentajeIgv ?? this.porcentajeIgv,
           incrementoCas: incrementoCas ?? this.incrementoCas,
           isExportingData: isExportingData ?? this.isExportingData,
-          listadoCas: listadoCas ?? this.listadoCas);
+          listadoCas: listadoCas ?? this.listadoCas,
+          calcularMesesIniciales:
+              calcularMesesIniciales ?? this.calcularMesesIniciales);
   @override
   List<Object> get props => [
         mesInicio,
@@ -118,7 +122,8 @@ class HeadParametersSuccessState extends HeadParametersState {
         isExportingData,
         listadoCas,
         message,
-        status
+        status,
+        calcularMesesIniciales
       ];
 }
 
@@ -135,19 +140,18 @@ class HeadParametersInitialState extends HeadParametersState {
   final num incrementoCas;
 
   final bool isExportingData;
-  HeadParametersInitialState({
-    this.isExportingData = false,
-    this.mesInicio = 0,
-    this.mesFin = 11,
-    this.uit = 0,
-    this.porcentajeMaximoEssalud = 0,
-    this.porcentajeDescEssalud = 0,
-    this.aguinaldoSemestral = 0,
-    this.porcentajeSctrSalud = 0,
-    this.porcentajeSctrPension = 0,
-    this.porcentajeIgv = 0,
-    this.incrementoCas=0
-  });
+  HeadParametersInitialState(
+      {this.isExportingData = false,
+      this.mesInicio = 0,
+      this.mesFin = 11,
+      this.uit = 0,
+      this.porcentajeMaximoEssalud = 0,
+      this.porcentajeDescEssalud = 0,
+      this.aguinaldoSemestral = 0,
+      this.porcentajeSctrSalud = 0,
+      this.porcentajeSctrPension = 0,
+      this.porcentajeIgv = 0,
+      this.incrementoCas = 0});
 
   HeadParametersInitialState copyWith(
     int? mesInicio,

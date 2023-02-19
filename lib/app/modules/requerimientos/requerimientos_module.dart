@@ -15,20 +15,16 @@ class RequerimientosModule extends Module {
   @override
   final List<Bind> binds = [
     //Bloc
-    Bind.lazySingleton(
-        (i) => RequerimientoListBloc(requerimientoListUseCase: i())),
+    Bind.singleton(
+        (i) => RequerimientosBloc(getRequerimientosInitialUseCase: i())),
+    Bind.singleton((i) => RequerimientoListBloc(requerimientoListUseCase: i())),
     Bind.singleton((i) => RequerimientoDetailBloc(requerimientoListBloc: i())),
-    Bind.singleton(
-        (i) => RequerimientosBloc(getRequerimientosInitialUseCase: i())),
+
     Bind.singleton((i) => RequerimientoNewBloc()),
-    Bind.singleton(
-        (i) => RequerimientosBloc(getRequerimientosInitialUseCase: i())),
 
     //UseCase
     Bind.lazySingleton(
         (i) => RequerimientoListUseCase(iRequerimientoRepository: i())),
-    Bind.lazySingleton(
-        (i) => GetRequerimientosInitialUseCase(iRequerimientoRepository: i())),
     Bind.lazySingleton(
         (i) => GetRequerimientosInitialUseCase(iRequerimientoRepository: i())),
 
