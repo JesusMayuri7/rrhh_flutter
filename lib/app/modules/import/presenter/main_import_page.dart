@@ -2,8 +2,6 @@ import 'package:auto_divider/auto_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:rrhh_clean/app/modules/import/presenter/import_page.dart';
 
-import '../../../../core/uitls/widgets/line_divider.dart';
-
 class MainImportPage extends StatelessWidget {
   const MainImportPage({Key? key}) : super(key: key);
 

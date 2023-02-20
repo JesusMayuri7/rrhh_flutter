@@ -3,7 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/certificados/domain/entities/certificado_entity.dart';
 import 'package:rrhh_clean/app/modules/certificados/domain/usecases/list_certificado/get_list_certificados.dart';
 import 'package:rrhh_clean/app/modules/certificados/domain/usecases/list_certificado/sum_list_certificados_usecase.dart';
-import 'package:rrhh_clean/core/domain/use_cases/usecase.dart';
 
 import 'list_certificado_event.dart';
 import 'list_certificado_state.dart';

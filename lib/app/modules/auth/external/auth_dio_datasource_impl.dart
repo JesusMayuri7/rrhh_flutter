@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
-
-import 'package:dio/adapter.dart';
 
 import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
 
@@ -22,12 +21,12 @@ class AuthDioDataSourceImpl implements IAuthCoreDataSource {
   Future<LoginResponseModel> login(AuthCoreParams params) async {
     Dio dio = Dio();
 
-/*   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
+   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
   // Hook into the findProxy callback to set the client's proxy.
   client.findProxy = (url) {
     return 'PROXY localhost:80';
   };
-  }; */
+  }; 
 
     try {
       var response = await dio.post(

@@ -187,7 +187,7 @@ class LiquidacionDetalleDataSource extends DataGridSource {
 
   Widget _buildTextFieldWidget(
       String displayText, GridColumn column, CellSubmit submitCell) {
-    final bool isTextAlignRight = false;
+    bool isTextAlignRight = false;
 
     final bool isNumericKeyBoardType =
         column.columnName == 'monto_certificado' ||
@@ -201,13 +201,13 @@ class LiquidacionDetalleDataSource extends DataGridSource {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
       alignment:
-          isTextAlignRight ? Alignment.centerRight : Alignment.centerLeft,
+          isTextAlignRight==true ? Alignment.centerRight : Alignment.centerLeft,
       child: TextField(
         style: TextStyle(fontSize: 12),
         textAlignVertical: TextAlignVertical.center,
         autofocus: true,
         controller: editingController..text = displayText,
-        textAlign: isTextAlignRight ? TextAlign.right : TextAlign.left,
+        textAlign: isTextAlignRight==true ? TextAlign.right : TextAlign.left,
         autocorrect: false,
         // maxLines: 1,
 

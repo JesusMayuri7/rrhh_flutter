@@ -12,7 +12,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Año',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -24,7 +24,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Control',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -36,7 +36,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Estado',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -49,7 +49,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Tipo',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -62,7 +62,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Exp. PVN',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -75,7 +75,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'N° Doc. PVN',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -88,7 +88,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Asunto',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -101,7 +101,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Fec. Asig.',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -114,7 +114,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Fec. Deriv.',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -126,7 +126,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Remite',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -138,7 +138,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Destino',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -151,7 +151,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Exp. MTC',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -164,7 +164,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Exp. MEF',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -176,7 +176,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Detalle',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -188,7 +188,7 @@ List<GridColumn> getColumnsListDocumentos(BuildContext context) {
         child: Text(
           'Acción',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),

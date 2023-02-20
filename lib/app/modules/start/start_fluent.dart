@@ -76,7 +76,7 @@ class _StartFluentState extends State<StartFluent>
 
   @override
   Widget build(BuildContext context) {
-    final String anioSelected = preferences.getString('anio').toString();
+    //final String anioSelected = preferences.getString('anio').toString();
     return BlocListener<AuthBloc, AuthState>(
       bloc: this.bloc,
       listener: (context, state) {

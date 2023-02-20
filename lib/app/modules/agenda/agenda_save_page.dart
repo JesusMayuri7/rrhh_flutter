@@ -10,7 +10,7 @@ import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart
 import 'cubit/agenda_list_cubit.dart';
 
 class AgendaSavePage extends StatefulWidget {
-  AgendaEntity? agendaEntity;
+  final AgendaEntity? agendaEntity;
   final String title;
 
   AgendaSavePage({

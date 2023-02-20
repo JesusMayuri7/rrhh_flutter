@@ -7,9 +7,7 @@ import 'domain/usecases/initial_cas_use_case.dart';
 import 'domain/usecases/presupuesto_cas_use_case.dart';
 import 'external/certificado_cas_datasource.dart';
 import 'external/pim_cas_datasource.dart';
-import 'external/pim_cas_ley_datasource.dart';
 import 'external/presupuesto_cas_datasource.dart';
-import 'external/presupuesto_cas_ley_datasource.dart';
 import 'presenter/base_cas_page/listado/listado_cas_page/parameters_page/bloc/headparameters_bloc.dart';
 import 'presenter/main_base_cas_page.dart';
 
@@ -35,8 +33,8 @@ class BaseCasModule extends Module {
   @override
   final List<Bind> binds = [
     // EXTERNAL
-   Bind((i) => BaseCasDatasourceImpl(httpCustom: i())),
-   // Bind((i) => BaseCasDatasourceImpl2023(httpCustom: i())),
+   //Bind((i) => BaseCasDatasourceImpl(httpCustom: i())),
+    Bind((i) => BaseCasDatasourceImplProyeccion(httpCustom: i())),
     Bind((i) => BaseExcelDatasourceImpl(httpCustom: i())),
     Bind((i) => InitialCasDatasourceImpl(httpCustom: i())),
     Bind((i) => PimCasDatasourceImpl(httpCustom: i())),

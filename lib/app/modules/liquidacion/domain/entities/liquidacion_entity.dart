@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_report_entity.dart';
 
 import 'liquidacion_detalle._entity.dart';
 

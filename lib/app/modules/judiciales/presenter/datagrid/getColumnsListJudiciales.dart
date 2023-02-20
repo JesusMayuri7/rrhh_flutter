@@ -12,7 +12,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Año',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -25,7 +25,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Ppto.',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -38,7 +38,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Area',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -51,7 +51,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Dni',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -63,7 +63,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Nombres',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -75,7 +75,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Monto Jud.',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -88,7 +88,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'N° CAP',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -101,7 +101,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Cod. Plaza',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -114,7 +114,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Fuente',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -127,7 +127,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Meta',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -140,7 +140,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Fe. Ing.',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -152,7 +152,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Cargo',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -164,7 +164,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Exp. Jud.',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -176,7 +176,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Estado Procesal',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -189,7 +189,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Exp. PVN',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -202,7 +202,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Exp. MTC',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -215,7 +215,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Expediente MEF',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -227,7 +227,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Documento ORH',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -239,7 +239,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Observacion',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -252,7 +252,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Detalle',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -264,7 +264,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
         child: Text(
           'Acción',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),

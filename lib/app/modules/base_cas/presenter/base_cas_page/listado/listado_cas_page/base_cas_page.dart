@@ -2,15 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:motion_toast/motion_toast.dart';
-import 'package:motion_toast/resources/arrays.dart';
-import 'package:rrhh_clean/app/modules/base_cas/domain/entities/base_cas_entity.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'listado_cas_page.dart';
 import 'parameters_page/bloc/headparameters_bloc.dart';
 import 'parameters_page/parameters_page.dart';
-import 'widgets/base_cas_datasource.dart';
+
 
 //import 'package:pluto_grid/pluto_grid.dart';
 //import 'package:pluto_grid/pluto_grid.dart';
@@ -54,7 +51,7 @@ class _BaseCasPageState extends State<BaseCasPage> //with AfterLayoutMixin
                   (state.status == StatusCas.loadedList ||
                       state.status == StatusCas.exportingList))
                 return ListadoCasPage(
-                    listadoCas: state.listadoCas as List<BaseCasEntity>);
+                    listadoCas: state.listadoCas);
               if (state is HeadParametersSuccessState &&
                   (state.status == StatusCas.loadingList))
                 return Center(child: CircularProgressIndicator());

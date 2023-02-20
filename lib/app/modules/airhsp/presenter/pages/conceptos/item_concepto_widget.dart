@@ -7,9 +7,9 @@ class ItemConceptoPage extends StatelessWidget {
   ItemConceptoPage(
       {required this.conceptos, required this.codPlaza, required this.nombres});
 
-  List<ConceptoEntity> conceptos;
-  String codPlaza;
-  String nombres;
+  final List<ConceptoEntity> conceptos;
+  final String codPlaza;
+  final String nombres;
 
   @override
   Widget build(BuildContext context) {

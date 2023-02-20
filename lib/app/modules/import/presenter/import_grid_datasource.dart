@@ -32,7 +32,7 @@ class ImportDataSource extends DataGridSource {
     final rowIndex = _importDataGridRows.indexOf(row);
     var backgroundColor = Colors.transparent;
     if ((rowIndex % 2) == 0) {
-      backgroundColor = Theme.of(context).backgroundColor.withOpacity(0.7);
+      backgroundColor = Theme.of(context).colorScheme.background.withOpacity(0.7);
     }
     //if ((rowIndex > 0))
     return DataGridRowAdapter(

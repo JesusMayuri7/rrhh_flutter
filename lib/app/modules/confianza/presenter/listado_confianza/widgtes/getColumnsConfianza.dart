@@ -15,7 +15,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
             overflow: TextOverflow.ellipsis,
             'Año',
             style: TextStyle(
-                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+                color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
           ),
         ),
       ),
@@ -32,7 +32,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+                color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
           ),
         ),
       ),
@@ -47,7 +47,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
           overflow: TextOverflow.ellipsis,
           'Tipo',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -63,7 +63,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
             overflow: TextOverflow.ellipsis,
             'AIRHSP',
             style: TextStyle(
-                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+                color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
           ),
         ),
       ),
@@ -76,7 +76,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Estado',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -88,7 +88,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Area',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -100,7 +100,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Cargo',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -112,7 +112,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Dni',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -124,7 +124,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Nombres',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -136,7 +136,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Inicio',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -148,7 +148,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Fin',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -160,7 +160,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Doc. Desig.',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -172,7 +172,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Doc. Cese',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -184,7 +184,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Detalle',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),
@@ -196,7 +196,7 @@ List<GridColumn> getColumnsConfianza(BuildContext context) {
         child: Text(
           'Acciones',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
     ),

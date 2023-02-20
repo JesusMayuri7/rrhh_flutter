@@ -11,7 +11,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Año',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'anio',
@@ -25,7 +25,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Fuente',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'fuente',
@@ -40,7 +40,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
         child: Text(
           'Producto',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'producto',
@@ -53,7 +53,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
         child: Text(
           'Especifica',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'especifica3',
@@ -66,7 +66,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'PIA',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
           maxLines: 1,
         ),
       ),
@@ -82,7 +82,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'PIM',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'pim',
@@ -97,7 +97,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
             'Certificado',
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+                color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
           ),
         ),
         columnName: 'certificado',
@@ -113,7 +113,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Devengado',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'devengado',
@@ -128,7 +128,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Enero',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'enero',
@@ -143,7 +143,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Febrero',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'febrero',
@@ -156,7 +156,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Marzo',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'marzo',
@@ -169,7 +169,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Abril',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'abril',
@@ -182,7 +182,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Mayo',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'mayo',
@@ -195,7 +195,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Junio',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'junio',
@@ -208,7 +208,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Julio',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'julio',
@@ -221,7 +221,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
           'Agosto',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'agosto',
@@ -236,7 +236,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
         child: Text(
           'setiembre',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 10.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 10.0),
         ),
       ),
       columnName: 'setiembre',
@@ -249,7 +249,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
         child: Text(
           'Octubre',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 10.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 10.0),
         ),
       ),
       columnName: 'octubre',
@@ -262,7 +262,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
         child: Text(
           'Noviembre',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'noviembre',
@@ -276,7 +276,7 @@ List<GridColumn> getColumnsPresuspuesto(BuildContext context) {
         child: Text(
           'Diciembre',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       //columnWidthMode: ColumnWidthMode.fill,

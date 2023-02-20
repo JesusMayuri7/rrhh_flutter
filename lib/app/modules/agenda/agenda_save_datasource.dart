@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:rrhh_clean/app/modules/agenda/agenda_model.dart';
@@ -25,9 +23,6 @@ class AgendaSaveDatasourceImpl implements IAgendaSaveDatasource {
     try {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           agendaParams.toMap(), (i) => responseFromJson(i));
-
-      print('data : ' + response.data.toString());
-      String bodyData = jsonEncode(response.data);
 
       AgendaModel result = AgendaModel.fromJson(response.data);
 

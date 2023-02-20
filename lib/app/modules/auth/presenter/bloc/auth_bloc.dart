@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-
 import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
 import 'package:rrhh_clean/app/modules/auth/domain/auth_response_entity.dart';
 

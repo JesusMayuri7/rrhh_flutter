@@ -6,7 +6,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/subsidio/domain/new_subsidio_devolucion_usecase.dart';
 
-import 'package:rrhh_clean/app/modules/subsidio/domain/subsidio_devolucion_entity.dart';
 import 'package:rrhh_clean/app/modules/subsidio/presenter/bloc/subsidio_devolucion_bloc.dart';
 import 'package:rrhh_clean/app/modules/subsidio/presenter/widgets/exportSubsidio.dart';
 import 'package:rrhh_clean/app/modules/subsidio/presenter/new_subsidio/new_subsidio_devolucion_page.dart';
@@ -241,12 +240,9 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
 
                           onSelectionChanged: (List<DataGridRow> addedRows,
                               List<DataGridRow> removedRows) {
-                            final index = subsidioDevolucionDataSource.rows
-                                .indexOf(addedRows.last);
+                            //final index = subsidioDevolucionDataSource.rows.indexOf(addedRows.last);
 
-                            SubsidioDevolucionEntity liquidacion =
-                                subsidioDevolucionDataSource
-                                    .subsidioDevolucionFiltered[index];
+                            //SubsidioDevolucionEntity liquidacion =  subsidioDevolucionDataSource.subsidioDevolucionFiltered[index];
 /*
                                 this.bloc.add(SetLiquidacionDetalleEvent(
                                     dscCertificado: liquidacion.dscCertificado,

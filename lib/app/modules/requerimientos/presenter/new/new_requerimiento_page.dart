@@ -21,7 +21,7 @@ import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 import 'bloc/requerimiento_new_bloc.dart';
 
 class NewRequerimientoPage extends StatefulWidget {
-  RequerimientoEntity? requerimientoEntity;
+  final RequerimientoEntity? requerimientoEntity;
   final BuildContext contextReq;
 
   NewRequerimientoPage({

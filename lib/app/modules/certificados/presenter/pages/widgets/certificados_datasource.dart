@@ -98,7 +98,7 @@ class CertififadosDataSource extends DataGridSource {
       if (dscCertificado.isEmpty)
         backgroundColor = Colors.green[100]!;
       else
-        backgroundColor = Theme.of(context).backgroundColor.withOpacity(0.7);
+        backgroundColor = Theme.of(context).colorScheme.background.withOpacity(0.7);
     }
     return DataGridRowAdapter(
         color: backgroundColor,

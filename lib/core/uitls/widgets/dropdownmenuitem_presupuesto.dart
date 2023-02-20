@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/certificado_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/clasificador_entity.dart';
-import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 
 List<DropdownMenuItem<ClasificadorEntity>> buildClasificadores(

@@ -9,7 +9,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Codigo Plaza',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'codigo_plaza',
@@ -22,7 +22,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Presupuesto',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'presupuesto',
@@ -36,7 +36,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Fuente',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'fuente_base',
@@ -48,7 +48,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Meta',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'meta_base',
@@ -60,7 +60,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Unidad',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'desc_unidad',
@@ -74,7 +74,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Area',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'desc_area',
@@ -88,7 +88,7 @@ List<GridColumn> getColumns(BuildContext context) {
           child: Text(
             'Cargo',
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+            style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
           ),
         ),
         columnName: 'cargo',
@@ -103,7 +103,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Estado',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'estadoAir',
@@ -117,7 +117,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Monto',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'monto',
@@ -130,7 +130,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Essalud',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       //columnWidthMode: ColumnWidthMode.fill,
@@ -143,7 +143,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Meses',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'meses',
@@ -155,7 +155,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Monto',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'montoAnual',
@@ -167,7 +167,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Essalud',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'essaludAnual',
@@ -180,7 +180,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Aguinaldo',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'aguinaldoAnual',
@@ -193,7 +193,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Total Anual',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color),
         ),
       ),
       columnName: 'total',

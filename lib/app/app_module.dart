@@ -1,10 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/auth/data/auth_repository_impl.dart';
 import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
-import 'package:rrhh_clean/app/modules/auth/external/auth_http_datasource_impl.dart';
+
 import 'package:rrhh_clean/app/splash_page.dart';
 import 'package:rrhh_clean/core/config/dio_custom.dart';
-import 'package:rrhh_clean/core/config/http_custom.dart';
+
 import 'package:rrhh_clean/core/data/repositories/repository_app_impl.dart';
 import 'package:rrhh_clean/core/domain/use_cases/get_certificados_usecases.dart';
 import 'package:rrhh_clean/core/domain/use_cases/get_clasificadores_usecase.dart';

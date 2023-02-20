@@ -2,8 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart' as f hide Colors;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:motion_toast/motion_toast.dart';
-import 'package:motion_toast/resources/arrays.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'presenter/listado_confianza/listado_confianza_page.dart';

@@ -11,7 +11,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Certificado',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'dsc_certificado',
@@ -25,7 +25,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Año',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'anoEje',
@@ -39,7 +39,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'certificado_id',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: 11.0),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color,fontSize: 11.0),
         ),
       ),
       columnName: 'certificado_id',
@@ -53,7 +53,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'clasificador_id',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: 11.0),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color,fontSize: 11.0),
         ),
       ),
       columnName: 'clasificador_id',
@@ -65,7 +65,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'fuente',
           overflow: TextOverflow.ellipsis,
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: 11.0),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color,fontSize: 11.0),
         ),
       ),
       columnName: 'fuente',
@@ -80,7 +80,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Fuente',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'fuente_base',
@@ -95,7 +95,7 @@ List<GridColumn> getColumns(BuildContext context) {
             'Clasificador',
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+                color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
           ),
         ),
         columnName: 'clasificador',
@@ -111,7 +111,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Modalidad',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'modalidad',
@@ -126,7 +126,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Tipo',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'tipo',
@@ -141,7 +141,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Detalle',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'detalle',
@@ -155,7 +155,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Concepto',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       //columnWidthMode: ColumnWidthMode.fill,
@@ -169,7 +169,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Meta',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'sec_func',
@@ -182,7 +182,7 @@ List<GridColumn> getColumns(BuildContext context) {
         child: Text(
           'Finalidad',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'finalidad',
@@ -195,7 +195,7 @@ List<GridColumn> getColumns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'idmeta_anual',
-          style: TextStyle(color: Theme.of(context).bottomAppBarColor,fontSize: 11.0),
+          style: TextStyle(color: Theme.of(context).bottomAppBarTheme.color,fontSize: 11.0),
         ),
       ),
       columnName: 'idmeta_anual',
@@ -209,7 +209,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Certificado',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'monto',
@@ -223,7 +223,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Devengado',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'devengado',
@@ -237,7 +237,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Saldo',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'saldo',
@@ -251,7 +251,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Enero',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'enero',
@@ -265,7 +265,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Febrero',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'febrero',
@@ -279,7 +279,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Marzo',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'marzo',
@@ -293,7 +293,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Abril',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'abril',
@@ -307,7 +307,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Mayo',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'mayo',
@@ -321,7 +321,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Junio',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'junio',
@@ -335,7 +335,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Julio',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'julio',
@@ -349,7 +349,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Agosto',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'agosto',
@@ -363,7 +363,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Setiembre',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'setiembre',
@@ -377,7 +377,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Octubre',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'octubre',
@@ -391,7 +391,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Noviembre',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'noviembre',
@@ -405,7 +405,7 @@ List<GridColumn> getColumns(BuildContext context) {
           'Diciembre',
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
         ),
       ),
       columnName: 'diciembre',

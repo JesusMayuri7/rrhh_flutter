@@ -7,7 +7,6 @@ abstract class AuthState {
     this.loginResponseEntity,
   });
 
-  @override
   List<Object> get props => [];
 }
 

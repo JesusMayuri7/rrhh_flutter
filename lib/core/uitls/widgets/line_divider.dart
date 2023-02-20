@@ -80,8 +80,4 @@ class PlutoDualGridDividerWidgetState
   }
 }
 
-enum _PlutoDualGridId {
-  gridA,
-  gridB,
-  divider,
-}
+

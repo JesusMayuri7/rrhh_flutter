@@ -1,11 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
-import 'package:dio/dio.dart';
 import 'package:dio/adapter.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:flutter_system_proxy/flutter_system_proxy.dart';
-
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/import/presenter/domain/import_file_use_case.dart';
 import 'package:rrhh_clean/core/config/i_client_custom.dart';
@@ -32,15 +30,13 @@ class DioCustom implements IClientCustom {
       ),
     );
 
-/*   var uri = _dio.options.baseUrl;
-  var proxy = await FlutterSystemProxy.findProxyFromEnvironment('http://172.23.28.26:80'); 
 
    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
   client.findProxy = (url) {
     return 'PROXY localhost:80';
   };
-  return client;|
-  };  */
+  return client;
+  };  
 
     _dio.interceptors.add(
         InterceptorsWrapper(onError: (error, errorInterceptorHandler) async {
