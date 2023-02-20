@@ -14,7 +14,7 @@ class RequerimientoListBloc
   RequerimientoListBloc({required this.requerimientoListUseCase})
       : super(RequerimientoListInitial()) {
     on<RequerimientoListEvent>(_onRequerimientoListLoadToState);
-    on<RequerimientoSetDetailEvent>(_onRequerimientoDetailLoadToState);
+    on<RequerimientoSetDetailEvent>(_onRequerimientoListDetailLoadToState);
   }
 
   _onRequerimientoListLoadToState(RequerimientoListEvent event,
@@ -27,7 +27,7 @@ class RequerimientoListBloc
     }, (r) => RequerimientoListLoaded(requerimientoList: r.data)));
   }
 
-  _onRequerimientoDetailLoadToState(RequerimientoSetDetailEvent event,
+  _onRequerimientoListDetailLoadToState(RequerimientoSetDetailEvent event,
       Emitter<RequerimientoListState> emit) async {
     emit(RequerimientoSetDetailState(
         requerimientoDetail: event.reqrerimientoDetail));

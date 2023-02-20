@@ -26,6 +26,7 @@ class RequerimientoModel extends RequerimientoEntity {
       required fuenteId,
       required descFuente,
       required modalidadId,
+      required cantidad,
       required List<RequerimientoDetalleModel> requerimientoDetalle})
       : super(
             anio: anio,
@@ -41,6 +42,7 @@ class RequerimientoModel extends RequerimientoEntity {
             fuenteId: fuenteId,
             descFuente: descFuente,
             modalidadId: modalidadId,
+            cantidad: cantidad,
             requerimientoDetalle: requerimientoDetalle);
 
   factory RequerimientoModel.fromJson(Map<String, dynamic> json) =>
@@ -59,6 +61,7 @@ class RequerimientoModel extends RequerimientoEntity {
         descMeta: json['desc_metaa'] ?? '',
         fuenteId: json['fuente_id'] ?? 0,
         metaId: json['meta_id'] ?? 0,
+        cantidad: json['cantidad'] ?? 0,
         modalidadId: json['modalidad_id'] ?? 0,
       );
 
@@ -71,6 +74,7 @@ class RequerimientoModel extends RequerimientoEntity {
         "fecha_solicitud": fechaSolicitud,
         "desc_area": descUnidad,
         "unidad_id": unidadId,
+        "cantidad": cantidad,
         "requerimientoDetalle": requerimientoDetalle
       };
 }

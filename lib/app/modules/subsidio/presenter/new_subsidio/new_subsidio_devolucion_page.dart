@@ -53,7 +53,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
   @override
   void initState() {
     super.initState();
-    widget.params.modalidadId = widget.dscModalidad == 'CAS' ? 1 : 3;
+    widget.params.modalidadId = widget.dscModalidad == 'CAS' ? 6 : 8;
     newSubsidio = widget.params;
     newSubsidio?.estado = newSubsidio?.estado ?? 'PENDIENTE';
     _certificadoEntity = (this.blocSubsidio.state as SubsidioLoaded)

@@ -79,7 +79,8 @@ class _AgendaSavePageState extends State<AgendaSavePage> {
                   maxLength: 800,
                   textAlign: TextAlign.left,
                   title: 'Texto',
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.multiline,
+                  textInputAction: TextInputAction.newline,
                   onSaved: (value) {
                     agendaParams!.texto = value!;
                   },

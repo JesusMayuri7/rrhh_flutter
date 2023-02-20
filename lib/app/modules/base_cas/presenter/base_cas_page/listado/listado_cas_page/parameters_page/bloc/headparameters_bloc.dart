@@ -17,12 +17,12 @@ part 'headparameters_state.dart';
 
 class HeadParametersBloc
     extends Bloc<HeadParametersEvent, HeadParametersState> {
-  HeadParametersBloc({
-    required this.initialUseCase, 
-    required this.calcularCasUseCase,
-    required this.listarUseCase, 
-    required this.presupuestoCasUseCase})
-    :super(HeadParametersInitialState()) {
+  HeadParametersBloc(
+      {required this.initialUseCase,
+      required this.calcularCasUseCase,
+      required this.listarUseCase,
+      required this.presupuestoCasUseCase})
+      : super(HeadParametersInitialState()) {
     on<HeadParametersListEvent>(_listaEventToBaseCasState);
     on<HeadParametersExportEvent>(_exportEventToHeadParametersState);
     on<HeadParametersCalcularEvent>(_calcularEventToBaseCasState);
@@ -69,7 +69,9 @@ class HeadParametersBloc
               mesInicio: event.mesInicio,
               mesFin: event.mesFin,
               pim: pimCas,
-              certificado: certificadoCas));
+              certificado: certificadoCas,
+              calcularMesesIniciales: (state as HeadParametersSuccessState)
+                  .calcularMesesIniciales));
 
       emit((state as HeadParametersSuccessState)
           .copyWith(status: StatusCas.loadedList, message: 'Lista Exportada'));
@@ -79,8 +81,12 @@ class HeadParametersBloc
   _calcularEventToBaseCasState(HeadParametersCalcularEvent event,
       Emitter<HeadParametersState> emit) async {
     if (state is HeadParametersSuccessState) {
-      emit((state as HeadParametersSuccessState).copyWith(
-          status: StatusCas.calculating, message: 'Calculando lista'));
+      emit(
+        (state as HeadParametersSuccessState).copyWith(
+          status: StatusCas.calculating,
+          message: 'Calculando lista',
+        ),
+      );
       var result = await calcularCasUseCase(ParamsCalcular(
           lista: (state as HeadParametersSuccessState).listadoCas,
           uit: event.uit,
@@ -100,27 +106,27 @@ class HeadParametersBloc
           (l) => (state as HeadParametersSuccessState).copyWith(
               status: StatusCas.failure, message: 'Error al calcular'), (r) {
         return (state as HeadParametersSuccessState).copyWith(
-          status: StatusCas.loadedList,
-          uit: event.uit,
-          porcentajeMaximoEssalud: event.porcentajeMaximoEssalud,
-          aguinaldoSemestral: event.aguinaldoSemestral,
-          porcentajeDescEssalud: event.porcentajeEssalud,
-          porcentajeSctrSalud: event.porcentajePrimaSctrSalud,
-          porcentajePrimaSctrPension: event.porcentajePrimaSctrPension,
-          porcentajeComisionSctrPension: event.porcentajeComisionSctrPension,
-          porcentajeIgv: event.porcentajeIgv,
-          message: 'Calculado',
-          listadoCas: r.listaBaseCas,
-        );
+            status: StatusCas.loadedList,
+            uit: event.uit,
+            porcentajeMaximoEssalud: event.porcentajeMaximoEssalud,
+            aguinaldoSemestral: event.aguinaldoSemestral,
+            porcentajeDescEssalud: event.porcentajeEssalud,
+            porcentajeSctrSalud: event.porcentajePrimaSctrSalud,
+            porcentajePrimaSctrPension: event.porcentajePrimaSctrPension,
+            porcentajeComisionSctrPension: event.porcentajeComisionSctrPension,
+            porcentajeIgv: event.porcentajeIgv,
+            message: 'Calculado',
+            listadoCas: r.listaBaseCas,
+            calcularMesesIniciales: true);
       }));
     }
   }
 
   _initialEventToHeadParametersState(HeadParametersFormLoadEvent event,
       Emitter<HeadParametersState> emit) async {
-        print('event initial '+event.toString());
+    print('event initial ' + event.toString());
     emit(HeadParametersLoadingState());
-     
+
     double uit = 0;
     double porcentajeMaximoEssalud = 0;
     double porcentajeDescEssalud = 0;
@@ -153,7 +159,7 @@ class HeadParametersBloc
           porcentajePrimaSctrPension = double.parse(item['valor']);
         if (item['detalle'] == 'PORCENTAJE_COMISION_SCTR_PENSION')
           porcentajeComisionSctrPension = double.parse(item['valor']);
-          if (item['detalle'] == 'INCREMENTO_CAS')
+        if (item['detalle'] == 'INCREMENTO_CAS')
           incrementoCas = double.parse(item['valor']);
         if (item['detalle'] == 'PORCENTAJE_IGV')
           porcentajeIgv = double.parse(item['valor']);
@@ -172,7 +178,7 @@ class HeadParametersBloc
           porcentajePrimaSctrPension: porcentajePrimaSctrPension,
           porcentajeComisionSctrPension: porcentajeComisionSctrPension,
           porcentajeIgv: porcentajeIgv,
-          incrementoCas:incrementoCas,
+          incrementoCas: incrementoCas,
           isExportingData: false,
           listadoCas: []);
     }));
@@ -183,7 +189,7 @@ class HeadParametersBloc
     if (state is HeadParametersSuccessState) {
       emit((state as HeadParametersSuccessState)
           .copyWith(status: StatusCas.loadingList, message: 'Cargando lista'));
-      var result = await listarUseCase(event.anio);
+      var result = await this.listarUseCase(event.anio);
 
       emit(result.fold((l) {
         return HeadParametersSuccessState(

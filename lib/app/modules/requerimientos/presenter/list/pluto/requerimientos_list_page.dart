@@ -6,11 +6,12 @@ import 'package:pluto_grid/pluto_grid.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_detalle_entity.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_entity.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/presenter/get_columns_grid.dart';
+import 'package:rrhh_clean/app/modules/requerimientos/presenter/list/pluto/requerimiento_grid_pluto_page.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/presenter/new/new_requerimiento_page.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_dialog_widget.dart';
 
-import '../detail/requerimiento_list_detail_page.dart';
-import 'bloc/requerimiento_list_bloc.dart';
+import '../../detail/requerimiento_detail_page.dart';
+import '../bloc/requerimiento_list_bloc.dart';
 
 class RequerimientosListPage extends StatefulWidget {
   const RequerimientosListPage({Key? key}) : super(key: key);
@@ -21,11 +22,12 @@ class RequerimientosListPage extends StatefulWidget {
 
 class _RequerimientosListPageState extends State<RequerimientosListPage> {
   final requerimientoListBloc = Modular.get<RequerimientoListBloc>();
-  List<PlutoRow> rows = [];
+
   static PlutoGridStateManager? stateManager = null;
   List<RequerimientoDetalleEntity> requerimientoDetail = [];
   List<RequerimientoEntity> requerimientoList = [];
   RequerimientoEntity? rowSelected;
+  List<PlutoRow> rows = [];
 
   @override
   void initState() {
@@ -88,56 +90,7 @@ class _RequerimientosListPageState extends State<RequerimientosListPage> {
                     }),
               ],
             ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                child: PlutoGrid(
-                    key: ValueKey('Master'),
-                    configuration: PlutoGridConfiguration(
-                      columnFilter: PlutoGridColumnFilterConfig(),
-                      scrollbar: PlutoGridScrollbarConfig(isAlwaysShown: true),
-                      style: PlutoGridStyleConfig(
-                        cellTextStyle: TextStyle(fontSize: 11),
-                        columnTextStyle:
-                            TextStyle(fontSize: 11, color: Colors.white),
-                        columnHeight: 25,
-                        rowHeight: 21,
-                        columnFilterHeight: 25,
-                        enableGridBorderShadow: true,
-                      ),
-                    ),
-                    columns: columns,
-                    rows: rows,
-                    mode: PlutoGridMode.select,
-                    onSelected: (PlutoGridOnSelectedEvent event) {
-                      if (event.row != null) {
-//                        int index = event.row?.cells['id']?.value;
-
-                        requerimientoDetail = requerimientoList[event.rowIdx!]
-                            .requerimientoDetalle;
-                        this.rowSelected = requerimientoList[event.rowIdx!];
-                        this.requerimientoListBloc.add(
-                            RequerimientoSetDetailEvent(
-                                reqrerimientoDetail: requerimientoDetail));
-                        ;
-                      }
-                    },
-                    onRowChecked: (e) {
-                      print(e.row?.cells['column1']?.value);
-                    },
-                    onChanged: (PlutoGridOnChangedEvent event) {
-                      print(event.rowIdx);
-                    },
-                    onRowSecondaryTap: (e) {},
-                    onLoaded: (PlutoGridOnLoadedEvent event) {
-                      stateManager = event.stateManager;
-                      stateManager!
-                          .setSelectingMode(PlutoGridSelectingMode.none);
-                      event.stateManager.setShowColumnFilter(true);
-                    }),
-              ),
-            ),
-            RequerimientoListDetailPage()
+            RequerimientoPlutoPage(requerimientoList: requerimientoList)
           ],
         );
       },

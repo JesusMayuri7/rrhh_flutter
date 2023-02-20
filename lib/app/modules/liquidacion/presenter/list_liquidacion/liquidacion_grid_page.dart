@@ -87,8 +87,10 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
         builder: (context, state) {
           if (state is LiquidacionListLoaded) {
             if ((state.status == LiquidacionStatus.LiquidacionLoaded ||
-                    state.status == LiquidacionStatus.LiquidacionUpdated) &&
-                state.listLiquidacionFiltered.isNotEmpty) {
+                    state.status == LiquidacionStatus.LiquidacionUpdated)
+                //&& state.listLiquidacionFiltered.isNotEmpty
+                ) {
+              modalidadSelected = state.modalidad;
               liquidacionDataSource.listLiquidacionFiltered =
                   state.listLiquidacionFiltered;
               liquidacionDataSource.listLiquidacionOriginal =
@@ -100,8 +102,16 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                   .map((e) => e.liquidacionDetalle)
                   .toList();
               List<LiquidacionDetalleEntity> flat = data.flattened.toList();
-              resumenLiquidacionDetalle =
-                  flat.reduce((value, element) => LiquidacionDetalleEntity(
+              resumenLiquidacionDetalle = flat.isEmpty
+                  ? LiquidacionDetalleEntity(
+                      id: 0,
+                      clasificador: 'todos',
+                      montoCertificado: 0,
+                      montoDevengado: 0,
+                      montoDevolucion: 0,
+                      montoLiquidacion: 0,
+                    )
+                  : flat.reduce((value, element) => LiquidacionDetalleEntity(
                         id: 0,
                         clasificador: 'todos',
                         montoCertificado:
@@ -152,7 +162,8 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
                                         SetLiquidacionFilteredModalidadEvent(
                                             dscModalidad: value!));
                                     // modalidadSelected = value;
-                                    modalidadSelected = value;
+
+                                    //  modalidadSelected = value;
                                   }),
                             ),
                             Container(
