@@ -8,6 +8,7 @@ class RequerimientoEntity extends Equatable {
     required this.anio,
     required this.id,
     required this.dscModalidad,
+    required this.presupuesto,
     required this.nroExpediente,
     required this.dctoSolicitud,
     required this.fechaSolicitud,
@@ -25,6 +26,7 @@ class RequerimientoEntity extends Equatable {
   final String anio;
   final int id;
   final String dscModalidad;
+  final String presupuesto;
   final String nroExpediente;
   final String dctoSolicitud;
   final String fechaSolicitud;
@@ -44,6 +46,7 @@ class RequerimientoEntity extends Equatable {
       anio,
       id,
       dscModalidad,
+      presupuesto,
       nroExpediente,
       dctoSolicitud,
       fechaSolicitud,

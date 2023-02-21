@@ -21,7 +21,7 @@ List<GridColumn> requerimientos_list_columns(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 100,
+      width: 80,
       columnName: 'desc_modalidad',
       label: Container(
         alignment: Alignment.centerLeft,
@@ -29,6 +29,23 @@ List<GridColumn> requerimientos_list_columns(BuildContext context) {
           message: 'Modalidad',
           child: Text(
             'Modalidad',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+                color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+          ),
+        ),
+      ),
+    ),
+        GridColumn(
+      width: 100,
+      columnName: 'presupuesto',
+      label: Container(
+        alignment: Alignment.centerLeft,
+        child: Tooltip(
+          message: 'Presupuesto',
+          child: Text(
+            'Presupuesto',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -50,7 +67,7 @@ List<GridColumn> requerimientos_list_columns(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 100,
+      width: 200,
       columnName: 'dcto_solicitud',
       label: Container(
         alignment: Alignment.center,
@@ -64,7 +81,7 @@ List<GridColumn> requerimientos_list_columns(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 100,
+      width: 110,
       columnName: 'nro_expediente',
       label: Container(
         alignment: Alignment.center,

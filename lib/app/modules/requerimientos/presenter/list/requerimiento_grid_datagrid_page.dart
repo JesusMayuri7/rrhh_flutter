@@ -44,7 +44,7 @@ class RequerimientoGridDataGridPage extends StatelessWidget {
                   //footerFrozenColumnsCount: 1,
                   //frozenColumnsCount: 3,
                   source: requerimientosListDataSource!,
-                  headerRowHeight: 25,
+                  headerRowHeight: 35,
                   rowHeight: 25,
                   isScrollbarAlwaysShown: true,
                   gridLinesVisibility: GridLinesVisibility.both,
@@ -66,7 +66,8 @@ class RequerimientoGridDataGridPage extends StatelessWidget {
                             .listadoConfianza[index].requerimientoDetalle;
                     this.requerimientoListBloc.add(RequerimientoSetDetailEvent(
                         reqrerimientoDetail: requerimientoDetalle));
-                  }),
+                  } 
+                  ),
             )));
   }
 }

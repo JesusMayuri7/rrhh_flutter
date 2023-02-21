@@ -24,6 +24,9 @@ class RequerimientosListDataSource extends DataGridSource {
               DataGridCell<String>(
                   columnName: 'desc_modalidad',
                   value: dataGridRow.dscModalidad),
+                                DataGridCell<String>(
+                  columnName: 'presupuesto',
+                  value: dataGridRow.presupuesto),
               DataGridCell<String>(
                   columnName: 'desc_unidad', value: dataGridRow.descUnidad),
               DataGridCell<String>(
