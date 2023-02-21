@@ -5,15 +5,15 @@ List<GridColumn> requerimientos_detail_columns(BuildContext context) {
   return ([
     GridColumn(
       width: 60,
-      columnName: 'anio',
+      columnName: 'desc_fuente',
       label: Container(
         alignment: Alignment.center,
         child: Tooltip(
-          message: 'Año',
+          message: 'Fuente',
           child: Text(
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            'Año',
+            'Fuente',
             style: TextStyle(
                 color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
           ),
@@ -21,69 +21,43 @@ List<GridColumn> requerimientos_detail_columns(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 100,
-      columnName: 'desc_modalidad',
+      width: 300,
+      columnName: 'desc_meta',
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Meta',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+    GridColumn(
+      width: 300,
+      columnName: 'desc_area',
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Area',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+    GridColumn(
+      width: 350,
+      columnName: 'cargo',
       label: Container(
         alignment: Alignment.centerLeft,
         child: Tooltip(
-          message: 'Modalidad',
+          message: 'cargo',
           child: Text(
-            'Modalidad',
+            'Cargo',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
           ),
-        ),
-      ),
-    ),
-    GridColumn(
-      width: 250,
-      columnName: 'desc_unidad',
-      label: Container(
-        alignment: Alignment.center,
-        child: Text(
-          'Unidad',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
-        ),
-      ),
-    ),
-    GridColumn(
-      width: 100,
-      columnName: 'dcto_solicitud',
-      label: Container(
-        alignment: Alignment.center,
-        child: Text(
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          'N° Solicitud',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
-        ),
-      ),
-    ),
-    GridColumn(
-      width: 100,
-      columnName: 'nro_expediente',
-      label: Container(
-        alignment: Alignment.center,
-        child: Text(
-          'N° Exp.',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
-        ),
-      ),
-    ),
-    GridColumn(
-      width: 100,
-      columnName: 'fecha_expediente',
-      label: Container(
-        alignment: Alignment.center,
-        child: Text(
-          'Fec. Exp.',
-          style: TextStyle(
-              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),
       ),
     ),
@@ -94,6 +68,18 @@ List<GridColumn> requerimientos_detail_columns(BuildContext context) {
         alignment: Alignment.center,
         child: Text(
           'Cantidad',
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+    GridColumn(
+      width: 100,
+      columnName: 'monto',
+      label: Container(
+        alignment: Alignment.center,
+        child: Text(
+          'Monto',
           style: TextStyle(
               color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
         ),

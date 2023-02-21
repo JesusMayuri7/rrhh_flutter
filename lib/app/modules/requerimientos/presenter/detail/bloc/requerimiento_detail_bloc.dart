@@ -15,7 +15,8 @@ class RequerimientoDetailBloc
     requerimientoListBlocSubscripcion =
         requerimientoListBloc.stream.listen((stateList) {
       if (stateList is RequerimientoSetDetailState) {
-        // add(RequerimientoDetailLoad(requerimientoDetail: (stateList.requerimientoDetail)));
+        add(RequerimientoDetailLoad(
+            requerimientoDetail: (stateList.requerimientoDetail)));
       }
     });
     on<RequerimientoDetailLoad>(_onRequerimientoDetailLoad);

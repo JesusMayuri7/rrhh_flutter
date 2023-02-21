@@ -32,7 +32,7 @@ class _RequerimientosListPageState extends State<RequerimientosListPage> {
   @override
   void initState() {
     if (requerimientoListBloc.state is RequerimientoListInitial) {
-      requerimientoListBloc.add(RequerimientoListLoadEvent());
+      requerimientoListBloc.add(RequerimientoLoadListEvent());
     }
     super.initState();
   }
@@ -71,7 +71,7 @@ class _RequerimientosListPageState extends State<RequerimientosListPage> {
                     onPressed: () {
                       this
                           .requerimientoListBloc
-                          .add(RequerimientoListLoadEvent());
+                          .add(RequerimientoLoadListEvent());
                     }),
                 SizedBox(width: 10),
                 fluentUi.FilledButton(

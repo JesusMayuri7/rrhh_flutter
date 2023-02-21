@@ -67,7 +67,7 @@ List<GridColumn> requerimientos_list_columns(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 200,
+      width: 250,
       columnName: 'dcto_solicitud',
       label: Container(
         alignment: Alignment.center,
@@ -81,7 +81,7 @@ List<GridColumn> requerimientos_list_columns(BuildContext context) {
       ),
     ),
     GridColumn(
-      width: 110,
+      width: 120,
       columnName: 'nro_expediente',
       label: Container(
         alignment: Alignment.center,

@@ -29,6 +29,7 @@ class RequerimientosDetailDataSource extends DataGridSource {
                   columnName: 'cargo', value: dataGridRow.cargo),
               DataGridCell<int>(
                   columnName: 'cantidad', value: dataGridRow.cantidad),
+              DataGridCell<num>(columnName: 'monto', value: dataGridRow.monto),
               DataGridCell<RequerimientoDetalleEntity>(
                   columnName: 'acciones', value: dataGridRow),
             ]))

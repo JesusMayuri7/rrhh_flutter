@@ -32,20 +32,18 @@ class _RequerimientosListDatagridPageState
   void initState() {
     super.initState();
     if (requerimientoListBloc.state is RequerimientoListInitial) {
-      requerimientoListBloc.add(RequerimientoListLoadEvent());
+      requerimientoListBloc.add(RequerimientoLoadListEvent());
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RequerimientoListBloc, RequerimientoListState>(
-      listener: (context, state) {
-        print(state.runtimeType.toString());
-      },
+      listener: (context, state) {},
       buildWhen: (previous, current) {
         return (current is RequerimientoListLoaded) ? true : false;
       },
-      bloc: requerimientoListBloc,
+      bloc: this.requerimientoListBloc,
       builder: (context, state) {
         if (state is RequerimientoListLoaded) {
           requerimientoList = state.requerimientoList;
@@ -60,7 +58,7 @@ class _RequerimientosListDatagridPageState
                     onPressed: () {
                       this
                           .requerimientoListBloc
-                          .add(RequerimientoListLoadEvent());
+                          .add(RequerimientoLoadListEvent());
                     }),
                 SizedBox(width: 10),
                 fluentUi.FilledButton(
@@ -84,10 +82,11 @@ class _RequerimientosListDatagridPageState
               context: context,
               requerimientosEntity: requerimientoList,
             ),
-            /*     RequerimientoDetailPage(
+            Divider(),
+            RequerimientoDetailPage(
               requerimientoListBloc: this.requerimientoListBloc,
               requerimientoDetailEntity: [],
-            ) */
+            )
           ],
         );
       },
