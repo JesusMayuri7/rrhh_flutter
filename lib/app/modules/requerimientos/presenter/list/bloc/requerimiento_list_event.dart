@@ -7,7 +7,7 @@ abstract class RequerimientoListEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class RequerimientoListLoadEvent extends RequerimientoListEvent {}
+class RequerimientoLoadListEvent extends RequerimientoListEvent {}
 
 class RequerimientoSetDetailEvent extends RequerimientoListEvent {
   final List<RequerimientoDetalleEntity> reqrerimientoDetail;

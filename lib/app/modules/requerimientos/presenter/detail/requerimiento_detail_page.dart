@@ -14,51 +14,35 @@ import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 import 'package:rrhh_clean/core/domain/entities/modalidad_entity.dart';
 
 import '../../domain/requerimiento_detalle_entity.dart';
-import '../bloc/requerimientos_bloc.dart';
-import '../list/requerimientos_list_columns.dart';
 import 'bloc/requerimiento_detail_bloc.dart';
 import 'requerimientos_detail_columns.dart';
 
-class RequerimientoDetailPage extends StatefulWidget {
+class RequerimientoDetailPage extends StatelessWidget {
   RequerimientoDetailPage({
     Key? key,
     required this.requerimientoDetailEntity,
     required this.requerimientoListBloc,
-  }) : super(key: key);
+  }) : super(key: key) {
+    requerimientosDetailDataSource = RequerimientosDetailDataSource(
+        detalleRequerimiento: requerimientoDetailEntity);
+  }
 
   final List<RequerimientoDetalleEntity> requerimientoDetailEntity;
   final RequerimientoListBloc requerimientoListBloc;
 
-  @override
-  State<RequerimientoDetailPage> createState() =>
-      _RequerimientoDetailPageState();
-}
-
-class _RequerimientoDetailPageState extends State<RequerimientoDetailPage> {
-  RequerimientosDetailDataSource requerimientosDetailDataSource =
-      RequerimientosDetailDataSource(detalleRequerimiento: []);
-  List<RequerimientoDetalleEntity> listDetail = [];
-  //static PlutoGridStateManager? stateManagerDetail = null;
-  late PlutoGridStateManager stateManagerDetail;
-
-  final _blocRequerimientoList = Modular.get<RequerimientoListBloc>();
+  RequerimientosDetailDataSource? requerimientosDetailDataSource;
 
   List<FuenteEntity> fuentes = [];
   List<MetaEntity> metas = [];
   List<AreaEntity> areas = [];
   List<ModalidadEntity> modalidades = [];
 
-  @override
-  void initState() {
-    super.initState();
-/*     if (this._blocRequerimientoList.state is RequerimientoSetDetailState) {
+/*
+    if (this._blocRequerimientoList.state is RequerimientoSetDetailState) {
       requerimientosDetailDataSource.detalleRequerimiento =
           (this._blocRequerimientoList.state as RequerimientoSetDetailState)
               .requerimientoDetail;
-    } */
-  }
-
-  List<PlutoRow> rowsDetail = [];
+*/
 
   final RequerimientoDetailBloc requerimientoDetailBloc =
       Modular.get<RequerimientoDetailBloc>();
@@ -66,21 +50,27 @@ class _RequerimientoDetailPageState extends State<RequerimientoDetailPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RequerimientoDetailBloc, RequerimientoDetailState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        print(this.requerimientoDetailEntity.length);
+        print(state.runtimeType.toString());
+      },
       buildWhen: (previousState, newState) {
-        if (newState is RequerimientoSetDetailState) return true;
+        if (newState is RequerimientoDetailLoaded) return true;
         return false;
       },
       bloc: this.requerimientoDetailBloc,
       builder: (context, state) {
-        if (this._blocRequerimientoList.state is RequerimientoSetDetailState) {
-          this.requerimientosDetailDataSource.clearFilters();
-          this.requerimientosDetailDataSource.buildDataGridRows();
-          this.requerimientosDetailDataSource.updateDataGrid();
+        if (state is RequerimientoDetailLoaded) {
+          this.requerimientosDetailDataSource?.clearFilters();
+          requerimientosDetailDataSource = RequerimientosDetailDataSource(
+              detalleRequerimiento: state.requerimientoDetail);
+          this.requerimientosDetailDataSource?.buildDataGridRows();
+          this.requerimientosDetailDataSource?.updateDataGrid();
         }
         return Expanded(
             child: SizedBox(
                 height: 500,
+                width: double.infinity,
                 child: SfDataGridTheme(
                   data: SfDataGridThemeData(
                     brightness: Theme.of(context).brightness,
@@ -95,7 +85,7 @@ class _RequerimientoDetailPageState extends State<RequerimientoDetailPage> {
                         footerFrozenRowsCount: 0,
                         //footerFrozenColumnsCount: 1,
                         //frozenColumnsCount: 3,
-                        source: requerimientosDetailDataSource,
+                        source: requerimientosDetailDataSource!,
                         headerRowHeight: 25,
                         rowHeight: 25,
                         isScrollbarAlwaysShown: true,
