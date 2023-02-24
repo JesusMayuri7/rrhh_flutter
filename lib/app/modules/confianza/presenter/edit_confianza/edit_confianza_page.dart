@@ -380,7 +380,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
       listDropDownItemAreas.add(DropdownMenuItem(
         value: item.id,
         child: Text(
-          '${item.descArea}',
+          '${item.id} - ${item.descArea}',
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),

@@ -18,7 +18,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
     ),
     GridColumn(
       allowEditing: false,
-      width: 75,
+      width: 100,
       columnName: 'presupuesto',
       label: Container(
         alignment: Alignment.center,
@@ -31,7 +31,7 @@ List<GridColumn> getColumnsListJudiciales(BuildContext context) {
     ),
     GridColumn(
       allowEditing: false,
-      width: 170,
+      width: 250,
       columnName: 'desc_area',
       label: Container(
         alignment: Alignment.center,

@@ -39,7 +39,9 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
   List<String> _estadoProcesal = [
     'EJECUCION_SENTENCIA',
     'EJECUCION_MEDIDA',
-    'COSA_JUZGADA'
+    'COSA_JUZGADA',
+    'DESESTIMIENTO',
+    'FALLECIMIENTO'
   ];
 
   String presupuestoSelected = 'NO_PREVISTA';
