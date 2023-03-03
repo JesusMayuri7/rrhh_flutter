@@ -65,6 +65,15 @@ void sheetCertificado(Workbook workbook, int firstRowHeading,
 
   final int _rowSum = certificadoSheet.getLastRow();
 
+  _totalesCertificado(certificadoSheet, _rowSum);
+
+  _proyeccion(6, 22, certificadoSheet, certificadoSheet.getLastRow() - 1,
+      baseCas, lastRowBase);
+
+  _totalesCalculo(certificadoSheet, _rowSum);
+}
+
+void _totalesCertificado(Worksheet certificadoSheet, int _rowSum) {
   certificadoSheet.getRangeByIndex(_rowSum + 1, 6).formula =
       'SUBTOTAL(9,F6:F$_rowSum)';
   certificadoSheet.getRangeByIndex(_rowSum + 1, 7).formula =
@@ -97,10 +106,9 @@ void sheetCertificado(Workbook workbook, int firstRowHeading,
       'SUBTOTAL(9,T6:T$_rowSum)';
   certificadoSheet.getRangeByIndex(_rowSum + 1, 21).formula =
       'SUBTOTAL(9,U6:U$_rowSum)';
+}
 
-  _proyeccion(6, 22, certificadoSheet, certificadoSheet.getLastRow() - 1,
-      baseCas, lastRowBase);
-
+void _totalesCalculo(Worksheet certificadoSheet, int _rowSum) {
   certificadoSheet.getRangeByIndex(_rowSum + 1, 22).formula =
       'SUBTOTAL(9,V6:V$_rowSum)';
   certificadoSheet.getRangeByIndex(_rowSum + 1, 23).formula =
@@ -133,7 +141,7 @@ void sheetCertificado(Workbook workbook, int firstRowHeading,
       'SUBTOTAL(9,AJ6:AJ$_rowSum)';
   certificadoSheet.getRangeByIndex(_rowSum + 1, 37).formula =
       'SUBTOTAL(9,AK6:AK$_rowSum)';
-
+  
   certificadoSheet.getRangeByName('F6:U${_rowSum + 1}').numberFormat =
       '#,##0.00';
   certificadoSheet.getRangeByName('W6:W${_rowSum + 1}').numberFormat =

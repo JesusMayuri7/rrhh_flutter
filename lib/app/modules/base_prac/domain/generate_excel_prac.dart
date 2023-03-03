@@ -3,6 +3,7 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
 
+import 'certificado/certificado_prac_sheet.dart';
 import 'column_prac_base_header.dart';
 import 'column_prac_base_table.dart';
 import 'export_prac_use_case.dart';
@@ -36,6 +37,7 @@ Future<void> generateExcelPrac(ParamsPracCalcular params) async {
     sheet.importList(row, firstRowHeading + index + 1, 1, false);
   }
   calcularPracBaseSheet(sheet, firstRowHeading, fmesInicio, fmesFin);
+  sheetPracCertificado(workbook,firstRowHeading,params,sheet.getLastRow(),params.lista);
 
   final List<int> bytes = workbook.saveAsStream();
   workbook.dispose();

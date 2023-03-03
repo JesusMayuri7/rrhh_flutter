@@ -35,7 +35,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
   TextEditingController plazaController = TextEditingController();
   TextEditingController direccionController = TextEditingController();
   List<DropdownMenuItem<AreaEntity>>? listDropDownItemAreas;
-  int? _area;
+  int _area = 0;
   final _formKey = GlobalKey<FormState>();
   late ConfianzaEntity dataForm;
   final blocEdit = Modular.get<EditConfianzaBloc>();
@@ -58,6 +58,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
     this.direccionController.text = widget.confianzaEntity.direccion;
     this.tipoController.text = widget.confianzaEntity.tipo;
     this.plazaController.text = widget.confianzaEntity.plaza;
+    this._area = widget.confianzaEntity.area_id;
     if (blocApp.state is ConfianzaAreaStateLoaded)
       listAreas = (blocApp.state as ConfianzaAreaStateLoaded).listAreas;
   }
@@ -145,7 +146,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                   dropdownMenuItemList: _buildAreas(listAreas),
                                   value: this._area,
                                   onChanged: (int? value) {
-                                    this._area = value;
+                                    this._area = value!;
                                   },
                                   title: 'Area'),
                               SizedBox(
@@ -307,7 +308,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                                     modalidadController.text,
                                                 nombres: nombresController.text
                                                     .toUpperCase(),
-                                                area_id: this._area!,
+                                                area_id: this._area,
                                                 plaza: plazaController.text,
                                                 tipo: tipoController.text,
                                                 trabajadorId: 0,
@@ -387,7 +388,7 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
       ));
     }
     if (widget.confianzaEntity.area_id == 0)
-      this._area = listDropDownItemAreas[0].value;
+      this._area = listDropDownItemAreas[0].value!;
     else
       this._area = widget.confianzaEntity.area_id;
     return listDropDownItemAreas;

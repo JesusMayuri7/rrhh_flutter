@@ -102,6 +102,7 @@ class ConfianzaDataSource extends DataGridSource {
                 size: 14,
               ),
               onPressed: () {
+                print(e.value);
                 _showModalDialog(this.context, e.value);
               },
             ),

@@ -72,7 +72,7 @@ class ConfianzaModel extends ConfianzaEntity {
       docCese: json["doc_cese"] ?? '',
       direccion: json["direccion"] ?? '',
       modalidad: json["modalidad"] ?? '',
-      area_id: json["org_area_id"] ?? 0,
+      area_id: json["area_id"] ?? 0,
       trabajadorId: json["trabajador_id"] ?? 0,
       detalle: json["detalle"] ?? '',
       tipo: json["tipo"] ?? '',
