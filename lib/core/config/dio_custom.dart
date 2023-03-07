@@ -30,10 +30,10 @@ class DioCustom implements IClientCustom {
       ),
     );
 
-
-   (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
+  (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
   client.findProxy = (url) {
-    return 'PROXY localhost:80';
+    //return 'PROXY localhost:80';
+    return 'DIRECT';
   };
   return client;
   };  

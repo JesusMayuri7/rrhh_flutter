@@ -1,47 +1,43 @@
+// To parse this JSON data, do
+//
+//     final judicialDetailModel = judicialDetailModelFromJson(jsonString);
+
 import 'dart:convert';
+import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_detail_entity.dart';
 
-import '../../domain/judiciales_detalle_entity.dart';
+JudicialDetailModel judicialDetailModelFromJson(String str) => JudicialDetailModel.fromJson(json.decode(str));
 
-List<JudicialDetalleModel> requerimientoDetalleModelFromJson(String str) =>
-    List<JudicialDetalleModel>.from(
-        json.decode(str).map((x) => JudicialDetalleModel.fromJson(x)));
+class JudicialDetailModel extends JudicialDetailEntity{
+    JudicialDetailModel({
+        required this.id,
+        required this.judicialId,
+        required this.detalle,
+        required this.expedientePvn,
+        required this.nroDocumento,
+        required this.fechaExpedientePvn,
+        required this.createdAt,
+        required this.updatedAt,
+    }):super(id: id,judicialId: judicialId,detalle: detalle,expedientePvn: expedientePvn,nroDocumento: nroDocumento,
+    fechaExpedientePvn: fechaExpedientePvn,createdAt: createdAt,updatedAt: updatedAt);
 
-String requerimientoDetalleModelToJson(List<JudicialDetalleModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+    int id;
+    int judicialId;
+    String detalle;
+    String expedientePvn;
+    String nroDocumento;
+    String fechaExpedientePvn;
+    String createdAt;
+    String updatedAt;
 
-class JudicialDetalleModel extends JudicialDetalleEntity {
-  JudicialDetalleModel(
-      {required final String cargo,
-      required final int monto,
-      required final int cantidad,
-      required final int subAreaId,
-      required final String descSubarea,
-      required final int requerimientoId})
-      : super(
-          cargo: cargo,
-          monto: monto,
-          cantidad: cantidad,
-          subAreaId: subAreaId,
-          descSubarea: descSubarea,
-          requerimientoId: requerimientoId,
-        );
+    factory JudicialDetailModel.fromJson(Map<String, dynamic> json) => JudicialDetailModel(
+        id: json["id"] ?? 0,
+        judicialId: json["judicial_id"] ?? 0,
+        detalle: json["detalle"] ?? '',
+        expedientePvn: json["expediente_pvn"] ?? '',
+        nroDocumento: json["nro_documento"] ?? '',
+        fechaExpedientePvn: json["fecha_expediente_pvn"] ?? '',
+        createdAt: json["created_at"] ?? '',
+        updatedAt: json["updated_at"] ?? '',
+    );
 
-  factory JudicialDetalleModel.fromJson(Map<String, dynamic> json) =>
-      JudicialDetalleModel(
-        cargo: json["cargo"],
-        monto: json["monto"],
-        cantidad: json["cantidad"],
-        subAreaId: json["sub_area_id"],
-        descSubarea: json["desc_subarea"],
-        requerimientoId: json["requerimiento_id"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "cargo": cargo,
-        "monto": monto,
-        "cantidad": cantidad,
-        "sub_area_id": subAreaId,
-        "desc_subarea": descSubarea,
-        "requerimiento_id": requerimientoId,
-      };
 }

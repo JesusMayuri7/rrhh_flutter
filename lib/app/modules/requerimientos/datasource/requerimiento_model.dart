@@ -13,7 +13,8 @@ String requerimientoModelToJson(List<RequerimientoModel> data) =>
 
 class RequerimientoModel extends RequerimientoEntity {
   RequerimientoModel(
-      {required anio,
+      {
+      required anio,
       required id,
       required dscModalidad,
       required presupuesto,

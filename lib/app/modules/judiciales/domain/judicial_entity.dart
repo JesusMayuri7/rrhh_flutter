@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_detail_entity.dart';
 
 class JudicialEntity extends Equatable {
   JudicialEntity(
@@ -28,7 +29,9 @@ class JudicialEntity extends Equatable {
       required this.nroCap,
       required this.documentoOrh,
       required this.observacion,
-      required this.descEscala});
+      required this.descEscala,
+      required this.judicialDetailEntity
+      });
 
   final int id;
   final String anio;
@@ -56,6 +59,7 @@ class JudicialEntity extends Equatable {
   final String codigoPlaza;
   final String nroCap;
   final String descEscala;
+  final List<JudicialDetailEntity> judicialDetailEntity;
 
   factory JudicialEntity.empty() {
     return JudicialEntity(
@@ -84,7 +88,9 @@ class JudicialEntity extends Equatable {
         documentoOrh: '',
         codigoPlaza: '',
         nroCap: '',
-        descEscala: '');
+        descEscala: '',
+        judicialDetailEntity: []
+        );
   }
 
   @override

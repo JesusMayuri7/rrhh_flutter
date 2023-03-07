@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'judiciales_list_bloc.dart';
 
 abstract class JudicialesListEvent extends Equatable {
@@ -19,4 +20,11 @@ class JudicialesListFilter extends JudicialesListEvent {
 
   @override
   List<Object> get props => [this.criterio];
+}
+
+class JudicialesListLoadedEvent extends JudicialesListEvent {
+  final List<JudicialDetailEntity> judicialesEntity;
+  JudicialesListLoadedEvent({
+    required this.judicialesEntity,
+  });
 }

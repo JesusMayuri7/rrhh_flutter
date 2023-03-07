@@ -24,7 +24,7 @@ class ListJudicialesPage extends StatefulWidget {
 class _ListJudicialesPageState extends State<ListJudicialesPage> {
   final textSearchController = TextEditingController();
 
-  final blocJudicial = Modular.get<JudicialesListBloc>();
+  final blocListJudicial = Modular.get<JudicialesListBloc>();
   final String? anioSelected =
       Modular.get<AuthBloc>().state.loginResponseEntity?.anio;
 
@@ -32,8 +32,8 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
 
   @override
   void initState() {
-    if (this.blocJudicial.state is JudicialesListInitial) {
-      this.blocJudicial.add(JudicialesListLoad(anio: anioSelected!));
+    if (this.blocListJudicial.state is JudicialesListInitial) {
+      this.blocListJudicial.add(JudicialesListLoad(anio: anioSelected!));
     }
     this.listJudicialesDataSource =
         ListJudicialesDataSource(listadoJudiciales: [], context: context);
@@ -44,7 +44,7 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<JudicialesListBloc, JudicialesListState>(
       listener: (context, state) {
-        if (this.blocJudicial.state is JudicialesListError) {
+        if (this.blocListJudicial.state is JudicialesListError) {
           f.showSnackbar(
             context,
             f.Snackbar(
@@ -53,11 +53,11 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
           );
         }
       },
-      bloc: this.blocJudicial,
+      bloc: this.blocListJudicial,
       builder: (context, state) {
-        if (this.blocJudicial.state is JudicialesListLoaded) {
+        if (this.blocListJudicial.state is JudicialesListLoaded) {
           this.listJudicialesDataSource.listadoJudiciales =
-              (this.blocJudicial.state as JudicialesListLoaded)
+              (this.blocListJudicial.state as JudicialesListLoaded)
                   .judicialesListFiltered;
           this.listJudicialesDataSource.buildDataGridRows();
           this.listJudicialesDataSource.updateDataGrid();
@@ -74,7 +74,7 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                       f.Button(
                           onPressed: () {
                             this
-                                .blocJudicial
+                                .blocListJudicial
                                 .add(JudicialesListLoad(anio: anioSelected!));
                           },
                           child: Text(
@@ -85,9 +85,9 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                       f.Button(
                           onPressed: () {
                             //exportDataGridToExcel();
-                            generateExcel((this.blocJudicial.state
+                            generateExcel((this.blocListJudicial.state
                                     is JudicialesListLoaded)
-                                ? (this.blocJudicial.state
+                                ? (this.blocListJudicial.state
                                         as JudicialesListLoaded)
                                     .judicialesListOriginal
                                 : []);
@@ -125,7 +125,7 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                         keyboardType: TextInputType.text,
                         onFieldSubmitted: (value) {
                           this
-                              .blocJudicial
+                              .blocListJudicial
                               .add(JudicialesListFilter(criterio: value));
                         },
                         decoration: InputDecoration(
@@ -152,6 +152,7 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                   listJudicialesDataSource: this.listJudicialesDataSource,
                   columns: getColumnsListJudiciales(context),
                   data: state.judicialesListFiltered,
+                  blocListJudicial: this.blocListJudicial,
                 ),
               (state is JudicialesListLoading)
                   ? Center(

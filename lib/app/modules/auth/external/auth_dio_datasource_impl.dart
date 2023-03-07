@@ -24,7 +24,7 @@ class AuthDioDataSourceImpl implements IAuthCoreDataSource {
    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) { 
   // Hook into the findProxy callback to set the client's proxy.
   client.findProxy = (url) {
-    return 'PROXY localhost:80';
+    return 'DIRECT';
   };
   }; 
 

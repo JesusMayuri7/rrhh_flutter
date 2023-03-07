@@ -1,9 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:rrhh_clean/app/modules/judiciales/cubit/judiciales_bloc.dart';
+import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_detail_entity.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../domain/judicial_entity.dart';
+import '../bloc/list/judiciales_list_bloc.dart';
 import 'list_judiciales_datasource.dart';
 
 class GridJudicialesPage extends StatelessWidget {
@@ -13,6 +16,7 @@ class GridJudicialesPage extends StatelessWidget {
 
   final EditingGestureType editingGestureType = EditingGestureType.doubleTap;
   late ListJudicialesDataSource listJudicialesDataSource;
+  final JudicialesListBloc blocListJudicial;
 
   /// Default sorting operating in drop down widget
   final List<String> showMenuItems = <String>[
@@ -21,10 +25,11 @@ class GridJudicialesPage extends StatelessWidget {
   ];
 
   GridJudicialesPage(
-      {required this.columns,
-      required this.data,
-      //required this.keyGrid,
-      required this.listJudicialesDataSource});
+  {
+    required this.columns,
+    required this.data,
+    required this.blocListJudicial,
+    required this.listJudicialesDataSource});
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +106,15 @@ class GridJudicialesPage extends StatelessWidget {
                               summaryType: GridSummaryType.count)
                         ])
                   ],
+                  onSelectionChanged: (List<DataGridRow> addedRows,
+                  List<DataGridRow> removedRows) {
+                  final index = this.listJudicialesDataSource.rows.indexOf(addedRows.last);
+
+                  List<JudicialDetailEntity> judicialDetalle =listJudicialesDataSource.listadoJudiciales
+                                  [index].judicialDetailEntity;
+                          
+                          this.blocListJudicial.add(JudicialesListLoadedEvent(judicialesEntity: judicialDetalle));
+                  } 
                 ),
               ),
             ),
