@@ -25,12 +25,12 @@ dependencies:
   equatable: ^2.0.5
   flutter_bloc: ^8.1.0
   flutter_modular: ^5.0.3
-  syncfusion_flutter_core: ^20.4.38
-  syncfusion_flutter_datagrid: ^20.4.38
-  syncfusion_flutter_xlsio: ^20.4.38-beta
-  syncfusion_flutter_charts: ^20.4.38
-  syncfusion_flutter_datagrid_export: ^20.4.38-beta
-  syncfusion_flutter_pdf: ^20.4.38
+  syncfusion_flutter_core: ^20.4.53
+  syncfusion_flutter_datagrid: ^20.4.53
+  syncfusion_flutter_xlsio: ^20.4.53-beta
+  syncfusion_flutter_charts: ^20.4.53
+  syncfusion_flutter_datagrid_export: ^20.4.53-beta
+  syncfusion_flutter_pdf: ^20.4.53
   pluto_grid: ^5.4.9
   shared_preferences: ^2.0.16 
   #after_layout: ^1.0.7+2

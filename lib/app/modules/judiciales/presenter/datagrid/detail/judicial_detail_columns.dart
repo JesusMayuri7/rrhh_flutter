@@ -3,42 +3,36 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 List<GridColumn> judicialDetailColumns(BuildContext context) {
   return ([
-    GridColumn(
-      allowFiltering: false,
-      visible: false,
+    GridColumn(         
+      visible: false,   
       width: 30,
       columnName: 'id',
       label: Container(
         alignment: Alignment.center,
-        child: Tooltip(
-          message: 'id',
-          child: Text(
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            'id',
-            style: TextStyle(
-                color: Colors.white, fontSize: 11.0),
-          ),
+        child: Text(
+          'id',
+          style: TextStyle(
+              color: Colors.white, fontSize: 11.0),
+              softWrap: true,
         ),
       ),
     ),
-    GridColumn(
-      allowFiltering: false,
-      visible: false,
+    GridColumn(      
+      visible: false,    
       width: 30,
-      columnName: 'judiciales_id',
+      columnName: 'judicial_id',
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'Meta',
           style: TextStyle(
               color: Colors.white, fontSize: 11.0),
+              softWrap: true,
         ),
       ),
     ),
-    GridColumn(
-      allowFiltering: false,
-      width: 200,
+    GridColumn(      
+      width: 250,
       columnName: 'detalle',
       label: Container(
         alignment: Alignment.center,
@@ -46,53 +40,56 @@ List<GridColumn> judicialDetailColumns(BuildContext context) {
           'Detalle',
           style: TextStyle(
               color: Colors.white, fontSize: 11.0),
+              softWrap: true,
         ),
       ),
     ),
     GridColumn(
-      allowFiltering: false,
-      width: 100,
-      columnName: 'Exp. Pvn',
+      width: 90,
+      columnName: 'expediente_pvn',
       label: Container(
         alignment: Alignment.centerLeft,
-        child: Tooltip(
-          message: 'Expediente PVN',
-          child: Text(
-            'Exp. Pvn',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                color: Colors.white, fontSize: 11.0),
+        child: Text(
+          'Expediente PVN',   style: TextStyle(
+              color: Colors.white, fontSize: 11.0),        
+            softWrap: true,
+        )  
           ),
+        ),    
+    GridColumn(
+      width: 75,
+      columnName: 'fecha_expediente_pvn',
+      label: Container(
+        alignment: Alignment.center,
+       child: Text(
+            'F. Exp.', style: TextStyle(
+              color: Colors.white, fontSize: 11.0),
+softWrap: true,
         ),
       ),
     ),
-    GridColumn(
-      allowFiltering: false,
-      width: 100,
+        GridColumn(
+      width: 150,
       columnName: 'nro_documento',
       label: Container(
         alignment: Alignment.center,
        child: Text(
-            'N° Doc.',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-                color: Colors.white, fontSize: 11.0),
+            'N° Doc', style: TextStyle(
+              color: Colors.white, fontSize: 11.0),
+softWrap: true,
         ),
       ),
     ),
     GridColumn(
-      allowFiltering: false,
-      width: 60,
+      width: 35,
       columnName: 'acciones',
       label: Container(
         alignment: Alignment.center,
-        child: Text(
-          'Acciones',
-          style: TextStyle(
-              color: Colors.white, fontSize: 11.0),
-        ),
+        child:   Icon(
+      Icons.settings,
+      color: Colors.amber,
+      size: 16.0,
+    ),
       ),
     ),
   ]);

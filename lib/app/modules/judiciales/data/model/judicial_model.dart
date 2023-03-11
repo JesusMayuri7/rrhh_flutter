@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import '../../domain/judicial_detail_entity.dart';
 import '../../domain/judicial_entity.dart';
+import 'judicial_detalle_model.dart';
 
 List<JudicialModel> judicialModelFromJson(String str) =>
     List<JudicialModel>.from(
@@ -97,7 +98,7 @@ class JudicialModel extends JudicialEntity {
         codigoPlaza: json['codigo_plaza'] ?? '',
         nroCap: json['nro_cap'] ?? '',
         descEscala: json['desc_escala'] ?? '',
-        judicialDetailEntity: json['judicial_detalle'] ?? []
+        judicialDetailEntity: judicialDetailModelFromJson(json['judicial_detalle'] ?? [])
       );
 
   Map<String, dynamic> toJson() => {

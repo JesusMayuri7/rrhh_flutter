@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +19,7 @@ class JudicialesListBloc
       : super(JudicialesListInitial()) {
     on<JudicialesListLoad>(_onJudicialListLoadToState);
     on<JudicialesListFilter>(_onJudicialListFilterToState);
+    on<JudicialesListSetDetailEvent>(_onJudicialListSetDetailEvent);
   }
 
   _onJudicialListLoadToState(
@@ -29,16 +32,26 @@ class JudicialesListBloc
     }));
   }
 
+
+
   _onJudicialListFilterToState(
-      JudicialesListFilter event, Emitter<JudicialesListState> emit) async {
+    JudicialesListFilter event, Emitter<JudicialesListState> emit) async {
     if (state is JudicialesListLoaded) {
-      List<JudicialEntity> judiciales = List.from(
+      print(event.criterio);
+      if(event.criterio.isNotEmpty){      
+        List<JudicialEntity> judiciales = List.from(
           (state as JudicialesListLoaded)
               .judicialesListOriginal
               .where((element) => element.nombres.contains(event.criterio))
               .toList());
-      emit((state as JudicialesListLoaded)
+        emit((state as JudicialesListLoaded)
           .copyWith(judicialesListFiltered: judiciales));
+      }
+        emit((state as JudicialesListLoaded).copyWith(judicialesListFiltered: (state as JudicialesListLoaded).judicialesListOriginal));
     }
+  }
+
+  _onJudicialListSetDetailEvent(JudicialesListSetDetailEvent event, Emitter<JudicialesListState> emit) {
+    emit(JudicialesListSetDetail(judicialDetailEntity:  event.judicialesEntity, judicialId: event.judicialId));
   }
 }

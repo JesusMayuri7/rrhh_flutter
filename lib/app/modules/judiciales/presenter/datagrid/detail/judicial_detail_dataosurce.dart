@@ -21,13 +21,15 @@ class JudicialDetailDataSource extends DataGridSource {
               DataGridCell<int>(
                   columnName: 'id', value: dataGridRow.id),
               DataGridCell<int>(
-                  columnName: 'desc_meta', value: dataGridRow.judicialId),
+                  columnName: 'judicial_id', value: dataGridRow.judicialId),
               DataGridCell<String>(
-                  columnName: 'desc_area', value: dataGridRow.detalle),
+                  columnName: 'detalle', value: dataGridRow.detalle),
               DataGridCell<String>(
-                  columnName: 'cargo', value: dataGridRow.expedientePvn),
+                  columnName: 'expediente_pvn', value: dataGridRow.expedientePvn),
               DataGridCell<String>(
-                  columnName: 'cantidad', value: dataGridRow.fechaExpedientePvn),              
+                  columnName: 'fecha_expediente_pvn', value: dataGridRow.fechaExpedientePvn),    
+                                DataGridCell<String>(
+                  columnName: 'nro_documento', value: dataGridRow.nroDocumento),               
               DataGridCell<JudicialDetailEntity>(
                   columnName: 'acciones', value: dataGridRow),
             ]))
@@ -53,36 +55,18 @@ class JudicialDetailDataSource extends DataGridSource {
                 size: 14,
               ),
               onPressed: () {
-                //_showModalDialog(this.context, e.value);
+//                  _showModalDialogJudicialNewDetail(context,this.judicialId, this.judicialDetailBloc);
               },
             ),
           );
         }
-        if (e.columnName == 'plaza' ||
-            e.columnName == 'dni' ||
-            e.columnName == 'modalidad') {
-          return Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(
-              left: 5,
-            ),
-            child: Text(
-              e.value.toString(),
-              style: TextStyle(fontSize: 10.5),
-            ),
-          );
-        } else
-          return Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(
-              left: 5,
-            ),
-            child: Text(
-              e.value.toString(),
-              maxLines: 1,
-              style: TextStyle(fontSize: 10.5),
-              overflow: TextOverflow.ellipsis,
-            ),
+          return Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Container(
+                  //padding: const EdgeInsets.symmetric(horizontal: 8),
+                  alignment: Alignment.centerLeft,
+                  child: Text(e.value.toString(),style: TextStyle(fontSize: 12)),
+                ),
           );
       }).toList(),
     );

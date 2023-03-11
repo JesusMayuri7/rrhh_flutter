@@ -22,9 +22,14 @@ class JudicialesListFilter extends JudicialesListEvent {
   List<Object> get props => [this.criterio];
 }
 
-class JudicialesListLoadedEvent extends JudicialesListEvent {
+class JudicialesListSetDetailEvent extends JudicialesListEvent {
   final List<JudicialDetailEntity> judicialesEntity;
-  JudicialesListLoadedEvent({
+  final int judicialId;
+  JudicialesListSetDetailEvent({
     required this.judicialesEntity,
+    required this.judicialId,
   });
+
+   @override
+  List<Object> get props => [this.judicialesEntity,this.judicialId];
 }

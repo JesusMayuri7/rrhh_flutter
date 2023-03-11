@@ -6,6 +6,8 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:rrhh_clean/app/modules/base_prac/domain/practicante_entity.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/list_practicante_datasource.dart';
 
+import 'custom_column_sizer.dart';
+
 class GridPracPage extends StatelessWidget {
   final List<GridColumn> columns;
   final List<PracticanteEntity> data;
@@ -19,6 +21,8 @@ class GridPracPage extends StatelessWidget {
     'Filter',
     'Clear filter',
   ];
+
+  final CustomColumnSizer _customColumnSizer = CustomColumnSizer();
 
   GridPracPage(
       {required this.columns, required this.data, required this.keyGrid});
@@ -49,6 +53,7 @@ class GridPracPage extends StatelessWidget {
                 }),
                 child: SfDataGrid(
                     key: this.keyGrid,
+                    columnSizer: _customColumnSizer,
                     footer: Container(),
                     onCellSecondaryTap: (DataGridCellTapDetails details) {
                       if (details.rowColumnIndex.rowIndex > 0) {
@@ -77,10 +82,8 @@ class GridPracPage extends StatelessWidget {
                     isScrollbarAlwaysShown: true,
                     gridLinesVisibility: GridLinesVisibility.both,
                     headerGridLinesVisibility: GridLinesVisibility.both,
-                    allowSorting: true,
-                    allowMultiColumnSorting: true,
-                    allowTriStateSorting: true,
-                    showSortNumbers: true,
+                    //allowSorting: true,
+                    allowFiltering: true,
                     selectionMode: SelectionMode.single,
                     navigationMode: GridNavigationMode.cell,
                     allowEditing: true,

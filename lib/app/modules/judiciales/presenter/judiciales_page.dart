@@ -19,13 +19,8 @@ class _JudicialesPageState extends State<JudicialesPage> {
         Expanded(          
           child:ListJudicialesPage()),
         SizedBox(
-          width: 500,
-          child:Column(
-            children: [
-              Text('Detalle de Reposicion Judicial'),
-              JudicialDetailPage(),
-            ],
-          ))
+          width: 600,
+          child:JudicialDetailPage())
       ],
     );
   }

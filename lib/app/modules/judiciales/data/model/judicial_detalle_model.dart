@@ -5,7 +5,9 @@
 import 'dart:convert';
 import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_detail_entity.dart';
 
-JudicialDetailModel judicialDetailModelFromJson(String str) => JudicialDetailModel.fromJson(json.decode(str));
+List<JudicialDetailModel> judicialDetailModelFromJson(String str) =>
+    List<JudicialDetailModel>.from(
+        json.decode(str).map((x) => JudicialDetailModel.fromJson(x)));
 
 class JudicialDetailModel extends JudicialDetailEntity{
     JudicialDetailModel({

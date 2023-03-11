@@ -680,58 +680,58 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_charts
-      sha256: "400fa4c57a22f17b78fac6d086e39ecc7b7ece760fdf2041f235951f05640976"
+      sha256: "51c8ed241312bd01bfd242979249d3a69ea0a46486509275dc10b1c9d288f027"
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.49"
+    version: "20.4.53"
   syncfusion_flutter_core:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_core
-      sha256: b5cb2525beb38fae36a363f72f8a2db92ed3995d6f0695968412cc6836e3a7b7
+      sha256: ab3eac31638e80663eae19c71e362012e1e2f67dfd527dc5c07d9397cd4238f2
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.49"
+    version: "20.4.53"
   syncfusion_flutter_datagrid:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_datagrid
-      sha256: daf52a4e7e580da75d71488da860aba1ce628bd0798480a619feb140b53fea5e
+      sha256: "894fb8d4d8291e1a2c6b62b8efc567201d138b770f075391a07a8ed14cb18fb1"
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.49"
+    version: "20.4.53"
   syncfusion_flutter_datagrid_export:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_datagrid_export
-      sha256: "383a408b947159463df988c37260eb37c6a265b8c75099b00cc4bb32169e3b01"
+      sha256: b2135700934b85ee904f71262b0c5d74d94bd49b0357a9695c375b885eaf62f0
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.49-beta"
+    version: "20.4.53-beta"
   syncfusion_flutter_pdf:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_pdf
-      sha256: ae1684beabe92d28d106cba52449243c35475ef47ce52097396fffd4b3f17741
+      sha256: ff8fbd891dab7d67826f874c2949d99057cfe4da126702c3aebdd8a92af36cb7
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.49"
+    version: "20.4.53"
   syncfusion_flutter_xlsio:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_xlsio
-      sha256: f674d7832d130d7946713cf9f8ad3d4f8008abf3bfdf4274cbb0f70b7b57cd2f
+      sha256: "5f10939e4faf6d20225e792c9454aec8dfd1104ae46566c6eec67eb68ffba9db"
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.49-beta"
+    version: "20.4.53-beta"
   syncfusion_officecore:
     dependency: transitive
     description:
       name: syncfusion_officecore
-      sha256: "0f7fe5334f79a68d9d959d5ece88de53d1bcc8a281db9ae99505928018bc0362"
+      sha256: "4fd1fb3c67e76ba02b76c04f5da3d217335383d5d9e1499d7a0610cdf6f96dbc"
       url: "https://pub.dev"
     source: hosted
-    version: "20.4.49-beta"
+    version: "20.4.53-beta"
   term_glyph:
     dependency: transitive
     description:

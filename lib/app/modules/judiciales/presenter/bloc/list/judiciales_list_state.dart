@@ -17,6 +17,19 @@ class JudicialesListLoading extends JudicialesListState {
   List<Object> get props => [];
 }
 
+class JudicialesListSetDetail extends JudicialesListState {
+
+  final List<JudicialDetailEntity> judicialDetailEntity;
+  final int judicialId;
+  JudicialesListSetDetail({
+    required this.judicialDetailEntity,
+    required this.judicialId,
+  });
+
+  @override
+  List<Object> get props => [this.judicialDetailEntity,this.judicialId];
+}
+
 class JudicialesListError extends JudicialesListState {
   final String message;
 

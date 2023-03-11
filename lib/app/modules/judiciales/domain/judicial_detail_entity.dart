@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 class JudicialDetailEntity extends Equatable {
@@ -24,5 +26,53 @@ class JudicialDetailEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id,judicialId,expedientePvn,fechaExpedientePvn,nroDocumento,detalle,createdAt,updatedAt];
+  List<Object> get props {
+    return [
+      id,
+      judicialId,
+      expedientePvn,
+      fechaExpedientePvn,
+      nroDocumento,
+      detalle,
+      createdAt,
+      updatedAt,
+    ];
+  }
+
+  JudicialDetailEntity copyWith({
+    int? id,
+    int? judicialId,
+    String? expedientePvn,
+    String? fechaExpedientePvn,
+    String? nroDocumento,
+    String? detalle,
+    String? createdAt,
+    String? updatedAt,
+  }) {
+    return JudicialDetailEntity(
+      id: id ?? this.id,
+      judicialId: judicialId ?? this.judicialId,
+      expedientePvn: expedientePvn ?? this.expedientePvn,
+      fechaExpedientePvn: fechaExpedientePvn ?? this.fechaExpedientePvn,
+      nroDocumento: nroDocumento ?? this.nroDocumento,
+      detalle: detalle ?? this.detalle,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'judicialId': judicialId,
+      'expedientePvn': expedientePvn,
+      'fechaExpedientePvn': fechaExpedientePvn,
+      'nroDocumento': nroDocumento,
+      'detalle': detalle,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+    };
+  }
+
+
 }

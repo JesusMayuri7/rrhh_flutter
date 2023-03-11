@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:rrhh_clean/app/modules/judiciales/cubit/judiciales_bloc.dart';
 import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_detail_entity.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -106,14 +105,11 @@ class GridJudicialesPage extends StatelessWidget {
                               summaryType: GridSummaryType.count)
                         ])
                   ],
-                  onSelectionChanged: (List<DataGridRow> addedRows,
-                  List<DataGridRow> removedRows) {
+                  onSelectionChanged: (List<DataGridRow> addedRows,List<DataGridRow> removedRows) {
                   final index = this.listJudicialesDataSource.rows.indexOf(addedRows.last);
-
-                  List<JudicialDetailEntity> judicialDetalle =listJudicialesDataSource.listadoJudiciales
-                                  [index].judicialDetailEntity;
-                          
-                          this.blocListJudicial.add(JudicialesListLoadedEvent(judicialesEntity: judicialDetalle));
+                  List<JudicialDetailEntity> judicialDetalle =listJudicialesDataSource.listadoJudiciales[index].judicialDetailEntity;                       
+                  this.blocListJudicial.add(JudicialesListSetDetailEvent(judicialesEntity: judicialDetalle,
+                          judicialId:listJudicialesDataSource.listadoJudiciales[index].id ));                          
                   } 
                 ),
               ),

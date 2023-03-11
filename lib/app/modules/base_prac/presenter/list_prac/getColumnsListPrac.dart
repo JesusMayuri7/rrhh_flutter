@@ -12,7 +12,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Año',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -25,59 +25,59 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Airhsp',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
     GridColumn(
       allowEditing: false,
-      width: 30,
+      width: 50,
       columnName: 'plaza',
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'Plaza',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
     GridColumn(
       allowEditing: false,
-      width: 40,
+      width: 50,
       columnName: 'fuente_base',
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'Fuente',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
     GridColumn(
       allowEditing: false,
-      width: 45,
+      width: 50,
       columnName: 'sede',
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'Sede',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
     GridColumn(
       allowEditing: false,
-      width: 40,
+      width: 50,
       columnName: 'meta',
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'meta',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -89,7 +89,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'finalidad',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -103,7 +103,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Unidad',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -115,7 +115,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Area',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -127,7 +127,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'cargo',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -139,7 +139,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Dni',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -151,32 +151,32 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'nombres',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
     GridColumn(
       allowEditing: false,
-      width: 40,
+      width: 50,
       columnName: 'monto_base',
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'Monto',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
     GridColumn(
-      width: 30,
+      width: 50,
       columnName: 'tipo',
       label: Container(
         alignment: Alignment.center,
         child: Text(
           'tipo',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -189,7 +189,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'estado',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -203,7 +203,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Estado',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -215,7 +215,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Alta',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -227,7 +227,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Baja',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -240,7 +240,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Tramite',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -252,7 +252,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'N° Tramite',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -264,7 +264,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'detalle',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -277,7 +277,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Fuente',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -290,7 +290,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'estado_pap',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -303,7 +303,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'estado_opp',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -316,7 +316,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'estados',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -329,7 +329,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Estado AIR',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -341,7 +341,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Modalidd',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),
@@ -353,7 +353,7 @@ List<GridColumn> getColumnsListPrac(BuildContext context) {
         child: Text(
           'Acciones',
           style: TextStyle(
-              color: Theme.of(context).bottomAppBarTheme.color, fontSize: 11.0),
+              color: Colors.white, fontSize: 11.0),
         ),
       ),
     ),

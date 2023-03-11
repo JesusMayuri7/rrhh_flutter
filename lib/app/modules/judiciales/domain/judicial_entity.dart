@@ -122,7 +122,8 @@ class JudicialEntity extends Equatable {
       documentoOrh,
       codigoPlaza,
       nroCap,
-      descEscala
+      descEscala,
+      judicialDetailEntity
     ];
   }
 
@@ -154,6 +155,7 @@ class JudicialEntity extends Equatable {
       'codigo_plaza': codigoPlaza,
       'nro_cap': nroCap,
       'desc_escala': descEscala,
+      'judicial_detalle':judicialDetailEntity
     };
   }
 }

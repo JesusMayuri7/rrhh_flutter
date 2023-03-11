@@ -26,9 +26,7 @@ class GetListJudicialesImpl implements IJudicialesListDataSource {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));
 
-      String bodyData = jsonEncode(response.data);
-
-      //String body = jsonDecode(response.data);
+      String bodyData = jsonEncode(response.data);   
 
       List<JudicialModel> result = judicialModelFromJson(bodyData);
 
