@@ -81,8 +81,14 @@ class _StartPageState extends State<StartPage> with WindowListener {
               toolbarHeight: 30,
               title: () {
                 if (kIsWeb)
-                  return Text('RRHH - PROVIAS NACIONAL - ${anioSelected}',
-                      style: TextStyle(fontSize: 11));
+                  return Row(
+                    children: [
+                      Text('RRHH - PROVIAS NACIONAL - ${anioSelected}',
+                          style: TextStyle(fontSize: 11)),
+                      const Spacer(),
+                      LogoutWidget(),
+                    ],
+                  );
                 return DragToMoveArea(
                   child: Row(
                     children: [

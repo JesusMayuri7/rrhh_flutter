@@ -3,14 +3,15 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_detail_entity.dart';
 
+import 'judicial_detail_page.dart';
 
 class JudicialDetailDataSource extends DataGridSource {
-  JudicialDetailDataSource({
-    required this.detailJudicial,
-  });
+  JudicialDetailDataSource(
+      {required this.detailJudicial, required this.contextUp});
 
   List<JudicialDetailEntity> detailJudicial;
   List<DataGridRow> _confianzaDataGridRows = [];
+  BuildContext contextUp;
 
   @override
   List<DataGridRow> get rows => _confianzaDataGridRows;
@@ -18,18 +19,19 @@ class JudicialDetailDataSource extends DataGridSource {
   void buildDataGridRows() {
     _confianzaDataGridRows = detailJudicial
         .map((dataGridRow) => DataGridRow(cells: [
-              DataGridCell<int>(
-                  columnName: 'id', value: dataGridRow.id),
+              DataGridCell<int>(columnName: 'id', value: dataGridRow.id),
               DataGridCell<int>(
                   columnName: 'judicial_id', value: dataGridRow.judicialId),
               DataGridCell<String>(
                   columnName: 'detalle', value: dataGridRow.detalle),
               DataGridCell<String>(
-                  columnName: 'expediente_pvn', value: dataGridRow.expedientePvn),
+                  columnName: 'expediente_pvn',
+                  value: dataGridRow.expedientePvn),
               DataGridCell<String>(
-                  columnName: 'fecha_expediente_pvn', value: dataGridRow.fechaExpedientePvn),    
-                                DataGridCell<String>(
-                  columnName: 'nro_documento', value: dataGridRow.nroDocumento),               
+                  columnName: 'fecha_expediente_pvn',
+                  value: dataGridRow.fechaExpedientePvn),
+              DataGridCell<String>(
+                  columnName: 'nro_documento', value: dataGridRow.nroDocumento),
               DataGridCell<JudicialDetailEntity>(
                   columnName: 'acciones', value: dataGridRow),
             ]))
@@ -45,34 +47,34 @@ class JudicialDetailDataSource extends DataGridSource {
       //color: getRowBackgroundColor(),
       cells: row.getCells().map<Widget>((e) {
         if (e.columnName == 'acciones') {
-          return Container(
-            padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 8),
-            alignment: Alignment.center,
-            child: IconButton(
-              icon: Icon(
-                Icons.edit_outlined,
-                color: Colors.amber[800],
-                size: 14,
-              ),
-              onPressed: () {
-//                  _showModalDialogJudicialNewDetail(context,this.judicialId, this.judicialDetailBloc);
-              },
+          return IconButton(
+            onPressed: () {
+              showModalDialogJudicialNewDetail(
+                  this.contextUp, detailJudicial[rowIndex].judicialId);
+            },
+            splashRadius: 16,
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints(),
+            color: Colors.amber,
+            highlightColor: Colors.amberAccent, //<-- SEE HERE
+            iconSize: 16,
+            icon: Icon(
+              Icons.edit,
             ),
           );
         }
-          return Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Container(
-                  //padding: const EdgeInsets.symmetric(horizontal: 8),
-                  alignment: Alignment.centerLeft,
-                  child: Text(e.value.toString(),style: TextStyle(fontSize: 12)),
-                ),
-          );
+        return Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Container(
+            //padding: const EdgeInsets.symmetric(horizontal: 8),
+            alignment: Alignment.centerLeft,
+            child: Text(e.value.toString(), style: TextStyle(fontSize: 12)),
+          ),
+        );
       }).toList(),
     );
   }
 
- 
   void updateDataGrid() {
     notifyListeners();
   }

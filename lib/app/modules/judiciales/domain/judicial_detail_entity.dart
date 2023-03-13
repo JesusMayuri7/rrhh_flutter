@@ -1,19 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class JudicialDetailEntity extends Equatable {
-   final int id;
-   final int judicialId;
-   final String expedientePvn;
-   final String fechaExpedientePvn;
-   final String nroDocumento;
-   final String detalle;
-   final String createdAt;
-   final String updatedAt;
-   
+  final int id;
+  final int judicialId;
+  final String expedientePvn;
+  final String fechaExpedientePvn;
+  final String nroDocumento;
+  final String detalle;
+  final String createdAt;
+  final String updatedAt;
+
   JudicialDetailEntity({
     required this.id,
     required this.judicialId,
@@ -73,6 +71,4 @@ class JudicialDetailEntity extends Equatable {
       'updatedAt': updatedAt,
     };
   }
-
-
 }

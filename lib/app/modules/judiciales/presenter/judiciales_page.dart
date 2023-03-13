@@ -15,12 +15,9 @@ class _JudicialesPageState extends State<JudicialesPage> {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [                
-        Expanded(          
-          child:ListJudicialesPage()),
-        SizedBox(
-          width: 600,
-          child:JudicialDetailPage())
+      children: [
+        Expanded(child: ListJudicialesPage()),
+        SizedBox(width: 600, child: JudicialDetailPage(context: this.context))
       ],
     );
   }

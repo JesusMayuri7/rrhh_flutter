@@ -3,12 +3,11 @@ import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/modules/judiciales/domain/new_judicial_detail_use_case.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
-
-
 
 import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
@@ -20,18 +19,20 @@ import 'judicial_detail_columns.dart';
 import 'judicial_detail_dataosurce.dart';
 import 'new_detail/judicial_new_detail_page.dart';
 
-
 class JudicialDetailPage extends StatelessWidget {
-  
   List<FuenteEntity> fuentes = [];
   List<MetaEntity> metas = [];
   List<AreaEntity> areas = [];
   List<ModalidadEntity> modalidades = [];
+  BuildContext context;
+  JudicialDetailDataSource? judicialDetailDataSource;
 
-JudicialDetailDataSource? judicialDetailDataSource = JudicialDetailDataSource(
-        detailJudicial: []);
+  JudicialDetailPage({required this.context}) {
+    judicialDetailDataSource =
+        JudicialDetailDataSource(contextUp: this.context, detailJudicial: []);
+  }
 
-  int judicialId = 0;      
+  int judicialId = 0;
 
   final JudicialDetailCubit judicialDetailBloc =
       Modular.get<JudicialDetailCubit>();
@@ -40,10 +41,9 @@ JudicialDetailDataSource? judicialDetailDataSource = JudicialDetailDataSource(
   Widget build(BuildContext context) {
     return BlocConsumer<JudicialDetailCubit, JudicialDetailState>(
       listener: (context, state) {
-            if(state is JudicialDetailError) {
-              showToastError(context, 'Error al grabar');
-            }
-            
+        if (state is JudicialDetailError) {
+          showToastError(context, 'Error al grabar');
+        }
       },
       buildWhen: (previousState, newState) {
         if (newState is JudicialDetailLoaded) return true;
@@ -51,11 +51,11 @@ JudicialDetailDataSource? judicialDetailDataSource = JudicialDetailDataSource(
       },
       bloc: this.judicialDetailBloc,
       builder: (context, state) {
-        if (state is JudicialDetailLoaded) {          
+        if (state is JudicialDetailLoaded) {
           this.judicialId = state.judicialId;
           this.judicialDetailDataSource?.clearFilters();
           judicialDetailDataSource = JudicialDetailDataSource(
-              detailJudicial: state.judicialDetailList);
+              contextUp: context, detailJudicial: state.judicialDetailList);
           this.judicialDetailDataSource?.buildDataGridRows();
           this.judicialDetailDataSource?.updateDataGrid();
         }
@@ -65,9 +65,12 @@ JudicialDetailDataSource? judicialDetailDataSource = JudicialDetailDataSource(
               children: [
                 Text('Detalle de Reposicion Judicial'),
                 Spacer(),
-                fluentUi.Button(child: Text('Nuevo'), onPressed: (){ 
-                _showModalDialogJudicialNewDetail(context,this.judicialId, this.judicialDetailBloc);
-                 }),
+                fluentUi.Button(
+                    child: Text('Nuevo'),
+                    onPressed: () {
+                      showModalDialogJudicialNewDetail(
+                          context, this.judicialId);
+                    }),
               ],
             ),
             SizedBox(
@@ -82,20 +85,19 @@ JudicialDetailDataSource? judicialDetailDataSource = JudicialDetailDataSource(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5.0),
                     child: SfDataGrid(
-                        key: ValueKey('Detail'),
-                        //highlightRowOnHover: true,
-                        footerFrozenRowsCount: 0,
-                        //footerFrozenColumnsCount: 1,
-                        //frozenColumnsCount: 3,
-                        source: judicialDetailDataSource!,
-                        headerRowHeight: 50,
-                        rowHeight: 50,                       
-                        gridLinesVisibility: GridLinesVisibility.both,
-                        headerGridLinesVisibility: GridLinesVisibility.both,                                                                       
-                        //selectionMode: SelectionMode.single,
-                        columns: judicialDetailColumns(context),
-                        
-                        ),
+                      key: ValueKey('Detail'),
+                      //highlightRowOnHover: true,
+                      footerFrozenRowsCount: 0,
+                      //footerFrozenColumnsCount: 1,
+                      //frozenColumnsCount: 3,
+                      source: judicialDetailDataSource!,
+                      headerRowHeight: 50,
+                      rowHeight: 50,
+                      gridLinesVisibility: GridLinesVisibility.both,
+                      headerGridLinesVisibility: GridLinesVisibility.both,
+                      //selectionMode: SelectionMode.single,
+                      columns: judicialDetailColumns(context),
+                    ),
                   ),
                 )),
           ],
@@ -103,21 +105,20 @@ JudicialDetailDataSource? judicialDetailDataSource = JudicialDetailDataSource(
       },
     );
   }
+}
 
-    _showModalDialogJudicialNewDetail(_context,int _judicialId,_blocJudicialDetail) {
-    showDialog(
-        context: _context,
-        builder: (BuildContext _context) {
-          return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0)),
-              child: Container(
-                  height: 500,
-                  width: 300,
-                  child: JudicialNewDetailPage(
-                    judicialId: _judicialId,
-                    judicialDetailCubit: _blocJudicialDetail,
-                  )));
-        });
-  }
+showModalDialogJudicialNewDetail(_context, int _judicialId) {
+  showDialog(
+      context: _context,
+      builder: (BuildContext _context) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            child: Container(
+                height: 500,
+                width: 300,
+                child: JudicialNewDetailPage(
+                    paramsNewJudicialDetail:
+                        ParamsNewJudicialDetail(judicialId: _judicialId))));
+      });
 }

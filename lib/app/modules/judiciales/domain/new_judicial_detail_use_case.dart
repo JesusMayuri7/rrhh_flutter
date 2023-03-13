@@ -2,14 +2,15 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
+
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
 import 'package:rrhh_clean/core/domain/use_cases/usecase.dart';
 import 'package:rrhh_clean/core/errors/failure.dart';
 
 import 'i_judiciales_repository.dart';
 
-class NewJudicialDetailUseCase extends UseCase<ResponseEntity,ParamsNewJudicialDetail> {
-  
+class NewJudicialDetailUseCase
+    extends UseCase<ResponseEntity, ParamsNewJudicialDetail> {
   final IJudicialesRepository iJudicialesRepository;
 
   NewJudicialDetailUseCase({
@@ -23,12 +24,12 @@ class NewJudicialDetailUseCase extends UseCase<ResponseEntity,ParamsNewJudicialD
 }
 
 class ParamsNewJudicialDetail {
-    int? id;
-    int? judicialId;
-    String? detalle;
-    String? expedientePvn;
-    String? nroDocumento;
-    String? fechaExpedientePvn;    
+  int? id;
+  int? judicialId;
+  String? detalle;
+  String? expedientePvn;
+  String? nroDocumento;
+  String? fechaExpedientePvn;
   ParamsNewJudicialDetail({
     this.id,
     this.judicialId,
@@ -38,14 +39,25 @@ class ParamsNewJudicialDetail {
     this.fechaExpedientePvn,
   });
 
+  factory ParamsNewJudicialDetail.empty() {
+    return ParamsNewJudicialDetail(
+      id: 0,
+      judicialId: 0,
+      detalle: '',
+      expedientePvn: '',
+      nroDocumento: '',
+      fechaExpedientePvn: '',
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'judicial_id': judicialId,
+      'judicialId': judicialId,
       'detalle': detalle,
-      'expediente_pvn': expedientePvn,
-      'nro_documento': nroDocumento,
-      'fecha_expediente_pvn': fechaExpedientePvn,
+      'expedientePvn': expedientePvn,
+      'nroDocumento': nroDocumento,
+      'fechaExpedientePvn': fechaExpedientePvn,
     };
   }
 }
