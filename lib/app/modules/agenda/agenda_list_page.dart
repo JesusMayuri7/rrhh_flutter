@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
+
 import 'package:rrhh_clean/app/modules/agenda/agenda_save_page.dart';
 import 'package:rrhh_clean/app/modules/agenda/agenda_entity.dart';
 import 'package:rrhh_clean/app/modules/agenda/cubit/agenda_list_cubit.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/core/uitls/theme/theme_custon.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_dialog_widget.dart';
-
-import '../auth/presenter/bloc/auth_bloc.dart';
 
 const cellRed = Color(0xffc73232);
 const cellMustard = Color(0xffd7aa22);
@@ -24,21 +28,30 @@ class AgendaListPage extends StatefulWidget {
 }
 
 class AgendaListPageState extends State<AgendaListPage> {
+  final appService = Modular.get<AppService>();
   final blocListAgenda = Modular.get<AgendaListCubit>();
-  final blocAuth = Modular.get<AuthBloc>().state as SuccessAuthState;
+  String? anioSelected;
   List<AgendaEntity> listAgenda = [];
   final int crossAxisCount = 2;
+  FocusNode? myFocusNode;
 
   @override
   void initState() {
-    if (this.blocListAgenda.state is AgendaListInitial) {
-      this.blocListAgenda.loaded(blocAuth.loginResponseEntity.anio);
-    }
     super.initState();
+    init();
+    if (this.blocListAgenda.state is AgendaListInitial) {
+      this.blocListAgenda.loaded(anioSelected!);
+    }
+    myFocusNode = FocusNode();
+  }
+
+  void init() {
+    anioSelected = appService.sessionEntity!.anio;
   }
 
   @override
   Widget build(BuildContext context) {
+    final ThemeCustom? theme = Theme.of(context).extension<ThemeCustom>();
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -49,19 +62,30 @@ class AgendaListPageState extends State<AgendaListPage> {
             children: [
               ElevatedButton(
                   onPressed: () {
-                    this
-                        .blocListAgenda
-                        .loaded(blocAuth.loginResponseEntity.anio);
+                    this.blocListAgenda.loaded(anioSelected!);
                   },
                   child: Text('Actualizar')),
+              Spacer(),
+              SizedBox(
+                width: 500,
+                child: fluentUi.TextFormBox(
+                    placeholder: 'Buscar',
+                    focusNode: myFocusNode,
+                    autocorrect: false,
+                    autofocus: true,
+                    onFieldSubmitted: (value) {
+                      this.blocListAgenda.filtered(value);
+                      FocusScope.of(context).requestFocus(myFocusNode);
+                    }),
+              ),
               Spacer(),
               ElevatedButton(
                   onPressed: () {
                     showModalDialogWidget(
                         contextDialog: context,
                         pageDetail: AgendaSavePage(title: 'Nueva Agenda'),
-                        width: 350,
-                        height: 300);
+                        width: 450,
+                        height: 450);
                   },
                   child: Text('Nuevo')),
             ],
@@ -99,7 +123,7 @@ class AgendaListPageState extends State<AgendaListPage> {
                                   return Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Card(
-                                      color: Colors.grey[200],
+                                      color: theme!.colorBackground,
                                       shadowColor: Colors.grey,
                                       elevation: 5,
                                       shape: RoundedRectangleBorder(
@@ -156,8 +180,8 @@ class AgendaListPageState extends State<AgendaListPage> {
                                                             agendaEntity:
                                                                 listAgenda[
                                                                     index]),
-                                                        width: 350,
-                                                        height: 300);
+                                                        width: 450,
+                                                        height: 450);
                                                   },
                                                   icon: Icon(Icons.edit),
                                                   label: Text('Edit'),
@@ -179,11 +203,22 @@ class AgendaListPageState extends State<AgendaListPage> {
                   );
                 }
               }
+              if (state is AgendaListLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
               return Center(child: Text('Sin datos para el año actual'));
             },
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    // Limpia el nodo focus cuando se haga dispose al formulario
+    myFocusNode?.dispose();
+
+    super.dispose();
   }
 }

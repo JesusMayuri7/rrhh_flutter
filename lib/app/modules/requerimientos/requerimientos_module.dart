@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/datasource/requerimiento_repository_impl.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_list_usecase.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/main_requerimientos_page.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 
 import 'datasource/i_requerimiento_initial_datasource.dart';
 import 'datasource/i_requerimiento_list_datasource.dart';
@@ -44,6 +45,7 @@ class RequerimientosModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MainDocumentosPage()),
+    ChildRoute('/',
+        child: (_, args) => MainDocumentosPage(), guards: [AppGuard()]),
   ];
 }

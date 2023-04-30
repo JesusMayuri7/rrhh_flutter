@@ -3,6 +3,7 @@ import 'package:rrhh_clean/app/modules/reports/airhsp/data/reports_airhsp_reposi
 import 'package:rrhh_clean/app/modules/reports/airhsp/external/get_download_datasource_impl.dart';
 import 'package:rrhh_clean/app/modules/reports/airhsp/presenter/cubit/reports_airhsp_cubit.dart';
 import 'package:rrhh_clean/app/modules/reports/reports_main_page.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 
 import 'airhsp/domain/get_download_use_case.dart';
 
@@ -20,6 +21,7 @@ class ReportsModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => ReportsMainPage())
+    ChildRoute('/',
+        child: (_, args) => ReportsMainPage(), guards: [AppGuard()]),
   ];
 }

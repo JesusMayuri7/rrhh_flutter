@@ -28,7 +28,10 @@ class ConceptosBloc extends Bloc<ConceptosEvent, ConceptosState> {
     emit(result.fold(
       (failure) => ConceptosErrorState(message: _mapFailureToMessage(failure)),
       (data) {
-        return ConceptosLoadedState(data);
+        return ConceptosLoadedState(
+            conceptos: data,
+            codigoPlaza: event.codPlaza,
+            nombres: event.nombres);
       },
     ));
   }

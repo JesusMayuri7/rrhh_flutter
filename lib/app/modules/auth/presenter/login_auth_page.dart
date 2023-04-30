@@ -3,16 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:window_manager/window_manager.dart';
 import 'package:intl/intl.dart';
-import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
+import 'bloc/auth_bloc.dart';
+
+import '../domain/login_auth_usecase.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 import 'package:rrhh_clean/core/uitls/widgets/windows_buttons.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
-import 'package:window_manager/window_manager.dart';
-
-import 'bloc/auth_bloc.dart';
 
 class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
@@ -25,11 +23,10 @@ class _AuthPageState extends State<AuthPage> with WindowListener {
   List<String> _anios = ['2020', '2021', '2022', '2023'];
   static final DateFormat formatter = DateFormat('yyyy');
   String _anioSelected = formatter.format(DateTime.now());
+  final AuthBloc authbloc = Modular.get<AuthBloc>();
 
-  final bloc = Modular.get<AuthBloc>();
-  final share = Modular.getAsync<SharedPreferences>();
+  //final appbloc = Modular.get<AppBloc>();
 
-  //final SharedPreferences share = Modular.get<SharedPreferences>();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -41,6 +38,7 @@ class _AuthPageState extends State<AuthPage> with WindowListener {
   @override
   void initState() {
     super.initState();
+    //init();
     windowManager.addListener(this);
   }
 
@@ -49,32 +47,22 @@ class _AuthPageState extends State<AuthPage> with WindowListener {
     await windowManager.destroy();
   }
 
+  Future<void> init() async {
+    // this.authbloc = await Modular.get<AuthBloc>();
+  }
+
   @override
   Widget build(BuildContext context) {
     AuthCoreParams params = AuthCoreParams(anio: _anioSelected);
     return BlocListener<AuthBloc, AuthState>(
-        bloc: this.bloc,
+        bloc: this.authbloc,
         listener: (context, state) async {
           if (state is ErrorAuthState) {
             showToastError(context, state.message);
           }
           if (state is SuccessAuthState) {
-            if (state.loginResponseEntity.isLogged) {
-              final SharedPreferences preferences =
-                  Modular.get<SharedPreferences>();
-              preferences.clear();
-              preferences.setString('token', state.loginResponseEntity.token);
-              preferences.setString('anio', state.loginResponseEntity.anio);
-              preferences.setString(
-                  'message', state.loginResponseEntity.message);
-              preferences.setBool('status', state.loginResponseEntity.status);
-              preferences.setBool('isLogged', true);
-              preferences.setInt(
-                  'expiresIn', state.loginResponseEntity.expiresIn);
-              preferences.setString('email', state.loginResponseEntity.email);
-              share.then((pref) {
-                Modular.to.navigate('/start/agenda/');
-              });
+            if (state.sessionEntity.isLogged) {
+              Modular.to.navigate('/start/agenda/');
             }
           }
         },
@@ -156,7 +144,9 @@ class _AuthPageState extends State<AuthPage> with WindowListener {
                                 onPressed: () {
                                   // if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
-                                  this.bloc.add(LoginAuthEvent(params: params));
+                                  this
+                                      .authbloc
+                                      .add(LoginAuthEvent(params: params));
                                   //}
                                 },
                                 child: Text('Login'))

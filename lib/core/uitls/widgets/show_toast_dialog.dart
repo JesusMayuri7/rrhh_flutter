@@ -21,6 +21,7 @@ showToastSuccess(BuildContext _context, String message) {
 }
 
 showToastError(BuildContext _context, String message) {
+  print(message);
   MotionToast.error(
     title: const Text(
       'Error',
@@ -33,7 +34,7 @@ showToastError(BuildContext _context, String message) {
     position: MotionToastPosition.top,
     barrierColor: Colors.black.withOpacity(0.3),
     width: 300,
-    height: 80,
+    height: 180,
     dismissable: false,
   ).show(_context);
 }

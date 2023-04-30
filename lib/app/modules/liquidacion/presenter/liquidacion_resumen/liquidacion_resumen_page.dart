@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/bloc/liquidacion_bloc.dart';
 
@@ -35,8 +37,7 @@ class _LiquidacionResumenPageState extends State<LiquidacionResumenPage>
   ClasificadorEntity? _clasificadorEntity;
   CertificadoEntity? _certificadoEntity;
 
-  final String anioSelected =
-      Modular.get<AuthBloc>().state.loginResponseEntity!.anio;
+  final String anioSelected = Modular.get<AppService>().sessionEntity!.anio;
 
   late LiquidacionResumenSiafDatasource liquidacionResumenSiafDatasource;
   late LiquidacionResumenLiquidacionDatasource

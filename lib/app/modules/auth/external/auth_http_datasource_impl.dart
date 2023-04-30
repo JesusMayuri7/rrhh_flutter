@@ -23,8 +23,6 @@ class AuthHttpDataSourceImpl implements IAuthCoreDataSource {
           headers: {'Content-Type': 'application/json'},
           body: json.encode(params.toMap()));
 
-      await Clipboard.setData(ClipboardData(text: response.body.toString()));
-
       var result = json.decode(response.body);
 
       if (response.statusCode == 200)

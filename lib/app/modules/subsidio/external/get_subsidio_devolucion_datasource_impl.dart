@@ -2,8 +2,6 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
-
 import 'package:rrhh_clean/app/modules/subsidio/data/i_subsidio_devolucion_datasource.dart';
 import 'package:rrhh_clean/app/modules/subsidio/data/subsidio_devolucion_model.dart';
 
@@ -13,18 +11,12 @@ import 'package:rrhh_clean/core/data/models/response_model.dart';
 
 class GetSubsidioDevolucionDatasourceImpl
     implements IGetSubsidioDevolucionDatasource {
-  final appBloc = Modular.get<AuthBloc>();
-
   final IClientCustom clientCustom;
 
   GetSubsidioDevolucionDatasourceImpl({required this.clientCustom});
 
   @override
   Future<ResponseModel> getSubsidioDevolucion(String anio) async {
-    //final String token = (appBloc.state as SuccessAuthState).loginResponseEntity.token;
-
-    // int _anio = int.parse((appBloc.state as AppAnioSelectedState).anioSelected);
-
     Uri url = Uri.http(
         'rrhh.pvn.gob.pe', '/api/subsidio/devolucion/' + anio, {'q': '{http}'});
 

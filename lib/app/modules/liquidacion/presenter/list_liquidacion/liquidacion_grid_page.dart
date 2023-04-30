@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/domain/entities/liquidacion_detalle._entity.dart';
@@ -38,8 +40,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
   var _modalidad = ['CAS', 'CAP'];
 
   //String anioSelected = DateFormat('y').format(DateTime.now());
-  final String? anioSelected =
-      (Modular.get<AuthBloc>().state).loginResponseEntity!.anio;
+  final String? anioSelected = (Modular.get<AppService>()).sessionEntity!.anio;
 
   String modalidadSelected = 'CAP';
 

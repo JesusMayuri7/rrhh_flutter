@@ -19,7 +19,22 @@ class AgendaListCubit extends Cubit<AgendaListState> {
     required this.agendaSaveUseCase,
   }) : super(AgendaListInitial());
 
+  filtered(String criterio) async {
+    if (state is AgendaListLoaded) {
+      final _listAgendaOriginal =
+          (state as AgendaListLoaded).listAgendaOriginal;
+      emit((state as AgendaListLoaded).copyWith(
+          listAgendaFiltered: _listAgendaOriginal
+              .where((element) =>
+                  element.titulo.contains(criterio) ||
+                  element.texto.contains(criterio))
+              .toList()));
+      ;
+    }
+  }
+
   loaded(String anio) async {
+    emit(AgendaListLoading());
     var response = await this.agendaListUseCase(anio);
     emit(response.fold((l) => AgendaListError(message: l.toString()), (r) {
       return AgendaListLoaded(
@@ -28,7 +43,6 @@ class AgendaListCubit extends Cubit<AgendaListState> {
   }
 
   save(AgendaParams agendaParams) async {
-    print(agendaParams.toString());
     var response = await this.agendaSaveUseCase(agendaParams);
     emit(response.fold((l) => AgendaListError(message: l.toString()), (r) {
       AgendaEntity agendaEntity = r.data as AgendaEntity;

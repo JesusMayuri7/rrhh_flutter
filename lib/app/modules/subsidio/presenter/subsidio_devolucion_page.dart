@@ -2,8 +2,9 @@ import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 
-import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/subsidio/domain/new_subsidio_devolucion_usecase.dart';
 
 import 'package:rrhh_clean/app/modules/subsidio/presenter/bloc/subsidio_devolucion_bloc.dart';
@@ -34,9 +35,7 @@ class _SubsidioDevolucionPageState extends State<SubsidioDevolucionPage>
   var _modalidad = ['CAS', 'CAP'];
   String modalidadSelected = 'CAS';
 
-  String anioSelected = (Modular.get<AuthBloc>().state as SuccessAuthState)
-      .loginResponseEntity
-      .anio;
+  final String anioSelected = Modular.get<AppService>().sessionEntity!.anio;
   //String anioSelected = DateFormat('y').format(DateTime.now());
 
   @override

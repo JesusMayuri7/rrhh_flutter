@@ -12,6 +12,7 @@ import 'package:rrhh_clean/app/modules/subsidio/main_subsidio_page.dart';
 import 'package:rrhh_clean/app/modules/subsidio/presenter/bloc/subsidio_devolucion_bloc.dart';
 import 'package:rrhh_clean/app/modules/subsidio/presenter/new_subsidio/bloc/new_subsidio_bloc.dart';
 import 'package:rrhh_clean/app/modules/subsidio/subsidio_guard.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 
 class SubsidioModule extends Module {
   @override
@@ -49,10 +50,8 @@ class SubsidioModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute(
-      '/',
-      child: (context, args) => MainSubsidioPage(),
-      //guards: [SubsidioGuard()]
-    ),
+    ChildRoute('/',
+        child: (context, args) => MainSubsidioPage(),
+        guards: [SubsidioGuard()]),
   ];
 }

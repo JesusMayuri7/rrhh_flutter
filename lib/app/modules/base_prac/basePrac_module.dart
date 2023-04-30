@@ -12,6 +12,7 @@ import 'package:rrhh_clean/app/modules/base_prac/main_prac_page.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/alta_baja/bloc/alta_baja_prac_bloc.dart';
 
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/bloc/list_prac_bloc.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 
 import 'domain/export_prac_use_case.dart';
 import 'external/get_data_initial_prac_impl.dart';
@@ -57,6 +58,6 @@ class BasePracModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MainPracPage()),
+    ChildRoute('/', child: (_, args) => MainPracPage(), guards: [AppGuard()]),
   ];
 }

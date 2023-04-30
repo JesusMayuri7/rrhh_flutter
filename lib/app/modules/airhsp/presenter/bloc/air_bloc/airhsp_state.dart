@@ -1,7 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-import '../../../domain/entities/airhsp_entity.dart';
-import '../../../domain/entities/concepto_entity.dart';
+part of 'airhsp_bloc.dart';
 
 abstract class AirhspState extends Equatable {
   const AirhspState();

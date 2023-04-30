@@ -2,6 +2,8 @@ import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/core/uitls/upper_cas_text_formatter.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' hide Column, Row;
@@ -27,8 +29,7 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
   final textSearchController = TextEditingController();
 
   final blocListJudicial = Modular.get<JudicialesListBloc>();
-  final String? anioSelected =
-      Modular.get<AuthBloc>().state.loginResponseEntity?.anio;
+  final String? anioSelected = Modular.get<AppService>().sessionEntity?.anio;
 
   late ListJudicialesDataSource listJudicialesDataSource;
 
@@ -55,7 +56,8 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
           );
         }
       },
-      buildWhen: (previous, current) => current is JudicialesListLoaded ? true: false,
+      buildWhen: (previous, current) =>
+          current is JudicialesListLoaded ? true : false,
       bloc: this.blocListJudicial,
       builder: (context, state) {
         if (this.blocListJudicial.state is JudicialesListLoaded) {
@@ -119,28 +121,27 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                       SizedBox(width: 5.0),
                     ],
                   ),
-                   Container(
+                  Container(
                     width: 400,
-                    child: TextFormField(                        
+                    child: TextFormField(
                         controller: textSearchController,
                         textAlign: TextAlign.left,
                         keyboardType: TextInputType.text,
                         textCapitalization: TextCapitalization.characters,
                         inputFormatters: [UpperCaseTextFormatter()],
-                        onFieldSubmitted: (value) {                          
-                          if(value.isNotEmpty)     
-                          {                     
+                        onFieldSubmitted: (value) {
+                          if (value.isNotEmpty) {
                             this.listJudicialesDataSource.addFilter(
-                              'nombres',
-                              FilterCondition(
-                                type: FilterType.contains,
-                                value: value,
-                                filterOperator: FilterOperator.or,
-                                filterBehavior: FilterBehavior.stringDataType,
-                              ),
-                            );
-                          }
-                          else
+                                  'nombres',
+                                  FilterCondition(
+                                    type: FilterType.contains,
+                                    value: value,
+                                    filterOperator: FilterOperator.or,
+                                    filterBehavior:
+                                        FilterBehavior.stringDataType,
+                                  ),
+                                );
+                          } else
                             this.listJudicialesDataSource.clearFilters();
                         },
                         decoration: InputDecoration(
@@ -158,7 +159,7 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                           contentPadding: EdgeInsets.only(
                               left: 5, top: 12, bottom: 0), // Added this
                         )),
-                  ), 
+                  ),
                 ],
               ),
               SizedBox(height: 5.0),

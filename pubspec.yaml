@@ -25,19 +25,20 @@ dependencies:
   equatable: ^2.0.5
   flutter_bloc: ^8.1.0
   flutter_modular: ^5.0.3
-  syncfusion_flutter_core: ^20.4.53
-  syncfusion_flutter_datagrid: ^20.4.53
-  syncfusion_flutter_xlsio: ^20.4.53-beta
-  syncfusion_flutter_charts: ^20.4.53
-  syncfusion_flutter_datagrid_export: ^20.4.53-beta
-  syncfusion_flutter_pdf: ^20.4.53
+  syncfusion_flutter_core: ^21.1.38
+  syncfusion_flutter_datagrid: ^21.1.38
+  syncfusion_flutter_xlsio: ^21.1.38
+  syncfusion_flutter_charts: ^21.1.38
+  syncfusion_flutter_datagrid_export: ^21.1.38
+  syncfusion_flutter_pdf: ^21.1.38
   pluto_grid: ^5.4.9
-  shared_preferences: ^2.0.16 
+  shared_preferences: ^2.1.0
   #after_layout: ^1.0.7+2
   dartz: ^0.10.1
   #slidy: ^3.2.2+1
   http: ^0.13.4
-  dio: ^4.0.6
+  #dio: ^4.0.6
+  dio: ^5.1.1
   xml: ^6.2.2
   intl: ^0.17.0
   flutter_layout_grid: ^2.0.1
@@ -55,10 +56,7 @@ dependencies:
   mime: ^1.0.2
   auto_divider: ^1.0.0
   dropdown_button2: ^1.9.2
-  flutter_system_proxy:
-    git: 
-      url: https://github.com/BrowserStackCE/flutter_system_proxy.git
-      ref: main
+  dson_adapter: ^1.2.0+2
   flutter_icons:
     git:
       url: https://github.com/adarsh-technocrat/flutter-icons  

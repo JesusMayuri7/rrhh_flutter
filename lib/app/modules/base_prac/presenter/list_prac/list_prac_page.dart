@@ -2,6 +2,8 @@ import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/base_prac/domain/export_prac_use_case.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/bloc/list_prac_bloc.dart';
@@ -29,8 +31,7 @@ class _ListPracPageState extends State<ListPracPage> {
   final textSearchController = TextEditingController();
 
   final bloc = Modular.get<ListPracBloc>();
-  final String? anioSelected =
-      Modular.get<AuthBloc>().state.loginResponseEntity?.anio;
+  final String? anioSelected = Modular.get<AppService>().sessionEntity?.anio;
 
   @override
   void initState() {

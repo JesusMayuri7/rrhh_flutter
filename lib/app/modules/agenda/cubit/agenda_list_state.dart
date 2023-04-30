@@ -10,6 +10,8 @@ abstract class AgendaListState extends Equatable {
 
 class AgendaListInitial extends AgendaListState {}
 
+class AgendaListLoading extends AgendaListState {}
+
 class AgendaListError extends AgendaListState {
   final String message;
   AgendaListError({

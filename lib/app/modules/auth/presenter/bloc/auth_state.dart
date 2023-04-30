@@ -1,38 +1,38 @@
 part of 'auth_bloc.dart';
 
 abstract class AuthState {
-  final LoginResponseEntity? loginResponseEntity;
+  final SessionEntity? sessionEntity;
 
   const AuthState({
-    this.loginResponseEntity,
+    this.sessionEntity,
   });
 
   List<Object> get props => [];
 }
 
 class AuthInitial extends AuthState {
-  const AuthInitial() : super(loginResponseEntity: null);
+  const AuthInitial() : super(sessionEntity: null);
 }
 
 class LoadingAuthState extends AuthState {}
 
 class SuccessAuthState extends AuthState {
-  final LoginResponseEntity loginResponseEntity;
+  final SessionEntity sessionEntity;
 
   SuccessAuthState({
-    required this.loginResponseEntity,
-  }) : super(loginResponseEntity: loginResponseEntity);
+    required this.sessionEntity,
+  }) : super(sessionEntity: sessionEntity);
 
   @override
-  List<Object> get props => [this.loginResponseEntity];
+  List<Object> get props => [this.sessionEntity];
 
   SuccessAuthState copyWith({
     String? anio,
     bool? isLogged,
-    LoginResponseEntity? loginResponseEntity,
+    SessionEntity? sessionEntity,
   }) {
     return SuccessAuthState(
-      loginResponseEntity: loginResponseEntity ?? this.loginResponseEntity,
+      sessionEntity: sessionEntity ?? this.sessionEntity,
     );
   }
 }

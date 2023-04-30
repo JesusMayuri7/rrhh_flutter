@@ -17,6 +17,7 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
   }
 
   final HttpCustom httpCustom;
+
   ListarDatasourceImpl({
     required this.httpCustom,
   });
@@ -33,7 +34,7 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
     var url = Uri.http(env['url_mef']!, _url);
 
     Map<String, String> param = {
-      'idGobierno': "0",
+      'idGobierno': "01",
       'idSector': "36",
       'idPliego': "036",
       'idUe': _ejecutora,
@@ -63,7 +64,6 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
           },
           body: param);
 
-      print(response.body.toString());
       return airHspModelFromXML(response.body);
     } on SocketException {
       throw ServerException('Sin conexion');

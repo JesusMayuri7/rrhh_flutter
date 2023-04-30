@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/base_cas/data/datasources/i_certificado_cas_datasource.dart';
 import 'package:rrhh_clean/app/modules/base_cas/data/datasources/i_presupuesto_cas_datasource.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 
 import 'domain/usecases/certificado_cas_use_case.dart';
 import 'domain/usecases/initial_cas_use_case.dart';
@@ -33,7 +34,7 @@ class BaseCasModule extends Module {
   @override
   final List<Bind> binds = [
     // EXTERNAL
-   //Bind((i) => BaseCasDatasourceImpl(httpCustom: i())),
+    //Bind((i) => BaseCasDatasourceImpl(httpCustom: i())),
     Bind((i) => BaseCasDatasourceImplProyeccion(httpCustom: i())),
     Bind((i) => BaseExcelDatasourceImpl(httpCustom: i())),
     Bind((i) => InitialCasDatasourceImpl(httpCustom: i())),
@@ -41,17 +42,17 @@ class BaseCasModule extends Module {
     Bind((i) => CertificadoCasDatasourceImpl(httpCustom: i())),
 
     //2023
-   Bind((i) => PresupuestoCasDatasourceImpl(
+    Bind((i) => PresupuestoCasDatasourceImpl(
         getCertificadosCasImpl: i<CertificadoCasDatasourceImpl>(),
-        getPimCasImpl: i<PimCasDatasourceImpl>())), 
+        getPimCasImpl: i<PimCasDatasourceImpl>())),
 
     //2023
-  /*    Bind((i) => PresupuestoCasDatasourceImplLey(
+    /*    Bind((i) => PresupuestoCasDatasourceImplLey(
         getCertificadosCasImpl: i<PimCasLeyDatasourceImpl>(),
         getPimCasImpl: i<PimCasLeyDatasourceImpl>())),  */
 
     // REPOSITORY
-    
+
     Bind((i) => ListarRepositoryImpl(
         baseExceldatasource: i<IBaseExcelDatasource>(),
         baseCasdatasource: i<IBaseCasDatasource>(),
@@ -70,18 +71,20 @@ class BaseCasModule extends Module {
     Bind((i) => PresupuestoCasUseCase(i())),
 
     // BLOC
-    Bind.lazySingleton((i) => HeadParametersBloc(
-      initialUseCase: i(),
-      calcularCasUseCase: i(),
-      listarUseCase:  i(),
-      presupuestoCasUseCase:  i()),
-      export: true),
+    Bind.lazySingleton(
+        (i) => HeadParametersBloc(
+            initialUseCase: i(),
+            calcularCasUseCase: i(),
+            listarUseCase: i(),
+            presupuestoCasUseCase: i()),
+        export: true),
     Bind.lazySingleton((i) => ResumenBloc(i(), i(), i()), export: true),
     Bind.lazySingleton((i) => PresupuestoBloc(i()), export: true),
   ];
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MainBaseCasPage()),
+    ChildRoute('/',
+        child: (_, args) => MainBaseCasPage(), guards: [AppGuard()]),
   ];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 
 import 'confianza_page.dart';
 import 'domain/usecases/get_confianza_use_case.dart';
@@ -37,6 +38,6 @@ class ConfianzaModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => ConfianzaPage())
+    ChildRoute('/', child: (_, args) => ConfianzaPage(), guards: [AppGuard()]),
   ];
 }

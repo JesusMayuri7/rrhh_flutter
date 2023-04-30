@@ -3,14 +3,14 @@ import 'package:flutter_icons/flutter_icons.dart';
 
 import 'airhsp/airhsp_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class AirhspPersonalPage extends StatefulWidget {
+  const AirhspPersonalPage({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<HomePage> {
+class _HomeState extends State<AirhspPersonalPage> {
   int _selectedIndex = 0;
   final pageViewController = PageController();
   @override

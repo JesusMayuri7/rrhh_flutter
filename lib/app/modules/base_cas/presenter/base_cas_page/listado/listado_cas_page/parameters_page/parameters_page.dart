@@ -2,12 +2,13 @@ import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_dropdown.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
 
 import 'bloc/headparameters_bloc.dart';
-
 
 class ParametersPage extends StatefulWidget {
   @override
@@ -17,19 +18,19 @@ class ParametersPage extends StatefulWidget {
 class _HeadBaseCasPageState extends State<ParametersPage>
     with AutomaticKeepAliveClientMixin {
   final bloc = Modular.get<HeadParametersBloc>();
-  final authBloc = Modular.get<AuthBloc>();
+  final appBloc = Modular.get<AppService>();
   String? anioSelected;
 
   @override
   void initState() {
     super.initState();
 
-    anioSelected = authBloc.state.loginResponseEntity?.anio;
+    anioSelected = appBloc.sessionEntity?.anio;
     if (this.bloc.state is HeadParametersInitialState) {
-       this.bloc.add(HeadParametersFormLoadEvent(
+      this.bloc.add(HeadParametersFormLoadEvent(
           dscVariable: 'CALCULAR_PROYECCION_CAS',
           modalidadId: 1,
-          anio: anioSelected!)); 
+          anio: anioSelected!));
     }
   }
 
@@ -88,7 +89,7 @@ class _HeadBaseCasPageState extends State<ParametersPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    
+
     double w = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -128,8 +129,10 @@ class _HeadBaseCasPageState extends State<ParametersPage>
                             state.porcentajePrimaSctrPension.toString();
                         porcentajeComisionSctrPensionController.text =
                             state.porcentajeComisionSctrPension.toString();
-                        porcentajeIgvController.text =                            state.porcentajeIgv.toString();
-                        incrementoCasController.text =                            state.incrementoCas.toString();
+                        porcentajeIgvController.text =
+                            state.porcentajeIgv.toString();
+                        incrementoCasController.text =
+                            state.incrementoCas.toString();
                         return Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,

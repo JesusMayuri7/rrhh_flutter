@@ -1,20 +1,26 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
+
 import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
-import 'package:rrhh_clean/app/modules/auth/domain/auth_response_entity.dart';
+import 'package:rrhh_clean/core/domain/entities/session_entity.dart';
+import 'package:rrhh_clean/app/app_service.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc({required this.authCoreUseCase}) : super(AuthInitial()) {
+  AuthBloc({
+    required this.authCoreUseCase,
+    required this.appService,
+  }) : super(AuthInitial()) {
     on<LoginAuthEvent>(_onLoginAuthEventToState);
     on<LogoutAuthEvent>(_onLogoutAuthEventToState);
     on<LoadPreferencesAuthEvent>(_onLoadPreferencesAuthEventToState);
   }
 
   final LoginAuthUseCase authCoreUseCase;
+  final AppService appService;
 
   Future<void> _onLogoutAuthEventToState(
       LogoutAuthEvent event, Emitter<AuthState> emit) async {
@@ -27,8 +33,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(result.fold((l) {
       return ErrorAuthState(message: l.toString());
     }, (r) {
+      appService.saveSession(SessionEntity(
+          status: r.status,
+          token: r.token,
+          message: r.message,
+          expiresIn: r.expiresIn,
+          anio: r.anio,
+          isLogged: r.isLogged,
+          email: r.email));
       return SuccessAuthState(
-          loginResponseEntity: LoginResponseEntity(
+          sessionEntity: SessionEntity(
               anio: event.params.anio,
               expiresIn: r.expiresIn,
               isLogged: true,
@@ -57,6 +71,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _onLoadPreferencesAuthEventToState(
       LoadPreferencesAuthEvent event, Emitter<AuthState> emit) {
-    emit(SuccessAuthState(loginResponseEntity: event.loginResponseEntity));
+    emit(SuccessAuthState(sessionEntity: event.sessionEntity));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 
 import 'data/documentos_repository_impl.dart';
 import 'datasource/i_documentos_list_datasource.dart';
@@ -37,6 +38,7 @@ class DocumentosModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MainDocumentosPage()),
+    ChildRoute('/',
+        child: (_, args) => MainDocumentosPage(), guards: [AppGuard()]),
   ];
 }

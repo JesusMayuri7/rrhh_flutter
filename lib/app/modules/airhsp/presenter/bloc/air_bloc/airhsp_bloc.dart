@@ -1,18 +1,15 @@
 import 'dart:async';
-
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/download_file_use_case.dart';
 
+import '../../../domain/entities/concepto_entity.dart';
+import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/download_file_use_case.dart';
 import '../../../domain/entities/airhsp_entity.dart';
 import '../../../domain/use_cases/conceptos_use_case.dart';
-
 import '../../../domain/use_cases/listar_use_case.dart';
 
-import 'airhsp_event.dart';
-import 'airhsp_state.dart';
-
-export 'airhsp_event.dart';
-export 'airhsp_state.dart';
+part 'airhsp_event.dart';
+part 'airhsp_state.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
@@ -73,7 +70,7 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
     }
   }
 
-  FutureOr<void> _searchEvent(event, Emitter<AirhspState> emit) {
+  FutureOr<void> _searchEvent(SearchEvent event, Emitter<AirhspState> emit) {
     if (state is LoadedAirhspState) {
       if (event.criterio.isNotEmpty) {
         List<AirhspEntity> dummyListData = [];

@@ -11,7 +11,7 @@ class WindowButtons extends StatelessWidget {
 
     return SizedBox(
       width: 138,
-      height: 50,
+      height: 15,
       child: !kIsWeb
           ? WindowCaption(
               brightness: theme.brightness,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../domain/entities/concepto_entity.dart';
+import 'package:rrhh_clean/app/modules/airhsp/domain/entities/concepto_entity.dart';
 
 //final oCcy = NumberFormat("#,##0.00", "en_US");
 

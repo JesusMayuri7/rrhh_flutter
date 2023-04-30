@@ -1,5 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 
 class HttpCustom extends http.BaseClient {
@@ -8,7 +10,7 @@ class HttpCustom extends http.BaseClient {
   http.Client _client = http.Client();
 
   HttpCustom();
-  final authBloc = Modular.get<AuthBloc>();
+  final appService = Modular.get<AppService>();
 
   // Use a memory cache to avoid local storage access in each call
   String _inMemoryToken = '';
@@ -34,7 +36,7 @@ class HttpCustom extends http.BaseClient {
         print('todo ok 200');
       }
       if (response.statusCode == 401) {
-        if ((authBloc.state as SuccessAuthState).loginResponseEntity.status) {}
+        //if ((appBloc.state as AppLoggedState).sessionEntity!.status) {}
         print('si esta logeado');
         print('todo mal 401');
         reset();
@@ -48,8 +50,7 @@ class HttpCustom extends http.BaseClient {
   }
 
   String _loadTokenFromSharedPreference() {
-    var accessToken =
-        (authBloc.state as SuccessAuthState).loginResponseEntity.token;
+    var accessToken = appService.sessionEntity!.token;
 
     // print('httpCustom ' + accessToken);
     //final user = sharedPref.getString('token');

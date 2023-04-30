@@ -9,6 +9,7 @@ import 'package:rrhh_clean/app/modules/liquidacion/presenter/list_liquidacion/bl
 import 'package:rrhh_clean/app/modules/liquidacion/presenter/new_liquidacion/bloc/new_liquidacion_bloc.dart';
 
 import 'package:rrhh_clean/core/external/get_certificados_impl.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 import 'data/repository/liquidacion_repository_impl.dart';
 import 'domain/usecases/get_liquidacion_report_usecase.dart';
 import 'domain/usecases/get_liquidacion_resumenes.dart';
@@ -102,7 +103,8 @@ class LiquidacionModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MainLiquidacionPage())
+    ChildRoute('/',
+        child: (_, args) => MainLiquidacionPage(), guards: [AppGuard()]),
   ];
 }
 
