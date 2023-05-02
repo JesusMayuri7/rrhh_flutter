@@ -102,6 +102,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         initialValue: newSubsidio?.anio?.toString() ?? '',
                         heightErroStyle: 0.5,
                         maxLength: 4,
+                        maxLines: 1,
                         textAlign: TextAlign.left,
                         title: 'Año',
                         keyboardType: TextInputType.number,
@@ -173,6 +174,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                       LabelWithFormFieldInitial(
                         heightErroStyle: 0.5,
                         maxLength: 6,
+                        maxLines: 1,
                         textAlign: TextAlign.left,
                         title: 'Codigo AIRHSP',
                         initialValue: newSubsidio?.codigoPlaza ?? '',
@@ -195,6 +197,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                       LabelWithFormFieldInitial(
                         heightErroStyle: 0.5,
                         maxLength: 5,
+                        maxLines: 1,
                         textAlign: TextAlign.left,
                         title: 'Codigo SIGA',
                         initialValue: newSubsidio?.codigoSiga ?? '',
@@ -218,6 +221,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         initialValue: newSubsidio?.dni ?? '',
                         heightErroStyle: 0.5,
                         maxLength: 8,
+                        maxLines: 1,
                         textAlign: TextAlign.left,
                         title: 'Dni',
                         inputFormatters: [
@@ -241,6 +245,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         heightErroStyle: 0.5,
                         keyboardType: TextInputType.text,
                         maxLength: 200,
+                        maxLines: 1,
                         textAlign: TextAlign.left,
                         title: 'Apellidos y Nombres',
                         inputFormatters: [
@@ -262,6 +267,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         heightErroStyle: 0.5,
                         keyboardType: TextInputType.text,
                         maxLength: 20,
+                        maxLines: 1,
                         textAlign: TextAlign.left,
                         title: 'Expediente',
                         inputFormatters: [
@@ -279,6 +285,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                         heightErroStyle: 0.5,
                         hintText: '2021-01-01',
                         maxLength: 20,
+                        maxLines: 1,
                         textAlign: TextAlign.left,
                         title: 'Fecha',
                         onSaved: (value) {
@@ -322,6 +329,7 @@ class _NewSubsidioDevolucionPage extends State<NewSubsidioDevolucionPage> {
                                 initialValue:
                                     newSubsidio?.monto?.toString() ?? '0',
                                 maxLength: 15,
+                                maxLines: 1,
                                 textAlign: TextAlign.right,
                                 title: 'Monto',
                                 keyboardType: TextInputType.number,

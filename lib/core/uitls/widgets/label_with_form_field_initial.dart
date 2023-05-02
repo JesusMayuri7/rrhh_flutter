@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class LabelWithFormFieldInitial extends StatelessWidget {
+class LabelWithFormFieldInitial extends StatefulWidget {
   final String title;
   final TextInputType keyboardType;
   final TextAlign textAlign;
@@ -15,7 +15,7 @@ class LabelWithFormFieldInitial extends StatelessWidget {
   final String hintText;
   final String initialValue;
   final TextInputAction textInputAction;
-  final int maxLines;
+  final int? maxLines;
   final bool readOnly;
   final bool autofocus;
 
@@ -32,7 +32,7 @@ class LabelWithFormFieldInitial extends StatelessWidget {
       this.inputFormatters = const [],
       this.hintText = '',
       this.initialValue = '',
-      this.maxLines = 1,
+      required this.maxLines,
       this.readOnly = false,
       this.textInputAction = TextInputAction.none,
       this.autofocus = true
@@ -40,6 +40,11 @@ class LabelWithFormFieldInitial extends StatelessWidget {
       // this.inputFormatter = const FilteringTextInputFormatter.,
       });
 
+  @override
+  _LabelWithFormFieldInitialState createState() => _LabelWithFormFieldInitialState();
+}
+
+class _LabelWithFormFieldInitialState extends State<LabelWithFormFieldInitial> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -50,7 +55,7 @@ class LabelWithFormFieldInitial extends StatelessWidget {
             padding: EdgeInsets.only(left: 4),
             alignment: Alignment.centerLeft,
             child: Text(
-              this.title,
+              this.widget.title,
               textAlign: TextAlign.start,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -59,38 +64,38 @@ class LabelWithFormFieldInitial extends StatelessWidget {
             ),
           ),
           TextFormField(
-            readOnly: this.readOnly,
-            initialValue: this.initialValue,
+            readOnly: this.widget.readOnly,
+            initialValue: this.widget.initialValue,
             textCapitalization: TextCapitalization.characters,
-            onSaved: this.onSaved,
-            inputFormatters: this.inputFormatters,
-            maxLength: this.maxLength,
+            onSaved: this.widget.onSaved,
+            inputFormatters: this.widget.inputFormatters,
+            maxLength: this.widget.maxLength,
             enableInteractiveSelection: true,
             textInputAction: TextInputAction.done,
             textAlignVertical: TextAlignVertical.center,
-            textAlign: textAlign,
-            keyboardType: this.keyboardType,
-            validator: validator,
-            onFieldSubmitted: onFieldSubmited,
+            textAlign: widget.textAlign,
+            keyboardType: this.widget.keyboardType,
+            validator: widget.validator,
+            onFieldSubmitted: widget.onFieldSubmited,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               //isCollapsed: true,
               isDense: true,
-              hintText: this.hintText,
+              hintText: this.widget.hintText,
               contentPadding:
                   EdgeInsets.only(left: 4, top: 12, bottom: 0, right: 2),
-              prefixIcon: this.icon == null ? null : Icon(this.icon),
+              prefixIcon: this.widget.icon == null ? null : Icon(this.widget.icon),
               counterText: "",
               errorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.red),
               ),
               errorStyle: TextStyle(
-                height: heightErroStyle,
+                height: widget.heightErroStyle,
                 fontSize: 10,
               ),
             ),
             style: TextStyle(fontSize: 11),
-            maxLines: this.maxLines,
+            maxLines: this.widget.maxLines,
           ),
         ]);
   }

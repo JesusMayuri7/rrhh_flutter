@@ -61,13 +61,11 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('build splas');
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         bloc: this.auth,
         listener: (context, state) {
-          print(state.toString());
-          if (state is SuccessAuthState)
+        if (state is SuccessAuthState)
             Modular.to.pushReplacementNamed('/start/agenda/');
         },
         child: Center(

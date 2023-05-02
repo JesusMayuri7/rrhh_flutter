@@ -99,6 +99,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                             initialValue:
                                                 paramsAltaBaja.anio.toString(),
                                             maxLength: 1,
+                                            maxLines: 1,
                                             textAlign: TextAlign.center,
                                             title: 'Año',
                                             keyboardType: TextInputType.text),
@@ -109,6 +110,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                             initialValue:
                                                 paramsAltaBaja.codigoBaja,
                                             maxLength: 1,
+                                            maxLines: 1,
                                             textAlign: TextAlign.center,
                                             title: 'Airhsp',
                                             onSaved: (value) {
@@ -124,6 +126,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                             maxLength: 1,
                                             textAlign: TextAlign.center,
                                             title: 'Plaza',
+                                            maxLines: 1,
                                             keyboardType: TextInputType.text),
                                       ),
                                     ],
@@ -132,11 +135,13 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                   LabelWithFormFieldInitial(
                                       initialValue: paramsAltaBaja.descUnidad,
                                       maxLength: 1,
+                                      maxLines: 1,
                                       textAlign: TextAlign.left,
                                       title: 'Unidad',
                                       keyboardType: TextInputType.text),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
+                                    maxLines: 1,
                                       initialValue: paramsAltaBaja.descArea,
                                       maxLength: 1,
                                       textAlign: TextAlign.left,
@@ -144,6 +149,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                       keyboardType: TextInputType.text),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
+                                    maxLines: 1,
                                       initialValue: paramsAltaBaja.dni,
                                       maxLength: 1,
                                       textAlign: TextAlign.left,
@@ -151,6 +157,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                       keyboardType: TextInputType.text),
                                   SizedBox(height: 5.0),
                                   LabelWithFormFieldInitial(
+                                    maxLines: 1,
                                       initialValue: paramsAltaBaja.nombres,
                                       maxLength: 1,
                                       textAlign: TextAlign.left,
@@ -186,6 +193,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                                             paramsAltaBaja
                                                                 .tramite,
                                                         maxLength: 1,
+                                                        maxLines: 1,
                                                         textAlign:
                                                             TextAlign.center,
                                                         title: 'Tramite',
@@ -201,6 +209,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                                             paramsAltaBaja
                                                                 .estado,
                                                         maxLength: 1,
+                                                        maxLines: 1,
                                                         textAlign:
                                                             TextAlign.center,
                                                         title: 'Actual',
@@ -216,6 +225,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                                             paramsAltaBaja
                                                                 .estados,
                                                         maxLength: 1,
+                                                        maxLines: 1,
                                                         textAlign:
                                                             TextAlign.center,
                                                         title: 'SigaNet',
@@ -237,6 +247,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                                             paramsAltaBaja
                                                                 .estadoPap,
                                                         maxLength: 1,
+                                                        maxLines: 1,
                                                         textAlign:
                                                             TextAlign.center,
                                                         title: 'PAP',
@@ -252,6 +263,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                                             paramsAltaBaja
                                                                 .estadoOpp,
                                                         maxLength: 1,
+                                                        maxLines: 1,
                                                         textAlign:
                                                             TextAlign.center,
                                                         title: 'OPP',
@@ -267,6 +279,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                                             paramsAltaBaja
                                                                 .estadoAir,
                                                         maxLength: 1,
+                                                        maxLines: 1,
                                                         textAlign:
                                                             TextAlign.center,
                                                         title: 'AIRHSP',
@@ -284,6 +297,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                       initialValue: paramsAltaBaja.fechaBaja,
                                       hintText: '2021-01-01',
                                       maxLength: 10,
+                                      maxLines: 1,
                                       textAlign: TextAlign.left,
                                       title: 'Fecha Baja',
                                       inputFormatters: [
@@ -295,6 +309,7 @@ class _AltaBajaPracPageState extends State<AltaBajaPracPage> {
                                       keyboardType: TextInputType.text),
                                   LabelWithFormFieldInitial(
                                       maxLength: 6,
+                                      maxLines: 1,
                                       textAlign: TextAlign.left,
                                       title: 'Codigo Alta',
                                       onSaved: (value) {

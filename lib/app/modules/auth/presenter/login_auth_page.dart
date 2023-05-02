@@ -72,9 +72,10 @@ class _AuthPageState extends State<AuthPage> with WindowListener {
               preferences.setInt(
                   'expiresIn', state.loginResponseEntity.expiresIn);
               preferences.setString('email', state.loginResponseEntity.email);
-              share.then((pref) {
+             // share.then((pref) {
                 Modular.to.navigate('/start/agenda/');
-              });
+           // }
+            //  );
             }
           }
         },

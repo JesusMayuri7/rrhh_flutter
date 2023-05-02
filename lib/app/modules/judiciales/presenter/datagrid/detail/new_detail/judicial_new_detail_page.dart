@@ -21,6 +21,13 @@ class JudicialNewDetailPage extends StatefulWidget {
 }
 
 class _JudicialNewDetailPageState extends State<JudicialNewDetailPage> {
+
+
+  @override
+  void initState() {    
+    super.initState();    
+  }
+
   JudicialDetailCubit judicialDetailCubit = Modular.get<JudicialDetailCubit>();
 
   TextEditingController detalleController = TextEditingController();
@@ -33,12 +40,13 @@ class _JudicialNewDetailPageState extends State<JudicialNewDetailPage> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
-          child: Column(
-        children: [
+        child: Column(
+          children: [
           Text('Agregar seguimiento de Registro Judicial'),
           LabelWithFormFieldInitial(
               keyboardType: TextInputType.text,
               maxLength: 100,
+              maxLines: 1,
               textAlign: TextAlign.end,
               title: 'Detalle',
               hintText: 'detalle',
@@ -46,6 +54,7 @@ class _JudicialNewDetailPageState extends State<JudicialNewDetailPage> {
           LabelWithFormFieldInitial(
               keyboardType: TextInputType.text,
               maxLength: 100,
+              maxLines: 1,
               textAlign: TextAlign.end,
               title: 'N° Expediente',
               hintText: 'N° Expediente',
@@ -54,6 +63,7 @@ class _JudicialNewDetailPageState extends State<JudicialNewDetailPage> {
           LabelWithFormFieldInitial(
               keyboardType: TextInputType.text,
               maxLength: 100,
+              maxLines: 1,
               textAlign: TextAlign.end,
               title: 'Fecha Expediente',
               hintText: 'fecha exp.',
@@ -62,6 +72,7 @@ class _JudicialNewDetailPageState extends State<JudicialNewDetailPage> {
           LabelWithFormFieldInitial(
               keyboardType: TextInputType.text,
               maxLength: 100,
+              maxLines: 1,
               textAlign: TextAlign.end,
               title: 'N° Documento',
               hintText: 'N° Documento',

@@ -390,6 +390,7 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                           initialValue:
                                               paramsAltaBaja.documentoOrh,
                                           maxLength: 100,
+                                          maxLines: 1,
                                           textAlign: TextAlign.center,
                                           title: 'N° Doc. ORH',
                                           keyboardType: TextInputType.text,
@@ -410,6 +411,7 @@ class _NewJudicialPageState extends State<NewJudicialPage> {
                                           initialValue: paramsAltaBaja
                                               .nroExpedienteJudicial,
                                           maxLength: 10,
+                                          maxLines: 1,
                                           textAlign: TextAlign.right,
                                           title: 'N° Exp. Judicial',
                                           keyboardType: TextInputType.text,

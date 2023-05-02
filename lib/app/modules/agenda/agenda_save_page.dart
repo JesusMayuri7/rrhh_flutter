@@ -25,7 +25,7 @@ class AgendaSavePage extends StatefulWidget {
 
 class _AgendaSavePageState extends State<AgendaSavePage> {
   AgendaParams? agendaParams;
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final blocListAgenda = Modular.get<AgendaListCubit>();
 
   @override
@@ -65,6 +65,7 @@ class _AgendaSavePageState extends State<AgendaSavePage> {
                 LabelWithFormFieldInitial(
                   initialValue: agendaParams!.titulo,
                   maxLength: 100,
+                  maxLines: 2,
                   textAlign: TextAlign.left,
                   title: 'Titulo',
                   keyboardType: TextInputType.text,
@@ -75,7 +76,7 @@ class _AgendaSavePageState extends State<AgendaSavePage> {
                 SizedBox(height: 5),
                 LabelWithFormFieldInitial(
                   initialValue: agendaParams!.texto,
-                  maxLines: 8,
+                  maxLines: null,
                   maxLength: 800,
                   textAlign: TextAlign.left,
                   title: 'Texto',
@@ -89,6 +90,7 @@ class _AgendaSavePageState extends State<AgendaSavePage> {
                 LabelWithFormFieldInitial(
                     initialValue: agendaParams!.fecha,
                     maxLength: 50,
+                    maxLines: 1,
                     textAlign: TextAlign.left,
                     title: 'Fecha',
                     keyboardType: TextInputType.text,

@@ -54,8 +54,8 @@ class JudicialDetailPage extends StatelessWidget {
         if (state is JudicialDetailLoaded) {
           this.judicialId = state.judicialId;
           this.judicialDetailDataSource?.clearFilters();
-          judicialDetailDataSource = JudicialDetailDataSource(
-              contextUp: context, detailJudicial: state.judicialDetailList);
+          //judicialDetailDataSource = JudicialDetailDataSource(contextUp: context, detailJudicial: state.judicialDetailList);
+          this.judicialDetailDataSource?.detailJudicial =  state.judicialDetailList;
           this.judicialDetailDataSource?.buildDataGridRows();
           this.judicialDetailDataSource?.updateDataGrid();
         }

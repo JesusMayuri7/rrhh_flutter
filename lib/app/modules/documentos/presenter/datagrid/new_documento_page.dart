@@ -111,6 +111,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                                             initialValue:
                                                 widget.documentoEntity.tipo,
                                             maxLength: 50,
+                                            maxLines: 1,
                                             textAlign: TextAlign.center,
                                             title: 'Tipo',
                                             onSaved: (value) {
@@ -124,6 +125,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                                           initialValue:
                                               widget.documentoEntity.estado,
                                           maxLength: 50,
+                                          maxLines: 1,
                                           textAlign: TextAlign.center,
                                           title: 'Estado',
                                           keyboardType: TextInputType.text,
@@ -181,6 +183,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                                             initialValue: widget
                                                 .documentoEntity.numeroPvn,
                                             maxLength: 50,
+                                            maxLines: 1,
                                             textAlign: TextAlign.center,
                                             title: 'N° Doc. PVN',
                                             keyboardType: TextInputType.text,
@@ -215,6 +218,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                                           initialValue: widget
                                               .documentoEntity.expedientePvn,
                                           maxLength: 15,
+                                          maxLines: 1,
                                           textAlign: TextAlign.center,
                                           title: 'Exp. PVN',
                                           keyboardType: TextInputType.text,
@@ -230,6 +234,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                                           initialValue: widget
                                               .documentoEntity.expedienteMtc,
                                           maxLength: 15,
+                                          maxLines: 1,
                                           textAlign: TextAlign.center,
                                           title: 'Exp. MTC',
                                           keyboardType: TextInputType.text,
@@ -245,6 +250,7 @@ class _NewDocumentoPageState extends State<NewDocumentoPage> {
                                           initialValue: widget
                                               .documentoEntity.expedienteMef,
                                           maxLength: 15,
+                                          maxLines: 1,
                                           textAlign: TextAlign.center,
                                           title: 'Exp. MEF',
                                           keyboardType: TextInputType.text,
