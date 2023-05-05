@@ -1,33 +1,37 @@
 import 'dart:convert';
 
-import '../domain/auth_response_entity.dart';
+import 'package:rrhh_clean/core/domain/entities/session_entity.dart';
 
 LoginResponseModel loginResponseModelFromJson(String str) =>
     LoginResponseModel.fromJson(json.decode(str));
 
-String loginResponseModelToJson(LoginResponseModel data) =>
-    json.encode(data.toJson());
-
-class LoginResponseModel extends LoginResponseEntity {
-  LoginResponseModel({
-    required bool status,
-    required String token,
-    required String message,
-    required int expiresIn,
-  }) : super(
-          status: status,
-          token: token,
-          message: message,
-          expiresIn: expiresIn,
-        );
+class LoginResponseModel extends SessionEntity {
+  LoginResponseModel(
+      {required bool status,
+      required String token,
+      required String message,
+      required int expiresIn,
+      required String anio,
+      required String email,
+      required bool isLogged})
+      : super(
+            status: status,
+            token: token,
+            message: message,
+            expiresIn: expiresIn,
+            anio: anio,
+            email: email,
+            isLogged: isLogged);
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       LoginResponseModel(
-        status: json["status"],
-        token: json["token"],
-        message: json["message"],
-        expiresIn: json["expires_in"],
-      );
+          status: json["status"],
+          token: json["token"],
+          message: json["message"],
+          anio: json["anio"] ?? '2023',
+          email: json["email"] ?? '',
+          isLogged: json["is_logged"] ?? true,
+          expiresIn: json["expires_in"] ?? 0);
 
   Map<String, dynamic> toJson() => {
         "status": status,

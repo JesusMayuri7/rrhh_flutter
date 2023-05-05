@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_module.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
+import 'package:rrhh_clean/app/app_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'modules/auth/domain/auth_response_entity.dart';
-import 'modules/auth/presenter/bloc/auth_bloc.dart';
+import '../core/domain/entities/session_entity.dart';
 
 class SplashPage extends StatefulWidget {
   final String title;
@@ -16,41 +17,23 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final auth = Modular.get<AuthBloc>();
+  //final appBloc = Modular.get<AppBloc>();
+  String? anioSelected;
 
   @override
   initState() {
     super.initState();
-    checkToken();
+    init();
   }
 
-  void checkToken() async {
+  Future<void> init() async {
     await Modular.isModuleReady<AppModule>();
-    final SharedPreferences preferences = Modular.get<SharedPreferences>();
-
-    final String token = preferences.getString('token') ?? '';
-    final String anio = preferences.getString('anio') ?? '';
-
-    final String message = preferences.getString('message') ?? '';
-    final bool status = preferences.getBool('status') ?? false;
-    final bool isLogged = preferences.getBool('isLogged') ?? false;
-    final int expiresIn = preferences.getInt('expiresIn') ?? 0;
-    final String email = preferences.getString('email') ?? '';
-    //return Future.value(true);
-
-    //if (auth.state.isLogged)
-    if (isLogged) {
-      auth.add(LoadPreferencesAuthEvent(
-          loginResponseEntity: LoginResponseEntity(
-              anio: anio,
-              expiresIn: expiresIn,
-              isLogged: isLogged,
-              message: message,
-              status: status,
-              token: token,
-              email: email)));
+    final appService = await Modular.get<AppService>();
+    if (appService.sessionEntity == null) {
+      print('enviando a login');
+      Modular.to.pushNamedAndRemoveUntil('/login/', (p0) => false);
     } else {
-      Modular.to.pushReplacementNamed('/login/');
+      Modular.to.pushReplacementNamed('/start/agenda/');
     }
   }
 
@@ -61,17 +44,11 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('splash page');
+    //print('estado 1' + appBloc.state.toString());
     return Scaffold(
-      body: BlocListener<AuthBloc, AuthState>(
-        bloc: this.auth,
-        listener: (context, state) {
-        if (state is SuccessAuthState)
-            Modular.to.pushReplacementNamed('/start/agenda/');
-        },
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-    );
+        body: Center(
+      child: CircularProgressIndicator(),
+    ));
   }
 }

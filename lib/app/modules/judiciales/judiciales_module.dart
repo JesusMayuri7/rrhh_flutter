@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/judiciales/data/datasource/i_judiciales_new_detail_datasource.dart';
 import 'package:rrhh_clean/app/modules/judiciales/presenter/datagrid/detail/cubit/judicial_detail_cubit.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 import 'cubit/judiciales_bloc.dart';
 
 import 'data/datasource/i_judiciales_init_datasource.dart';
@@ -26,8 +27,9 @@ class JudicialesModule extends Module {
     Bind.singleton((i) => JudicialesBloc(getJudicialesInitialUseCase: i())),
     Bind.lazySingleton((i) => JudicialesListBloc(judicialesListUseCase: i())),
     Bind.lazySingleton((i) => NewJudicialBloc(newJudicialUseCase: i())),
-    Bind.lazySingleton((i) => JudicialDetailCubit(judicialListBloc: i(),newJudicialDetailUseCase: i())),
-    //Bind.lazySingleton((i) => UpdateJudicialBloc()),    
+    Bind.lazySingleton((i) => JudicialDetailCubit(
+        judicialListBloc: i(), newJudicialDetailUseCase: i())),
+    //Bind.lazySingleton((i) => UpdateJudicialBloc()),
 
     //UseCase
     Bind((i) => GetJudicialesInitialUseCase(iJudicialesRepository: i())),
@@ -37,11 +39,10 @@ class JudicialesModule extends Module {
 
     //Repository
     Bind((i) => JudicialesRepositoryImpl(
-          iJudicialesInitialDatasource: i(),
-          iJudicialesListDataSource: i(),
-          iJudicialesNewDataSource: i(),
-          iJudicialesNewDetailDataSource: i()
-        )),
+        iJudicialesInitialDatasource: i(),
+        iJudicialesListDataSource: i(),
+        iJudicialesNewDataSource: i(),
+        iJudicialesNewDetailDataSource: i())),
 
     //Datasource
     // Bind.lazySingleton((i) => GetDataInitialDatasourceImpl(getAreasImpl: i(), getFuentesImpl: i(), getMetasImpl: i())),
@@ -54,6 +55,7 @@ class JudicialesModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MainJudicialesPage()),
+    ChildRoute('/',
+        child: (_, args) => MainJudicialesPage(), guards: [AppGuard()]),
   ];
 }

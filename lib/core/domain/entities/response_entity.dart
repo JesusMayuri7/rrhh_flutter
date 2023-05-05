@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 class ResponseEntity extends Equatable {
@@ -44,4 +45,7 @@ class ResponseEntity extends Equatable {
         isLoged: isLoged ?? this.isLoged,
         anio: anio ?? this.anio);
   }
+
+  @override
+  bool get stringify => true;
 }

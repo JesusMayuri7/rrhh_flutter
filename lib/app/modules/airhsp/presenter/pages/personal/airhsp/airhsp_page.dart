@@ -6,7 +6,6 @@ import 'package:rrhh_clean/app/modules/airhsp/presenter/bloc/conceptos_bloc/conc
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'widgets/text_field_search.dart';
-import '../conceptos/conceptos_page.dart';
 import '../conceptos/item_concepto_widget.dart';
 
 import '../widgets/text_field_total_plaza.dart';
@@ -48,23 +47,6 @@ class _AirhspPageState extends State<AirhspPage>
   dispose() {
     bloc.close();
     super.dispose();
-  }
-
-/*   listar() {
-    this
-        .bloc
-        .add(ListarEvent(ejecutora: '1078', tipoPersona: widget.tipoPersona));
-    //bloc.add(SelectedItemEvent(ejecutora: '1078',codPlaza: '000411', tipoPersona: widget.tipoPersona));
-  } */
-
-  Widget screenConceptos(
-      {required String codPlaza,
-      required String nombres,
-      required String tipoPersona}) {
-    return Expanded(
-      child: ConceptosPage(
-          codPlaza: codPlaza, nombres: nombres, tipoPersona: tipoPersona),
-    );
   }
 
   @override
@@ -139,8 +121,8 @@ class _AirhspPageState extends State<AirhspPage>
                       if (_state is ConceptosLoadedState)
                         ItemConceptoPage(
                             conceptos: _state.conceptos,
-                            codPlaza: '00000',
-                            nombres: 'NOMBRES')
+                            codPlaza: _state.codigoPlaza,
+                            nombres: _state.nombres)
                     ],
                   ),
                 );

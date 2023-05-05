@@ -292,3 +292,7 @@ class PracticanteModel extends PracticanteEntity {
         "modalidad": modalidad,
       };
 }
+
+
+
+

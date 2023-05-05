@@ -23,10 +23,10 @@ class LogoutAuthEvent extends AuthEvent {
 }
 
 class LoadPreferencesAuthEvent extends AuthEvent {
-  final LoginResponseEntity loginResponseEntity;
+  final SessionEntity sessionEntity;
   LoadPreferencesAuthEvent({
-    required this.loginResponseEntity,
+    required this.sessionEntity,
   });
   @override
-  List<Object> get props => [loginResponseEntity];
+  List<Object> get props => [sessionEntity];
 }

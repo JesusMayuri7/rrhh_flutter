@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_guard.dart';
 
 import 'data/repositories/certificados_repository_impl.dart';
 
@@ -43,6 +44,7 @@ class CertificadosModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MainCertificadoPage()),
+    ChildRoute('/',
+        child: (_, args) => MainCertificadoPage(), guards: [AppGuard()]),
   ];
 }

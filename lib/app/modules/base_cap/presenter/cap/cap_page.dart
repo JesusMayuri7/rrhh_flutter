@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 import 'listado_cap/listado_cap_page.dart';
@@ -22,8 +24,7 @@ class _HeadBaseCasPageState extends State<CapPage>
   }
 
   final ScrollController controller = ScrollController();
-  final String? anioSelected =
-      Modular.get<AuthBloc>().state.loginResponseEntity!.anio;
+  final String? anioSelected = Modular.get<AppService>().sessionEntity!.anio;
 
   String dropdownPresupuesto = 'TODOS';
   String dropdownEstado = 'TODOS';

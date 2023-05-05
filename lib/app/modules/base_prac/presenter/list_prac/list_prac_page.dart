@@ -1,7 +1,9 @@
-import 'package:fluent_ui/fluent_ui.dart' as f;
+import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/base_prac/domain/export_prac_use_case.dart';
 import 'package:rrhh_clean/app/modules/base_prac/presenter/list_prac/bloc/list_prac_bloc.dart';
@@ -29,8 +31,7 @@ class _ListPracPageState extends State<ListPracPage> {
   final textSearchController = TextEditingController();
 
   final bloc = Modular.get<ListPracBloc>();
-  final String? anioSelected =
-      Modular.get<AuthBloc>().state.loginResponseEntity?.anio;
+  final String? anioSelected = Modular.get<AppService>().sessionEntity?.anio;
 
   @override
   void initState() {
@@ -58,7 +59,7 @@ class _ListPracPageState extends State<ListPracPage> {
                 children: [
                   Row(
                     children: [
-                      f.Button(
+                      fluentUi.Button(
                           onPressed: () {
                             this.bloc.add(ListPracEvent(anio: anioSelected!));
                           },
@@ -67,10 +68,11 @@ class _ListPracPageState extends State<ListPracPage> {
                             style: TextStyle(fontSize: 12),
                           )),
                       SizedBox(width: 5.0),
-                      f.Button(
+                      fluentUi.Button(
                           onPressed: () {
                             this.bloc.add(ExportPracEvent(
                                 paramsPracCalcular: ParamsPracCalcular(
+                                    anio: anioSelected!,
                                     lista: (state is ListPracLoaded)
                                         ? state.listPracticanteOriginal
                                         : [],
@@ -107,19 +109,25 @@ class _ListPracPageState extends State<ListPracPage> {
                         },
                         decoration: InputDecoration(
                           hintText: 'Buscar',
-                          prefixIcon: textSearchController.text.length > 0
-                              ? Icon(Icons.close)
-                              : Icon(Icons.search_outlined),
+                          suffixIcon: textSearchController.text.length > 0
+                              ? IconButton(
+                              onPressed:() { 
+                                textSearchController.clear;                                                                   
+                                },
+                              icon: Icon(Icons.clear))
+                              : IconButton(
+                              onPressed: () => this.bloc.add(FilterPracEvent(textFilter: textSearchController.text)),
+                              icon: Icon(Icons.search_outlined)),
                           // set the prefix icon constraints
-                          prefixIconConstraints: BoxConstraints(
-                            minWidth: 25,
-                            minHeight: 25,
+                          suffixIconConstraints: BoxConstraints(
+                            minWidth: 16,
+                            minHeight: 16,
                           ),
                           border: OutlineInputBorder(),
                           isDense: true, // Added this
                           contentPadding: EdgeInsets.only(
                               left: 5, top: 12, bottom: 0), // Added this
-                        )),
+                        ),),
                   ),
                 ],
               ),

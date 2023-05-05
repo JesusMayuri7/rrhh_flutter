@@ -1,50 +1,44 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
+import 'package:rrhh_clean/core/data/models/response_model.dart';
 
-import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
-
-import 'package:rrhh_clean/core/errors/exceptions.dart';
-
+import '../domain/login_auth_usecase.dart';
 import '../data/auth_response_model.dart';
 import '../data/i_auth_core_datasource.dart';
+
+import 'package:rrhh_clean/core/errors/exceptions.dart';
 
 class AuthDioDataSourceImpl implements IAuthCoreDataSource {
   Uri url = Uri.http('rrhh.pvn.gob.pe', '/api/auth/login', {'q': '{http}'});
 
-  //final HttpClient http;
+  final IClientCustom httpCustom;
+  AuthDioDataSourceImpl({
+    required this.httpCustom,
+  });
 
   @override
   Future<LoginResponseModel> login(AuthCoreParams params) async {
-    Dio dio = Dio();
-
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      // Hook into the findProxy callback to set the client's proxy.
-      client.findProxy = (url) {
-        //return 'PROXY localhost:80';
-        return 'DIRECT';
-      };
-    };
-
     try {
-      var response = await dio.post(
-        url.toString(),
-        options: Options(headers: {
-          HttpHeaders.contentTypeHeader: "application/json",
-        }),
-        data: json.encode(params.toMap()),
-      );
+/*       var response = await this.dio.post(
+            url.toString(),
+            options: Options(headers: {
+              HttpHeaders.contentTypeHeader: "application/json",
+            }),
+            data: json.encode(params.toMap()),
+          ); */
 
-      Clipboard.setData(ClipboardData(text: response.data.toString()));
+      ResponseModel response = await httpCustom.request('POST', url.toString(),
+          json.encode(params.toMap()), (i) => responseFromJson(i));
+
+      // Clipboard.setData(ClipboardData(text: response.data.toString()));
 
       //var result = json.decode(response.data);
 
       //if (response.statusCode == 200)
-      return loginResponseModelFromJson(json.encode(response.data));
+      return loginResponseModelFromJson(response.data);
 
       // throw Exception('Error desconocido');
     } on SocketException {

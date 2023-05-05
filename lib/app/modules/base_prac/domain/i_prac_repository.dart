@@ -12,4 +12,6 @@ abstract class IPracRepository {
   Future<Either<Failure, ResponseModel>> altaBajaPrac(ParamsAltaBaja params);
   Future<Either<Failure, List<ResponseEntity>>> getDataInitial(String anio);
   Future<Either<Failure, ResponseModel>> updatedPrac(UpdatedPracParams params);
+  Future<Either<Failure, List<ResponseEntity>>> getPresupuestalPracRepository(String anio);
+  Future<Either<Failure, ResponseEntity>> getCertificadoPracRepository(String anio);
 }

@@ -134,8 +134,8 @@ class LiquidacionDetalleDataSource extends DataGridSource {
   }
 
   @override
-  void onCellSubmit(DataGridRow dataGridRow, RowColumnIndex rowColumnIndex,
-      GridColumn column) {
+  Future<void> onCellSubmit(DataGridRow dataGridRow,
+      RowColumnIndex rowColumnIndex, GridColumn column) async {
     final dynamic oldValue = dataGridRow
             .getCells()
             .firstWhereOrNull((DataGridCell dataGridCell) =>
@@ -200,14 +200,15 @@ class LiquidacionDetalleDataSource extends DataGridSource {
 
     return Container(
       padding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 2),
-      alignment:
-          isTextAlignRight==true ? Alignment.centerRight : Alignment.centerLeft,
+      alignment: isTextAlignRight == true
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
       child: TextField(
         style: TextStyle(fontSize: 12),
         textAlignVertical: TextAlignVertical.center,
         autofocus: true,
         controller: editingController..text = displayText,
-        textAlign: isTextAlignRight==true ? TextAlign.right : TextAlign.left,
+        textAlign: isTextAlignRight == true ? TextAlign.right : TextAlign.left,
         autocorrect: false,
         // maxLines: 1,
 

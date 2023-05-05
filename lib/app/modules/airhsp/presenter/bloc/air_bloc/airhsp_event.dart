@@ -1,7 +1,5 @@
-import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+part of 'airhsp_bloc.dart';
 
-@immutable
 abstract class AirhspEvent extends Equatable {
   const AirhspEvent();
   List<Object> get props => [];

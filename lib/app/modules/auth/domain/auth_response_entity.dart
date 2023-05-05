@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
-class LoginResponseEntity extends Equatable {
+class SessionEntityAuth extends Equatable {
   final bool status;
   final String token;
   final String message;
@@ -9,14 +9,15 @@ class LoginResponseEntity extends Equatable {
   final String anio;
   final bool isLogged;
   final String email;
-  LoginResponseEntity(
-      {this.status = false,
-      this.token = '',
-      this.message = '',
-      this.expiresIn = 0,
-      this.anio = '',
-      this.isLogged = false,
-      this.email = ''});
+  SessionEntityAuth({
+    required this.status,
+    required this.token,
+    required this.message,
+    required this.expiresIn,
+    required this.anio,
+    required this.isLogged,
+    required this.email,
+  });
 
   @override
   List<Object> get props {
@@ -31,7 +32,7 @@ class LoginResponseEntity extends Equatable {
     ];
   }
 
-  LoginResponseEntity copyWith({
+  SessionEntityAuth copyWith({
     bool? status,
     String? token,
     String? message,
@@ -40,7 +41,7 @@ class LoginResponseEntity extends Equatable {
     bool? isLogged,
     String? email,
   }) {
-    return LoginResponseEntity(
+    return SessionEntityAuth(
         status: status ?? this.status,
         token: token ?? this.token,
         message: message ?? this.message,

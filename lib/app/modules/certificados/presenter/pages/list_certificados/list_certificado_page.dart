@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 
 import '../../../domain/entities/certificado_entity.dart';
@@ -31,9 +33,7 @@ class _JsonDataSourceDataGridState extends State<ListCertificadoPage> {
   late DataGridController dataGridController;
   late CertififadosDataSource jsonDataGridSource;
   final bloc = Modular.get<ListCertificadoBloc>();
-  final anioSelected = (Modular.get<AuthBloc>().state as SuccessAuthState)
-      .loginResponseEntity
-      .anio;
+  final anioSelected = Modular.get<AppService>().sessionEntity!.anio;
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _JsonDataSourceDataGridState extends State<ListCertificadoPage> {
 
     if (bloc.state is LoadedListCertificadoState) {
       if ((bloc.state as LoadedListCertificadoState).listCertificadoOri.isEmpty)
-        this.bloc.add(GetListCertificadoEvent(anio: anioSelected ));
+        this.bloc.add(GetListCertificadoEvent(anio: anioSelected));
     }
   }
 

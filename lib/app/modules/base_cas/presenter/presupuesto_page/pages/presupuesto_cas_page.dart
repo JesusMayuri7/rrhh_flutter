@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
+import 'package:rrhh_clean/app/app_service.dart';
 import '../../../domain/entities/presupuesto_cas_entity.dart';
 import '../bloc/presupuesto_bloc.dart';
 import 'widgets/getColumnsPresupuesto.dart';
@@ -20,8 +22,8 @@ class PresupuestoCasPage extends StatefulWidget {
 
 class _PresupuestoCasPageState extends State<PresupuestoCasPage>
     with AutomaticKeepAliveClientMixin {
-  final String? anioSelected =
-      Modular.get<AuthBloc>().state.loginResponseEntity!.anio;
+  String? anioSelected;
+
   final bloc = Modular.get<PresupuestoBloc>();
   late PresupuestoCasDs _presupuestoCasDs;
   List<PresupuestoCasEntity> presupuestoCas = const [];
@@ -29,10 +31,17 @@ class _PresupuestoCasPageState extends State<PresupuestoCasPage>
   @override
   void initState() {
     super.initState();
+    init();
     _presupuestoCasDs = PresupuestoCasDs(presupuestoCas);
     _presupuestoCasDs.buildDataGridRows();
     _presupuestoCasDs.updateDataGrid();
+
     this.bloc.add(PresupuestoCasEventLoading(anio: this.anioSelected!));
+  }
+
+  Future<void> init() async {
+    final appBloc = await Modular.get<AppBloc>();
+    anioSelected = appBloc.state.sessionEntity!.anio;
   }
 
   @override

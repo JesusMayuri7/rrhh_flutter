@@ -89,7 +89,7 @@ class ListPracticanteDataSource extends DataGridSource {
       RowColumnIndex rowColumnIndex,
       String summaryValue) {
     return Container(
-      padding: EdgeInsets.all(0.0),
+      padding: EdgeInsets.all(2.0),
       child: Text(summaryValue),
     );
   }
@@ -274,8 +274,8 @@ class ListPracticanteDataSource extends DataGridSource {
   }
 
   @override
-  void onCellSubmit(DataGridRow dataGridRow, RowColumnIndex rowColumnIndex,
-      GridColumn column) {
+  Future<void> onCellSubmit(DataGridRow dataGridRow,
+      RowColumnIndex rowColumnIndex, GridColumn column) async {
     final dynamic oldValue = dataGridRow
             .getCells()
             .firstWhereOrNull((DataGridCell dataGridCell) =>
@@ -302,6 +302,7 @@ class ListPracticanteDataSource extends DataGridSource {
 
       //buildDataGridRows();
     }
+
     newCellValue = null;
   }
 }

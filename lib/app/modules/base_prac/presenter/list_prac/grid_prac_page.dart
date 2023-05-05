@@ -52,43 +52,42 @@ class GridPracPage extends StatelessWidget {
                   PointerDeviceKind.mouse,
                 }),
                 child: SfDataGrid(
-                    key: this.keyGrid,
-                    columnSizer: _customColumnSizer,
-                    footer: Container(),
-                    onCellSecondaryTap: (DataGridCellTapDetails details) {
-                      if (details.rowColumnIndex.rowIndex > 0) {
-                        buildShowMenu(context, details);
-                      }
-                    },
-                    footerHeight: 5,
-                    highlightRowOnHover: true,
-                    tableSummaryRows: [
-                      GridTableSummaryRow(
-                          showSummaryInRow: false,
-                          columns: [
-                            GridSummaryColumn(
-                                name: 'Sum',
-                                columnName: 'codigo_plaza',
-                                summaryType: GridSummaryType.count)
-                          ],
-                          position: GridTableSummaryRowPosition.bottom)
-                    ],
-                    footerFrozenRowsCount: 0,
-                    footerFrozenColumnsCount: 1,
-                    frozenColumnsCount: 3,
-                    source: listPracticanteDataSource,
-                    headerRowHeight: 21,
-                    rowHeight: 18,
-                    isScrollbarAlwaysShown: true,
-                    gridLinesVisibility: GridLinesVisibility.both,
-                    headerGridLinesVisibility: GridLinesVisibility.both,
-                    //allowSorting: true,
-                    allowFiltering: true,
-                    selectionMode: SelectionMode.single,
-                    navigationMode: GridNavigationMode.cell,
-                    allowEditing: true,
-                    editingGestureType: editingGestureType,
-                    columns: this.columns),
+                  key: this.keyGrid,
+                  columnSizer: _customColumnSizer,
+                  onCellSecondaryTap: (DataGridCellTapDetails details) {
+                    if (details.rowColumnIndex.rowIndex > 0) {
+                      buildShowMenu(context, details);
+                    }
+                  },
+                  highlightRowOnHover: true,
+                  tableSummaryRows: [
+                    GridTableSummaryRow(
+                        showSummaryInRow: false,
+                        columns: [
+                          GridSummaryColumn(
+                              name: 'Sum',
+                              columnName: 'codigo_plaza',
+                              summaryType: GridSummaryType.count)
+                        ],
+                        position: GridTableSummaryRowPosition.bottom)
+                  ],
+
+                  footerFrozenColumnsCount: 1,
+                  frozenColumnsCount: 3,
+                  source: listPracticanteDataSource,
+                  headerRowHeight: 22,
+                  rowHeight: 20,
+                  isScrollbarAlwaysShown: true,
+                  gridLinesVisibility: GridLinesVisibility.both,
+                  headerGridLinesVisibility: GridLinesVisibility.both,
+                  //allowSorting: true,
+                  allowFiltering: true,
+                  selectionMode: SelectionMode.single,
+                  navigationMode: GridNavigationMode.cell,
+                  allowEditing: true,
+                  editingGestureType: editingGestureType,
+                  columns: this.columns,
+                ),
               ),
             ),
           ),

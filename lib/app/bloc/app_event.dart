@@ -1,14 +1,31 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
-@immutable
-abstract class AppEvent extends Equatable {}
+import 'package:rrhh_clean/core/domain/entities/session_entity.dart';
 
-class AppAnioSelectEvent extends AppEvent {
-  final String anioSelected;
+abstract class AppEvent extends Equatable {
+  final SessionEntity? sessionEntity;
+  AppEvent({
+    required this.sessionEntity,
+  });
+}
 
-  AppAnioSelectEvent(this.anioSelected);
+class AppLogingEvent extends AppEvent {
+  AppLogingEvent({required super.sessionEntity});
 
   @override
-  List<Object?> get props => [anioSelected];
+  List<Object?> get props => [sessionEntity];
+}
+
+class AppInitEvent extends AppEvent {
+  AppInitEvent() : super(sessionEntity: null);
+
+  @override
+  List<Object?> get props => [sessionEntity];
+}
+
+class AppLogoutEvent extends AppEvent {
+  AppLogoutEvent() : super(sessionEntity: null);
+  @override
+  List<Object?> get props => [sessionEntity];
 }

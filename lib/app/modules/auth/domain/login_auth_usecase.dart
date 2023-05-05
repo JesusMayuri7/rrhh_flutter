@@ -1,20 +1,19 @@
 import 'package:dartz/dartz.dart';
+import 'package:rrhh_clean/core/domain/entities/session_entity.dart';
 
 import 'package:rrhh_clean/core/domain/use_cases/usecase.dart';
 import 'package:rrhh_clean/core/errors/failure.dart';
 
 import 'auth_repository.dart';
-import 'auth_response_entity.dart';
 
-class LoginAuthUseCase implements UseCase<LoginResponseEntity, AuthCoreParams> {
+class LoginAuthUseCase implements UseCase<SessionEntity, AuthCoreParams> {
   final IAuthReposity iAuthRepository;
   LoginAuthUseCase({
     required this.iAuthRepository,
   });
 
   @override
-  Future<Either<Failure, LoginResponseEntity>> call(
-      AuthCoreParams params) async {
+  Future<Either<Failure, SessionEntity>> call(AuthCoreParams params) async {
     return await this.iAuthRepository.loginEmailPassword(params);
   }
 }

@@ -2,6 +2,8 @@ import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import 'package:rrhh_clean/app/modules/liquidacion/bloc/liquidacion_bloc.dart';
 
@@ -19,16 +21,14 @@ class MainLiquidacionPage extends StatefulWidget {
 
 class MainLiquidacionPageState extends State<MainLiquidacionPage> {
   final liquidacionBloc = Modular.get<LiquidacionBloc>();
-  final anioSelected = (Modular.get<AuthBloc>().state as SuccessAuthState)
-      .loginResponseEntity
-      .anio;
+  final anioSelected = Modular.get<AppService>().sessionEntity!.anio;
 
   @override
   void initState() {
+    super.initState();
     if (this.liquidacionBloc.state is LiquidacionInitalState) {
       this.liquidacionBloc.add(LiquidacionDataLoadedEvent(anio: anioSelected));
     }
-    super.initState();
   }
 
   @override

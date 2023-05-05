@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:window_manager/window_manager.dart';
@@ -9,6 +10,7 @@ import 'app/app_widget.dart';
 import 'core/uitls/device_info.dart';
 
 void main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   if (DeviceInfo.isDesktop) {
     await WindowManager.instance.ensureInitialized();

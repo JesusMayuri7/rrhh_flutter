@@ -1,66 +1,66 @@
 import 'dart:convert';
 
+import 'package:dson_adapter/dson_adapter.dart';
+
 import '../../domain/entities/presupuesto_entity.dart';
 
 List<PresupuestoModel> presupuestoEntityFromJson(String str) {
   List<dynamic> presupuestoCasJson = json.decode(str);
   return List<PresupuestoModel>.from(
-      (presupuestoCasJson).map((x) => PresupuestoModel.fromJson(x)));
+      (presupuestoCasJson).map((x) { 
+        return PresupuestoModel.fromJson(x); } ) );
 }
+
+List<PresupuestoModel> presupuestoModelFromJsonDSON(dynamic str) =>
+    List<PresupuestoModel>.from(
+        (str).map((x) { 
+          print(x.toString());
+          final result = PresupuestoModel.fromJson(x);
+          print(result.toString());
+          return result;
+           }));
 
 String presupuestoEntityToJson(List<PresupuestoModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class PresupuestoModel extends PresupuestoEntity {
   PresupuestoModel({
-    required int anoEje,
-    required String fuente,
-    required String producto,
-    required String meta,
-    required String especifica3,
-    required String subgenerica,
-    required String dscClasificadorExt,
-    required double pia,
-    required double pim,
-    required double certificado,
-    required double devengado,
-    required double enero,
-    required double febrero,
-    required double marzo,
-    required double abril,
-    required double mayo,
-    required double junio,
-    required double julio,
-    required double agosto,
-    required double setiembre,
-    required double octubre,
-    required double noviembre,
-    required double diciembre,
-  }) : super(
-          anoEje: anoEje,
-          fuente: fuente,
-          producto: producto,
-          meta: meta,
-          especifica3: especifica3,
-          subgenerica: subgenerica,
-          dscClasificadorExt: dscClasificadorExt,
-          pia: pia,
-          pim: pim,
-          certificado: certificado,
-          devengado: devengado,
-          enero: enero,
-          febrero: febrero,
-          marzo: marzo,
-          abril: abril,
-          mayo: mayo,
-          junio: junio,
-          julio: julio,
-          agosto: agosto,
-          setiembre: setiembre,
-          octubre: octubre,
-          noviembre: noviembre,
-          diciembre: diciembre,
-        );
+    required super.anoEje,
+    required super.fuente,
+    required super.producto,
+    required super.meta,
+    required super.especifica3,
+    required super.subgenerica,
+    required super.dscClasificadorExt,
+    required super.pia,
+    required super.pim,
+    required super.certificado,
+    required super.devengado,
+    required super.enero,
+    required super.febrero,
+    required super.marzo,
+    required super.abril,
+    required super.mayo,
+    required super.junio,
+    required super.julio,
+    required super.agosto,
+    required super.setiembre,
+    required super.octubre,
+    required super.noviembre,
+    required super.diciembre,
+  });
+
+  factory PresupuestoModel.fromJsonDSON({
+    required dynamic json,
+  }) {
+    return DSON().fromJson(json, PresupuestoModel.new, aliases: {
+      PresupuestoModel: {
+        'anoEje': 'ano_eje',
+        'especifica3': 'clasificador',
+        'dscClasificadorExt': 'dsc_clasificador_ext',        
+      }
+    });
+  }      
 
   factory PresupuestoModel.fromJson(Map<String, dynamic> json) =>
       PresupuestoModel(
@@ -115,3 +115,7 @@ class PresupuestoModel extends PresupuestoEntity {
         "diciembre": diciembre.toDouble(),
       };
 }
+
+
+
+

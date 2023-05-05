@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../domain/entities/airhsp_entity.dart';
-
-import '../../../bloc/conceptos_bloc/conceptos_bloc.dart';
+import 'package:rrhh_clean/app/modules/airhsp/domain/entities/airhsp_entity.dart';
+import 'package:rrhh_clean/app/modules/airhsp/presenter/bloc/conceptos_bloc/conceptos_bloc.dart';
 
 import 'item_list_widget.dart';
 

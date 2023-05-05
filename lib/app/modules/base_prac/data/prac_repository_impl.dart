@@ -1,30 +1,35 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
-
 import 'package:rrhh_clean/app/modules/base_prac/data/i_alta_baja_prac_datasource.dart';
 import 'package:rrhh_clean/app/modules/base_prac/data/i_listar_prac_datasource.dart';
 import 'package:rrhh_clean/app/modules/base_prac/data/i_updated_prac_datasource.dart';
 import 'package:rrhh_clean/app/modules/base_prac/domain/alta_baja_use_case.dart';
 import 'package:rrhh_clean/app/modules/base_prac/domain/i_prac_repository.dart';
 import 'package:rrhh_clean/app/modules/base_prac/domain/practicante_entity.dart';
-
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 import 'package:rrhh_clean/core/errors/failure.dart';
 
+import 'i_certificado_prac_datasource.dart';
 import 'i_get_data_initial_prac_datasource.dart';
+import 'i_presupuestal_prac_datasource.dart';
 
 class PracRepositoryImpl implements IPracRepository {
   final IListarPracDataSource iPracDataSource;
   final IAltaBajaPracDataSource iAltaBajaPracDataSource;
   final IGetDataInitialPracDatasource iGetDataInitialPracDatasource;
   final IUpdatedPracDataSource iUpdatedPracDataSource;
+  final IPresupuestalPracDatasource iPresupuestalPracDatasource;
+  final ICertificadoPracDatasource iCertificadoPracDatasource;
 
   PracRepositoryImpl({
     required this.iPracDataSource,
     required this.iAltaBajaPracDataSource,
     required this.iGetDataInitialPracDatasource,
     required this.iUpdatedPracDataSource,
+    required this.iPresupuestalPracDatasource,
+    required this.iCertificadoPracDatasource,
   });
 
   @override
@@ -65,6 +70,26 @@ class PracRepositoryImpl implements IPracRepository {
   Future<Either<Failure, ResponseModel>> updatedPrac(params) async {
     try {
       final result = await this.iUpdatedPracDataSource.updatedPrac(params);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(Error(e.message));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, List<ResponseEntity>>> getPresupuestalPracRepository(String anio) async {
+    try {
+      final result = await this.iPresupuestalPracDatasource.getPresupuestalPrac(anio);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(Error(e.message));
+    }
+  }
+  
+  @override
+  Future<Either<Failure, ResponseEntity>> getCertificadoPracRepository(String anio) async {
+    try {
+      final result = await this.iCertificadoPracDatasource.getCertificadoPrac(anio);
       return Right(result);
     } on ServerException catch (e) {
       return Left(Error(e.message));

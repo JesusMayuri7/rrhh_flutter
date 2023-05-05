@@ -21,9 +21,6 @@ class NewSubsidioDevolucionDatasourceImpl
   @override
   Future<SubsidioDevolucionModel> newSubsidioDevolucion(
       ParamsNewSubsidio params) async {
-    //final _state = Modular.get<AuthBloc>();
-    //params.anio = int.parse((_state as SuccessAuthState).anio);
-
     try {
       var response = await clientCustom.request('POST', url.toString(),
           jsonEncode(params.toMap()), (i) => responseFromJson(i));

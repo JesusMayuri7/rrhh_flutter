@@ -1,21 +1,38 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class AppState extends Equatable {}
+import 'package:rrhh_clean/core/domain/entities/session_entity.dart';
 
-class InitialAppState extends AppState {
-  @override
-  List<Object?> get props => [];
-}
-
-class AppAnioSelectedState extends AppState {
-  final String anioSelected;
-  final bool isLogged;
-
-  AppAnioSelectedState({
-    required this.anioSelected,
-    this.isLogged = false,
+abstract class AppState extends Equatable {
+  final SessionEntity? sessionEntity;
+  AppState({
+    this.sessionEntity,
   });
 
   @override
-  List<Object?> get props => [anioSelected, this.isLogged];
+  bool get stringify => true;
+}
+
+class InitialAppState extends AppState {
+  InitialAppState({
+    required super.sessionEntity,
+  });
+
+  @override
+  List<Object> get props => [sessionEntity!];
+}
+
+class AppLoggedState extends AppState {
+  AppLoggedState({required super.sessionEntity});
+
+  @override
+  List<Object> get props => [sessionEntity!];
+}
+
+class AppLogoutState extends AppState {
+  AppLogoutState({required super.sessionEntity});
+
+  @override
+  List<Object> get props => [sessionEntity!];
 }

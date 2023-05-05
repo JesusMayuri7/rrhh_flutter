@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
+import 'package:rrhh_clean/app/app_service.dart';
+import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/modules/subsidio/bloc/subsidio_bloc.dart';
 
 import 'package:rrhh_clean/app/modules/subsidio/presenter/subsidio_devolucion_page.dart';
@@ -10,15 +11,13 @@ import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 class MainSubsidioPage extends StatelessWidget {
   MainSubsidioPage({Key? key}) : super(key: key);
 
+  final appService = Modular.get<AppService>();
   final blocSubsidio = Modular.get<SubsidioBloc>();
-  final String anioSelected =
-      (Modular.get<AuthBloc>().state as SuccessAuthState)
-          .loginResponseEntity
-          .anio;
 
   @override
   Widget build(BuildContext context) {
-    this.blocSubsidio.add(SubsidioDataInitialLoad(anio: this.anioSelected));
+    final String anioSelected = appService.sessionEntity!.anio;
+    this.blocSubsidio.add(SubsidioDataInitialLoad(anio: anioSelected));
     return BlocConsumer<SubsidioBloc, SubsidioState>(
       listener: (context, state) {
         if (state is SubsidioError) {
