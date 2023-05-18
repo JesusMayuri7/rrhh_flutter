@@ -21,7 +21,7 @@ class RequerimientoDetalleEntity extends Equatable {
   final int areaId;
   final String descArea;
   final int id;
-  final String fuenteId;
+  final int fuenteId;
   final String descFuente;
   final int metaId;
   final String descMeta;
@@ -42,4 +42,30 @@ class RequerimientoDetalleEntity extends Equatable {
 
   @override
   bool get stringify => true;
+
+  RequerimientoDetalleEntity copyWith({
+    String? cargo,
+    num? monto,
+    int? cantidad,
+    int? areaId,
+    String? descArea,
+    int? id,
+    int? fuenteId,
+    String? descFuente,
+    int? metaId,
+    String? descMeta,
+  }) {
+    return RequerimientoDetalleEntity(
+      cargo: cargo ?? this.cargo,
+      monto: monto ?? this.monto,
+      cantidad: cantidad ?? this.cantidad,
+      areaId: areaId ?? this.areaId,
+      descArea: descArea ?? this.descArea,
+      id: id ?? this.id,
+      fuenteId: fuenteId ?? this.fuenteId,
+      descFuente: descFuente ?? this.descFuente,
+      metaId: metaId ?? this.metaId,
+      descMeta: descMeta ?? this.descMeta,
+    );
+  }
 }

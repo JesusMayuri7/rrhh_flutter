@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:rrhh_clean/app/modules/airhsp/domain/entities/airhsp_presupuesto_entity.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 
 import '../../../../../core/errors/failure.dart';

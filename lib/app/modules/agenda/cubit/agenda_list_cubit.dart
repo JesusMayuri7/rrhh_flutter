@@ -44,7 +44,8 @@ class AgendaListCubit extends Cubit<AgendaListState> {
 
   save(AgendaParams agendaParams) async {
     var response = await this.agendaSaveUseCase(agendaParams);
-    emit(response.fold((l) => AgendaListError(message: l.toString()), (r) {
+    emit(response.fold((l) { 
+      return AgendaListError(message: l.toString()); }, (r) {
       AgendaEntity agendaEntity = r.data as AgendaEntity;
 
       if (state is AgendaListLoaded) {

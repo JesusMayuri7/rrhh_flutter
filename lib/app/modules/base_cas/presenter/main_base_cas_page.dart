@@ -19,8 +19,7 @@ class _HomeState extends State<MainBaseCasPage> {
         controller: pageViewController,
         onPageChanged: (a) => _selectedIndex,
         children: [
-          BaseCasPage(),
-          
+          BaseCasPage(),          
           //PresupuestoCasPage(),
           //ResumenCasPage(),
           //AirhspPage(tipoPersona: '6'),

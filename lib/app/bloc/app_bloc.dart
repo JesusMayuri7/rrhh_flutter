@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
 import 'package:rrhh_clean/core/domain/entities/session_entity.dart';
-import 'package:rrhh_clean/core/presenter/logout_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_event.dart';

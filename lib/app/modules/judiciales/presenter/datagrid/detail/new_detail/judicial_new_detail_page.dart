@@ -3,7 +3,6 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/judiciales/domain/new_judicial_detail_use_case.dart';
 
-import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field.dart';
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
 
 import '../cubit/judicial_detail_cubit.dart';

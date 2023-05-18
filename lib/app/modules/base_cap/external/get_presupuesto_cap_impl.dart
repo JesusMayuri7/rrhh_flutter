@@ -4,10 +4,11 @@ import 'package:rrhh_clean/app/modules/base_cap/data/datasource/i_presupuesto_ca
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 
+import '../data/datasource/i_certificado_cap_datasource.dart';
 import '../data/datasource/i_pim_cap_datasource.dart';
 
 class GetPresupuestoCapDatasourceImpl implements IPresupuestoCapDatasource {
-  final IPimCapDatasource getCertificadoCapDatasourceImpl;
+  final ICertificadoCapDatasource getCertificadoCapDatasourceImpl;
   final IPimCapDatasource getPimCapDatasourceImpl;
 
   GetPresupuestoCapDatasourceImpl({
@@ -19,7 +20,7 @@ class GetPresupuestoCapDatasourceImpl implements IPresupuestoCapDatasource {
   Future<List<ResponseModel>> getPresupuestoCap(String anio) async {
     try {
       var responseCertificado =
-          this.getCertificadoCapDatasourceImpl.getPimCap(anio);
+          this.getCertificadoCapDatasourceImpl.getCertificadoCap(anio);
 
       var responsePim = this.getPimCapDatasourceImpl.getPimCap(anio);
 

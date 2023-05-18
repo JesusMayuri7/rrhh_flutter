@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_module.dart';
-import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/app_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../core/domain/entities/session_entity.dart';
 
 class SplashPage extends StatefulWidget {
   final String title;

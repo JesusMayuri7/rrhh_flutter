@@ -44,44 +44,49 @@ class _DropdownPresupuestalState<T> extends State<DropdownPresupuestal<T>> {
         hint: Text(widget.hint,
             style: TextStyle(fontSize: 11), overflow: TextOverflow.ellipsis),
         //itemHighlightColor: Colors.blue,
-        itemSplashColor: Colors.blue,
-        dropdownDecoration:
-            BoxDecoration(color: Color.fromARGB(219, 255, 250, 250)),
+        //itemSplashColor: Colors.blue,
+        //dropdownDecoration:            BoxDecoration(color: Color.fromARGB(219, 255, 250, 250)),
         //barrierColor: Colors.red,
-        dropdownMaxHeight: 350,
-        dropdownWidth: widget.dropdownWidth,
+        //dropdownMaxHeight: 350,
+        //dropdownWidth: widget.dropdownWidth,
         isExpanded: true,
         autofocus: true,
-        itemHeight: 30,
+        //itemHeight: 30,
         value: widget.value,
-        offset: const Offset(0, 0),
+        //offset: const Offset(0, 0),
         onChanged: widget.onChanged,
         items: widget.dropDownMenuItems,
-        searchController: textEditingController,
+        //searchController: textEditingController,
         //value: widget.value,
-        searchInnerWidget: Padding(
-          padding: const EdgeInsets.only(
-            top: 8,
-            bottom: 4,
-            right: 8,
-            left: 8,
-          ),
-          child: TextFormField(
-            controller: textEditingController,
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 8,
+dropdownSearchData: DropdownSearchData(
+            searchController: textEditingController,
+            searchInnerWidgetHeight: 50,
+            searchInnerWidget: Container(
+              height: 50,
+              padding: const EdgeInsets.only(
+                top: 8,
+                bottom: 4,
+                right: 8,
+                left: 8,
               ),
-              hintText: 'Buscar certificado',
-              hintStyle: const TextStyle(fontSize: 12),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+              child: TextFormField(
+                expands: true,
+                maxLines: null,
+                controller: textEditingController,
+                decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
+                  hintText: 'Search for an item...',
+                  hintStyle: const TextStyle(fontSize: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
         searchMatchFn: (item, searchValue) {
           return (item.value
               .toString()
@@ -89,12 +94,13 @@ class _DropdownPresupuestalState<T> extends State<DropdownPresupuestal<T>> {
               .contains(searchValue.toUpperCase()));
         },
         //This to clear the search value when you close the menu
-        onMenuStateChange: (isOpen) {
-          if (!isOpen) {
-            textEditingController.clear();
-          }
-        },
+
       ),
-    );
+      onMenuStateChange: (isOpen) {
+            if (!isOpen) {
+              textEditingController.clear();
+            }
+          },
+    ));
   }
 }

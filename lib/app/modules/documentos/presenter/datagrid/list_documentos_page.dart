@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_service.dart';
-import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_datagrid_export/export.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' hide Column, Row;
@@ -11,7 +10,6 @@ import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
 
 import 'package:rrhh_clean/app/modules/documentos/presenter/bloc/list/documentos_list_bloc.dart';
-import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 
 import '../../domain/documento_entity.dart';
 import 'getColumnsListDocumentos.dart';

@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.1
 
 environment:
-  sdk: ">=2.17.0-0 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:  
   excel: ^2.0.1
@@ -31,7 +31,6 @@ dependencies:
   syncfusion_flutter_charts: ^21.1.38
   syncfusion_flutter_datagrid_export: ^21.1.38
   syncfusion_flutter_pdf: ^21.1.38
-  pluto_grid: ^5.4.9
   shared_preferences: ^2.1.0
   #after_layout: ^1.0.7+2
   dartz: ^0.10.1
@@ -40,7 +39,7 @@ dependencies:
   #dio: ^4.0.6
   dio: ^5.1.1
   xml: ^6.2.2
-  intl: ^0.17.0
+  intl: ^0.18.0
   flutter_layout_grid: ^2.0.1
   path_provider: ^2.0.11
   path_provider_windows: ^2.0.6
@@ -48,14 +47,14 @@ dependencies:
   filepicker_windows: ^2.0.2
   mask_text_input_formatter: ^2.3.0  
   collection: ^1.17.0
-  fluent_ui: ^4.4.1
+  fluent_ui: ^4.6.1
   contained_tab_bar_view: ^0.8.0
   window_manager: ^0.3.0
   flutter_dotenv: ^5.0.2    
   motion_toast: ^2.6.4  
   mime: ^1.0.2
   auto_divider: ^1.0.0
-  dropdown_button2: ^1.9.2
+  dropdown_button2: ^2.1.2
   dson_adapter: ^1.2.0+2
   flutter_icons:
     git:

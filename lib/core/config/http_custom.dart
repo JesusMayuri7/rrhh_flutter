@@ -1,8 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 import 'package:rrhh_clean/app/app_service.dart';
-import 'package:rrhh_clean/app/bloc/app_bloc.dart';
-import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 
 class HttpCustom extends http.BaseClient {
   //SharedPreferences sharedPref;

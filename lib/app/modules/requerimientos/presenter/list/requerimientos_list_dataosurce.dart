@@ -49,7 +49,7 @@ class RequerimientosListDataSource extends DataGridSource {
 
   @override
   DataGridRowAdapter? buildRow(DataGridRow row) {
-    final int rowIndex = _confianzaDataGridRows.indexOf(row);
+    //final int rowIndex = _confianzaDataGridRows.indexOf(row);
 
     return DataGridRowAdapter(
       //color: getRowBackgroundColor(),

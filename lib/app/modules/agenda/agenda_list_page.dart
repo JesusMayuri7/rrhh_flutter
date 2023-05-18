@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 
 import 'package:rrhh_clean/app/modules/agenda/agenda_save_page.dart';
 import 'package:rrhh_clean/app/modules/agenda/agenda_entity.dart';
@@ -181,7 +180,7 @@ class AgendaListPageState extends State<AgendaListPage> {
                                                                 listAgenda[
                                                                     index]),
                                                         width: 450,
-                                                        height: 450);
+                                                        height: 530);
                                                   },
                                                   icon: Icon(Icons.edit),
                                                   label: Text('Edit'),

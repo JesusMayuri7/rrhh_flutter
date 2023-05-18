@@ -34,14 +34,14 @@ class BaseCapModule extends Module {
     //2023
     Bind((i) => GetPimCapDatasourceImpl(httpCustom: i())),
     Bind((i) => GetPresupuestoCapDatasourceImpl(
-        getCertificadoCapDatasourceImpl: i<GetPimCapDatasourceImpl>(),
+        getCertificadoCapDatasourceImpl: i<GetCertificadoCapDatasourceImpl>(),
         getPimCapDatasourceImpl: i<GetPimCapDatasourceImpl>())),
 
     //2023
     Bind((i) => GetPimCapDatasourceImpl2023(httpCustom: i())),
     Bind((i) => GetPresupuestoCapDatasourceImpl(
-        getCertificadoCapDatasourceImpl: i<GetPimCapDatasourceImpl2023>(),
-        getPimCapDatasourceImpl: i<GetPimCapDatasourceImpl2023>())),
+        getCertificadoCapDatasourceImpl: i<GetCertificadoCapDatasourceImpl>(),
+        getPimCapDatasourceImpl: i<GetPimCapDatasourceImpl>())),
 
     // REPOSITORY
     Bind((i) => BaseCapRepositoryImpl(

@@ -35,7 +35,7 @@ class ResumenBloc extends Bloc<ResumenEvent, ResumenState> {
       if (state is HeadParametersSuccessState) {
         add(ResumenCasEventBaseCasLoading(
             baseCasList: (baseCasBloc.state as HeadParametersSuccessState)
-                .listadoCas as List<BaseCasEntity>));
+                .listadoCas));
       }
     });
 

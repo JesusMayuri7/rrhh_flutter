@@ -44,13 +44,23 @@ class _DropdownFormPresupuestalState<T>
     return Container(
       //color: Colors.amber,
       child: DropdownButtonFormField2<T>(
-        selectedItemHighlightColor: Colors.blue,
+             buttonStyleData: const ButtonStyleData(
+            height: 40,
+            width: 200,
+          ),
+          dropdownStyleData: const DropdownStyleData(
+            maxHeight: 200,
+          ),
+          menuItemStyleData: const MenuItemStyleData(
+            height: 40,
+          ),
+        
         //buttonSplashColor: Colors.amber,
         //buttonHighlightColor: Colors.red,
-        buttonOverlayColor: MaterialStateProperty.all(Colors.transparent),
-        buttonDecoration: BoxDecoration(
+        
+        /*buttonDecoration: BoxDecoration(
           color: Colors.transparent,
-        ),
+        ),*/
         decoration: InputDecoration(
             isDense: true,
             label: Text(widget.label,
@@ -60,68 +70,73 @@ class _DropdownFormPresupuestalState<T>
                     color: Colors.blueAccent)),
             contentPadding: const EdgeInsets.symmetric(horizontal: 8),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: Colors.grey))),
-        buttonPadding: const EdgeInsets.fromLTRB(0, 8, 6, 6),
-        buttonHeight: 30,
+                borderSide: BorderSide(width: 1, color: Colors.transparent))),
+        //buttonPadding: const EdgeInsets.fromLTRB(0, 8, 6, 6),
+        //buttonHeight: 30,
         hint: Text(
           widget.hint,
           style: TextStyle(fontSize: 11),
           overflow: TextOverflow.ellipsis,
         ),
         //itemHighlightColor: Colors.blue,
-        itemSplashColor: Colors.blue,
-        dropdownDecoration:
-            BoxDecoration(color: Color.fromARGB(219, 255, 250, 250)),
+        
+        //dropdownDecoration:            BoxDecoration(color: Color.fromARGB(219, 255, 250, 250)),
         //barrierColor: Colors.red,
-        dropdownMaxHeight: 350,
-        dropdownWidth: widget.dropdownWidth,
+        //dropdownMaxHeight: 350,
+        
+        //dropdownWidth: widget.dropdownWidth,
         isExpanded: true,
         autofocus: true,
-        itemHeight: 30,
-        offset: const Offset(0, 0),
+        //itemHeight: 30,
+        //offset: const Offset(0, 0),
         onChanged: widget.onChanged,
         items: widget.dropDownMenuItems,
-        searchController: textEditingController,
-        searchInnerWidget: Padding(
-          padding: const EdgeInsets.only(
-            top: 8,
-            bottom: 4,
-            right: 8,
-            left: 8,
-          ),
-          child: TextFormField(
-            style: TextStyle(color: Colors.amber),
-            controller: textEditingController,
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 8,
+        //searchController: textEditingController,
+         dropdownSearchData: DropdownSearchData(
+            searchController: textEditingController,
+            searchInnerWidgetHeight: 50,
+            searchInnerWidget: Container(
+              height: 50,
+              padding: const EdgeInsets.only(
+                top: 8,
+                bottom: 4,
+                right: 8,
+                left: 8,
               ),
-              hintText: widget.hintText,
-              hintStyle: const TextStyle(fontSize: 11),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
+              child: TextFormField(
+                expands: true,
+                maxLines: null,
+                controller: textEditingController,
+                decoration: InputDecoration(
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
+                  hintText: 'Search for an item...',
+                  hintStyle: const TextStyle(fontSize: 12),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
         searchMatchFn: (item, searchValue) {
           return (item.value
               .toString()
               .toUpperCase()
               .contains(searchValue.toUpperCase()));
         },
-        //This to clear the search value when you close the menu
-        onMenuStateChange: (isOpen) {
+      ),
+              //This to clear the search value when you close the menu
+         onMenuStateChange: (isOpen) {
           if (!isOpen) {
             textEditingController.clear();
           }
-        },
-        onSaved: (value) {
+        }, 
+         onSaved: (value) {
           selectedValue = value.toString();
-        },
-      ),
-    );
+        }, 
+    ));
   }
 }

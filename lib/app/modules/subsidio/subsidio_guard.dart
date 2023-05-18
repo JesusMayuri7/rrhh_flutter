@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_module.dart';
-import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 import 'package:rrhh_clean/app/app_service.dart';
 
 class SubsidioGuard extends RouteGuard {

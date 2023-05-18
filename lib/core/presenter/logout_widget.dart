@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_service.dart';
-import 'package:rrhh_clean/app/bloc/app_bloc.dart';
 
 class LogoutWidget extends StatelessWidget {
   LogoutWidget({Key? key}) : super(key: key);

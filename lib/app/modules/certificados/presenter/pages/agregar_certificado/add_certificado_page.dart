@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_service.dart';
-import 'package:rrhh_clean/app/bloc/app_bloc.dart';
-import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 import '../../../domain/entities/modalidad_entity.dart';
 import '../../../../../../core/uitls/widgets/label_with_dropdown.dart';
 import '../../../../../../core/uitls/widgets/label_with_form_field.dart';

@@ -15,7 +15,7 @@ class GetModalidadesImpl implements IModalidadesDatasourceApp {
 
   @override
   Future<ResponseModel> getModalidades(String anio) async {
-    Uri url = Uri.http('rrhh.pvn.gob.pe', 'api/configuracion/modalidades');
+    Uri url = Uri.http('rrhh.pvn.gob.pe', 'api/configuracion/modalidades/$anio');
     try {
       ResponseModel response = await httpCustom.request(
           'GET', url.toString(), {}, (i) => responseFromJson(i));

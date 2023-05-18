@@ -30,7 +30,7 @@ class GetListRequerimientos implements IRequerimientoListDataSource {
           'GET', url.toString(), {}, (i) => responseFromJson(i));
 
       //var body = jsonDecode(response.data);
-      String bodyData = jsonEncode(response.data);
+      String bodyData = jsonEncode(response.data);  
 
       List<RequerimientoModel> result = requerimientoModelFromJson(bodyData);
       return ResponseModel(

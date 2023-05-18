@@ -1,20 +1,19 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:pluto_grid/pluto_grid.dart';
+
 
 import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_entity.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/presenter/bloc/requerimientos_bloc.dart';
-import 'package:rrhh_clean/app/modules/requerimientos/presenter/get_columns_grid.dart';
+import 'package:rrhh_clean/app/modules/requerimientos/presenter/new/datatable_new_requerimiento.dart';
+
 
 import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 import 'package:rrhh_clean/core/domain/entities/modalidad_entity.dart';
-import 'package:rrhh_clean/core/uitls/widgets/dropdown_form_presupuestal.dart';
-
 import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
@@ -36,12 +35,11 @@ class NewRequerimientoPage extends StatefulWidget {
 
 class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
   late NewParamsRequerimiento paramsNewRequerimiento;
+  NewParamsRequerimientoDetalle paramsNewRequerimientoDetalle = NewParamsRequerimientoDetalle();
   final _formKey = GlobalKey<FormState>();
   final _blocNew = Modular.get<RequerimientoNewBloc>();
   final _blocRequerimiento = Modular.get<RequerimientosBloc>();
 
-  PlutoGridStateManager? stateManagerDetail;
-  List<PlutoRow> rowsDetail = [];
 
   FuenteEntity? _fuenteEntity;
   MetaEntity? _metaEntity;
@@ -68,6 +66,8 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
       this.modalidades =
           (this._blocRequerimiento.state as RequerimientosLoaded).modalidades;
 
+      
+
       _areaEntity = widget.requerimientoEntity == null
           ? areas.first
           : areas.firstWhere(
@@ -89,7 +89,11 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
               element.id == widget.requerimientoEntity?.modalidadId);
 
       if (widget.requerimientoEntity == null)
-        paramsNewRequerimiento = NewParamsRequerimiento(anio: '2023');
+         paramsNewRequerimiento = NewParamsRequerimiento(anio: '2023');
+
+       print(modalidades);     
+       print(_modalidadEntity);     
+
     }
   }
 
@@ -100,11 +104,11 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
         child: BlocConsumer<RequerimientoNewBloc, RequerimientoNewState>(
           bloc: this._blocNew,
           listener: (context, state) {
-            if (state is RequerimientoNewSaved) {
+            if (state.statusNewRequerimiento == StatusNewRequerimiento.saved) {
               showToastSuccess(context, 'Se grabao correctamente');
               Navigator.pop(context);
             }
-            if (state is RequerimientoNewError) {
+            if (state.statusNewRequerimiento == StatusNewRequerimiento.error) {
               showToastError(context, state.toString());
             }
           },
@@ -133,192 +137,144 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
+                                    SizedBox(
+                                      width: 350.0,
+                                      child: fluentUi.InfoLabel(
+                                        label: 'Modalidad',
+                                        child: fluentUi.AutoSuggestBox<ModalidadEntity>(                                                     
+                                                      enabled: true,
+                                                      items: this.modalidades
+                                                          .map<fluentUi.AutoSuggestBoxItem<ModalidadEntity>>(
+                                                            (modalidad) => fluentUi.AutoSuggestBoxItem<ModalidadEntity>(
+                                                              value: modalidad,
+                                                              label: modalidad.dsc_modalidad,
+                                                              onFocusChange: (focused) {
+                                                                if (focused) debugPrint('Focused $modalidad');
+                                                              },
+                                                            ),
+                                                          )
+                                                          .toList(),
+                                                      onSelected: (item) {
+                                                        //setState(() => selectedCat = item.value);
+                                                      },
+                                                    ),
+                                      ),
+                                    ),
+                                      SizedBox(width: 15),
                                     Expanded(
-                                      flex: 8,
-                                      child: DropdownFormPresupuestal<
-                                              ModalidadEntity>(
-                                          label: 'Modalidad',
-                                          hintText: 'Buscar Modalidad',
-                                          value: _modalidadEntity!,
-                                          hint: 'Seleccione Modalidad',
-                                          dropdownWidth: 350,
-                                          dropDownMenuItems: this
-                                              .modalidades
-                                              .map<
-                                                      DropdownMenuItem<
-                                                          ModalidadEntity>>(
-                                                  (ModalidadEntity value) {
-                                            return DropdownMenuItem<
-                                                ModalidadEntity>(
-                                              child: Text(
-                                                  '${value.dsc_modalidad}',
-                                                  style:
-                                                      TextStyle(fontSize: 11)),
-                                              value: value,
-                                            );
-                                          }).toList(),
-                                          onChanged: (value) {
-                                            paramsNewRequerimiento.modalidad =
+                                      flex: 4,
+                                      child: fluentUi.InfoLabel(
+                                        label: 'Exp. PVN',
+                                        child: fluentUi.TextFormBox(
+                                          initialValue: paramsNewRequerimiento
+                                              .expedientePvn!,
+                                          maxLength: 30,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.right,                                        
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsNewRequerimiento.expedientePvn =
                                                 value!;
-                                            //  _areaEntity = value;
-                                          }),
-                                    ),
-                                    SizedBox(width: 15),
-                                    Expanded(
-                                      flex: 4,
-                                      child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimiento
-                                            .expedientePvn!,
-                                        maxLength: 30,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.right,
-                                        title: 'Exp. PVN',
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (value) {
-                                          paramsNewRequerimiento.expedientePvn =
-                                              value!;
-                                        },
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 SizedBox(height: 10),
                                 Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Expanded(
-                                      flex: 8,
-                                      child: DropdownFormPresupuestal<
-                                              FuenteEntity>(
-                                          label: 'Fuente',
-                                          hintText: 'Buscar Fuente',
-                                          value: _fuenteEntity!,
-                                          hint: 'Seleccione Fuente',
-                                          dropdownWidth: 350,
-                                          dropDownMenuItems: this.fuentes.map<
-                                                  DropdownMenuItem<
-                                                      FuenteEntity>>(
-                                              (FuenteEntity value) {
-                                            return DropdownMenuItem<
-                                                FuenteEntity>(
-                                              child: Text('${value.dscFuente}',
-                                                  style:
-                                                      TextStyle(fontSize: 11)),
-                                              value: value,
-                                            );
-                                          }).toList(),
-                                          onChanged: (value) {
-                                            paramsNewRequerimiento.fuente =
-                                                value;
-                                            //  _areaEntity = value;
-                                          }),
-                                    ),
-                                    SizedBox(width: 15),
+                                    SizedBox(
+                                          width: 350.0,
+                                          child: fluentUi.InfoLabel(
+                                            label: 'Fuente',
+                                            child: fluentUi.AutoSuggestBox<FuenteEntity>(                                                     
+                                                          enabled: true,
+                                                          items: this.fuentes
+                                                              .map<fluentUi.AutoSuggestBoxItem<FuenteEntity>>(
+                                                                (fuente) => fluentUi.AutoSuggestBoxItem<FuenteEntity>(
+                                                                  value: fuente,
+                                                                  label: fuente.dscFuente,
+                                                                  onFocusChange: (focused) {
+                                                                    if (focused) debugPrint('Focused $fuente');
+                                                                  },
+                                                                ),
+                                                              )
+                                                              .toList(),
+                                                          onSelected: (item) {
+                                                            //setState(() => selectedCat = item.value);
+                                                          },
+                                                        ),
+                                          ),
+                                        ),
+                                                                            SizedBox(width: 15),
                                     Expanded(
                                       flex: 4,
-                                      child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimiento
-                                            .documentoPvn!,
-                                        maxLength: 30,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.right,
-                                        title: 'Doc. PVN',
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (value) {
-                                          paramsNewRequerimiento.documentoPvn =
-                                              value!;
-                                        },
+                                      child: fluentUi.InfoLabel(
+                                        label: 'Doc. PVN',
+                                        child: fluentUi.TextFormBox(
+                                          initialValue: paramsNewRequerimiento
+                                              .documentoPvn!,
+                                          maxLength: 30,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.right,                                        
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsNewRequerimiento.documentoPvn =
+                                                value!;
+                                          },
+                                        ),
                                       ),
-                                    )
+                                    ),
                                   ],
-                                ),
+                                ),                                                               
                                 SizedBox(height: 10),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Expanded(
-                                      flex: 8,
-                                      child: DropdownButtonHideUnderline(
-                                        child: DropdownFormPresupuestal<
-                                                MetaEntity>(
-                                            label: 'Meta',
-                                            hintText: 'Buscar Meta',
-                                            value: _metaEntity!,
-                                            hint: 'Seleccione Meta',
-                                            dropdownWidth: 350,
-                                            dropDownMenuItems: this.metas.map<
-                                                    DropdownMenuItem<
-                                                        MetaEntity>>(
-                                                (MetaEntity value) {
-                                              return DropdownMenuItem<
-                                                  MetaEntity>(
-                                                child: Text(
-                                                    '${value.finalidad}',
-                                                    style: TextStyle(
-                                                        fontSize: 11)),
-                                                value: value,
-                                              );
-                                            }).toList(),
-                                            onChanged: (value) {
-                                              paramsNewRequerimiento.meta =
-                                                  value;
-                                              //  _areaEntity = value;
-                                            }),
-                                      ),
-                                    ),
-                                    SizedBox(width: 10),
+                                                                            SizedBox(
+                                          width: 350.0,
+                                    child: fluentUi.InfoLabel(
+                                          label: 'Area',
+                                          child: fluentUi.AutoSuggestBox<AreaEntity>(                                                     
+                                                        enabled: true,
+                                                        items: this.areas
+                                                            .map<fluentUi.AutoSuggestBoxItem<AreaEntity>>(
+                                                              (area) => fluentUi.AutoSuggestBoxItem<AreaEntity>(
+                                                                value: area,
+                                                                label: area.descArea,
+                                                                onFocusChange: (focused) {
+                                                                  if (focused) debugPrint('Focused $area');
+                                                                },
+                                                              ),
+                                                            )
+                                                            .toList(),
+                                                        onSelected: (item) {
+                                                          //setState(() => selectedCat = item.value);
+                                                        },
+                                                      ),
+                                        ),
+                                  ),
+                                     SizedBox(width: 15),
                                     Expanded(
                                       flex: 4,
-                                      child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimiento
-                                            .fechaDocumento!,
-                                        maxLength: 30,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.right,
-                                        title: 'Fecha Doc.',
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (value) {
-                                          paramsNewRequerimiento
-                                              .fechaDocumento = value!;
-                                        },
+                                      child: fluentUi.InfoLabel(
+                                      label: 'Fecha Doc.',
+                                        child: fluentUi.TextFormBox(
+                                          initialValue: paramsNewRequerimiento
+                                              .fechaDocumento!,
+                                          maxLength: 30,
+                                          maxLines: 1,
+                                          textAlign: TextAlign.right,                                          
+                                          keyboardType: TextInputType.text,
+                                          onSaved: (value) {
+                                            paramsNewRequerimiento
+                                                .fechaDocumento = value!;
+                                          },
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 15),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Expanded(
-                                      child: DropdownButtonHideUnderline(
-                                        child: DropdownFormPresupuestal<
-                                                AreaEntity>(
-                                            label: 'Area',
-                                            hintText: 'Buscar Area',
-                                            value: _areaEntity!,
-                                            hint: 'Seleccione Area',
-                                            dropdownWidth: 350,
-                                            dropDownMenuItems: this.areas.map<
-                                                    DropdownMenuItem<
-                                                        AreaEntity>>(
-                                                (AreaEntity value) {
-                                              return DropdownMenuItem<
-                                                  AreaEntity>(
-                                                child: Text('${value.descArea}',
-                                                    style: TextStyle(
-                                                        fontSize: 11)),
-                                                value: value,
-                                              );
-                                            }).toList(),
-                                            onChanged: (value) {
-                                              paramsNewRequerimiento.orgArea =
-                                                  value;
-                                              //  _areaEntity = value;
-                                            }),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                      ), ),
+                              ],),                                                                                                                                       
+                                SizedBox(height: 15),                                   
                                 Divider(color: Colors.blue),
                                 SizedBox(height: 5.0),
                                 Row(
@@ -327,16 +283,15 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
                                     Expanded(
                                       flex: 1,
                                       child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimiento
-                                            .fechaDocumento!,
+                                        initialValue: paramsNewRequerimientoDetalle.cantidad.toString(),                                            
                                         maxLength: 30,
                                         maxLines: 1,
                                         textAlign: TextAlign.right,
                                         title: 'Cant.',
                                         keyboardType: TextInputType.text,
                                         onSaved: (value) {
-                                          paramsNewRequerimiento
-                                              .fechaDocumento = value!;
+                                          final int cantidad = int.parse(value!);
+                                          paramsNewRequerimientoDetalle.cantidad = cantidad;
                                         },
                                       ),
                                     ),
@@ -344,16 +299,14 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
                                     Expanded(
                                       flex: 3,
                                       child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimiento
-                                            .fechaDocumento!,
+                                        initialValue: paramsNewRequerimientoDetalle.descArea,
                                         maxLength: 30,
                                         maxLines: 1,
                                         textAlign: TextAlign.right,
                                         title: 'Sub Area',
                                         keyboardType: TextInputType.text,
                                         onSaved: (value) {
-                                          paramsNewRequerimiento
-                                              .fechaDocumento = value!;
+                                          paramsNewRequerimientoDetalle.descArea = value!;
                                         },
                                       ),
                                     ),
@@ -361,16 +314,14 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
                                     Expanded(
                                       flex: 3,
                                       child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimiento
-                                            .fechaDocumento!,
+                                        initialValue: paramsNewRequerimientoDetalle.cargo,
                                         maxLength: 30,
                                         maxLines: 1,
                                         textAlign: TextAlign.right,
                                         title: 'Cargo',
                                         keyboardType: TextInputType.text,
                                         onSaved: (value) {
-                                          paramsNewRequerimiento
-                                              .fechaDocumento = value!;
+                                          paramsNewRequerimientoDetalle.cargo = value!;
                                         },
                                       ),
                                     ),
@@ -386,15 +337,21 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
                                         title: 'Monto',
                                         keyboardType: TextInputType.text,
                                         onSaved: (value) {
-                                          paramsNewRequerimiento
-                                              .fechaDocumento = value!;
+                                          final num monto = num.parse(value!);
+                                          paramsNewRequerimientoDetalle.monto = monto;
                                         },
                                       ),
                                     ),
                                     SizedBox(width: 5),
                                     Expanded(
                                         child: ElevatedButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                                  _formKey.currentState!.save();
+                                                   this._blocNew.add(AddRequerimientoDetalleEvent(
+                                                    newParamsRequerimiento: this.paramsNewRequerimiento,
+                                                    paramsNewRequerimientoDetalle: this.paramsNewRequerimientoDetalle
+                                                   ));
+                                            },
                                             child: Text('Add')))
                                   ],
                                 ),
@@ -404,38 +361,7 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
                                   child: Column(
                                     children: [
                                       Expanded(
-                                        child: PlutoGrid(
-                                            key: ValueKey(
-                                                'AddRequerimientoDetail'),
-                                            configuration:
-                                                PlutoGridConfiguration(
-                                              columnFilter:
-                                                  PlutoGridColumnFilterConfig(),
-                                              scrollbar:
-                                                  PlutoGridScrollbarConfig(
-                                                      isAlwaysShown: true),
-                                              style: PlutoGridStyleConfig(
-                                                cellTextStyle:
-                                                    TextStyle(fontSize: 11),
-                                                columnTextStyle: TextStyle(
-                                                    fontSize: 11,
-                                                    color: Colors.white),
-                                                columnHeight: 25,
-                                                rowHeight: 21,
-                                                columnFilterHeight: 25,
-                                                enableGridBorderShadow: true,
-                                              ),
-                                            ),
-                                            columns: columnsDetail(this.areas),
-                                            rows: [],
-                                            onChanged: (PlutoGridOnChangedEvent
-                                                event) {},
-                                            onLoaded:
-                                                (PlutoGridOnLoadedEvent event) {
-                                              //  stateManagerDetail = event.stateManager;
-                                              event.stateManager
-                                                  .setShowColumnFilter(true);
-                                            }),
+                                        child: DataTableNewRequerimiento(requerimientoDetalle: state.requerimientoEntity == null ? [] : state.requerimientoEntity!.requerimientoDetalle )
                                       ),
                                       Row(
                                         children: [

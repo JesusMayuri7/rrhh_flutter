@@ -19,12 +19,14 @@ class RequerimientoListBloc
 
   _onRequerimientoLoadListToState(RequerimientoListEvent event,
       Emitter<RequerimientoListState> emit) async {
+
     emit(RequerimientoListLoading());
     var result = await this.requerimientoListUseCase(
         ParamsRequerimiento(anio: '2023', dscModalidad: 'CAS'));
     emit(result.fold((l) {
       return RequerimientoListLoaded(requerimientoList: []);
-    }, (r) => RequerimientoListLoaded(requerimientoList: r.data)));
+    }, (r) { 
+      return RequerimientoListLoaded(requerimientoList: r.data); }) );
   }
 
   _onRequerimientoSetDetailToState(RequerimientoSetDetailEvent event,

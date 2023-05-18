@@ -6,9 +6,7 @@ import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import 'package:rrhh_clean/core/data/models/response_model.dart';
 import 'package:rrhh_clean/core/errors/exceptions.dart';
 
-import '../../domain/new_judiciales_use_case.dart';
 import '../model/judicial_detalle_model.dart';
-import '../model/judicial_model.dart';
 
 abstract class IJudicialesNewDetailDataSource {
   Future<ResponseModel> newJudicialDetail(ParamsNewJudicialDetail params);

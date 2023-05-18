@@ -5,7 +5,6 @@ import 'package:rrhh_clean/app/modules/agenda/agenda_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/agenda/cubit/agenda_list_cubit.dart';
 import 'package:rrhh_clean/app/modules/agenda/agenda_list_page.dart';
-import 'package:rrhh_clean/app/app_guard.dart';
 
 import 'agenda_save_datasource.dart';
 import 'agenda_save_usecase.dart';

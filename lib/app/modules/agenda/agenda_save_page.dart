@@ -7,7 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/agenda/agenda_entity.dart';
 import 'package:rrhh_clean/app/modules/agenda/cubit/agenda_params.dart';
 import 'package:rrhh_clean/core/uitls/constants/constants.dart';
-import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
+import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'cubit/agenda_list_cubit.dart';
 
@@ -49,6 +49,9 @@ class _AgendaSavePageState extends State<AgendaSavePage> {
     return ScaffoldPage(
       content: BlocConsumer<AgendaListCubit, AgendaListState>(
         listener: (context, state) {
+          if ((state is AgendaListError)) {
+            showToastError(context, state.message);
+          }
           if ((state is AgendaListLoaded)) {
             Navigator.pop(context);
           }
@@ -96,6 +99,7 @@ class _AgendaSavePageState extends State<AgendaSavePage> {
                   Spacer(),
                   ElevatedButton(
                       onPressed: () {
+                        print('save');
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           this.blocListAgenda.save(agendaParams!);

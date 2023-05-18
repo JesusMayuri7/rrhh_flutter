@@ -18,7 +18,7 @@ class RequerimientoDetalleModel extends RequerimientoDetalleEntity {
       required int areaId,
       required String descArea,
       required int id,
-      required String fuenteId,
+      required int fuenteId,
       required String descFuente,
       required int metaId,
       required String descMeta})
@@ -44,7 +44,7 @@ class RequerimientoDetalleModel extends RequerimientoDetalleEntity {
           id: json["id"] ?? 0,
           descFuente: json['desc_fuente'] ?? '',
           descMeta: json['desc_meta'] ?? '',
-          fuenteId: json['fuente_id'] ?? '',
+          fuenteId: json['fuente_id'] ?? 0,
           metaId: json['meta_id'] ?? 0);
 
   Map<String, dynamic> toJson() => {

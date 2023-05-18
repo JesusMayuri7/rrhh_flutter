@@ -1,13 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_service.dart';
 import 'package:rrhh_clean/core/uitls/constants/menu_user.dart';
 //import 'package:window_manager/window_manager.dart';
 
-import 'package:rrhh_clean/app/modules/auth/presenter/bloc/auth_bloc.dart';
 
 import 'package:rrhh_clean/core/presenter/logout_widget.dart';
 import 'package:rrhh_clean/core/uitls/widgets/windows_buttons.dart';

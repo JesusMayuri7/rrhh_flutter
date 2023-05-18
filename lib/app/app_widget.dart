@@ -2,7 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/core/uitls/theme/theme_custon.dart';
 
-import 'app_module.dart';
 
 class AppWidget extends StatefulWidget {
   @override
@@ -31,9 +30,6 @@ class _AppWidgetState extends State<AppWidget> {
       theme: FluentThemeData.light().copyWith(
         //accentColor: appTheme.color,
         visualDensity: VisualDensity.standard,
-        focusTheme: FocusThemeData(
-          glowFactor: is10footScreen() ? 2.0 : 0.0,
-        ),
         extensions: <ThemeExtension<dynamic>>[
           ThemeCustom(
             colorBackground: Color.fromARGB(255, 217, 217, 217),
