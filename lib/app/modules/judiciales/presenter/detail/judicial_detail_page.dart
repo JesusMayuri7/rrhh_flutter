@@ -24,10 +24,11 @@ class JudicialDetailPage extends StatelessWidget {
   List<MetaEntity> metas = [];
   List<AreaEntity> areas = [];
   List<ModalidadEntity> modalidades = [];
-  BuildContext context;
+  BuildContext context;  
   JudicialDetailDataSource? judicialDetailDataSource;
 
   JudicialDetailPage({required this.context}) {
+    
     judicialDetailDataSource =
         JudicialDetailDataSource(contextUp: this.context, detailJudicial: []);
   }
@@ -41,6 +42,7 @@ class JudicialDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<JudicialDetailCubit, JudicialDetailState>(
       listener: (context, state) {
+
         if (state is JudicialDetailError) {
           showToastError(context, 'Error al grabar');
         }
@@ -63,13 +65,16 @@ class JudicialDetailPage extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text('Detalle de Reposicion Judicial'),
+                Text((state is JudicialDetailLoaded)? state.nombres : '',style: TextStyle(fontWeight: FontWeight.bold)),
                 Spacer(),
                 fluentUi.Button(
                     child: Text('Nuevo'),
                     onPressed: () {
+                      if(this.judicialId !=0){
                       showModalDialogJudicialNewDetail(
-                          context, this.judicialId);
+                          context, ParamsNewJudicialDetail(judicialId: this.judicialId));
+                      }
+                      else showToastError(context, 'Seleccione un registro judicial');
                     }),
               ],
             ),
@@ -107,18 +112,17 @@ class JudicialDetailPage extends StatelessWidget {
   }
 }
 
-showModalDialogJudicialNewDetail(_context, int _judicialId) {
+showModalDialogJudicialNewDetail(_context, ParamsNewJudicialDetail _judicial) {
   showDialog(
       context: _context,
-      builder: (BuildContext _context) {
+      builder: (BuildContext context) {
         return Dialog(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0)),
             child: Container(
-                height: 500,
+                height: 450,
                 width: 300,
                 child: JudicialNewDetailPage(
-                    paramsNewJudicialDetail:
-                        ParamsNewJudicialDetail(judicialId: _judicialId))));
+                    paramsNewJudicialDetail:_judicial )));
       });
 }

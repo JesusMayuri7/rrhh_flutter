@@ -10,7 +10,11 @@ abstract class RequerimientosEvent extends Equatable {
 
 class RequerimientosLoadEvent extends RequerimientosEvent {
   final String anio;
+
   RequerimientosLoadEvent({
     required this.anio,
   });
+
+    @override
+  List<Object> get props => [this.anio];
 }

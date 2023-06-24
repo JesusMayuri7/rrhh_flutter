@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rrhh_clean/app/modules/judiciales/domain/new_judicial_detail_use_case.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import 'package:rrhh_clean/app/modules/judiciales/domain/judicial_detail_entity.dart';
@@ -47,10 +48,14 @@ class JudicialDetailDataSource extends DataGridSource {
       //color: getRowBackgroundColor(),
       cells: row.getCells().map<Widget>((e) {
         if (e.columnName == 'acciones') {
-          return IconButton(
-            onPressed: () {
+          return IconButton(            
+            onPressed: detailJudicial[rowIndex].id == 0 ? null: () {              
               showModalDialogJudicialNewDetail(
-                  this.contextUp, detailJudicial[rowIndex].judicialId);
+                  this.contextUp, 
+                  ParamsNewJudicialDetail(id: detailJudicial[rowIndex].id,detalle: detailJudicial[rowIndex].detalle,
+                   expedientePvn: detailJudicial[rowIndex].expedientePvn,fechaExpedientePvn: detailJudicial[rowIndex].fechaExpedientePvn,
+                   judicialId: detailJudicial[rowIndex].judicialId,nroDocumento: detailJudicial[rowIndex].nroDocumento)
+                  );
             },
             splashRadius: 16,
             padding: EdgeInsets.zero,

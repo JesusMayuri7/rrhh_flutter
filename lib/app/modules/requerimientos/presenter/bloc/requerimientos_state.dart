@@ -14,7 +14,9 @@ class RequerimientosInitial extends RequerimientosState {}
 class RequerimientosLoading extends RequerimientosState {}
 
 class RequerimientosError extends RequerimientosState {
+
   final String message;
+
   RequerimientosError({
     required this.message,
   });
@@ -25,12 +27,16 @@ class RequerimientosLoaded extends RequerimientosState {
   final List<FuenteEntity> fuentes;
   final List<AreaEntity> areas;
   final List<ModalidadEntity> modalidades;
+  final List<TipoRequerimientoEntity> tipoRequerimientos;
+  
   RequerimientosLoaded(
       {required this.areas,
       required this.metas,
       required this.fuentes,
-      required this.modalidades});
+      required this.modalidades,
+      required this.tipoRequerimientos
+      });
 
   List<Object> get props =>
-      [this.metas, this.fuentes, this.areas, this.modalidades];
+      [this.metas, this.fuentes, this.areas, this.modalidades, this.tipoRequerimientos];
 }

@@ -27,6 +27,8 @@ class ConfianzaDataSource extends DataGridSource {
               DataGridCell<String>(                  columnName: 'anio', value: dataGridRow.anio),
               DataGridCell<String>(                  columnName: 'modalidad', value: dataGridRow.modalidad),
               DataGridCell<String>(columnName: 'tipo', value: dataGridRow.tipo),
+                          DataGridCell<String>(
+                  columnName: 'nro_cap', value: dataGridRow.nroCap),
               DataGridCell<String>(
                   columnName: 'plaza', value: dataGridRow.plaza),
               DataGridCell<String>(
@@ -46,6 +48,8 @@ class ConfianzaDataSource extends DataGridSource {
                   value: dataGridRow.docDesignacion),
               DataGridCell<String>(
                   columnName: 'doc_cese', value: dataGridRow.docCese),
+                                DataGridCell<String>(
+                  columnName: 'plaza_origen', value: dataGridRow.plazaOrigen),
               DataGridCell<String>(
                   columnName: 'detalle', value: dataGridRow.detalle),
               DataGridCell<ConfianzaEntity>(
@@ -75,7 +79,7 @@ class ConfianzaDataSource extends DataGridSource {
       repetidos = vigentes.firstWhereOrNull((element) =>
           element.id != this.listadoConfianza[rowIndex].id &&
           element.modalidad == this.listadoConfianza[rowIndex].modalidad &&
-          element.plaza == this.listadoConfianza[rowIndex].plaza &&
+          (element.plaza == this.listadoConfianza[rowIndex].plaza)  &&
           element.estado == this.listadoConfianza[rowIndex].estado);
 
       int idRepetido = repetidos == null ? 0 : repetidos.id;
@@ -102,7 +106,6 @@ class ConfianzaDataSource extends DataGridSource {
                 size: 14,
               ),
               onPressed: () {
-                print(e.value);
                 _showModalDialog(this.context, e.value);
               },
             ),

@@ -174,7 +174,6 @@ class LiquidacionListBloc
       return LiquidacionListInitial();
     }, (r) {
       LiquidacionEntity liquidacion = r['data'];
-      print('data ' + liquidacion.dscCertificado);
       return LiquidacionListLoaded(
         anio: liquidacion.anio,
         modalidad: liquidacion.dscModalidad,

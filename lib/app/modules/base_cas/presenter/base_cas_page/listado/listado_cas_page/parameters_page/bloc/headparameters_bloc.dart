@@ -124,7 +124,6 @@ class HeadParametersBloc
 
   _initialEventToHeadParametersState(HeadParametersFormLoadEvent event,
       Emitter<HeadParametersState> emit) async {
-    print('event initial ' + event.toString());
     emit(HeadParametersLoadingState());
 
     double uit = 0;

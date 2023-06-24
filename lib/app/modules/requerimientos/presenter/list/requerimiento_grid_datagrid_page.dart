@@ -48,12 +48,8 @@ class RequerimientoGridDataGridPage extends StatelessWidget {
                   rowHeight: 25,
                   isScrollbarAlwaysShown: true,
                   gridLinesVisibility: GridLinesVisibility.both,
-                  headerGridLinesVisibility: GridLinesVisibility.both,
-                  allowSorting: true,
-                  allowFiltering: true,
-                  allowMultiColumnSorting: true,
-                  allowTriStateSorting: true,
-                  showSortNumbers: true,
+                  headerGridLinesVisibility: GridLinesVisibility.both,                
+                  allowFiltering: true,                                                    
                   selectionMode: SelectionMode.single,
                   columns: requerimientos_list_columns(context),
                   onSelectionChanged: (List<DataGridRow> addedRows,
@@ -64,7 +60,6 @@ class RequerimientoGridDataGridPage extends StatelessWidget {
                     List<RequerimientoDetalleEntity> requerimientoDetalle =
                         requerimientosListDataSource!
                             .listadoConfianza[index].requerimientoDetalle;
-                    print('a ' + requerimientoDetalle.length.toString());
                     this.requerimientoListBloc.add(RequerimientoSetDetailEvent(
                         reqrerimientoDetail: requerimientoDetalle));
                   } 

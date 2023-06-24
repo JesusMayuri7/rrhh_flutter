@@ -9,3 +9,18 @@ var fuentes = [
 
 var dateLongInputFormatter = new MaskTextInputFormatter(
     mask: '####-##-##', filter: {"#": RegExp(r'[0-9]')});
+
+List<String> meses = [
+    'ENERO',
+    'FEBRERO',
+    'MARZO',
+    'ABRIL',
+    'MAYO',
+    'JUNIO',
+    'JULIO',
+    'AGOSTO',
+    'SETIEMBRE',
+    'OCTUBRE',
+    'NOVIEMBRE',
+    'DICIEMBRE'
+  ];    

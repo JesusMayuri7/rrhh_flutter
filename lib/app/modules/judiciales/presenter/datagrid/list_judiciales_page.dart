@@ -11,6 +11,7 @@ import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
 
 import '../../domain/judicial_entity.dart';
 import '../bloc/list/judiciales_list_bloc.dart';
+import 'export_judicial.dart';
 import 'getColumnsListJudiciales.dart';
 import 'grid_judiciales_page.dart';
 import 'list_judiciales_datasource.dart';
@@ -88,11 +89,19 @@ class _ListJudicialesPageState extends State<ListJudicialesPage> {
                       f.Button(
                           onPressed: () {
                             //exportDataGridToExcel();
-                            generateExcel((this.blocListJudicial.state
+/*                             generateExcel((this.blocListJudicial.state
                                     is JudicialesListLoaded)
                                 ? (this.blocListJudicial.state
                                         as JudicialesListLoaded)
                                     .judicialesListOriginal
+                                : []); */
+                                this.textSearchController.clear();
+                                this.listJudicialesDataSource.clearFilters();
+                                 exporJudicialToExcel((this.blocListJudicial.state
+                                    is JudicialesListLoaded)
+                                ? (this.blocListJudicial.state
+                                        as JudicialesListLoaded)
+                                    .judicialesListFiltered
                                 : []);
                           },
                           child: Row(

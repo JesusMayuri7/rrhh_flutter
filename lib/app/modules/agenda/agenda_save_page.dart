@@ -99,7 +99,6 @@ class _AgendaSavePageState extends State<AgendaSavePage> {
                   Spacer(),
                   ElevatedButton(
                       onPressed: () {
-                        print('save');
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           this.blocListAgenda.save(agendaParams!);

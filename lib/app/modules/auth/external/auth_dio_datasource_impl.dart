@@ -29,8 +29,12 @@ class AuthDioDataSourceImpl implements IAuthCoreDataSource {
             data: json.encode(params.toMap()),
           ); */
 
+
+
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           json.encode(params.toMap()), (i) => responseFromJson(i));
+
+
 
       // Clipboard.setData(ClipboardData(text: response.data.toString()));
 

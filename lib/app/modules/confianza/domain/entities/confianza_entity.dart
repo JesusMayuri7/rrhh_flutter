@@ -20,6 +20,8 @@ class ConfianzaEntity extends Equatable {
       required this.detalle,
       required this.tipo,
       required this.plaza,
+      required this.plazaOrigen,
+      required this.nroCap,
       required this.estado});
 
   final int id;
@@ -39,6 +41,8 @@ class ConfianzaEntity extends Equatable {
   final String detalle;
   final String tipo;
   final String plaza;
+  final String plazaOrigen;
+  final String nroCap;
   final String estado;
 
   @override
@@ -66,6 +70,8 @@ class ConfianzaEntity extends Equatable {
       detalle,
       tipo,
       plaza,
+      plazaOrigen,
+      nroCap,
       estado
     ];
   }
@@ -88,6 +94,8 @@ class ConfianzaEntity extends Equatable {
       String? detalle,
       String? tipo,
       String? plaza,
+      String? plazaOrigen,
+      String? nroCap,
       String? estado}) {
     return ConfianzaEntity(
         id: id ?? this.id,
@@ -107,6 +115,8 @@ class ConfianzaEntity extends Equatable {
         detalle: detalle ?? this.detalle,
         tipo: tipo ?? this.tipo,
         plaza: plaza ?? this.plaza,
+        plazaOrigen: plazaOrigen ?? this.plazaOrigen,
+        nroCap: nroCap ?? this.nroCap,
         estado: estado ?? this.estado);
   }
 
@@ -116,6 +126,8 @@ class ConfianzaEntity extends Equatable {
         "tipo": tipo,
         "estado": estado,
         "plaza": plaza,
+        "nro_cap": nroCap ,
+        "plaza_origen": plazaOrigen ,
         //"id": id,
         "desc_area": descArea,
         "cargo": cargo,

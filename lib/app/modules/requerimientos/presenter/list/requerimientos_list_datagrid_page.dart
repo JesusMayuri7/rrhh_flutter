@@ -7,8 +7,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_entity.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_dialog_widget.dart';
 
-
-
 import '../detail/requerimiento_detail_page.dart';
 import '../new/new_requerimiento_page.dart';
 import 'bloc/requerimiento_list_bloc.dart';
@@ -39,7 +37,13 @@ class _RequerimientosListDatagridPageState
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RequerimientoListBloc, RequerimientoListState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        print(state.runtimeType);
+        if(state is RequerimientoListLoaded)
+        {
+        print(state.requerimientoList.length);
+        }
+      },
       buildWhen: (previous, current) {
         return (current is RequerimientoListLoaded) ? true : false;
       },
@@ -68,7 +72,7 @@ class _RequerimientosListDatagridPageState
                       {
                            showModalDialogWidget(
                             contextDialog: context,
-                            width: 800,
+                            width: 1000,
                             height: 600,
                             pageDetail: NewRequerimientoPage(
                                 contextReq: context,

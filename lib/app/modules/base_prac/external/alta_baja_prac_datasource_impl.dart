@@ -26,7 +26,6 @@ class AltaBajaPracDataSourceImpl implements IAltaBajaPracDataSource {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           json.encode(params.toMap()), (i) => responseFromJson(i));
 
-      print(response.toString());
 
       PracticanteModel practicanteModel =
           PracticanteModel.fromJson(response.data);

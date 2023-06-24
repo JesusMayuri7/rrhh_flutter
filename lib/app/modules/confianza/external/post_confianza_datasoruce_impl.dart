@@ -20,10 +20,13 @@ class PostConfianzaDataSourceImpl implements IPostConfianzaDataSource {
 
   @override
   Future<ResponseModel> postConfianza(ConfianzaModel confianzaModel) async {
+
     try {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           jsonEncode(confianzaModel.toMap()), (i) => responseFromJson(i));
 
+ 
+    
       //ResponseModel dataJson = ResponseModel.fromJson(result['data']);
       //if(result['status'] && )
       ConfianzaModel confianza = ConfianzaModel.fromJson(response.data);

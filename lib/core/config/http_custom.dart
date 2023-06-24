@@ -50,7 +50,6 @@ class HttpCustom extends http.BaseClient {
   String _loadTokenFromSharedPreference() {
     var accessToken = appService.sessionEntity!.token;
 
-    // print('httpCustom ' + accessToken);
     //final user = sharedPref.getString('token');
 
     // If user is already authenticated, we can load his token from cache

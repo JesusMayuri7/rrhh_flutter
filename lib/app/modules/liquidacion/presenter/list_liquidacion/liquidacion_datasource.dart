@@ -413,7 +413,6 @@ class LiquidacionDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'fuente_id') {
-      print(newCellValue);
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: listLiquidacionFiltered,
           liquidacionId: listLiquidacionFiltered[dataRowIndex].id,

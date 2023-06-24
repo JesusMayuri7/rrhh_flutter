@@ -28,7 +28,7 @@ class InitialCasDatasourceImpl implements IInitialCasDatasource {
       "modalidadId": modalidadId,
       "anio": anio
     };
-    print(params.toString());
+
     try {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           json.encode(params), (i) => responseFromJson(i));

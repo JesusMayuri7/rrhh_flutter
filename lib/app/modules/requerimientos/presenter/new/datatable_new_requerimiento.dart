@@ -1,51 +1,104 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter/material.dart';
-import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_detalle_entity.dart';
+import 'bloc/requerimiento_new_bloc.dart';
 
-class DataTableNewRequerimiento extends StatelessWidget {
+class DataTableNewRequerimiento extends fluentUi.StatefulWidget {
 
-  final List<RequerimientoDetalleEntity> requerimientoDetalle;
+  final List<NewParamsRequerimientoDetalle> requerimientoDetalle;
+  final RequerimientoNewBloc requerimientoNewBloc;
 
   const DataTableNewRequerimiento({
     Key? key,
     required this.requerimientoDetalle,
+    required this.requerimientoNewBloc,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  fluentUi.State<DataTableNewRequerimiento> createState() => _DataTableNewRequerimientoState();
+}
+
+class _DataTableNewRequerimientoState extends fluentUi.State<DataTableNewRequerimiento> {
+  @override
+  Widget build(BuildContext context) {        
+
     return SingleChildScrollView(
       child: DataTable(
-                                              columns: [
+        columnSpacing: 5,
+          horizontalMargin: 0,
+          columns: [
+          DataColumn(
+          label: Container(
+                alignment: Alignment.center,
+                width: 70,
+                child: Text('Fuente')),
+          numeric: true,          
+       ),
+              DataColumn(
+                
+          label: Container(
+            alignment: Alignment.center,
+             width: 200,
+            child: Text("Meta")),
+          numeric: false,
+         ),
        DataColumn(
-          label: Text("Cant."),
+          label: Container(
+            alignment: Alignment.center,
+             width: 200,
+            child: Text("Area")),
+          numeric: false,
+         ),
+
+               DataColumn(
+          label: Container(
+            alignment: Alignment.center,
+             width: 70,
+            child: Text("Cant.")),
           numeric: true,
        ),
-       DataColumn(
-          label: Text("Subarea"),
+         DataColumn(
+          label: Container(
+            alignment: Alignment.center,
+             width: 250,
+            child: Text("Cargo")),
           numeric: false,
          ),
          DataColumn(
-          label: Text("Cargo"),
-          numeric: false,
-         ),
-         DataColumn(
-          label: Text("Monto"),
+          label: Container(
+            alignment: Alignment.center,
+             width: 70,
+            child: Text("Monto")),
           numeric: true,
          ),
+                  DataColumn(                     
+          label: Container(
+            alignment: Alignment.center,
+            width: 70,
+            child: Text("Accion")),
+          numeric: false,
+         ),
        ],
-       rows:requerimientoDetalle
+       rows:widget.requerimientoDetalle
     .map(
       (detalle) => DataRow(
           //selected: selectedAvengers.contains(avenger),
           cells: [
-            DataCell(
-              Text(detalle.cantidad.toString()),
-              onTap: () {
-                 // write your code..
-              },
+              DataCell(
+              fluentUi.Container(
+                alignment: Alignment.centerLeft,
+                child: Text(detalle.descFuente)),
             ),
               DataCell(
               Text(detalle.descArea),
+            ),
+                          DataCell(
+              Text(detalle.descMeta),
+            ),
+                        DataCell(                                        
+              fluentUi.Container(
+                alignment: Alignment.center,
+                child: Text(detalle.cantidad.toString())),             
             ),
             DataCell(
               Text(detalle.cargo),
@@ -53,6 +106,14 @@ class DataTableNewRequerimiento extends StatelessWidget {
               DataCell(
               Text(detalle.monto.toString()),
             ),
+             DataCell(
+              fluentUi.Button(child: Container(
+                alignment: Alignment.center,
+                color: Colors.red,
+                child: Text('Del',style: TextStyle(color: Colors.white),)),
+              onPressed: () {
+                //this.requerimientoNewBloc.add(DelRequerimientoDetalleEvent(deleteItemRequerimiento: detalle.id));
+              })),            
           ]),
     )
     .toList(),

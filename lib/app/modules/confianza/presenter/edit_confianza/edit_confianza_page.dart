@@ -33,6 +33,8 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
   TextEditingController tipoController = TextEditingController();
   TextEditingController cargoController = TextEditingController();
   TextEditingController plazaController = TextEditingController();
+  TextEditingController plazaOrigenController = TextEditingController();
+  TextEditingController nroCapController = TextEditingController();
   TextEditingController direccionController = TextEditingController();
   List<DropdownMenuItem<AreaEntity>>? listDropDownItemAreas;
   int _area = 0;
@@ -58,6 +60,8 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
     this.direccionController.text = widget.confianzaEntity.direccion;
     this.tipoController.text = widget.confianzaEntity.tipo;
     this.plazaController.text = widget.confianzaEntity.plaza;
+    this.nroCapController.text = widget.confianzaEntity.nroCap;
+    this.plazaOrigenController.text = widget.confianzaEntity.plazaOrigen;
     this._area = widget.confianzaEntity.area_id;
     if (blocApp.state is ConfianzaAreaStateLoaded)
       listAreas = (blocApp.state as ConfianzaAreaStateLoaded).listAreas;
@@ -110,6 +114,22 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                   title: 'Modalidad'),
                               SizedBox(
                                 height: 5,
+                              ),
+                                                            LabelWithFormField(
+                                heightErroStyle: 0.5,
+                                maxLength: 5,
+                                textAlign: TextAlign.left,
+                                title: 'N° CAP',
+                                textController: nroCapController,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                /*
+                                validator: (value) {
+                                  if (value == '000000' || value!.isEmpty)
+                                    return 'codigo airhsp requerido';
+                                },*/
                               ),
                               LabelWithFormField(
                                 heightErroStyle: 0.5,
@@ -262,6 +282,14 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                               SizedBox(
                                 height: 5,
                               ),
+                                                            LabelWithDropDown(
+                                  value: plazaOrigenController.text,
+                                  dropdownMenuItemList:
+                                      _buildOrigen(['NINGUNO', 'CAP','CAS']),
+                                  onChanged: (String? value) {
+                                    this.plazaOrigenController.text = value!;
+                                  },
+                                  title: 'Origen'),
                             ],
                           ),
                         ),
@@ -310,6 +338,8 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
                                                     .toUpperCase(),
                                                 area_id: this._area,
                                                 plaza: plazaController.text,
+                                                plazaOrigen: plazaOrigenController.text,
+                                                nroCap: nroCapController.text,
                                                 tipo: tipoController.text,
                                                 trabajadorId: 0,
                                                 estado: '')))
@@ -360,6 +390,20 @@ class _EditConfianzaPageState extends State<EditConfianzaPage> {
         .toList();
 
     return listModalidad;
+  }
+
+    List<DropdownMenuItem<String>> _buildOrigen(List<String> origen) {
+    List<DropdownMenuItem<String>> listOrigen = [];
+    origen
+        .asMap()
+        .entries
+        .map((e) => listOrigen.add(DropdownMenuItem(
+              value: e.value,
+              child: Text(e.value.toString()),
+            )))
+        .toList();
+
+    return listOrigen;
   }
 
   List<DropdownMenuItem<String>> _buildTipo(List<String> tipo) {

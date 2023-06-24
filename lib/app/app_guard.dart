@@ -11,9 +11,9 @@ class AppGuard extends RouteGuard {
   FutureOr<bool> canActivate(String path, ParallelRoute route) async {
     await Modular.isModuleReady<AppModule>();
     AppService appService = await Modular.get<AppService>();
-    print('guard app ');
+
     if (appService.sessionEntity != null) {
-      print('guard app ' + appService.sessionEntity.toString());
+
       return true;
     }
 

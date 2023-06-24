@@ -10,8 +10,6 @@ class JudicialesListLoad extends JudicialesListEvent {
   final String anio;
   JudicialesListLoad({required this.anio});
 
-  @override
-  List<Object> get props => [this.anio];
 }
 
 class JudicialesListFilter extends JudicialesListEvent {
@@ -25,11 +23,13 @@ class JudicialesListFilter extends JudicialesListEvent {
 class JudicialesListSetDetailEvent extends JudicialesListEvent {
   final List<JudicialDetailEntity> judicialesEntity;
   final int judicialId;
+  final String nombres;
   JudicialesListSetDetailEvent({
     required this.judicialesEntity,
     required this.judicialId,
+    required this.nombres,
   });
 
    @override
-  List<Object> get props => [this.judicialesEntity,this.judicialId];
+  List<Object> get props => [this.judicialesEntity,this.judicialId,this.nombres];
 }

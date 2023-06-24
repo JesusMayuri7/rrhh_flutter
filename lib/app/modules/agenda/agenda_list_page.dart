@@ -84,7 +84,7 @@ class AgendaListPageState extends State<AgendaListPage> {
                         contextDialog: context,
                         pageDetail: AgendaSavePage(title: 'Nueva Agenda'),
                         width: 450,
-                        height: 450);
+                        height: 550);
                   },
                   child: Text('Nuevo')),
             ],

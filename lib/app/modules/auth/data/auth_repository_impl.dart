@@ -17,7 +17,7 @@ class AuthRepositoyImpl implements IAuthReposity {
   @override
   Future<Either<Failure, SessionEntity>> loginEmailPassword(
       AuthCoreParams params) async {
-    try {
+    try {      
       final result = await this.iAuthCoreDataSource.login(params);
       return Right(result);
     } on ServerException catch (e) {

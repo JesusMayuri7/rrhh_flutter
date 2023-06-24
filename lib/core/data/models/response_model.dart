@@ -24,7 +24,7 @@ class ResponseModel extends ResponseEntity {
             anio: anio);
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) => ResponseModel(
-        status: json["status"] ?? 0,
+        status: json["status"] ?? false,
         message: json["message"] ?? '',
         data: json["data"] ?? [],
         expiresIn: json["expires_in"] ?? 0,

@@ -36,7 +36,6 @@ class _DropdownPresupuestalState<T> extends State<DropdownPresupuestal<T>> {
 
   @override
   Widget build(BuildContext context) {
-    print('build ' + widget.dropDownMenuItems.first.value.toString());
 
     return Container(
       //color: Colors.amber,

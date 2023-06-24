@@ -2,30 +2,37 @@
 part of 'requerimiento_new_bloc.dart';
 
 abstract class RequerimientoNewState extends Equatable {
-  final RequerimientoEntity? requerimientoEntity;
+  final NewParamsRequerimiento? newParamsRequerimiento;
+  final List<NewParamsRequerimientoDetalle> newParamsRequerimientoDetalle;
   final StatusNewRequerimiento statusNewRequerimiento;
   
-
   RequerimientoNewState({
-    required this.requerimientoEntity,
+    required this.newParamsRequerimiento,
+    required this.newParamsRequerimientoDetalle,
     this.statusNewRequerimiento = StatusNewRequerimiento.initial,
   });
 
-
-
+    @override
+  List<Object?> get props => []; 
 }
 
 class RequerimientoNew extends RequerimientoNewState {
-  RequerimientoNew({required super.requerimientoEntity, super.statusNewRequerimiento = StatusNewRequerimiento.initial });
+  RequerimientoNew({
+    required super.newParamsRequerimiento, 
+    required super.newParamsRequerimientoDetalle,
+    super.statusNewRequerimiento = StatusNewRequerimiento.initial });
   
   @override
-  List<Object?> get props => [this.requerimientoEntity,this.statusNewRequerimiento]; 
+  List<Object?> get props => [this.newParamsRequerimiento,this.newParamsRequerimientoDetalle,this.statusNewRequerimiento]; 
 
   RequerimientoNew copyWith({
-      RequerimientoEntity? requerimientoEntity,StatusNewRequerimiento? statusNewRequerimiento
+      NewParamsRequerimiento? newParamsRequerimiento,
+      List<NewParamsRequerimientoDetalle>? newParamsRequerimientoDetalle,
+      StatusNewRequerimiento? statusNewRequerimiento
   }) {
         return RequerimientoNew(
-      requerimientoEntity: requerimientoEntity ?? this.requerimientoEntity,
+      newParamsRequerimiento: newParamsRequerimiento ?? this.newParamsRequerimiento,
+      newParamsRequerimientoDetalle: newParamsRequerimientoDetalle ?? this.newParamsRequerimientoDetalle,
       statusNewRequerimiento: statusNewRequerimiento ?? this.statusNewRequerimiento,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/core/external/get_tipo_requerimiento_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:rrhh_clean/app/modules/auth/domain/login_auth_usecase.dart';
@@ -24,7 +25,7 @@ class AppModule extends Module {
   final List<Bind> binds = [
     AsyncBind<SharedPreferences>((i) => SharedPreferences.getInstance()),
     Bind.lazySingleton<AppService>((i) => AppService(preferences: i())..init()),
-    Bind.lazySingleton((i) => DioCustom()),
+    Bind.singleton((i) => DioCustom()),
     Bind((i) => LoginAuthUseCase(iAuthRepository: i())),
     Bind((i) => GetClasificadoresImpl(httpCustom: i())),
     Bind((i) => GetCertificadosImpl(httpCustom: i())),
@@ -41,6 +42,8 @@ class AppModule extends Module {
           iCertificadosDatasourceApp: i(),
           iAreasDatasourceApp: i(),
         )),
+   Bind((i) => GetTipoRequerimientoImpl(httpCustom: i()))
+
   ];
 
   @override

@@ -22,6 +22,7 @@ class JudicialDetailCubit
     judicialListSubscripcion = judicialListBloc.stream.listen((stateList) {
       if (stateList is JudicialesListSetDetail) {
         add(JudicialDetailLoadedEvent(
+            nombres: stateList.nombres,
             judicialDetailEntity: stateList.judicialDetailEntity,
             judicialId: stateList.judicialId));
       }
@@ -31,9 +32,9 @@ class JudicialDetailCubit
   }
 
   _onJudicialDetailLoadedEvent(JudicialDetailLoadedEvent event,
-      Emitter<JudicialDetailState> emit) async {
-    print('event ' + event.judicialId.toString());
-    emit(JudicialDetailLoaded(
+      Emitter<JudicialDetailState> emit) async {    
+    emit(JudicialDetailLoaded(     
+         nombres: event.nombres,    
         judicialDetailList: event.judicialDetailEntity,
         judicialId: event.judicialId));
   }
@@ -46,15 +47,29 @@ class JudicialDetailCubit
 
   _onJudicialNewDetailEvent(
       JudicialNewDetailEvent event, Emitter<JudicialDetailState> emit) async {
+        
     var result =
         await this.newJudicialDetailUseCase(event.paramsNewJudicialDetail);
     emit(result.fold((l) {
-      return JudicialDetailError(judicialDetailList: [], message: l.toString());
+         return JudicialDetailError(judicialDetailList: [], message: l.toString());
     }, (r) {
       JudicialDetailEntity judicialDetail = r.data as JudicialDetailEntity;
-      return JudicialDetailLoaded(
+      
+      if(event.paramsNewJudicialDetail.id == null || event.paramsNewJudicialDetail.id == 0)
+      {
+             return JudicialDetailLoaded(    
+              nombres: '',          
           judicialDetailList: [judicialDetail, ...state.judicialDetailList],
           judicialId: event.paramsNewJudicialDetail.judicialId!);
+        
+      }
+else
+{
+ return JudicialDetailLoaded(  
+  nombres: '',
+   judicialDetailList: state.judicialDetailList.map((e) => e.id == judicialDetail.id? judicialDetail : e).toList(),
+                  judicialId: event.paramsNewJudicialDetail.judicialId!);        
+}         
     }));
   }
 }

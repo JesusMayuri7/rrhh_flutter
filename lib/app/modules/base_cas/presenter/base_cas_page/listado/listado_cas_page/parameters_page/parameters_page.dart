@@ -308,20 +308,11 @@ class _HeadBaseCasPageState extends State<ParametersPage>
                                           mesFin: this.mesFin))
                                       : null,
                                   child: (state.status == StatusCas.calculating)
-                                      ? Center(
-                                          heightFactor: 1,
-                                          widthFactor: 1,
-                                          child: SizedBox(
-                                            height: 16,
-                                            width: 16,
-                                            child: CircularProgressIndicator(
-                                              valueColor:
-                                                  AlwaysStoppedAnimation<Color>(
-                                                      Colors.blue),
-                                              strokeWidth: 1.5,
-                                            ),
+                                      ? Expanded(
+                                        child: Center(
+                                            child: CircularProgressIndicator(),
                                           ),
-                                        )
+                                      )
                                       : Text('Calcular')),
                               SizedBox(width: 10),
                               f.FilledButton(

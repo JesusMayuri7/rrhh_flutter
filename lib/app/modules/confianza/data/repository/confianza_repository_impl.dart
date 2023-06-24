@@ -56,6 +56,8 @@ class ConfianzaRepositoryImpl implements IConfianzaRepository {
       required String nombres,
       required int orgAreaId,
       required String plaza,
+      required String plazaOrigen,
+      required String nroCap,
       required String tipo,
       required int trabajadorId,
       required String estado}) async {
@@ -79,6 +81,8 @@ class ConfianzaRepositoryImpl implements IConfianzaRepository {
                 detalle: detalle,
                 tipo: tipo,
                 plaza: plaza,
+                plazaOrigen: plazaOrigen,
+                nroCap: nroCap,
                 estado: '',
               ));
       return Right(result);

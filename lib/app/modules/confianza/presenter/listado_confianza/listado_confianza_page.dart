@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -109,6 +111,8 @@ class _ListadoConfianzaPageState extends State<ListadoConfianzaPage> {
                                 detalle: '',
                                 tipo: 'DESIGNACION',
                                 plaza: '000000',
+                                plazaOrigen: 'NINGUNO',
+                                nroCap: '00000',
                                 estado: ''));
                       },
                       child: Text('Nuevo')),
@@ -145,30 +149,37 @@ class _ListadoConfianzaPageState extends State<ListadoConfianzaPage> {
               Expanded(
                   child: SfDataGridTheme(
                 data: SfDataGridThemeData(
+
                   brightness: Theme.of(context).brightness,
                   headerHoverColor: Colors.white.withOpacity(0.3),
                   headerColor: Colors.lightBlue[800],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 5.0),
-                  child: SfDataGrid(
-                      highlightRowOnHover: true,
-                      footerFrozenRowsCount: 0,
-                      footerFrozenColumnsCount: 1,
-                      frozenColumnsCount: 3,
-                      source: confianzaDataSource,
-                      headerRowHeight: 25,
-                      rowHeight: 25,
-                      isScrollbarAlwaysShown: true,
-                      gridLinesVisibility: GridLinesVisibility.both,
-                      headerGridLinesVisibility: GridLinesVisibility.both,
-                      //allowSorting: true,
-                      allowFiltering: true,
-                      allowMultiColumnSorting: true,
-                      allowTriStateSorting: true,
-                      showSortNumbers: true,
-                      selectionMode: SelectionMode.single,
-                      columns: getColumnsConfianza(context)),
+                  child: ScrollConfiguration(
+                behavior:
+                    ScrollConfiguration.of(context).copyWith(dragDevices: {
+                  PointerDeviceKind.touch,
+                  PointerDeviceKind.mouse,
+                }),child: SfDataGrid(
+                        highlightRowOnHover: true,
+                        footerFrozenRowsCount: 0,
+                        footerFrozenColumnsCount: 1,
+                        frozenColumnsCount: 3,
+                        source: confianzaDataSource,
+                        headerRowHeight: 25,
+                        rowHeight: 25,
+                        isScrollbarAlwaysShown: true,
+                        gridLinesVisibility: GridLinesVisibility.both,
+                        headerGridLinesVisibility: GridLinesVisibility.both,
+                        //allowSorting: true,
+                        allowFiltering: true,
+                        allowMultiColumnSorting: true,
+                        allowTriStateSorting: true,
+                        showSortNumbers: true,
+                        selectionMode: SelectionMode.single,
+                        columns: getColumnsConfianza(context)),
+                  ),
                 ),
               )),
               if (state is ListConfianzaBlocLoading)

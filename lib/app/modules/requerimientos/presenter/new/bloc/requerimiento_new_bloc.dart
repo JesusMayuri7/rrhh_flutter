@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_detalle_entity.dart';
-import 'package:rrhh_clean/app/modules/requerimientos/domain/requerimiento_entity.dart';
+
 import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
@@ -13,33 +14,29 @@ part 'requerimiento_new_state.dart';
 
 class RequerimientoNewBloc
     extends Bloc<RequerimientoNewEvent, RequerimientoNewState> {
-  RequerimientoNewBloc() : super(RequerimientoNew(requerimientoEntity: null)) {
+  RequerimientoNewBloc() : super(RequerimientoNew(newParamsRequerimiento: null,newParamsRequerimientoDetalle: [])) {
     on<AddRequerimientoDetalleEvent>(_addRequerimientoDetalleEvent);
+    on<DelRequerimientoDetalleEvent>(_delRequerimientoDetalleEvent);
   }
 
-  _addRequerimientoDetalleEvent(AddRequerimientoDetalleEvent event, Emitter<RequerimientoNewState> emit) async {
+  _addRequerimientoDetalleEvent(AddRequerimientoDetalleEvent event, Emitter<RequerimientoNewState> emit) {
 
-    final requerimientoDetalle = state.requerimientoEntity == null ? []: state.requerimientoEntity?.requerimientoDetalle;
+    List<NewParamsRequerimientoDetalle> requerimientoDetalles =[];
 
-    final paramsNewRequerimiento = RequerimientoEntity(anio: event.newParamsRequerimiento.anio, id: event.newParamsRequerimiento.id ?? 0,
-    dscModalidad: '', presupuesto: '', 
-    nroExpediente: '', dctoSolicitud: '', fechaSolicitud: '', unidadId: 0, 
-    descUnidad: '', metaId: 0, descMeta: '', fuenteId: 0, modalidadId: 0, 
-    descFuente: '', cantidad: 0, requerimientoDetalle: []);
+    //final requerimientoDetalle = state.newParamsRequerimiento == null ? []: state.newParamsRequerimiento?.requerimientoDetalle;
+    //NewParamsRequerimiento requerimiento = state.newParamsRequerimiento ?? event.paramsNewRequerimiento;
+    requerimientoDetalles = List.of((state as RequerimientoNew).newParamsRequerimientoDetalle);
+    requerimientoDetalles.add(event.paramsNewRequerimientoDetalle);         
+   
 
-    final paramsRequerimientoDetalle = RequerimientoDetalleEntity(cargo: event.paramsNewRequerimientoDetalle.cargo,
-    monto: event.paramsNewRequerimientoDetalle.monto, cantidad: event.paramsNewRequerimientoDetalle.cantidad, 
-    areaId: event.paramsNewRequerimientoDetalle.areaId, descArea: event.paramsNewRequerimientoDetalle.descArea, id: 0, 
-    fuenteId: event.paramsNewRequerimientoDetalle.fuenteId, descFuente: event.paramsNewRequerimientoDetalle.descFuente, 
-    metaId: event.paramsNewRequerimientoDetalle.metaId, descMeta: event.paramsNewRequerimientoDetalle.descMeta);
+    //List<NewParamsRequerimientoDetalle> detalle =  List<NewParamsRequerimientoDetalle>.of([...requerimientoDetalles,event.paramsNewRequerimientoDetalle]);
+   
     
-    print(paramsRequerimientoDetalle);
-    print(state.toString());
+    emit(RequerimientoNew(newParamsRequerimientoDetalle: requerimientoDetalles, newParamsRequerimiento: null));         
+  }
 
-    final  result = (state as RequerimientoNew).copyWith(requerimientoEntity: 
-    (state as RequerimientoNew).requerimientoEntity?.copyWith(requerimientoDetalle: [...requerimientoDetalle!,paramsRequerimientoDetalle]));
-    print(result);
-     emit(result);
+  _delRequerimientoDetalleEvent(DelRequerimientoDetalleEvent event, Emitter<RequerimientoNewState> emit) async {
+
   }
 }
 
@@ -70,9 +67,37 @@ class NewParamsRequerimiento {
 
   @override
   String toString() {
-    return 'NewParamsRequerimiento(id: $id, anio: $anio, expedientePvn: $expedientePvn, documentoPvn: $documentoPvn, fechaDocumento: $fechaDocumento, orgArea: $orgArea, meta: $meta, fuente: $fuente, modalidad: $modalidad)';
+    return '''NewParamsRequerimiento(id: $id, anio: $anio, expedientePvn: $expedientePvn, documentoPvn: $documentoPvn, 
+    fechaDocumento: $fechaDocumento, orgArea: $orgArea, meta: $meta, fuente: $fuente, modalidad: $modalidad, requerimientoDetalle: $requerimientoDetalle)''';
+  }
+
+  NewParamsRequerimiento copyWith({
+    int? id,
+    String? anio,
+    String? expedientePvn,
+    String? documentoPvn,
+    String? fechaDocumento,
+    AreaEntity? orgArea,
+    MetaEntity? meta,
+    FuenteEntity? fuente,
+    ModalidadEntity? modalidad,
+    List<NewParamsRequerimientoDetalle>? requerimientoDetalle,
+  }) {
+    return NewParamsRequerimiento(
+      id: id ?? this.id,
+      anio: anio ?? this.anio,
+      expedientePvn: expedientePvn ?? this.expedientePvn,
+      documentoPvn: documentoPvn ?? this.documentoPvn,
+      fechaDocumento: fechaDocumento ?? this.fechaDocumento,
+      orgArea: orgArea ?? this.orgArea,
+      meta: meta ?? this.meta,
+      fuente: fuente ?? this.fuente,
+      modalidad: modalidad ?? this.modalidad,
+      requerimientoDetalle: requerimientoDetalle ?? this.requerimientoDetalle,
+    );
   }
 }
+
 
 class NewParamsRequerimientoDetalle extends Equatable {
   NewParamsRequerimientoDetalle({

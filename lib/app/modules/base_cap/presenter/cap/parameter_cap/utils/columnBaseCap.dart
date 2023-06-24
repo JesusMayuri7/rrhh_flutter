@@ -2,7 +2,7 @@ enum ColumnBaseCap {
   fuente('AF'),
   producto('AN'),
   meta('AL'),
-  estadoOpp('S'),  
+  estadoOpp('AA\$2'),   // Celda de la hoja de presupuesto como referencia a la Hoja Base y columna EstadoOpp
   epsAporta('BA'),
   montoBasico('BB'),
   incremento('BC'),

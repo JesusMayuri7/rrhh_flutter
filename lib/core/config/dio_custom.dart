@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
@@ -24,6 +21,9 @@ class DioCustom implements IClientCustom {
         'accept': '*/*',
         'Content-Type': 'application/json',
       },
+       receiveDataWhenStatusError: true,
+          connectTimeout: Duration(seconds: 60), // 60 seconds
+          receiveTimeout: Duration(seconds: 60) // 60 seconds
     ),
   );
   DioCustom() {
@@ -31,11 +31,12 @@ class DioCustom implements IClientCustom {
   }
 
   Future<void> init() async {
-    token = appService.sessionEntity!.token;
+    if(appService.sessionEntity != null)
+      token = appService.sessionEntity!.token;
 
     (this._dio!.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (client) {
-      client.findProxy = (url) {
+      client.findProxy = (url) {    
         if (kIsWeb)
           return 'PROXY localhost:80';
         else
@@ -43,19 +44,9 @@ class DioCustom implements IClientCustom {
       };
       return client;
     };
-
-/*  Future<void> init() async {
-     token = appService.sessionEntity!.token;
-    (this._dio!.httpClientAdapter as DefaultHttpClientAdapter)
-        .onHttpClientCreate = (client) {
-      client.findProxy = (url) {
-        return 'DIRECT';
-      };
-      return client;
-    }; */
-
+    
     this._dio!.interceptors.add(InterceptorsWrapper(
-            onError: (error, errorInterceptorHandler) async {
+            onError: (error, errorInterceptorHandler) async {              
           if (error.response?.statusCode == 401) {
             try {
               await this
@@ -79,21 +70,23 @@ class DioCustom implements IClientCustom {
                   return errorInterceptorHandler.resolve(cloneReq);
                 } else {
                   // bloc.add( ));
-                  Modular.to.navigate('/login');
+                  Modular.to.navigate('/auth/login');
                   throw Exception('Inicie sesion');
                 }
               });
             } on Exception {
-              Modular.to.navigate('/login');
+              print('expection $error');
+              Modular.to.navigate('/auth/login');
               //(Modular.get<AuthCoreBloc>().state as SuccessAuthState).loginResponseEntity.copyWith(status: false, token: '');
               return errorInterceptorHandler.next(error);
               //throw Exception('No podemos validar sus credenciales');
             }
           } else
             return errorInterceptorHandler.next(error);
-        }, onRequest: (request, requestInterceptorHandler) {
+        }, onRequest: (request, requestInterceptorHandler) {          
+          if(request.path != 'http://rrhh.pvn.gob.pe/api/auth/login')
+            request.headers["Authorization"] = "Bearer " + token!;
           print("${request.method} | ${request.path} | ${request.baseUrl}");
-          request.headers["Authorization"] = "Bearer " + token!;
           return requestInterceptorHandler.next(request);
         }, onResponse: (response, responseInterceptorHandler) {
           return responseInterceptorHandler.next(response);
@@ -101,12 +94,10 @@ class DioCustom implements IClientCustom {
   }
 
   @override
-  Future<dynamic> request(method, url, data, Function(dynamic) fromJson) async {
-    log(url);
+  Future<dynamic> request(method, url, data, Function(dynamic) fromJson) async {  
     Response<String> response = await this
         ._dio!
-        .request(url, data: data, options: Options(method: method));
-
+        .request(url, data: data, options: Options(method: method));        
     return fromJson(response.data.toString());
   }
 
@@ -120,7 +111,13 @@ class DioCustom implements IClientCustom {
               validateStatus: (status) {
                 return status! < 500;
               }),
-        );
+        ).timeout(Duration(seconds: 60));
+    return response;
+  }
+
+   @override
+  Future<Response> download2(String url) async {
+    Response response = await this._dio!.download(url,'./airhsp.xls');
     return response;
   }
 
@@ -134,7 +131,6 @@ class DioCustom implements IClientCustom {
         filename: params.bytes!.path.split('/').last,
         contentType: new MediaType("application", "xls"),
       ),
-      //   "anio": params.anio,
     });
     var response = await this._dio!.request(url,
         data: formData,

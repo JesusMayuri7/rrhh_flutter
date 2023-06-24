@@ -7,27 +7,54 @@ abstract class AirhspPresupuestoEvent extends Equatable {
 
 class ListPracEvent extends AirhspPresupuestoEvent {
   final String anio;
+  final bool cts;
+  final bool gratificacion;
+  final bool bonificacion;
 
   ListPracEvent({
     required this.anio,
+    required this.cts,
+    required this.gratificacion,
+    required this.bonificacion,
   });
 
   @override
-  List<Object> get props => [this.anio];
+  List<Object> get props => [this.anio,this.cts,this.gratificacion,this.bonificacion];
 }
 
-class AltaBajaListEvent extends AirhspPresupuestoEvent {
-  final List<AirhspPresupuestoEntity> listPracticanteFiltered;
-  final List<AirhspPresupuestoEntity> listPracticanteOriginal;
 
-  AltaBajaListEvent({
+class TotalesAirhspEvent extends AirhspPresupuestoEvent {
+  final List<AirhspPresupuestoEntity> listPracticanteFiltered;
+  final bool cts;
+  final bool gratificacion;
+  final bool bonificacion;
+  
+  TotalesAirhspEvent({
     this.listPracticanteFiltered = const [],
-    this.listPracticanteOriginal = const [],
+    required this.cts,
+    required this.gratificacion,
+    required this.bonificacion,
   });
 
   @override
-  List<Object> get props =>
-      [this.listPracticanteFiltered, this.listPracticanteOriginal];
+  List<Object> get props => [this.listPracticanteFiltered,this.cts,this.gratificacion,this.bonificacion];
+}
+
+class CalculoAirhspEvent extends AirhspPresupuestoEvent {
+  final List<AirhspPresupuestoEntity> listPracticanteFiltered;
+  final bool cts;
+  final bool gratificacion;
+  final bool bonificacion;
+  
+  CalculoAirhspEvent({
+    this.listPracticanteFiltered = const [],
+    required this.cts,
+    required this.gratificacion,
+    required this.bonificacion,
+  });
+
+  @override
+  List<Object> get props => [this.listPracticanteFiltered,this.cts,this.gratificacion,this.bonificacion];
 }
 
 class FilterPracEvent extends AirhspPresupuestoEvent {

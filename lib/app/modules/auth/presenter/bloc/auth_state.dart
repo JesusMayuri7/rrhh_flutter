@@ -38,8 +38,13 @@ class SuccessAuthState extends AuthState {
 }
 
 class ErrorAuthState extends AuthState {
+
   final String message;
+
   ErrorAuthState({
     required this.message,
   });
+
+    @override
+  List<Object> get props => [this.message];
 }

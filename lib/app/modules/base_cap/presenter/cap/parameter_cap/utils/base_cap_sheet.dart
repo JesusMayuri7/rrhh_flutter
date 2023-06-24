@@ -129,7 +129,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 9)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam}+${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
+        'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam}+${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Ene Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 10)
@@ -157,7 +157,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 15)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam}+${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
+        'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam}+${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Feb Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 16)
@@ -180,7 +180,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 20)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
+        'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Mar Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 21)
@@ -202,7 +202,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 25)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
+        'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Abr Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 26)
@@ -224,7 +224,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 30)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
+        'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // May Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 31)
@@ -242,7 +242,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 34)
             .formula =
-        '(${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam} + (${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam}/6))/2';
+        'ROUND(((${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam} + (${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam}/6))/360)*180,2)';
 
     // Jun Monto
     sheet
@@ -252,7 +252,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 36)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
+        'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Jun Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 37)
@@ -274,7 +274,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 41)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + (${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam} * 2)';
+        'ROUND(IF(${ColumnBaseCap.epsAporta.columnLetter}${firstRowHeading + idxParam}=1,${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} +(${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}*2),${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam} ),2)';
     
     // Jul Sctr Salud
     sheet
@@ -283,13 +283,11 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     // Jul Vida ley
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 43)
-        .formula = '${ColumnBaseCap.vidaLey.columnLetter}${firstRowHeading + idxParam}';
-    
+        .formula = '${ColumnBaseCap.vidaLey.columnLetter}${firstRowHeading + idxParam}';    
     // Jul Sctr Pension
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 44)
         .formula = '${ColumnBaseCap.sctrPensionGrati.columnLetter}${firstRowHeading + idxParam}';
-
     // Jul Grati
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 45)
@@ -297,9 +295,8 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     // Jul Boni
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 46)
-            .formula =
-        '(${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam}*0.09)-${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
-
+            .formula =        
+        'ROUND(IF(${ColumnBaseCap.epsAporta.columnLetter}${firstRowHeading + idxParam}=1,${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam},${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}),2)';
     // Ago Monto
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 47)
@@ -308,7 +305,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 48)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam}+${ColumnBaseCap.epsAporta.columnLetter}${firstRowHeading + idxParam}';
+           'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Ago Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 49)
@@ -330,7 +327,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 53)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam}+${ColumnBaseCap.epsAporta.columnLetter}${firstRowHeading + idxParam}';
+           'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Set Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 54)
@@ -352,7 +349,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 58)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
+        'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Oct Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 59)
@@ -374,7 +371,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 63)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}';
+        'ROUND(${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam},2)';
     // Nov Sctr Salud
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 64)
@@ -391,8 +388,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 67)
             .formula =
-        '(${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam} + (${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam}/6))/2';
-
+        'ROUND(((${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam} + (${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam}/6))/360)*180,2)';
     // Dic Monto
     sheet
         .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 68)
@@ -402,7 +398,7 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
     sheet
             .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 69)
             .formula =
-        '${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + (${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam} * 2)';
+         'ROUND(IF(${ColumnBaseCap.epsAporta.columnLetter}${firstRowHeading + idxParam}=1,${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} +(${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}*2),${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam} ),2)';
 
     // Dic Sctr Salud
     sheet
@@ -425,9 +421,9 @@ baseCapSheet(Worksheet sheet, ParamsCapCalcular params) {
         .formula = '${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam}';
     // Dic Boni
     sheet
-            .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 74)
+        .getRangeByIndex(firstRowHeading + idxParam, firstColProcess + 74)
             .formula =
-        '(${ColumnBaseCap.totalBasico.columnLetter}${firstRowHeading + idxParam}*0.09) - (${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam})';
+        'ROUND(IF(${ColumnBaseCap.epsAporta.columnLetter}${firstRowHeading + idxParam}=1,${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam},${ColumnBaseCap.essalud.columnLetter}${firstRowHeading + idxParam} + ${ColumnBaseCap.epsSalud.columnLetter}${firstRowHeading + idxParam}),2)';
 
     final int rowClasificador = firstRowHeading - 1;
     final int rowIndex = firstRowHeading + idxParam;

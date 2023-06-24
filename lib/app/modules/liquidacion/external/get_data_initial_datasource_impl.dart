@@ -38,8 +38,6 @@ class GetDataInitialDatasourceImpl implements IGetDataInitialDatasource {
         responseFuentes
       ]);
 
-     // print(listData.toString());
-
       return listData;
     } on SocketException {
       throw ServerException('Sin Conexion');

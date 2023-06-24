@@ -10,6 +10,7 @@ part 'requerimiento_detail_state.dart';
 
 class RequerimientoDetailBloc
     extends Bloc<RequerimientoDetailEvent, RequerimientoDetailState> {
+      
   RequerimientoDetailBloc({required this.requerimientoListBloc})
       : super(RequerimientoDetailInitial()) {
     requerimientoListBlocSubscripcion =

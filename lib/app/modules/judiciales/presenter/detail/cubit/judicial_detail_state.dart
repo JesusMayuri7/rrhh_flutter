@@ -4,6 +4,7 @@ abstract class JudicialDetailState extends Equatable {
   JudicialDetailState({required this.judicialDetailList});
 
   final List<JudicialDetailEntity> judicialDetailList; 
+  
 
 
   @override
@@ -24,10 +25,11 @@ class JudicialDetailError extends JudicialDetailState {
 }
 
 class JudicialDetailLoaded extends JudicialDetailState {
-  JudicialDetailLoaded({required super.judicialDetailList, required this.judicialId});
+  JudicialDetailLoaded({required super.judicialDetailList, required this.judicialId, required this.nombres});
   final int judicialId;
+  final String nombres;
 
   @override
-  List<Object> get props => [this.judicialDetailList,this.judicialId];
+  List<Object> get props => [this.judicialDetailList,this.judicialId,this.nombres];
   
 }

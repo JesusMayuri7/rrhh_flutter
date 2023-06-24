@@ -218,10 +218,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_bloc
-      sha256: "434951eea948dbe87f737b674281465f610b8259c16c097b8163ce138749a775"
+      sha256: e74efb89ee6945bcbce74a5b3a5a3376b088e5f21f55c263fc38cbdc6237faae
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.2"
+    version: "8.1.3"
   flutter_dotenv:
     dependency: "direct main"
     description:
@@ -671,58 +671,58 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_charts
-      sha256: a3694508b7a7bc366a5ce27b6ab3be60a32bc994d1fd806f6d57e81ed9ca637c
+      sha256: "806ee3e7b4870e37afde0ee29294d0d5b687d469715fd63ae8fa39d6503b0c23"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.5"
+    version: "22.1.34"
   syncfusion_flutter_core:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_core
-      sha256: b2ad1c93239b094d6de1b4679c1835b1bc4332e6c6548bd2da44bd2594e6cdc5
+      sha256: "952f5ee970bc3fba2db95a8dac71a295d9a70ad2c0993c7279e3a883c3e1459f"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.5"
+    version: "22.1.34"
   syncfusion_flutter_datagrid:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_datagrid
-      sha256: a76124ad7ca3712d7f0c885aab838e8657126e33d0b76bbbe5b12e1c9978c55b
+      sha256: eca31fb38ac6736507bb343f5e64b7ce531fded72568759502e980f2c05a6c86
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.5"
+    version: "22.1.34"
   syncfusion_flutter_datagrid_export:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_datagrid_export
-      sha256: "05afd14655ba9ad5badb09e92ce1ec727cb98632f3ab4bc01aec7e56db5d5cc3"
+      sha256: "12bd5e1380056a7894f3a6b1b8a2351633dd27a4b2bb33988031b409f3c93b11"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.5"
+    version: "22.1.34"
   syncfusion_flutter_pdf:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_pdf
-      sha256: df2638d86699b2af5de38a263c732e367d3ece93a269e69d861d770475e24657
+      sha256: fd9b3dd2fde35be9bd61b7b22145e39f77b06bde65ae549d37669a61f2b0c8d1
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.5"
+    version: "22.1.34"
   syncfusion_flutter_xlsio:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_xlsio
-      sha256: "82ec78ddb79ad7d21887664895bf3ffa0409c50dfc7ed88524b329fcfef697bd"
+      sha256: "8473d7df64e7173acd8808a29ec7e2f003c5923adf31b010294811f314dd3800"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.5"
+    version: "22.1.34"
   syncfusion_officecore:
     dependency: transitive
     description:
       name: syncfusion_officecore
-      sha256: cdf6f252f4eb32706d9aea4803bdc1966f828a780b6831ab33a7c757021cccce
+      sha256: "5f77af8b255e492ff33867faa3afb3b9445343f8b3b694dc1de54defa1bcf90d"
       url: "https://pub.dev"
     source: hosted
-    version: "21.2.5"
+    version: "22.1.34"
   term_glyph:
     dependency: transitive
     description:

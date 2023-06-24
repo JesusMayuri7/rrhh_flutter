@@ -16,15 +16,14 @@ class MainDocumentosPage extends StatefulWidget {
 }
 
 class _MainDocumentosPageState extends State<MainDocumentosPage> {
-  final RequerimientosBloc requerimientosBloc =
-      Modular.get<RequerimientosBloc>();
+  final RequerimientosBloc requerimientosBloc = Modular.get<RequerimientosBloc>();
 
   @override
   void initState() {
-    super.initState();
     if (requerimientosBloc.state is RequerimientosInitial) {
       this.requerimientosBloc.add(RequerimientosLoadEvent(anio: '2023'));
     }
+    super.initState();
   }
 
   @override
@@ -35,7 +34,7 @@ class _MainDocumentosPageState extends State<MainDocumentosPage> {
         child: BlocConsumer<RequerimientosBloc, RequerimientosState>(
           listener: (context, state) {
             if (state is RequerimientosError) {
-              showToastSuccess(context, state.message);
+              showToastError(context, state.message);
             }
           },
           bloc: this.requerimientosBloc,

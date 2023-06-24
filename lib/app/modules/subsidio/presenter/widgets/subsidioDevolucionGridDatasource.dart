@@ -205,7 +205,6 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
         '';
     newCellValue = null;
 
-    print('display ' + displayText);
 
     if (column.columnName == 'dsc_certificado') {
       CertificadoEntity? selectedCertificado = displayText.isEmpty
@@ -283,7 +282,6 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
         column.columnName == 'nombres' ||
         column.columnName == 'expediente' ||
         column.columnName == 'codigo_siga') {
-      print('antes de build ' + displayText);
       return _buildTextFieldWidget(displayText, column, submitCell);
     }
 
@@ -306,7 +304,6 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
     }
 /*
     if (column.columnName == 'dsc_certificado') {
-      print('newCellvalue ' + newCellValue.toString());
 
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: subsidioDevolucionFiltered,
@@ -318,7 +315,7 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'dsc_certificado_devengado') {
-      print('newCellvalue ' + newCellValue.toString());
+
 
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: subsidioDevolucionFiltered,
@@ -329,7 +326,6 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
       //buildDataGridRows();
     }
     if (column.columnName == 'finalidad') {
-      print('newCellvalue ' + newCellValue.toString());
 
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: subsidioDevolucionFiltered,
@@ -341,7 +337,7 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
     }
 
     if (column.columnName == 'finalidad_devengado') {
-      print('newCellvalue ' + newCellValue.toString());
+
 
       this.blocLiquidacionList.add(UpdateLiquidacionEvent(
           liquidacion: subsidioDevolucionFiltered,
@@ -458,11 +454,10 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
           isExpanded: true,
           //style: textStyle,
           onChanged: (CertificadoEntity? value) {
-            print('onChanged 1' + newCellValue.toString());
+
             newCellValue = value;
-            print('onChanged 2' + value.toString());
+ 
             submitCell();
-            print('onChanged 3' + newCellValue.toString());
             submitCell();
           },
           items: dropDownMenuItems.map<DropdownMenuItem<CertificadoEntity>>(
@@ -497,11 +492,11 @@ class SubsidioDevolucionGridDataSource extends DataGridSource {
           isExpanded: true,
           //style: textStyle,
           onChanged: (FuenteEntity? value) {
-            print('onChanged 1' + newCellValue.toString());
+
             newCellValue = value;
-            print('onChanged 2' + value.toString());
+
             submitCell();
-            print('onChanged 3' + newCellValue.toString());
+
             submitCell();
           },
           items: dropDownMenuItems

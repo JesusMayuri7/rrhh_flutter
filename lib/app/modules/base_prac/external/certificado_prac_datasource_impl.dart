@@ -25,12 +25,8 @@ class CertificadoPracDatasourceImpl implements ICertificadoPracDatasource {
 
       var bodyData = jsonEncode(response.data);
 
-      print('presupuesto model 0');
-      print(response.data);
-      final List<PresupuestoModel> presupuestoModel = presupuestoEntityFromJson(bodyData);
 
-      print('presupuesto model 1');
-      print('list certificados '+presupuestoModel.length.toString());
+      final List<PresupuestoModel> presupuestoModel = presupuestoEntityFromJson(bodyData);
 
       return ResponseModel(
           status: response.status,

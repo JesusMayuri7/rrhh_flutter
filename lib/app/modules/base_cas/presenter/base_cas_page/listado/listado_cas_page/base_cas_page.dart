@@ -54,7 +54,7 @@ class _BaseCasPageState extends State<BaseCasPage> //with AfterLayoutMixin
                     listadoCas: state.listadoCas);
               if (state is HeadParametersSuccessState &&
                   (state.status == StatusCas.loadingList))
-                return Center(child: CircularProgressIndicator());
+                return Expanded(child: Center(child: CircularProgressIndicator()));
               return ListadoCasPage(listadoCas: []); 
             })
       ]),

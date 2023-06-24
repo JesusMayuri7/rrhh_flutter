@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
     await Modular.isModuleReady<AppModule>();
     final appService = await Modular.get<AppService>();
     if (appService.sessionEntity == null) {
-      print('enviando a login');
+
       Modular.to.pushNamedAndRemoveUntil('/login/', (p0) => false);
     } else {
       Modular.to.pushReplacementNamed('/start/agenda/');
@@ -40,8 +40,6 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('splash page');
-    //print('estado 1' + appBloc.state.toString());
     return Scaffold(
         body: Center(
       child: CircularProgressIndicator(),

@@ -11,10 +11,12 @@ class JudicialDetailInitialEvent extends JudicialDetailEvent {}
 
 class JudicialDetailLoadedEvent extends JudicialDetailEvent {
   final List<JudicialDetailEntity> judicialDetailEntity;
-  final int judicialId;
+  final int judicialId;  
+  final String nombres;
   JudicialDetailLoadedEvent({
     required this.judicialDetailEntity,
     required this.judicialId,
+    required this.nombres
   });
 
   @override
@@ -23,7 +25,9 @@ class JudicialDetailLoadedEvent extends JudicialDetailEvent {
 
 class JudicialNewDetailEvent extends JudicialDetailEvent {
   final ParamsNewJudicialDetail paramsNewJudicialDetail;
+
   JudicialNewDetailEvent({
+
     required this.paramsNewJudicialDetail,
   });
 }

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'airhsp_presupuesto_bloc.dart';
 
 abstract class AirshpPresupuestoState extends Equatable {
@@ -15,33 +16,42 @@ class AirhspPresupuestoExported extends AirshpPresupuestoState {
 }
 
 class AirhspPresupuestoLoaded extends AirshpPresupuestoState {
-  final List<AirhspPresupuestoEntity> listPracticanteFiltered;
-  final List<AirhspPresupuestoEntity> listPracticanteOriginal;
+  final List<AirhspPresupuestoEntity> listPracticanteFiltered;  
+      final bool cts;
+  final bool gratificacion;
+  final bool bonificacion;
 
   AirhspPresupuestoLoaded({
     this.listPracticanteFiltered = const [],
-    this.listPracticanteOriginal = const [],
+    required this.cts,
+    required this.gratificacion,
+    required this.bonificacion,
   });
 
   @override
-  List<Object> get props =>
-      [this.listPracticanteFiltered, this.listPracticanteOriginal];
+  List<Object> get props => [this.listPracticanteFiltered,this.cts,this.gratificacion,this.bonificacion];
+
+
 
   AirhspPresupuestoLoaded copyWith({
     List<AirhspPresupuestoEntity>? listPracticanteFiltered,
-    List<AirhspPresupuestoEntity>? listPracticanteOriginal,
+    bool? cts,
+    bool? gratificacion,
+    bool? bonificacion,
   }) {
     return AirhspPresupuestoLoaded(
-      listPracticanteFiltered:
-          listPracticanteFiltered ?? this.listPracticanteFiltered,
-      listPracticanteOriginal:
-          listPracticanteOriginal ?? this.listPracticanteOriginal,
+      listPracticanteFiltered: listPracticanteFiltered ?? this.listPracticanteFiltered,
+      cts: cts ?? this.cts,
+      gratificacion: gratificacion ?? this.gratificacion,
+      bonificacion: bonificacion ?? this.bonificacion,
     );
   }
 }
 
 class AirhspPresupuestoError extends AirshpPresupuestoState {
+
   final String message;
+
   AirhspPresupuestoError({
     required this.message,
   });

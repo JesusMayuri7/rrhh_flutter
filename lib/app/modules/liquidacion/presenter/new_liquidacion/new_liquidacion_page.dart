@@ -351,46 +351,48 @@ class _NewLiquidacionPageState extends State<NewLiquidacionPage> {
           ? Column(
               children: [
                 Expanded(
-                  child: DataTable(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.amber, width: 2)),
-                      headingRowColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.amber),
-                      headingRowHeight: 20,
-                      headingTextStyle: const TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                      dataRowHeight: 22,
-                      columns: const <DataColumn>[
-                        DataColumn(
-                          label: Text(
-                            'Clasificador',
+                  child: SingleChildScrollView(
+                    child: DataTable(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.amber, width: 2)),
+                        headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Colors.amber),
+                        headingRowHeight: 20,
+                        headingTextStyle: const TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.black),
+                        dataRowHeight: 22,
+                        columns: const <DataColumn>[
+                          DataColumn(
+                            label: Text(
+                              'Clasificador',
+                            ),
                           ),
-                        ),
-                        DataColumn(
-                          numeric: true,
-                          label: Text(
-                            'Monto',
+                          DataColumn(
+                            numeric: true,
+                            label: Text(
+                              'Monto',
+                            ),
                           ),
-                        ),
-                        DataColumn(
-                          label: Text(
-                            'Accion',
+                          DataColumn(
+                            label: Text(
+                              'Accion',
+                            ),
                           ),
-                        ),
-                      ],
-                      rows: stateClasificadores.clasificadorMonto.map((e) {
-                        return DataRow(
-                          cells: <DataCell>[
-                            DataCell(Text(e['id'].toString() +
-                                ': ' +
-                                e['dsc_clasificador'])),
-                            DataCell(Text(NumberFormat('#,##0.00', 'en_US')
-                                .format(double.parse(
-                                    e['monto_certificado'].toString())))),
-                            DataCell(Text('Del')),
-                          ],
-                        );
-                      }).toList()),
+                        ],
+                        rows: stateClasificadores.clasificadorMonto.map((e) {
+                          return DataRow(
+                            cells: <DataCell>[
+                              DataCell(Text(e['id'].toString() +
+                                  ': ' +
+                                  e['dsc_clasificador'])),
+                              DataCell(Text(NumberFormat('#,##0.00', 'en_US')
+                                  .format(double.parse(
+                                      e['monto_certificado'].toString())))),
+                              DataCell(Text('Del')),
+                            ],
+                          );
+                        }).toList()),
+                  ),
                 ),
                 Container(
                   child: Text('Total: ${stateClasificadores.total}'),

@@ -30,6 +30,8 @@ class PostConfianzaUseCase implements UseCase<ResponseEntity, ConfianzaEntity> {
         fin: params.fin,
         orgAreaId: params.area_id,
         plaza: params.plaza,
+        plazaOrigen: params.plazaOrigen,
+        nroCap: params.nroCap,
         modalidad: params.modalidad,
         tipo: params.tipo,
         trabajadorId: params.trabajadorId,

@@ -24,6 +24,7 @@ class RequerimientoListBloc
     var result = await this.requerimientoListUseCase(
         ParamsRequerimiento(anio: '2023', dscModalidad: 'CAS'));
     emit(result.fold((l) {
+       print(l.toString());
       return RequerimientoListLoaded(requerimientoList: []);
     }, (r) { 
       return RequerimientoListLoaded(requerimientoList: r.data); }) );

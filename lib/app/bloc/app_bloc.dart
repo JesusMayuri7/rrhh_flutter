@@ -20,7 +20,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   _onLogingToState(AppLogingEvent event, Emitter<AppState> emit) async {
-    print('event appbloc ' + event.sessionEntity.toString());
+
     emit(AppLoggedState(sessionEntity: event.sessionEntity));
   }
 
@@ -29,7 +29,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   }
 
   _onInitToState(AppInitEvent event, Emitter<AppState> emit) {
-    print('init appbloc');
+
     this.preferences.then((SharedPreferences prefs) {
       final String token = prefs.getString('token') ?? '';
       final String anio = prefs.getString('anio') ?? '';
@@ -49,9 +49,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
                 anio: anio,
                 isLogged: isLogged,
                 email: email)));
-        print('emit AppLoggedState');
+  
       } else {
-        print('emit AppLogoutState');
+
         emit(AppLogoutState(sessionEntity: null));
       }
     });

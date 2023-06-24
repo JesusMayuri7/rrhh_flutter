@@ -11,6 +11,7 @@ class RequerimientoLoadListEvent extends RequerimientoListEvent {}
 
 class RequerimientoSetDetailEvent extends RequerimientoListEvent {
   final List<RequerimientoDetalleEntity> reqrerimientoDetail;
+  
   RequerimientoSetDetailEvent({
     required this.reqrerimientoDetail,
   });

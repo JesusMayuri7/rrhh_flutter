@@ -9,13 +9,26 @@ abstract class RequerimientoNewEvent extends Equatable {
 }
 
 class AddRequerimientoDetalleEvent extends RequerimientoNewEvent {
-   final NewParamsRequerimiento newParamsRequerimiento;
+   final NewParamsRequerimiento paramsNewRequerimiento;
    final NewParamsRequerimientoDetalle paramsNewRequerimientoDetalle;
+
   AddRequerimientoDetalleEvent({
-    required this.newParamsRequerimiento,
+    required this.paramsNewRequerimiento,
     required this.paramsNewRequerimientoDetalle,
   });
   
     @override
-  List<Object> get props => [this.paramsNewRequerimientoDetalle];
+  List<Object> get props => [this.paramsNewRequerimiento,this.paramsNewRequerimientoDetalle];
+}
+
+class DelRequerimientoDetalleEvent extends RequerimientoNewEvent {
+
+final int deleteItemRequerimiento;
+
+  DelRequerimientoDetalleEvent({
+    required this.deleteItemRequerimiento    
+  });
+  
+    @override
+  List<Object> get props => [this.deleteItemRequerimiento];
 }

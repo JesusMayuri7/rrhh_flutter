@@ -38,6 +38,20 @@ List<GridColumn> requerimientos_list_columns(BuildContext context) {
       ),
     ),
         GridColumn(
+      width: 80,
+      columnName: 'desc_tipo_requerimiento',
+      label: Container(
+        alignment: Alignment.centerLeft,
+        child: Text(
+          'Tipo',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              color: Theme.of(context).bottomAppBarColor, fontSize: 11.0),
+        ),
+      ),
+    ),
+        GridColumn(
       width: 100,
       columnName: 'presupuesto',
       label: Container(

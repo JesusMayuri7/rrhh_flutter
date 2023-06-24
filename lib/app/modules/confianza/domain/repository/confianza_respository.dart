@@ -22,6 +22,8 @@ abstract class IConfianzaRepository {
       required String nombres,
       required int orgAreaId,
       required String plaza,
+      required String plazaOrigen,
+      required String nroCap,
       required String tipo,
       required int trabajadorId,
       required String estado});

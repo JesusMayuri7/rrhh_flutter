@@ -21,9 +21,11 @@ class JudicialesListSetDetail extends JudicialesListState {
 
   final List<JudicialDetailEntity> judicialDetailEntity;
   final int judicialId;
+  final String nombres;
   JudicialesListSetDetail({
     required this.judicialDetailEntity,
     required this.judicialId,
+    required this.nombres
   });
 
   @override

@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:dartz/dartz.dart';
-
 import 'package:rrhh_clean/core/domain/entities/response_entity.dart';
 import 'package:rrhh_clean/core/domain/use_cases/usecase.dart';
 import 'package:rrhh_clean/core/errors/failure.dart';
@@ -52,11 +51,16 @@ class ParamsNewJudicialDetail {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'judicialId': judicialId,
+      'judicial_id': judicialId,
       'detalle': detalle,
-      'expedientePvn': expedientePvn,
-      'nroDocumento': nroDocumento,
-      'fechaExpedientePvn': fechaExpedientePvn,
+      'expediente_pvn': expedientePvn,
+      'nro_documento': nroDocumento,
+      'fecha_expediente_pvn': fechaExpedientePvn,
     };
+  }
+
+  @override
+  String toString() {
+    return 'ParamsNewJudicialDetail(id: $id, judicialId: $judicialId, detalle: $detalle, expedientePvn: $expedientePvn, nroDocumento: $nroDocumento, fechaExpedientePvn: $fechaExpedientePvn)';
   }
 }

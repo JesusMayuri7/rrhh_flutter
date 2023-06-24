@@ -14,9 +14,8 @@ List<PresupuestoModel> presupuestoEntityFromJson(String str) {
 List<PresupuestoModel> presupuestoModelFromJsonDSON(dynamic str) =>
     List<PresupuestoModel>.from(
         (str).map((x) { 
-          print(x.toString());
+
           final result = PresupuestoModel.fromJson(x);
-          print(result.toString());
           return result;
            }));
 

@@ -7,17 +7,16 @@ class RequerimientoEntity extends Equatable {
     required this.anio,
     required this.id,
     required this.dscModalidad,
+    required this.tipoRequerimientoId,
+    required this.descTipoRequerimiento,
     required this.presupuesto,
     required this.nroExpediente,
     required this.dctoSolicitud,
     required this.fechaSolicitud,
-    required this.unidadId,
-    required this.descUnidad,
-    required this.metaId,
-    required this.descMeta,
-    required this.fuenteId,
+    required this.descArea,
+    required this.areaId,
     required this.modalidadId,
-    required this.descFuente,
+
     required this.cantidad,
     required this.requerimientoDetalle,
   });
@@ -25,17 +24,16 @@ class RequerimientoEntity extends Equatable {
   final String anio;
   final int id;
   final String dscModalidad;
+  final int tipoRequerimientoId;
+  final String descTipoRequerimiento;
   final int modalidadId;
   final String presupuesto;
   final String nroExpediente;
   final String dctoSolicitud;
   final String fechaSolicitud;
-  final String descUnidad;
-  final int unidadId;
-  final String descMeta;
-  final int metaId;
-  final String descFuente;
-  final int fuenteId;  
+  final String descArea;
+  final int areaId;
+  
   final int cantidad;
   final List<RequerimientoDetalleEntity> requerimientoDetalle;
 
@@ -45,16 +43,13 @@ class RequerimientoEntity extends Equatable {
       anio,
       id,
       dscModalidad,
+      tipoRequerimientoId,
+      descTipoRequerimiento,
       presupuesto,
       nroExpediente,
       dctoSolicitud,
       fechaSolicitud,
-      descUnidad,
-      unidadId,
-      descMeta,
-      metaId,
-      descFuente,
-      fuenteId,
+
       modalidadId,
       cantidad,
       requerimientoDetalle,
@@ -65,17 +60,15 @@ class RequerimientoEntity extends Equatable {
     String? anio,
     int? id,
     String? dscModalidad,
+    int? tipoRequerimientoId,
+    String? descTipoRequerimiento,
     int? modalidadId,
     String? presupuesto,
     String? nroExpediente,
     String? dctoSolicitud,
     String? fechaSolicitud,
-    String? descUnidad,
-    int? unidadId,
-    String? descMeta,
-    int? metaId,
-    String? descFuente,
-    int? fuenteId,
+    String? descArea,
+    int? areaId,        
     int? cantidad,
     List<RequerimientoDetalleEntity>? requerimientoDetalle,
   }) {
@@ -83,17 +76,15 @@ class RequerimientoEntity extends Equatable {
       anio: anio ?? this.anio,
       id: id ?? this.id,
       dscModalidad: dscModalidad ?? this.dscModalidad,
+      tipoRequerimientoId: tipoRequerimientoId ?? this.tipoRequerimientoId,
+      descTipoRequerimiento: descTipoRequerimiento ?? this.descTipoRequerimiento,
       modalidadId: modalidadId ?? this.modalidadId,
       presupuesto: presupuesto ?? this.presupuesto,
       nroExpediente: nroExpediente ?? this.nroExpediente,
       dctoSolicitud: dctoSolicitud ?? this.dctoSolicitud,
       fechaSolicitud: fechaSolicitud ?? this.fechaSolicitud,
-      descUnidad: descUnidad ?? this.descUnidad,
-      unidadId: unidadId ?? this.unidadId,
-      descMeta: descMeta ?? this.descMeta,
-      metaId: metaId ?? this.metaId,
-      descFuente: descFuente ?? this.descFuente,
-      fuenteId: fuenteId ?? this.fuenteId,
+      areaId: areaId ?? this.areaId,
+      descArea: descArea ?? this.descArea,
       cantidad: cantidad ?? this.cantidad,
       requerimientoDetalle: requerimientoDetalle ?? this.requerimientoDetalle,
     );

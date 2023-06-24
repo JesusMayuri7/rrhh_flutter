@@ -12,7 +12,6 @@ class SubsidioGuard extends RouteGuard {
     await Modular.isModuleReady<AppModule>();
     AppService appService = await Modular.get<AppService>();
     await appService.init();
-    print('subsidio agenda ');
     if (appService.sessionEntity != null) {
       return true;
     }

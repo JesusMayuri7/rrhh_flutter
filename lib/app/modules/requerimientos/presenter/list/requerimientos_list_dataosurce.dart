@@ -21,14 +21,13 @@ class RequerimientosListDataSource extends DataGridSource {
     _confianzaDataGridRows = listadoConfianza
         .map((dataGridRow) => DataGridRow(cells: [
               DataGridCell<String>(columnName: 'anio', value: dataGridRow.anio),
+              DataGridCell<String>(columnName: 'desc_modalidad',value: dataGridRow.dscModalidad),
+              DataGridCell<String>(columnName: 'desc_tipo_requerimiento',value: dataGridRow.descTipoRequerimiento),
               DataGridCell<String>(
-                  columnName: 'desc_modalidad',
-                  value: dataGridRow.dscModalidad),
-                                DataGridCell<String>(
                   columnName: 'presupuesto',
                   value: dataGridRow.presupuesto),
               DataGridCell<String>(
-                  columnName: 'desc_unidad', value: dataGridRow.descUnidad),
+                  columnName: 'desc_area', value: dataGridRow.descArea),
               DataGridCell<String>(
                   columnName: 'dcto_solicitud',
                   value: dataGridRow.dctoSolicitud),

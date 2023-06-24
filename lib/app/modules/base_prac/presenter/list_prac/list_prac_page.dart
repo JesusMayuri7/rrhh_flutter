@@ -137,14 +137,17 @@ class _ListPracPageState extends State<ListPracPage> {
                   keyGrid: this.keyGrid,
                 ),
               (state is ListPracLoading)
-                  ? Center(
-                      child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                        Text('Cargando lista')
-                      ],
-                    ))
+                  ? Expanded(
+                    child: Center(
+                        child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(height: 5),
+                          Text('Cargando datos ...')
+                        ],
+                      )),
+                  )
                   : Container()
             ],
           ),

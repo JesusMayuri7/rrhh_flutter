@@ -12,7 +12,6 @@ class AgendaGuard extends RouteGuard {
     await Modular.isModuleReady<AppModule>();
     AppService appService = await Modular.get<AppService>();
     await appService.init();
-    print('guard agenda ' + appService.sessionEntity.toString());
     if (appService.sessionEntity != null) {
       return true;
     }

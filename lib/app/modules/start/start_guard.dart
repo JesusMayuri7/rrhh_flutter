@@ -12,7 +12,6 @@ class StartGuard extends RouteGuard {
     await Modular.isModuleReady<AppModule>();
     AppService appService = await Modular.get<AppService>();
     await appService.init();
-    print('guard start ' + appService.sessionEntity.toString());
     if (appService.sessionEntity != null) {
       return true;
     }

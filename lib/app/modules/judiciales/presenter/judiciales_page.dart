@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'datagrid/detail/judicial_detail_page.dart';
 import 'datagrid/list_judiciales_page.dart';
+import 'detail/judicial_detail_page.dart';
 
 class JudicialesPage extends StatefulWidget {
   const JudicialesPage({Key? key}) : super(key: key);

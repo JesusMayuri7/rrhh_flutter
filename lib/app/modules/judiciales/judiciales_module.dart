@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/judiciales/data/datasource/i_judiciales_new_detail_datasource.dart';
-import 'package:rrhh_clean/app/modules/judiciales/presenter/datagrid/detail/cubit/judicial_detail_cubit.dart';
+
 import 'package:rrhh_clean/app/app_guard.dart';
 import 'cubit/judiciales_bloc.dart';
 
@@ -19,6 +19,7 @@ import 'presenter/bloc/list/judiciales_list_bloc.dart';
 import 'presenter/bloc/new/bloc/new_judicial_bloc.dart';
 
 import 'main_judiciales_page.dart';
+import 'presenter/detail/cubit/judicial_detail_cubit.dart';
 
 class JudicialesModule extends Module {
   @override

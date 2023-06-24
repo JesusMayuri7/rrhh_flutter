@@ -69,7 +69,6 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
     return BlocConsumer<LiquidacionListBloc, LiquidacionListState>(
         buildWhen: (previousState, newState) {
           if (newState is LiquidacionListLoaded) {
-            print('aja');
             return true;
           }
           return false;
@@ -333,7 +332,7 @@ class _LiquidacionGridPageState extends State<LiquidacionGridPage>
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               child: Container(
-                  width: 350,
+                  width: 400,
                   height: 600,
                   child: NewLiquidacionPage(
                       contextLiq: _context,

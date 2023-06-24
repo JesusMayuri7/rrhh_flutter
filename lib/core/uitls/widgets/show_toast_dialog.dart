@@ -21,7 +21,6 @@ showToastSuccess(BuildContext _context, String message) {
 }
 
 showToastError(BuildContext _context, String message) {
-  print(message);
   MotionToast.error(
     title: const Text(
       'Error',

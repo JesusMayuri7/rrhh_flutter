@@ -57,7 +57,7 @@ void sheetPracCertificado(Workbook workbook, int firstRowHeading,
 
   //_fuenteMetaOfBase(baseCas, params.certificado);
   //fuenteMetaOfCertifcado(baseCas, params.certificado);
-  print('certificado '+ params.certificado.length.toString());
+
 
   for (int index = 0; index < params.certificado.length; index++) {
     final List<Object> row =

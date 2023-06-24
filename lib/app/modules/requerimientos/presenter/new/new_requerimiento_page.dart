@@ -14,7 +14,7 @@ import 'package:rrhh_clean/core/domain/entities/area_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/fuente_entity.dart';
 import 'package:rrhh_clean/core/domain/entities/meta_enttity.dart';
 import 'package:rrhh_clean/core/domain/entities/modalidad_entity.dart';
-import 'package:rrhh_clean/core/uitls/widgets/label_with_form_field_initial.dart';
+import 'package:rrhh_clean/core/domain/entities/tipo_requerimiento_entity.dart';
 import 'package:rrhh_clean/core/uitls/widgets/show_toast_dialog.dart';
 
 import 'bloc/requerimiento_new_bloc.dart';
@@ -36,20 +36,23 @@ class NewRequerimientoPage extends StatefulWidget {
 class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
   late NewParamsRequerimiento paramsNewRequerimiento;
   NewParamsRequerimientoDetalle paramsNewRequerimientoDetalle = NewParamsRequerimientoDetalle();
+  List<NewParamsRequerimientoDetalle> _paramsNewRequerimientoDetalleList = [];
   final _formKey = GlobalKey<FormState>();
   final _blocNew = Modular.get<RequerimientoNewBloc>();
   final _blocRequerimiento = Modular.get<RequerimientosBloc>();
 
 
-  FuenteEntity? _fuenteEntity;
-  MetaEntity? _metaEntity;
   AreaEntity? _areaEntity;
   ModalidadEntity? _modalidadEntity;
+  TipoRequerimientoEntity? _tipoRequerimientoEntity;
 
   List<FuenteEntity> fuentes = [];
   List<MetaEntity> metas = [];
   List<AreaEntity> areas = [];
   List<ModalidadEntity> modalidades = [];
+  List<TipoRequerimientoEntity> tipoRequerimientos = [];
+
+
   var maskDateFormatter = new MaskTextInputFormatter(
       mask: '####-##-##', filter: {"#": RegExp(r'[0-9]')});
 
@@ -63,37 +66,26 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
           (this._blocRequerimiento.state as RequerimientosLoaded).metas;
       this.areas =
           (this._blocRequerimiento.state as RequerimientosLoaded).areas;
-      this.modalidades =
-          (this._blocRequerimiento.state as RequerimientosLoaded).modalidades;
-
-      
-
+      this.modalidades = (this._blocRequerimiento.state as RequerimientosLoaded).modalidades;
+      this.tipoRequerimientos = (this._blocRequerimiento.state as RequerimientosLoaded).tipoRequerimientos;
+   
       _areaEntity = widget.requerimientoEntity == null
           ? areas.first
           : areas.firstWhere(
-              (element) => element.id == widget.requerimientoEntity?.unidadId);
-
-      _metaEntity = widget.requerimientoEntity == null
-          ? metas.first
-          : metas.firstWhere((element) =>
-              element.idmetaAnual == widget.requerimientoEntity?.metaId);
-
-      _fuenteEntity = widget.requerimientoEntity == null
-          ? fuentes.first
-          : fuentes.firstWhere(
-              (element) => element.id == widget.requerimientoEntity?.fuenteId);
+              (element) => element.id == widget.requerimientoEntity?.areaId);
 
       _modalidadEntity = widget.requerimientoEntity == null
           ? modalidades.first
           : modalidades.firstWhere((element) =>
               element.id == widget.requerimientoEntity?.modalidadId);
 
+      _tipoRequerimientoEntity = widget.requerimientoEntity == null ? 
+        tipoRequerimientos.first : tipoRequerimientos.firstWhere((element) => element.id == widget.requerimientoEntity?.tipoRequerimientoId);
+
       if (widget.requerimientoEntity == null)
+      {   
          paramsNewRequerimiento = NewParamsRequerimiento(anio: '2023');
-
-       print(modalidades);     
-       print(_modalidadEntity);     
-
+      }   
     }
   }
 
@@ -101,287 +93,371 @@ class _NewRequerimientoPageState extends State<NewRequerimientoPage> {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocConsumer<RequerimientoNewBloc, RequerimientoNewState>(
-          bloc: this._blocNew,
-          listener: (context, state) {
-            if (state.statusNewRequerimiento == StatusNewRequerimiento.saved) {
-              showToastSuccess(context, 'Se grabao correctamente');
-              Navigator.pop(context);
-            }
-            if (state.statusNewRequerimiento == StatusNewRequerimiento.error) {
-              showToastError(context, state.toString());
-            }
-          },
-          builder: (context, state) {
-            return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text('Requerimientos - ' +
-                      paramsNewRequerimiento.anio.toString()),
-                  SizedBox(height: 10.0),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Form(
-                          key: _formKey,
-                          autovalidateMode: AutovalidateMode.always,
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('Requerimientos - ' +
+                  paramsNewRequerimiento.anio.toString()),
+              SizedBox(height: 10.0),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Form(
+                      key: _formKey,
+                      autovalidateMode: AutovalidateMode.always,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            SizedBox(height: 5.0),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                SizedBox(height: 5.0),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    SizedBox(
-                                      width: 350.0,
-                                      child: fluentUi.InfoLabel(
-                                        label: 'Modalidad',
-                                        child: fluentUi.AutoSuggestBox<ModalidadEntity>(                                                     
+                                modalidadRequerimiento(), 
+                                SizedBox(width: 15), 
+                                tipoRequerimiento(),
+                                SizedBox(width: 15), 
+                                areaRequerimiento(),                              
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                documentoPVN(),expedientePVN(), SizedBox(width: 15),fechaDoc(),
+                              ],
+                            ),                                                               
+                            SizedBox(height: 10),                                                                                                                                    
+                            Divider(color: Colors.blue),
+                            SizedBox(height: 5.0),
+                            Row(
+                              children: [
+                                fuenteDetalle(),SizedBox(width: 5.0),metaDetalle(),SizedBox(width: 5.0),areaDetalle(),
+                              ],
+                            ),
+                            SizedBox(height: 10),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [                                                                                                                                                         
+                                cantidadDetalle(),SizedBox(width: 5),cargoDetalle(),SizedBox(width: 5),montoDetalle(),SizedBox(width: 5),
+                                buttonAdd()
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            SizedBox(
+                              height: 280,
+                              width: double.infinity,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  gridDetalle(),
+                                  Row(
+                                    children: [
+                                      buttonSave()
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          ]),
+                    ),
+                  ),
+                ),
+              )
+            ]));
+  }
+
+  fluentUi.Expanded buttonAdd() {
+    return Expanded(
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                            _formKey.currentState!.save();                                                  
+                                             //this._blocNew.add(AddRequerimientoDetalleEvent(paramsNewRequerimiento: this.paramsNewRequerimiento,                                                    paramsNewRequerimientoDetalle: this.paramsNewRequerimientoDetalle                                                   ));
+                                            _paramsNewRequerimientoDetalleList.add(paramsNewRequerimientoDetalle);  
+                                                                              
+                                      },
+                                      child: Text('Add')));
+  }
+
+  fluentUi.Expanded buttonSave() {
+    return Expanded(
+                                        child: ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text('Guardar')));
+  }
+
+  fluentUi.Expanded gridDetalle() {
+    return Expanded(
+                                  child: DataTableNewRequerimiento(
+                                    requerimientoDetalle: _paramsNewRequerimientoDetalleList,
+                                    requerimientoNewBloc: this._blocNew )
+                                );
+  }
+
+  fluentUi.Expanded montoDetalle() {
+    return Expanded(
+                                flex: 1,
+                                child: fluentUi.InfoLabel(
+                                  label: 'Monto',
+                                  child: fluentUi.TextFormBox(                                                                                                                   
+                                    maxLength: 10,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.right,                                          
+                                    keyboardType: TextInputType.number,
+                                    onSaved: (value) {
+                                      final num monto = num.parse(value!);
+                                      paramsNewRequerimientoDetalle.monto = monto;
+                                    },
+                                  ),
+                                ),
+                              );
+  }
+
+  fluentUi.Expanded cargoDetalle() {
+    return Expanded(
+                                flex: 3,
+                                child: fluentUi.InfoLabel(
+                                  label: 'Cargo',
+                                  child: fluentUi.TextFormBox(                                                                            
+                                    maxLength: 50,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.left,                                        
+                                    keyboardType: TextInputType.text,
+                                    onSaved: (value) {
+                                      paramsNewRequerimientoDetalle.cargo = value!;
+                                    },
+                                  ),
+                                ),
+                              );
+  }
+
+  fluentUi.Expanded cantidadDetalle() {
+    return Expanded(
+                                flex: 1,
+                                child: fluentUi.InfoLabel(
+                                  label: 'Cant.',
+                                  child: fluentUi.TextFormBox(                                                                                                                      
+                                    maxLength: 10,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.right,                                        
+                                    keyboardType: TextInputType.number,
+                                    onSaved: (value) {
+                                      final int cantidad = int.parse(value!);
+                                      paramsNewRequerimientoDetalle.cantidad = cantidad;
+                                    },
+                                  ),
+                                ),
+                              );
+  }
+
+  fluentUi.Expanded modalidadRequerimiento() {
+    return Expanded(
+                                flex: 3,                                      
+                                child: fluentUi.InfoLabel(
+                                  label: 'Modalidad',
+                                  child: fluentUi.AutoSuggestBox<ModalidadEntity>(     
+                                    autofocus: true,                                                
+                                                enabled: true,
+                                                items: this.modalidades
+                                                    .map<fluentUi.AutoSuggestBoxItem<ModalidadEntity>>(
+                                                      (modalidad) => fluentUi.AutoSuggestBoxItem<ModalidadEntity>(
+                                                        value: modalidad,
+                                                        label: modalidad.dsc_modalidad,
+                                                      ),
+                                                    )
+                                                    .toList(),
+                                                onSelected: (item) {
+                                                  //setState(() => selectedCat = item.value);
+                                                },
+                                              ),
+                                ),
+                              );
+  }
+
+    fluentUi.Expanded tipoRequerimiento() {
+    return Expanded(       
+                                flex: 3,                               
+                                child: fluentUi.InfoLabel(
+                                  label: 'Tipo',
+                                  child: fluentUi.AutoSuggestBox<TipoRequerimientoEntity>(     
+                                    autofocus: true,                                                
+                                                enabled: true,
+                                                items: this.tipoRequerimientos
+                                                    .map<fluentUi.AutoSuggestBoxItem<TipoRequerimientoEntity>>(
+                                                      (tipo) => fluentUi.AutoSuggestBoxItem<TipoRequerimientoEntity>(
+                                                        value: tipo,
+                                                        label: tipo.descTipoRequerimiento
+                                                      ),
+                                                    )
+                                                    .toList(),
+                                                onSelected: (item) {
+                                                  //setState(() => selectedCat = item.value);
+                                                },
+                                              ),
+                                ),
+                              );
+  }
+
+  fluentUi.Expanded areaRequerimiento() {
+    return Expanded(      
+                              flex: 6,                                    
+                              child: fluentUi.InfoLabel(
+                                    label: 'Area',
+                                    child: fluentUi.AutoSuggestBox<AreaEntity>(                                                     
+                                                  enabled: true,
+                                                  items: this.areas
+                                                      .map<fluentUi.AutoSuggestBoxItem<AreaEntity>>(
+                                                        (area) => fluentUi.AutoSuggestBoxItem<AreaEntity>(
+                                                          value: area,
+                                                          label: area.descArea,                                                           
+                                                        ),
+                                                      )
+                                                      .toList(),
+                                                  onSelected: (item) {
+                                                    //setState(() => selectedCat = item.value);
+                                                  },
+                                                ),
+                                  ),
+                            );
+  }
+
+  fluentUi.Expanded documentoPVN() {
+    return Expanded(
+                                flex: 4,
+                                child: fluentUi.InfoLabel(
+                                  label: 'Doc. PVN',
+                                  child: fluentUi.TextFormBox(
+                                    initialValue: paramsNewRequerimiento
+                                        .documentoPvn!,
+                                    maxLength: 30,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.right,                                        
+                                    keyboardType: TextInputType.text,
+                                    onSaved: (value) {
+                                      paramsNewRequerimiento.documentoPvn =
+                                          value!;
+                                    },
+                                  ),
+                                ),
+                              );
+  }
+
+  fluentUi.Expanded expedientePVN() {
+    return Expanded(
+                                flex: 4,
+                                child: fluentUi.InfoLabel(
+                                  label: 'Exp. PVN',
+                                  child: fluentUi.TextFormBox(
+                                    initialValue: paramsNewRequerimiento
+                                        .expedientePvn!,
+                                    maxLength: 30,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.right,                                        
+                                    keyboardType: TextInputType.text,
+                                    onSaved: (value) {
+                                      paramsNewRequerimiento.expedientePvn =
+                                          value!;
+                                    },
+                                  ),
+                                ),
+                              );
+  }
+
+  fluentUi.Expanded fechaDoc() {
+    return Expanded(
+                                flex: 4,
+                                child: fluentUi.InfoLabel(
+                                label: 'Fecha Doc.',
+                                  child: fluentUi.TextFormBox(
+                                    initialValue: paramsNewRequerimiento
+                                        .fechaDocumento!,
+                                    maxLength: 30,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.right,                                          
+                                    keyboardType: TextInputType.text,
+                                    onSaved: (value) {
+                                      paramsNewRequerimiento
+                                          .fechaDocumento = value!;
+                                    },
+                                ),
+                                ), );
+  }
+
+  fluentUi.Expanded fuenteDetalle() {
+    return Expanded(
+                                flex: 2,
+                                child: fluentUi.InfoLabel(
+                                        label: 'Fuente',
+                                        child: fluentUi.AutoSuggestBox<FuenteEntity>(                                                     
                                                       enabled: true,
-                                                      items: this.modalidades
-                                                          .map<fluentUi.AutoSuggestBoxItem<ModalidadEntity>>(
-                                                            (modalidad) => fluentUi.AutoSuggestBoxItem<ModalidadEntity>(
-                                                              value: modalidad,
-                                                              label: modalidad.dsc_modalidad,
-                                                              onFocusChange: (focused) {
-                                                                if (focused) debugPrint('Focused $modalidad');
-                                                              },
+                                                      items: this.fuentes
+                                                          .map<fluentUi.AutoSuggestBoxItem<FuenteEntity>>(
+                                                            (fuente) => fluentUi.AutoSuggestBoxItem<FuenteEntity>(
+                                                              value: fuente,
+                                                              label: fuente.abvFuente,
                                                             ),
                                                           )
                                                           .toList(),
-                                                      onSelected: (item) {
-                                                        //setState(() => selectedCat = item.value);
+                                                      onSelected: (item) {                                                        
+                                                            paramsNewRequerimientoDetalle.fuenteId = item.value!.id;
+                                                            paramsNewRequerimientoDetalle.descFuente = item.value!.abvFuente;                                                            
+                                                        
                                                       },
                                                     ),
                                       ),
-                                    ),
-                                      SizedBox(width: 15),
-                                    Expanded(
-                                      flex: 4,
-                                      child: fluentUi.InfoLabel(
-                                        label: 'Exp. PVN',
-                                        child: fluentUi.TextFormBox(
-                                          initialValue: paramsNewRequerimiento
-                                              .expedientePvn!,
-                                          maxLength: 30,
-                                          maxLines: 1,
-                                          textAlign: TextAlign.right,                                        
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
-                                            paramsNewRequerimiento.expedientePvn =
-                                                value!;
-                                          },
-                                        ),
+                              );
+  }
+
+  fluentUi.Expanded metaDetalle() {
+    return Expanded(
+      flex: 5,
+      child: fluentUi.InfoLabel(
+                                        label: 'Meta',
+                                        child: fluentUi.AutoSuggestBox<MetaEntity>(                                                                                                     
+                                                      enabled: true,
+                                                      items: this.metas
+                                                          .map<fluentUi.AutoSuggestBoxItem<MetaEntity>>(
+                                                            (meta) => fluentUi.AutoSuggestBoxItem<MetaEntity>(
+                                                              value: meta,
+                                                              label: meta.finalidad,
+                                                            ),
+                                                          )
+                                                          .toList(),
+                                                      onSelected: (item) {                                                        
+                                                         paramsNewRequerimientoDetalle.metaId = item.value!.idmetaAnual;
+                                                         paramsNewRequerimientoDetalle.descMeta = item.value!.finalidad;                                                                                                                  
+                                                           
+                                                      },
+                                                    ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                          width: 350.0,
-                                          child: fluentUi.InfoLabel(
-                                            label: 'Fuente',
-                                            child: fluentUi.AutoSuggestBox<FuenteEntity>(                                                     
-                                                          enabled: true,
-                                                          items: this.fuentes
-                                                              .map<fluentUi.AutoSuggestBoxItem<FuenteEntity>>(
-                                                                (fuente) => fluentUi.AutoSuggestBoxItem<FuenteEntity>(
-                                                                  value: fuente,
-                                                                  label: fuente.dscFuente,
-                                                                  onFocusChange: (focused) {
-                                                                    if (focused) debugPrint('Focused $fuente');
-                                                                  },
-                                                                ),
-                                                              )
-                                                              .toList(),
-                                                          onSelected: (item) {
-                                                            //setState(() => selectedCat = item.value);
-                                                          },
-                                                        ),
-                                          ),
-                                        ),
-                                                                            SizedBox(width: 15),
-                                    Expanded(
-                                      flex: 4,
-                                      child: fluentUi.InfoLabel(
-                                        label: 'Doc. PVN',
-                                        child: fluentUi.TextFormBox(
-                                          initialValue: paramsNewRequerimiento
-                                              .documentoPvn!,
-                                          maxLength: 30,
-                                          maxLines: 1,
-                                          textAlign: TextAlign.right,                                        
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
-                                            paramsNewRequerimiento.documentoPvn =
-                                                value!;
-                                          },
-                                        ),
+    );
+  }
+
+  fluentUi.Expanded areaDetalle() {
+    return Expanded(
+                                        flex: 5,
+                                        child: fluentUi.InfoLabel(
+                                        label: 'Area',
+                                        child: fluentUi.AutoSuggestBox<AreaEntity>(                                                                                                     
+                                                      enabled: true,
+                                                      items: this.areas
+                                                          .map<fluentUi.AutoSuggestBoxItem<AreaEntity>>(
+                                                            (areas) => fluentUi.AutoSuggestBoxItem<AreaEntity>(
+                                                              value: areas,
+                                                              label: areas.descArea,
+                                                            ),
+                                                          )
+                                                          .toList(),
+                                                      onSelected: (item) {                                                       
+                                                         paramsNewRequerimientoDetalle.areaId = item.value!.id;
+                                                              paramsNewRequerimientoDetalle.descArea = item.value!.descArea;                                                                                                                                                                                  
+                                                      },
+                                                    ),
                                       ),
-                                    ),
-                                  ],
-                                ),                                                               
-                                SizedBox(height: 10),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                                                            SizedBox(
-                                          width: 350.0,
-                                    child: fluentUi.InfoLabel(
-                                          label: 'Area',
-                                          child: fluentUi.AutoSuggestBox<AreaEntity>(                                                     
-                                                        enabled: true,
-                                                        items: this.areas
-                                                            .map<fluentUi.AutoSuggestBoxItem<AreaEntity>>(
-                                                              (area) => fluentUi.AutoSuggestBoxItem<AreaEntity>(
-                                                                value: area,
-                                                                label: area.descArea,
-                                                                onFocusChange: (focused) {
-                                                                  if (focused) debugPrint('Focused $area');
-                                                                },
-                                                              ),
-                                                            )
-                                                            .toList(),
-                                                        onSelected: (item) {
-                                                          //setState(() => selectedCat = item.value);
-                                                        },
-                                                      ),
-                                        ),
-                                  ),
-                                     SizedBox(width: 15),
-                                    Expanded(
-                                      flex: 4,
-                                      child: fluentUi.InfoLabel(
-                                      label: 'Fecha Doc.',
-                                        child: fluentUi.TextFormBox(
-                                          initialValue: paramsNewRequerimiento
-                                              .fechaDocumento!,
-                                          maxLength: 30,
-                                          maxLines: 1,
-                                          textAlign: TextAlign.right,                                          
-                                          keyboardType: TextInputType.text,
-                                          onSaved: (value) {
-                                            paramsNewRequerimiento
-                                                .fechaDocumento = value!;
-                                          },
-                                      ),
-                                      ), ),
-                              ],),                                                                                                                                       
-                                SizedBox(height: 15),                                   
-                                Divider(color: Colors.blue),
-                                SizedBox(height: 5.0),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimientoDetalle.cantidad.toString(),                                            
-                                        maxLength: 30,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.right,
-                                        title: 'Cant.',
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (value) {
-                                          final int cantidad = int.parse(value!);
-                                          paramsNewRequerimientoDetalle.cantidad = cantidad;
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Expanded(
-                                      flex: 3,
-                                      child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimientoDetalle.descArea,
-                                        maxLength: 30,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.right,
-                                        title: 'Sub Area',
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (value) {
-                                          paramsNewRequerimientoDetalle.descArea = value!;
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Expanded(
-                                      flex: 3,
-                                      child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimientoDetalle.cargo,
-                                        maxLength: 30,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.right,
-                                        title: 'Cargo',
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (value) {
-                                          paramsNewRequerimientoDetalle.cargo = value!;
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Expanded(
-                                      flex: 1,
-                                      child: LabelWithFormFieldInitial(
-                                        initialValue: paramsNewRequerimiento
-                                            .fechaDocumento!,
-                                        maxLength: 10,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.right,
-                                        title: 'Monto',
-                                        keyboardType: TextInputType.text,
-                                        onSaved: (value) {
-                                          final num monto = num.parse(value!);
-                                          paramsNewRequerimientoDetalle.monto = monto;
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Expanded(
-                                        child: ElevatedButton(
-                                            onPressed: () {
-                                                  _formKey.currentState!.save();
-                                                   this._blocNew.add(AddRequerimientoDetalleEvent(
-                                                    newParamsRequerimiento: this.paramsNewRequerimiento,
-                                                    paramsNewRequerimientoDetalle: this.paramsNewRequerimientoDetalle
-                                                   ));
-                                            },
-                                            child: Text('Add')))
-                                  ],
-                                ),
-                                SizedBox(height: 5),
-                                SizedBox(
-                                  height: 280,
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        child: DataTableNewRequerimiento(requerimientoDetalle: state.requerimientoEntity == null ? [] : state.requerimientoEntity!.requerimientoDetalle )
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                              child: ElevatedButton(
-                                                  onPressed: () {},
-                                                  child: Text('Guardar')))
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ]),
-                        ),
-                      ),
-                    ),
-                  )
-                ]);
-          },
-        ));
+                                      );
   }
 }
 

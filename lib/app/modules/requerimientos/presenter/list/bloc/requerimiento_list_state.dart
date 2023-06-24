@@ -16,6 +16,7 @@ class RequerimientoListLoading extends RequerimientoListState {
 
 class RequerimientoListLoaded extends RequerimientoListState {
   final List<RequerimientoEntity> requerimientoList;
+
   RequerimientoListLoaded({
     required this.requerimientoList,
   });
@@ -25,6 +26,7 @@ class RequerimientoListLoaded extends RequerimientoListState {
 
 class RequerimientoSetDetailState extends RequerimientoListState {
   final List<RequerimientoDetalleEntity> requerimientoDetail;
+  
   RequerimientoSetDetailState({
     required this.requerimientoDetail,
   });

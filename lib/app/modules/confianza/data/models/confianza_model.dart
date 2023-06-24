@@ -38,6 +38,8 @@ class ConfianzaModel extends ConfianzaEntity {
       required detalle,
       required tipo,
       required plaza,
+      required plazaOrigen,
+      required nroCap,
       required estado})
       : super(
             id: id,
@@ -57,6 +59,8 @@ class ConfianzaModel extends ConfianzaEntity {
             detalle: detalle,
             tipo: tipo,
             plaza: plaza,
+            plazaOrigen:plazaOrigen,
+            nroCap: nroCap,
             estado: estado);
 
   factory ConfianzaModel.fromJson(Map<String, dynamic> json) => ConfianzaModel(
@@ -76,13 +80,17 @@ class ConfianzaModel extends ConfianzaEntity {
       trabajadorId: json["trabajador_id"] ?? 0,
       detalle: json["detalle"] ?? '',
       tipo: json["tipo"] ?? '',
+      plazaOrigen: json["plaza_origen"] ?? 'NINGUNO',
       plaza: (json["plaza"] ?? 0).toString().padLeft(6, "0"),
+      nroCap: (json["nro_cap"] ?? 0).toString().padLeft(5, "0"),
       estado: json['estado'] ?? '');
 
   factory ConfianzaModel.fromMap(Map<String, dynamic> json) => ConfianzaModel(
       id: json["id"],
       anio: json["anio"],
       plaza: json["plaza"],
+      plazaOrigen: json["plaza_origen"],
+      nroCap: json["nro_cap"],
       descArea: json["desc_area"],
       cargo: json["cargo"],
       dni: json["dni"],
@@ -103,6 +111,8 @@ class ConfianzaModel extends ConfianzaEntity {
         "id": id,
         "anio": anio,
         "plaza": plaza,
+        "plaza_origen": plazaOrigen,
+        "nro_cap": nroCap,
         "desc_area": descArea,
         "cargo": cargo,
         "dni": dni,

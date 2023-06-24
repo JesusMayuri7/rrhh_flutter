@@ -26,7 +26,6 @@ class DownloadFileDatasourceImpl implements IDownloadFileDatasource {
     try {
       Response response = await iClientCustom.download(
           'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2023&tipoPersona=$tipoPersona&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
-
       String modalidad = tipoPersonaToModalidad(tipoPersona);
       await FileSaveHelper.saveAndLaunchFile(response.data,
           '${fechaActual}_ReporteDatoslaboralesNomina1078_$modalidad.xlsx');
@@ -41,6 +40,8 @@ class DownloadFileDatasourceImpl implements IDownloadFileDatasource {
       throw ServerException(e.toString());
     }
   }
+
+
 }
 
 tipoPersonaToModalidad(String _tipoPersona) {

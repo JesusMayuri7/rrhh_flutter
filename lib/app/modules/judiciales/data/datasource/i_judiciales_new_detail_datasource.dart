@@ -22,11 +22,13 @@ class NewJudicialDetailDatasourceImpl implements IJudicialesNewDetailDataSource 
   Future<ResponseModel> newJudicialDetail(ParamsNewJudicialDetail params) async {
     Uri url = Uri.http('rrhh.pvn.gob.pe', '/api/judiciales_detail', {'q': 'http'});
 
+
+
     try {
       ResponseModel response = await httpCustom.request('POST', url.toString(),
           jsonEncode(params.toMap()), (i) => responseFromJson(i));
 
-      print(response.data);
+
 
       JudicialDetailModel result = JudicialDetailModel.fromJson(response.data);
       return ResponseModel(

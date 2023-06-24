@@ -10,6 +10,7 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+
   AuthBloc({
     required this.authCoreUseCase,
     required this.appService,
@@ -29,6 +30,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onLoginAuthEventToState(
       LoginAuthEvent event, Emitter<AuthState> emit) async {
+
+       
     var result = await this.authCoreUseCase(event.params);
     emit(result.fold((l) {
       return ErrorAuthState(message: l.toString());
@@ -45,7 +48,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           sessionEntity: SessionEntity(
               anio: event.params.anio,
               expiresIn: r.expiresIn,
-              isLogged: true,
+              isLogged: r.status,
               message: '',
               status: r.status,
               token: r.token,

@@ -54,27 +54,7 @@ class GridJudicialesPage extends StatelessWidget {
                   PointerDeviceKind.mouse,
                 }),
                 child: SfDataGrid(
-                  //key: this.keyGrid,
-                  footer: Container(),
-                  onCellSecondaryTap: (DataGridCellTapDetails details) {
-                    if (details.rowColumnIndex.rowIndex > 0) {
-                      buildShowMenu(context, details);
-                    }
-                  },
-/*                     onQueryRowHeight: (details) {
-                      return details.rowIndex == 0
-                          ? 21
-                          : details.getIntrinsicRowHeight(details.rowIndex,
-                              excludedColumns: [
-                                  'detalle',
-                                  'observacion',
-                                  'documento_orh',
-                                  'nro_expediente_judicial',
-                                  'cargo',
-                                  'nro_expediente_tramite'
-                                ]);
-                    }, */
-                  footerHeight: 2,
+                    footerHeight: 2,
                   highlightRowOnHover: true,
                   footerFrozenRowsCount: 0,
                   footerFrozenColumnsCount: 1,
@@ -85,13 +65,13 @@ class GridJudicialesPage extends StatelessWidget {
                   gridLinesVisibility: GridLinesVisibility.both,
                   headerGridLinesVisibility: GridLinesVisibility.both,
                   allowSorting: true,
-                  allowMultiColumnSorting: true,
-                  allowTriStateSorting: true,
+                  //allowMultiColumnSorting: true,
+                  //allowTriStateSorting: true,
                   showSortNumbers: true,
                   allowFiltering: true,
                   selectionMode: SelectionMode.single,
                   navigationMode: GridNavigationMode.cell,
-                  allowEditing: true,
+                  //allowEditing: true,
                   editingGestureType: editingGestureType,
                   columns: this.columns,
                   tableSummaryRows: [
@@ -109,7 +89,8 @@ class GridJudicialesPage extends StatelessWidget {
                   final index = this.listJudicialesDataSource.rows.indexOf(addedRows.last);
                   List<JudicialDetailEntity> judicialDetalle =listJudicialesDataSource.listadoJudiciales[index].judicialDetailEntity;                       
                   this.blocListJudicial.add(JudicialesListSetDetailEvent(judicialesEntity: judicialDetalle,
-                          judicialId:listJudicialesDataSource.listadoJudiciales[index].id ));                          
+                          judicialId:listJudicialesDataSource.listadoJudiciales[index].id,nombres:
+                          listJudicialesDataSource.listadoJudiciales[index].nombres  ));                          
                   } 
                 ),
               ),

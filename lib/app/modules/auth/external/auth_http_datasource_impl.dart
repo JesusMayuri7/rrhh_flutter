@@ -17,10 +17,13 @@ class AuthHttpDataSourceImpl implements IAuthCoreDataSource {
 
   @override
   Future<LoginResponseModel> login(AuthCoreParams params) async {
+
     try {
       var response = await http.post(url,
           headers: {'Content-Type': 'application/json'},
           body: json.encode(params.toMap()));
+
+     
 
       var result = json.decode(response.body);
 

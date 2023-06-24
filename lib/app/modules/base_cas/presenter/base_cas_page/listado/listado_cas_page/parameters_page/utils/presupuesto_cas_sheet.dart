@@ -441,8 +441,6 @@ fuenteMetaOfPresupuesto(
     List<PresupuestoCasEntity> _params) {
   for (int x = 0; x < _baseCas.length - 1; x++) {
     var nose = _params.firstWhereOrNull((element) {
-      //print('${element.fuente} - ${_baseCas[x].fuenteBase}');
-      //print('${element.meta} - ${_baseCas[x].meta}');
       return element.fuente == _baseCas[x].fuenteBase &&
           element.meta.contains(_baseCas[x].meta);
     });

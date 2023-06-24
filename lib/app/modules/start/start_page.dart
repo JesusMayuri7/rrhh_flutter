@@ -193,6 +193,15 @@ class DrawerPage extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
+                            ListTile(
+                title: Text("Codigos"),
+                //trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  //controller.titleAppBar = 'AirHsp';
+                  Modular.to.navigate('/start/airhsp/codigos');
+                  Navigator.pop(context);
+                },
+              ),
               ListTile(
                 title: Text("Presupuesto"),
                 //trailing: Icon(Icons.arrow_forward),

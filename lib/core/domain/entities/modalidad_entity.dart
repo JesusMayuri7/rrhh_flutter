@@ -11,5 +11,9 @@ class ModalidadEntity extends Equatable {
   });
 
   @override
-  List<Object?> get props => [this.id, this.dsc_modalidad];
+  List<Object> get props => [id, dsc_modalidad];
+
+
+  @override
+  bool get stringify => true;
 }

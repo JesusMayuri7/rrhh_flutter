@@ -16,8 +16,7 @@ class AgendaSaveUseCase extends UseCase<ResponseModel, AgendaParams> {
   });
 
   @override
-  Future<Either<Failure, ResponseModel>> call(AgendaParams params) async {
-    print('save usecase');
+  Future<Either<Failure, ResponseModel>> call(AgendaParams params) async {    
     return await this.iAgendaRepository.saveAgenda(params);
   }
 }

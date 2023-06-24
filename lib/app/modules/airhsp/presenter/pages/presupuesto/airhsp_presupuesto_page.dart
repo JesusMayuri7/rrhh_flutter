@@ -2,6 +2,8 @@ import 'package:fluent_ui/fluent_ui.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rrhh_clean/app/modules/airhsp/domain/entities/columns_grid_presupuesto.dart';
+import 'package:rrhh_clean/app/modules/airhsp/presenter/pages/presupuesto/export_airhsp.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_datagrid_export/export.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' hide Column, Row;
@@ -29,14 +31,16 @@ class _ListAirhspPresupuestoPageState extends State<ListAirhspPresupuestoPage> {
 
   final bloc = Modular.get<AirhspPresupuestoBloc>();
   final String? anioSelected = Modular.get<AppService>().sessionEntity?.anio;
+  String? selectedCombo = 'BASE';
+ // ColumnsGridPresupuesto columnsGridPresupuesto = ColumnsGridPresupuesto(gratificacion: false, cts: false);
 
   @override
   void initState() {
     if (this.bloc.state is AirhspPresupuestoLoaded) {
       if ((this.bloc.state as AirhspPresupuestoLoaded)
-          .listPracticanteOriginal
+          .listPracticanteFiltered
           .isEmpty) {
-        this.bloc.add(ListPracEvent(anio: anioSelected!));
+        this.bloc.add(ListPracEvent(anio: anioSelected!,bonificacion: false,cts: false,gratificacion: false));
       }
     }
     super.initState();
@@ -62,25 +66,37 @@ class _ListAirhspPresupuestoPageState extends State<ListAirhspPresupuestoPage> {
                     children: [
                       f.Button(
                           onPressed: () {
-                            this.bloc.add(ListPracEvent(anio: anioSelected!));
+                            
+                           // this.bloc.add(ListPracEvent(anio: anioSelected!,bonificacion: false,cts: false,gratificacion: false));
                           },
                           child: Text(
                             'Actualizar',
                             style: TextStyle(fontSize: 12),
                           )),
                       SizedBox(width: 5.0),
+                        f.ComboBox<String>(
+                        value: selectedCombo,
+                        items: [f.ComboBoxItem(child: Text('Base AIRHSP'),value: 'BASE'),
+                        f.ComboBoxItem(child: Text('AIRHSP Totales'),value: 'TOTALES',),
+                        f.ComboBoxItem(child: Text('Calculo AIRHSP'),value: 'CALCULO',),                        
+                        ],
+                         onChanged: (value) {
+                          this.selectedCombo = value;                                                                                                    
+                         if(value == 'BASE'){                                                                                                                                 
+                              this.bloc.add(ListPracEvent(anio: anioSelected!, bonificacion: false,cts: false,gratificacion: false));
+                         }
+                         if(value == 'TOTALES'){
+                            this.bloc.add(TotalesAirhspEvent(bonificacion: true,cts: true,gratificacion: true));
+                         }
+                              if(value == 'CALCULO'){
+                            this.bloc.add(CalculoAirhspEvent(bonificacion: true,cts: true,gratificacion: true));
+                         }
+                    },
+                        ),
+                      SizedBox(width: 5.0),
                       f.Button(
                           onPressed: () {
-                            /*                     this.bloc.add(ExportPracEvent(
-                                 paramsPracCalcular: ParamsPracCalcular(
-                                    lista: (state is ListPracLoaded)
-                                        ? state.listPracticanteOriginal
-                                        : [],
-                                    porcentajePrimaSctrPension: 0.35,
-                                    porcentajeComisionSctrPension: 3,
-                                    porcentajeIgv: 18,
-                                    mesInicio: 0,
-                                    mesFin: 11))); */
+                           exportAirhspToExcel((state is AirhspPresupuestoLoaded)? state.listPracticanteFiltered : []);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -97,39 +113,15 @@ class _ListAirhspPresupuestoPageState extends State<ListAirhspPresupuestoPage> {
                           )),
                     ],
                   ),
-/*                   Container(
-                    width: 400,
-                    child: TextFormField(
-                        textDirection: TextDirection.rtl,
-                        controller: textSearchController,
-                        textAlign: TextAlign.left,
-                        keyboardType: TextInputType.text,
-                        onFieldSubmitted: (value) {},
-                        decoration: InputDecoration(
-                          hintText: 'Buscar',
-                          prefixIcon: textSearchController.text.length > 0
-                              ? Icon(Icons.close)
-                              : Icon(Icons.search_outlined),
-                          // set the prefix icon constraints
-                          prefixIconConstraints: BoxConstraints(
-                            minWidth: 25,
-                            minHeight: 25,
-                          ),
-                          border: OutlineInputBorder(),
-                          isDense: true, // Added this
-                          contentPadding: EdgeInsets.only(
-                              left: 5, top: 12, bottom: 0), // Added this
-                        )),
-                  ), */
                 ],
               ),
-              SizedBox(height: 5.0),
-              if (state is AirhspPresupuestoLoaded)
-                GridAirhspPresupuestoPage(
-                  columns: getColumnsAirhspPresupuesto(context),
-                  data: state.listPracticanteFiltered,
-                  keyGrid: this.keyGrid,
-                ),
+              SizedBox(height: 5.0),          
+              if (state is AirhspPresupuestoLoaded)                        
+                      GridAirhspPresupuestoPage(
+                        columns: getColumnsAirhspPresupuesto(context,ColumnsGridPresupuesto(gratificacion: state.gratificacion, cts: state.cts,bonificacion: state.bonificacion)),
+                        data: state.listPracticanteFiltered,
+                        keyGrid: this.keyGrid,
+                      ),                                        
               (state is AirhspPresupuestoLoading)
                   ? Center(
                       child: Column(

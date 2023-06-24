@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:rrhh_clean/app/modules/airhsp/data/datasources/i_airhsp_presupuesto_datasource.dart';
@@ -20,8 +19,7 @@ class AirhspPresupuestoDataSourceImpl implements IAirhspPresupuestoDatasource {
   Future<ResponseModel> listar(String anio) async {
     var url =
         Uri.http('rrhh.pvn.gob.pe', '/api/activos/airhsp/', {'q': '{http}'});
-    log(url.toString());
-
+    
     try {
       ResponseModel response = await this
           .httpCustom
@@ -29,8 +27,7 @@ class AirhspPresupuestoDataSourceImpl implements IAirhspPresupuestoDatasource {
 
       //String bodyData = jsonEncode(response.data);
       final List<AirhspPresupuestoModel> result =
-          airhspPresupuestoModelFromJson(response.data);
-      print(result.length);
+          airhspPresupuestoModelFromJson(response.data);      
       return ResponseModel(
           data: result, status: response.status, message: response.message);
     } on SocketException {

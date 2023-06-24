@@ -50,8 +50,6 @@ class RequerimientoDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RequerimientoDetailBloc, RequerimientoDetailState>(
       listener: (context, state) {
-        print(this.requerimientoDetailEntity.length);
-        print(state.runtimeType.toString());
       },
       buildWhen: (previousState, newState) {
         if (newState is RequerimientoDetailLoaded) return true;
