@@ -11,6 +11,7 @@ abstract class IAirhspRepository {
   Future<Either<Failure, List<AirhspEntity>>> listar(
       String ejecutora, String tipoPersona);
   Future<Either<Failure, ResponseModel>> listarAirshspPresupuesto(String anio);
+  Future<Either<Failure, ResponseModel>> listarAirshspExt(String anio);
   Future<Either<Failure, List<ConceptoEntity>>> conceptos(
       String ejecutora, String tipoPersona, String codPlaza);
   Future<Either<Failure, ResponseModel>> downloadFile(String tipoPersona);

@@ -4,8 +4,10 @@ import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:rrhh_clean/app/modules/airhsp/domain/entities/airhsp_ext_entity.dart';
 import 'package:rrhh_clean/app/modules/airhsp/domain/entities/airhsp_presupuesto_entity.dart';
 import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/calcular_airhsp_use_case.dart';
+import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/list_airhsp_ext_use_case.dart';
 import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/totales_airhsp_use_case.dart';
 import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/list_airhsp_presupuesto_use_case.dart';
 
@@ -15,6 +17,7 @@ part 'airhsp_presupuesto_state.dart';
 class AirhspPresupuestoBloc
     extends Bloc<AirhspPresupuestoEvent, AirshpPresupuestoState> {
   final ListarAirhspPresupuestoUseCase listarAirhspPresupuestoUseCase;
+  final ListarAirhspExUseCase listarAirhspExtUseCase;
   final TotalesAirhspUseCase totalesAirhspUseCase;
   final CalcularAirhspUseCase calcularAirhspUseCase;
 
@@ -22,8 +25,10 @@ class AirhspPresupuestoBloc
     required this.listarAirhspPresupuestoUseCase,
     required this.totalesAirhspUseCase,
     required this.calcularAirhspUseCase,
+    required this.listarAirhspExtUseCase
   }) : super(AirhspPresupuestoLoaded(bonificacion: false,cts: false, gratificacion:false)) {
     on<ListPracEvent>(_onListarBaseEventToState);
+    on<ListAirhspExtEvent>(_onListarExtEventToState);
     on<TotalesAirhspEvent>(_onTotalesAirhspEventToState);
     on<CalculoAirhspEvent>(_onCalculoAirhpsEventToState);
   }
@@ -40,6 +45,24 @@ class AirhspPresupuestoBloc
       return AirhspPresupuestoLoaded(listPracticanteFiltered: listPresupuesto,bonificacion: event.bonificacion,cts: event.cts,
       gratificacion:event.gratificacion);
     }));
+  }
+
+    FutureOr<void> _onListarExtEventToState(
+      ListAirhspExtEvent event, Emitter<AirshpPresupuestoState> emit) async {
+      print('event');
+      emit(AirhspPresupuestoLoading());
+      var result = await this.listarAirhspExtUseCase(event.anio);
+      emit(result.fold((l) {
+     print('fallo '+l.toString());
+      return AirhspPresupuestoError(message: l.toString()); 
+      },
+      (r) {
+        print('exito');
+        final listPresupuesto = List<AirhspExtEntity>.of((r.data as List<AirhspExtEntity>).map((e) {
+          return e;
+        }));
+        return AirhspPresupuestoLoadedExt(listAirhspExtEntity: listPresupuesto);
+      }));
   }
 
     FutureOr<void> _onTotalesAirhspEventToState(

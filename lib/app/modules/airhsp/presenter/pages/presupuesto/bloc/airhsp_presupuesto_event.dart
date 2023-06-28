@@ -22,6 +22,17 @@ class ListPracEvent extends AirhspPresupuestoEvent {
   List<Object> get props => [this.anio,this.cts,this.gratificacion,this.bonificacion];
 }
 
+class ListAirhspExtEvent extends AirhspPresupuestoEvent {
+  final String anio;
+
+  ListAirhspExtEvent({
+    required this.anio,
+  });
+
+  @override
+  List<Object> get props => [this.anio];
+}
+
 
 class TotalesAirhspEvent extends AirhspPresupuestoEvent {
   final List<AirhspPresupuestoEntity> listPracticanteFiltered;

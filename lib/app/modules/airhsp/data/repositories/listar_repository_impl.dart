@@ -10,6 +10,7 @@ import 'package:rrhh_clean/core/data/models/response_model.dart';
 import '../../../../../core/errors/exceptions.dart';
 import '../../../../../core/errors/failure.dart';
 import '../../domain/repositories/i_airhsp_respository.dart';
+import '../datasources/airhsp_ext_datasource.dart';
 import '../datasources/i_airhsp_codigos_datasource.dart';
 import '../datasources/i_listar_presupuesto_datasource.dart';
 import '../models/airhsp_model.dart';
@@ -19,6 +20,7 @@ class ListarRepositoryImpl implements IAirhspRepository {
   final IListarAirhspDatasource datasource;
   final IDownloadFileDatasource iDownloadFileDatasource;
   final IAirhspPresupuestoDatasource iAirhspPresupuestoDatasource;
+  final IAirhspExtDatasource iAirhspExtDatasource;
   final IAirhspCodigoDatasource iListarCodigoDatasource;
   final IModalidadesDatasourceApp iModalidadesDatasourceApp;
 
@@ -26,6 +28,7 @@ class ListarRepositoryImpl implements IAirhspRepository {
     required this.datasource,
     required this.iDownloadFileDatasource,
     required this.iAirhspPresupuestoDatasource,
+    required this.iAirhspExtDatasource,
     required this.iListarCodigoDatasource,
     required this.iModalidadesDatasourceApp,
   });
@@ -70,6 +73,17 @@ class ListarRepositoryImpl implements IAirhspRepository {
       String anio) async {
     try {
       var result = await iAirhspPresupuestoDatasource.listar(anio);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(e.message));
+    }
+  }
+
+    @override
+  Future<Either<Failure, ResponseModel>> listarAirshspExt(
+      String anio) async {
+    try {
+      var result = await iAirhspExtDatasource.listar(anio);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));

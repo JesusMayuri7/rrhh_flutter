@@ -15,6 +15,29 @@ class AirhspPresupuestoExported extends AirshpPresupuestoState {
   List<Object> get props => [];
 }
 
+class AirhspPresupuestoLoadedExt extends AirshpPresupuestoState {
+  final List<AirhspExtEntity> listAirhspExtEntity;  
+  
+  AirhspPresupuestoLoadedExt({
+    this.listAirhspExtEntity = const [],
+  
+  });
+
+  @override
+  List<Object> get props => [this.listAirhspExtEntity];
+
+  AirhspPresupuestoLoadedExt copyWith({
+    List<AirhspExtEntity>? listAirhspExtEntity,
+    bool? cts,
+    bool? gratificacion,
+    bool? bonificacion,
+  }) {
+    return AirhspPresupuestoLoadedExt(
+      listAirhspExtEntity: listAirhspExtEntity ?? this.listAirhspExtEntity,      
+    );
+  }
+}
+
 class AirhspPresupuestoLoaded extends AirshpPresupuestoState {
   final List<AirhspPresupuestoEntity> listPracticanteFiltered;  
       final bool cts;
@@ -30,8 +53,6 @@ class AirhspPresupuestoLoaded extends AirshpPresupuestoState {
 
   @override
   List<Object> get props => [this.listPracticanteFiltered,this.cts,this.gratificacion,this.bonificacion];
-
-
 
   AirhspPresupuestoLoaded copyWith({
     List<AirhspPresupuestoEntity>? listPracticanteFiltered,

@@ -4,12 +4,15 @@ import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/list_airhsp_codig
 import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/list_airhsp_presupuesto_use_case.dart';
 import 'package:rrhh_clean/app/modules/airhsp/presenter/cubit/airhsp_cubit.dart';
 import 'package:rrhh_clean/app/modules/airhsp/presenter/pages/main_codigo_page.dart';
+import 'package:rrhh_clean/app/modules/airhsp/presenter/pages/airhsp/airhsp_presupuesto_page_ext.dart';
 import 'package:rrhh_clean/core/config/http_custom.dart';
 import 'package:rrhh_clean/core/external/get_modalidades_impl.dart';
 import 'domain/use_cases/calcular_airhsp_use_case.dart';
+import 'domain/use_cases/list_airhsp_ext_use_case.dart';
 import 'domain/use_cases/totales_airhsp_use_case.dart';
 import 'domain/use_cases/download_file_use_case.dart';
 import 'external/airhsp_codigo_datasource.dart';
+import 'external/airhsp_ext_datasource.dart';
 import 'external/airhsp_presupuesto_datasource.dart';
 
 import 'external/download_file_datasource_impl.dart';
@@ -38,11 +41,15 @@ class AirhspModule extends Module {
 
     //PRESUPUESTO
     Bind.lazySingleton(
-        (i) => AirhspPresupuestoBloc(listarAirhspPresupuestoUseCase: i(),calcularAirhspUseCase: i(),totalesAirhspUseCase: i())),
+        (i) => AirhspPresupuestoBloc(listarAirhspPresupuestoUseCase: i(),calcularAirhspUseCase: i(),totalesAirhspUseCase: i(),
+        listarAirhspExtUseCase: i())),
     Bind((i) => ListarAirhspPresupuestoUseCase(i())),
+    Bind((i) => ListarAirhspExUseCase(i())),
     Bind((i) => CalcularAirhspUseCase()),
     Bind((i) => TotalesAirhspUseCase()),
     Bind((i) => AirhspPresupuestoDataSourceImpl(httpCustom: i())),
+
+    Bind((i) => AirhspExtDataSourceImpl(httpCustom: i())),
 
     //PERSONAL
     Bind.factory((i) => AirhspBloc(i(), i(), i())),
@@ -61,7 +68,10 @@ class AirhspModule extends Module {
         iModalidadesDatasourceApp: i(),
         datasource: i(),
         iDownloadFileDatasource: i(),
-        iAirhspPresupuestoDatasource: i(), iListarCodigoDatasource: i())),
+        iAirhspPresupuestoDatasource: i(),
+        iListarCodigoDatasource: i(),
+        iAirhspExtDatasource: i())),
+
     Bind((i) => ListarUseCase(i())),
     Bind((i) => TotalesAirhspUseCase()),
     Bind((i) => DownloadFileUseCase(repository: i())),
@@ -74,5 +84,6 @@ class AirhspModule extends Module {
     ChildRoute('/personal', child: (_, args) => AirhspPersonalPage()),
     ChildRoute('/codigos', child: (_, args) => MainCodigoPage()),
     ChildRoute('/presupuesto', child: (_, args) => ListAirhspPresupuestoPage()),
+    ChildRoute('/airhsp', child: (_, args) => ListAirhspPresupuestoPageExt()),
   ];
 }
