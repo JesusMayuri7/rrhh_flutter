@@ -6,6 +6,7 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../presupuesto/custom_column_sizer.dart';
+import 'airhsp_detalle_datasource.dart';
 
 class GridAirhspDetallePage extends StatelessWidget {
 
@@ -28,7 +29,7 @@ final List<GridColumn> columns;
 
   @override
   Widget build(BuildContext context) {
-  airhspPresupuestoDataSource = AirhspDetalleDataSource(listadoPresupuesto: this.data, context: context);
+  airhspPresupuestoDataSource = AirhspDetalleDataSource(listadoDetalle: [], context: context);
   airhspPresupuestoDataSource.buildDataGridRows();
   airhspPresupuestoDataSource.updateDataGrid();    
     final ThemeCustom? theme = Theme.of(context).extension<ThemeCustom>();

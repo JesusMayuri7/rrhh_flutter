@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:rrhh_clean/app/app_service.dart';
 import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/get_modalidad_use_case.dart';
 import 'package:rrhh_clean/core/domain/entities/modalidad_entity.dart';
 

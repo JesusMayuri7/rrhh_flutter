@@ -2,12 +2,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:http/http.dart' as http;
 import 'package:rrhh_clean/app/app_service.dart';
 
-class HttpCustom extends http.BaseClient {
+class HttpApi extends http.BaseClient {
   //SharedPreferences sharedPref;
 
   http.Client _client = http.Client();
 
-  HttpCustom();
+  HttpApi();
   final appService = Modular.get<AppService>();
 
   // Use a memory cache to avoid local storage access in each call

@@ -5,7 +5,7 @@ import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/list_airhsp_presu
 import 'package:rrhh_clean/app/modules/airhsp/presenter/cubit/airhsp_cubit.dart';
 import 'package:rrhh_clean/app/modules/airhsp/presenter/pages/main_codigo_page.dart';
 import 'package:rrhh_clean/app/modules/airhsp/presenter/pages/airhsp/airhsp_presupuesto_page_ext.dart';
-import 'package:rrhh_clean/core/config/http_custom.dart';
+import 'package:rrhh_clean/core/config/http_api.dart';
 import 'package:rrhh_clean/core/external/get_modalidades_impl.dart';
 import 'domain/use_cases/calcular_airhsp_use_case.dart';
 import 'domain/use_cases/list_airhsp_ext_use_case.dart';
@@ -32,7 +32,10 @@ import 'presenter/pages/presupuesto/bloc/airhsp_presupuesto_bloc.dart';
 class AirhspModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind((i) => HttpCustom()),
+    Bind((i) => HttpApi()),
+    //Bind((i) => HttpCustom()),
+    //Bind((i) => UnoCustom()),
+    
 
     //AIRHSP
     Bind.singleton((i) => AirhspCubit(getModalidadUseCase: i())),
@@ -48,7 +51,6 @@ class AirhspModule extends Module {
     Bind((i) => CalcularAirhspUseCase()),
     Bind((i) => TotalesAirhspUseCase()),
     Bind((i) => AirhspPresupuestoDataSourceImpl(httpCustom: i())),
-
     Bind((i) => AirhspExtDataSourceImpl(httpCustom: i())),
 
     //PERSONAL

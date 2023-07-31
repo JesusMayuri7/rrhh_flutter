@@ -8,7 +8,7 @@ import 'package:rrhh_clean/app/modules/home/external/get_home_data_initial_datas
 
 import 'package:rrhh_clean/app/modules/home/external/get_home_devengado_total_datasource_impl.dart';
 import 'package:rrhh_clean/app/modules/home/presenter/home_devengado_total/bloc/homedevengadototal_bloc.dart';
-import 'package:rrhh_clean/core/config/http_custom.dart';
+import 'package:rrhh_clean/core/config/http_api.dart';
 
 import 'home_page.dart';
 
@@ -32,7 +32,7 @@ class HomeModule extends Module {
         getHomeDataInitialDatasource: i())),
 
     //CONFIG
-    Bind((i) => HttpCustom()),
+    Bind((i) => HttpApi()),
     //DataSource
     Bind((i) => GetHomeDevengadoTotalDatasourceImpl(httpCustom: i())),
     Bind((i) => GetHomeCapEstadoOppDatasourceImpl(httpCustom: i())),

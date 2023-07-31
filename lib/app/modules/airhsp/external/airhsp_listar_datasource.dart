@@ -1,7 +1,8 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'package:rrhh_clean/core/config/http_custom.dart';
+import 'package:rrhh_clean/core/config/i_client_custom.dart';
 import '../../../../core/errors/exceptions.dart';
 import '../../../../core/errors/failure.dart';
 import '../data/datasources/i_listar_presupuesto_datasource.dart';
@@ -16,7 +17,7 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
         env['url_consulta_general']!, ejecutora, tipoPersona);
   }
 
-  final HttpCustom httpCustom;
+  final IClientCustom httpCustom;
 
   ListarDatasourceImpl({
     required this.httpCustom,
@@ -56,15 +57,15 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
     };
 
     try {
-      var response = await httpCustom.post(url,
-          headers: {
+      Response response = await httpCustom.post(url.toString(), param,  {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Cookie': env['cookie']!,
             'Host': env['url_mef']!
           },
-          body: param);
+      );
 
-      return airHspModelFromXML(response.body);
+
+      return airHspModelFromXML(response.data);
     } on SocketException {
       throw ServerException('Sin conexion');
     } on HttpException {
@@ -98,8 +99,7 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
     };
 
     try {
-      var response = await httpCustom.post(url,
-          headers: {
+      Response response = await httpCustom.post(url.toString(),param, {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
             'Cookie': env['cookie']!,
             "referer": "http://dggrp.mef.gob.pe/airhsp/ini.ejecutar.do",
@@ -110,11 +110,10 @@ class ListarDatasourceImpl implements IListarAirhspDatasource {
             'Accept': '*/*',
             'Origin': 'http://dggrp.mef.gob.pe',
             'Connection': 'keep-alive'
-          },
-          body: param);
+          },          );
 
       if (response.statusCode == 200)
-        return conceptosModelFromXML(response.body);
+        return conceptosModelFromXML(response.data);
       else
         throw Error('Failure of Server 😑');
     } on SocketException {

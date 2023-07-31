@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/app_service.dart';
 import 'package:rrhh_clean/app/modules/airhsp/domain/entities/airhsp_codigo_entity.dart';
-import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/list_airhsp_codigo_use_case.dart';
 import 'package:rrhh_clean/app/modules/airhsp/domain/use_cases/save_codigo_use_case.dart';
 import 'package:rrhh_clean/app/modules/airhsp/presenter/bloc/codigo_bloc/airhsp_codigo_bloc.dart';
 import 'package:rrhh_clean/core/domain/entities/modalidad_entity.dart';

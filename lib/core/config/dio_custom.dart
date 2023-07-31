@@ -36,11 +36,11 @@ class DioCustom implements IClientCustom {
 
     (this._dio!.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
         (client) {
-      client.findProxy = (url) {    
-        if (kIsWeb)
-          return 'PROXY localhost:80';
-        else
+      client.findProxy = (url) {          
+      if (url.host.startsWith('rrhh'))
           return 'DIRECT';
+        else
+          return 'PROXY proxy1:8080';
       };
       return client;
     };
@@ -68,18 +68,15 @@ class DioCustom implements IClientCustom {
                       data: error.requestOptions.data,
                       queryParameters: error.requestOptions.queryParameters);
                   return errorInterceptorHandler.resolve(cloneReq);
-                } else {
-                  // bloc.add( ));
-                  Modular.to.navigate('/auth/login');
+                } else {                  
+                  Modular.to.navigate('/login/');
                   throw Exception('Inicie sesion');
                 }
               });
             } on Exception {
               print('expection $error');
-              Modular.to.navigate('/auth/login');
-              //(Modular.get<AuthCoreBloc>().state as SuccessAuthState).loginResponseEntity.copyWith(status: false, token: '');
-              return errorInterceptorHandler.next(error);
-              //throw Exception('No podemos validar sus credenciales');
+              Modular.to.navigate('/login/');              
+              return errorInterceptorHandler.next(error);              
             }
           } else
             return errorInterceptorHandler.next(error);
@@ -102,23 +99,42 @@ class DioCustom implements IClientCustom {
   }
 
   @override
-  Future<Response> download(String url) async {
+  Future<Uint8List> download(Uri uri) async {
     Response response = await this._dio!.get<List<int>>(
-          url,
+          uri.toString(),
           options: Options(
               responseType: ResponseType.bytes,
               followRedirects: false,
               validateStatus: (status) {
                 return status! < 500;
               }),
-        ).timeout(Duration(seconds: 60));
-    return response;
+        ).timeout(Duration(seconds: 60));        
+    return response.data;
   }
 
    @override
-  Future<Response> download2(String url) async {
-    Response response = await this._dio!.download(url,'./airhsp.xls');
-    return response;
+  Future<List<int>> download2(Uri uri) async {
+           final Dio _dio = Dio();
+    (_dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
+      client.findProxy = (url) {    
+        if (kIsWeb)
+          return 'PROXY localhost:80';
+        else
+          return 'PROXY proxy1:8080';
+      };
+      return client;
+    };
+       
+        Response<List<int>> response = await _dio.get<List<int>>(
+          uri.toString(),
+          options: Options(
+              responseType: ResponseType.bytes,
+              followRedirects: false,
+              validateStatus: (status) {
+                return status! < 500;
+              }),
+        ).timeout(Duration(seconds: 60));        
+    return Future.value(response.data);  
   }
 
   @override
@@ -136,5 +152,11 @@ class DioCustom implements IClientCustom {
         data: formData,
         options: Options(contentType: "application/form-data", method: method));
     return response;
+  }
+  
+  @override
+  Future post(String url, data, Map<String, dynamic> headers) async {
+      var response = await this._dio!.post(url,data: data,options: Options(headers: headers));
+      return response;
   }
 }

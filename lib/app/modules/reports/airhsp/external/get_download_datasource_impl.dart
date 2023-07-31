@@ -18,11 +18,12 @@ class GetDownloadDatasourceImpl implements IGetDownloadDatasource {
 
   @override
   Future getDownloadDatasource() async {
+    Uri uri =
+        Uri.http('dggrp.mef.gob.pe', '/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2023&tipoPersona=1&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
     try {
-      Response response = await iClientCustom.download(
-          'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2023&tipoPersona=1&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
+      var response = await iClientCustom.download(uri);
 
-      var _excel = Excel.decodeBytes(response.data);
+      var _excel = Excel.decodeBytes(response);
 
       List<List<Object>> dataList = [];
       for (var table in _excel.tables.keys) {

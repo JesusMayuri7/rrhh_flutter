@@ -38,7 +38,9 @@ enum ColumnBaseHeader {
   clasificadorSueldoValue('AJ'),
   clasificadorEssaludValue('AK'),
   clasificadorAguinaldoValue('AL'),
-  clasificadorSctrSaludValue('AO');
+  clasificadorSctrSaludValue('AO'),
+
+  montoAdicional('AS');
 
   final String columnLetter;
 
@@ -63,7 +65,10 @@ enum ColumnBaseTable {
   sctrSaludMensual('AN'),
   sctrSaludAnual('AO'),
   sctrPensionMensual('AP'),
-  sctrPensionAnual('AQ');
+  sctrPensionAnual('AQ'),
+  montoAdicional('AR'),
+  essaludAdicional('AS'),
+  aguinaldoAdicional('AT');
 
   final String columnLetter;
 

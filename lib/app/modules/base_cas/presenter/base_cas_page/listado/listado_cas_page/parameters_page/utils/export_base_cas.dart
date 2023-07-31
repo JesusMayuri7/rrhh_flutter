@@ -50,6 +50,8 @@ Future<void> generateExcel(ParamsCalcular params) async {
       '\$${ColumnBaseHeader.igvAdicionalSctrPensionValue.columnLetter}\$${RowBaseHeader.rowDos.rowIndex}';
   String _fcomisionSctrPension =
       '\$${ColumnBaseHeader.comisionSctrPensionValue.columnLetter}\$${RowBaseHeader.rowTres.rowIndex}';
+  String _montoAdicional =
+      '\$${ColumnBaseHeader.montoAdicional.columnLetter}\$${RowBaseHeader.rowUno.rowIndex}';
 
   // Establecer Parametros
   parameterBaseSheet(
@@ -92,28 +94,30 @@ Future<void> generateExcel(ParamsCalcular params) async {
         >=$_sueldoTope,$_sueldoTope-${ColumnBaseTable.monto.columnLetter}$rowIndex,
         $_incrementoCas)''';
 
-    //=SI( (AF6 + $AG$1 )>= $AG$2;  $AG$2 -AF6; $AG$1)
-
-    sheet
+     sheet
             .getRangeByName(ColumnBaseTable.montoMensual.columnLetter + '$rowIndex')
             .formula =
         '${ColumnBaseTable.monto.columnLetter}$rowIndex+${ColumnBaseTable.incrementoCas.columnLetter}$rowIndex';
 
     // Essalud Mensual
     sheet
-            .getRangeByName(
-                ColumnBaseTable.essaludMensual.columnLetter + '$rowIndex')
+            .getRangeByName('${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex')
             .formula =
-        '=IF(\$${ColumnBaseTable.montoMensual.columnLetter}$rowIndex>=($_fuit*$_fmaxSueldo),($_fuit*$_fmaxSueldo*$_fmaxEssalud),${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*$_fmaxEssalud)';
+        '=ROUND(IF(\$${ColumnBaseTable.montoMensual.columnLetter}$rowIndex>=($_fuit*$_fmaxSueldo),($_fuit*$_fmaxSueldo*$_fmaxEssalud),${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*$_fmaxEssalud),2)';
 
     sheet
             .getRangeByName(ColumnBaseTable.montoAnual.columnLetter + '$rowIndex')
             .formula =
-        '=\$${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*IF(${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0)';
-    sheet
+        '''=\$${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*IF(${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0)+${ColumnBaseTable.montoAdicional.columnLetter}$rowIndex''';
+    
+    // Essalud Total
+     sheet
             .getRangeByName(ColumnBaseTable.essaludAnual.columnLetter + '$rowIndex')
             .formula =
-        '=\$${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex*IF(${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0)';
+        '''=(\$${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex*IF(${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,( (\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+IF((${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex + ${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex) >= ($_fuit*$_fmaxSueldo*$_fmaxEssalud)>=0,($_fuit*$_fmaxSueldo*$_fmaxEssalud),${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex)''';
+
+// + IF( (${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex + ${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex) >= ($_fuit*$_fmaxSueldo*$_fmaxEssalud),($_fuit*$_fmaxSueldo*$_fmaxEssalud),${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex)
+
     sheet
             .getRangeByName(
                 ColumnBaseTable.aguinaldoAnual.columnLetter + '$rowIndex')
@@ -122,7 +126,7 @@ Future<void> generateExcel(ParamsCalcular params) async {
             IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex<5,$_faguinaldo,IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex=5,$_faguinaldo-100,
             IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex=6,$_faguinaldo-200,0))),0)+IF(\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex>=11,
             IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex<10,$_faguinaldo,IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex=10,$_faguinaldo-100,
-            IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex=11,$_faguinaldo-200,0))),0),0)''';
+            IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex=11,$_faguinaldo-200,0))),0),0)+ ${ColumnBaseTable.aguinaldoAdicional.columnLetter}$rowIndex''';
     sheet
             .getRangeByName(ColumnBaseTable.total.columnLetter + '$rowIndex')
             .formula =
@@ -141,18 +145,29 @@ Future<void> generateExcel(ParamsCalcular params) async {
         '''=ROUND(IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,(\$${ColumnBaseTable.sctrSaludMensual.columnLetter}$rowIndex*
         IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-
         \$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+(${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowIndex*
-        ($_fprimaSctrSalud)*($_figvSctrSalud)),0),2)''';
+        ($_fprimaSctrSalud)*($_figvSctrSalud)),0),2)+(${ColumnBaseTable.montoAdicional.columnLetter}$rowIndex*$_fprimaSctrSalud*$_figvSctrSalud)''';
 
     sheet // Sctr Pension Mensual
             .getRangeByName(
                 ColumnBaseTable.sctrPensionMensual.columnLetter + '$rowIndex')
             .formula =
         '=ROUND(\$${ColumnBaseTable.montoMensual.columnLetter}$rowIndex*($_fprimaSctrPension)*($_figvSctrPension)*($_fcomisionSctrPension),2)';
+
     sheet
             .getRangeByName(
                 ColumnBaseTable.sctrPensionAnual.columnLetter + '$rowIndex')
             .formula =
         '=ROUND(IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,(\$${ColumnBaseTable.sctrPensionMensual.columnLetter}$rowIndex*IF(\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,((\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+(\$${ColumnBaseTable.aguinaldoAnual.columnLetter}$rowIndex*$_fprimaSctrPension*$_figvSctrPension*$_fcomisionSctrPension),0),2)';
+
+    sheet // Monto Adicional
+            .getRangeByName(
+                ColumnBaseTable.montoAdicional.columnLetter + '$rowIndex')
+            .formula = 'IF((${ColumnBaseTable.monto.columnLetter}$rowIndex+$_incrementoCas+$_montoAdicional)>=$_sueldoTope,0,${_montoAdicional})';
+
+    sheet // Essalud Adicional
+            .getRangeByName(
+                ColumnBaseTable.essaludAdicional.columnLetter + '$rowIndex')
+            .formula = '=ROUND(IF(\$${ColumnBaseTable.montoAdicional.columnLetter}$rowIndex>=($_fuit*$_fmaxSueldo),($_fuit*$_fmaxSueldo*$_fmaxEssalud),${ColumnBaseTable.montoAdicional.columnLetter}$rowIndex*$_fmaxEssalud),2)';
   }
 
   // Totales
@@ -327,6 +342,11 @@ void parameterBaseSheet(Worksheet sheet, ParamsCalcular params, int _rowUno,
       .getRangeByName(
           ColumnBaseHeader.comisionSctrPensionValue.columnLetter + '$_rowTres')
       .setNumber((params.porcentajeComisionSctrPension / 100) + 1);
+  sheet
+      .getRangeByName(
+          ColumnBaseHeader.montoAdicional.columnLetter + '$_rowUno')
+      .setNumber(50);
+
 
   // Clasificadores Row #4
   sheet

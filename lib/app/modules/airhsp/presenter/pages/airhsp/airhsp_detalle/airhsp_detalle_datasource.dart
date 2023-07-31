@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -22,12 +21,11 @@ class AirhspDetalleDataSource extends DataGridSource {
   List<DataGridRow> get rows => _airshpDetalleDataGridRows;
 
   void buildDataGridRows() {
-    _airshpDetalleDataGridRows = listadoDetalle.map((e) => null).toList();
+   // _airshpDetalleDataGridRows = listadoDetalle.map((e) => null).toList();
         
             
       }
         
-  }
 
     @override
   Widget? buildTableSummaryCellWidget(

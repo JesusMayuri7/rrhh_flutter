@@ -133,6 +133,9 @@ class BaseCasEntity extends Equatable {
       'totalSctrSaludAnual': sctrSaludAnual,
       'sctrPensionMensual': sctrPension,
       'totalSctrPensionAnual': sctrPensionAnual,
+      'montoAdicional': 0,
+      'essaludAdicional': 0,
+      'aguinaldoAdicional': 0,
       'detalle': detalle,
     };
   }

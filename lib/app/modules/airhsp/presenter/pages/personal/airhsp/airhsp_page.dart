@@ -75,6 +75,14 @@ class _AirhspPageState extends State<AirhspPage>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                     Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                      IconButton(icon: Icon(Icons.refresh_outlined),                      
+                      splashRadius: 16,
+                      padding: EdgeInsets.zero,
+                      constraints: BoxConstraints(),                                            
+                      iconSize: 32,
+                      onPressed: () => 
+                           this.bloc.add(ListarEvent(ejecutora: '1078', tipoPersona: widget.tipoPersona))                   
+                      ),                                          
                       Expanded(
                           child: TextFieldSearch(
                               controller: this._controller,

@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
 import 'package:rrhh_clean/app/modules/airhsp/data/datasources/i_download_file_datasource.dart';
@@ -23,12 +21,18 @@ class DownloadFileDatasourceImpl implements IDownloadFileDatasource {
   @override
   Future<ResponseModel> downloadFile(String tipoPersona) async {
     final String fechaActual = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    
+    Uri uri = Uri.parse('http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2023&tipoPersona=$tipoPersona&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
+    
     try {
-      Response response = await iClientCustom.download(
-          'http://dggrp.mef.gob.pe/airhsp/repnom.ejecutar.do?accion=generar&ejercicio=2023&tipoPersona=$tipoPersona&secejec=1078&excedente=%27O%27,%27T%27,%27R%27,%27V%27');
+      var response = await iClientCustom.download(uri);
+
+      if(response.isEmpty)
+          return ResponseModel(status: false, message: 'Error al procesar los datos',data: []);
+
       String modalidad = tipoPersonaToModalidad(tipoPersona);
-      await FileSaveHelper.saveAndLaunchFile(response.data,
-          '${fechaActual}_ReporteDatoslaboralesNomina1078_$modalidad.xlsx');
+      await FileSaveHelper.saveAndLaunchFile(response,
+          '${modalidad}_ReporteDatoslaboralesNomina1078_${fechaActual}.xlsx');
       return ResponseModel(status: true, message: 'ok');
     } on SocketException {
       throw ServerException('Sin conexion');

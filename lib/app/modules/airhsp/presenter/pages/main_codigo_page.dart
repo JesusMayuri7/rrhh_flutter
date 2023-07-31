@@ -1,4 +1,3 @@
-import 'package:fluent_ui/fluent_ui.dart' as fluentUi;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';

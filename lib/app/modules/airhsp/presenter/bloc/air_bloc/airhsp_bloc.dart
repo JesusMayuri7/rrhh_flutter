@@ -38,7 +38,6 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
     emit(LoadingAirhspState());
     var result = await _listarUseCase(ParamsListar(
         ejecutora: event.ejecutora, tipoPersona: event.tipoPersona));
-
     emit(result.fold(
       (failure) {
         return ErrorAirhspState(message: failure.toString());
@@ -75,7 +74,8 @@ class AirhspBloc extends Bloc<AirhspEvent, AirhspState> {
       if (event.criterio.isNotEmpty) {
         List<AirhspEntity> dummyListData = [];
         (state as LoadedAirhspState).listado.forEach((item) {
-          if (item.nombres.contains(event.criterio.toUpperCase())) {
+          if (item.nombres.contains(event.criterio.toUpperCase()) || item.plaza.contains(event.criterio.toUpperCase())
+              || item.cargo.contains(event.criterio.toUpperCase())) {
             dummyListData.add(item);
           }
         });

@@ -19,33 +19,37 @@ List<AirHspModel> airHspModelFromXML(_data) {
       .findElements("row");
 
   var cells = toto.map((cell) => cell.findAllElements('cell'));
+
+  //sin data
+  print(cells.toString());
+          
   cells.forEach((f) {
     var item = Map<String, dynamic>();
     for (var i = 0; i < f.length; i++) {
       switch (i) {
         case 2:
-          item['plaza'] = f.toList()[i].text.trim();
+          item['plaza'] = f.toList()[i].value == null ? "000000" : f.toList()[i].value!.trim();
           break;
         case 5:
-          item['nombres'] = f.toList()[i].text.trim();
+          item['nombres'] = f.toList()[i].value == null ? "" : f.toList()[i].value!.trim();
           break;
         case 6:
-          item['cargo'] = f.toList()[i].text.trim();
+          item['cargo'] = f.toList()[i].value == null ? "" : f.toList()[i].value!.trim();
           break;
         case 7:
-          item['nivel'] = f.toList()[i].text.trim();
+          item['nivel'] = f.toList()[i].value == null ? "" : f.toList()[i].value!.trim();
           break;
         case 8:
-          item['establecimiento'] = f.toList()[i].text.trim();
+          item['establecimiento'] = f.toList()[i].value == null ? "" : f.toList()[i].value!.trim();
           break;
         case 9:
-          item['dependencia'] = f.toList()[i].text.trim();
+          item['dependencia'] = f.toList()[i].value == null ? "" : f.toList()[i].value!.trim();
           break;
         case 13:
-          item['estado'] = f.toList()[i].text;
+          item['estado'] = f.toList()[i].value == null ? "" : f.toList()[i].value!.trim();
           break;
         case 14:
-          item['dni'] = f.toList()[i].text;
+          item['dni'] = f.toList()[i].value == null ? "" : f.toList()[i].value!.trim();
           break;
       }
     }
@@ -132,22 +136,22 @@ class AirHspModel extends AirhspEntity {
       for (var i = 0; i < f.length; i++) {
         switch (i) {
           case 1:
-            item.plaza = f.toList()[i].text.trim();
+            item.plaza = f.toList()[i].value!.trim();
             break;
           case 4:
-            item.nombres = f.toList()[i].text.trim();
+            item.nombres = f.toList()[i].value!.trim();
             break;
           case 5:
-            item.cargo = f.toList()[i].text.trim();
+            item.cargo = f.toList()[i].value!.trim();
             break;
           case 6:
-            item.nivel = f.toList()[i].text.trim();
+            item.nivel = f.toList()[i].value!.trim();
             break;
           case 7:
-            item.establecimiento = f.toList()[i].text.trim();
+            item.establecimiento = f.toList()[i].value!.trim();
             break;
           case 8:
-            item.dependencia = f.toList()[i].text.trim();
+            item.dependencia = f.toList()[i].value!.trim();
             break;
           case 12:
             item.estado = f.toList()[i].text;
