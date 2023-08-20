@@ -5,7 +5,7 @@ import 'package:rrhh_clean/app/modules/airhsp/domain/entities/airhsp_presupuesto
 
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-import 'bloc/airhsp_presupuesto_bloc.dart';
+import '../bloc/airhsp_presupuesto_bloc.dart';
 
 class AirhspPresupuestoDataSource extends DataGridSource {
   AirhspPresupuestoDataSource({

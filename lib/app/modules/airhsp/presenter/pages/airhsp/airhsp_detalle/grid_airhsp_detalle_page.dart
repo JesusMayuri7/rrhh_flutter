@@ -5,7 +5,7 @@ import 'package:rrhh_clean/core/uitls/theme/theme_custon.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
-import '../../presupuesto/custom_column_sizer.dart';
+import '../../presupuesto/widgets/custom_column_sizer.dart';
 import 'airhsp_detalle_datasource.dart';
 
 class GridAirhspDetallePage extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rrhh_clean/app/modules/airhsp/domain/entities/columns_grid_presupuesto.dart';
-import 'package:rrhh_clean/app/modules/airhsp/presenter/pages/presupuesto/export_airhsp.dart';
+import 'package:rrhh_clean/app/modules/airhsp/presenter/pages/presupuesto/widgets/export_airhsp.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_datagrid_export/export.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart' hide Column, Row;
@@ -14,7 +14,7 @@ import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
 
 import 'bloc/airhsp_presupuesto_bloc.dart';
-import 'getColumnsAirhspPresupuesto.dart';
+import 'widgets/getColumnsAirhspPresupuesto.dart';
 import 'grid_airhsp_presupuesto_page.dart';
 
 class ListAirhspPresupuestoPage extends StatefulWidget {
@@ -32,7 +32,7 @@ class _ListAirhspPresupuestoPageState extends State<ListAirhspPresupuestoPage> {
   final bloc = Modular.get<AirhspPresupuestoBloc>();
   final String? anioSelected = Modular.get<AppService>().sessionEntity?.anio;
   String? selectedCombo = 'BASE';
- // ColumnsGridPresupuesto columnsGridPresupuesto = ColumnsGridPresupuesto(gratificacion: false, cts: false);
+  // ColumnsGridPresupuesto columnsGridPresupuesto = ColumnsGridPresupuesto(gratificacion: false, cts: false);
 
   @override
   void initState() {
@@ -40,7 +40,11 @@ class _ListAirhspPresupuestoPageState extends State<ListAirhspPresupuestoPage> {
       if ((this.bloc.state as AirhspPresupuestoLoaded)
           .listPracticanteFiltered
           .isEmpty) {
-        this.bloc.add(ListPracEvent(anio: anioSelected!,bonificacion: false,cts: false,gratificacion: false));
+        this.bloc.add(ListPracEvent(
+            anio: anioSelected!,
+            bonificacion: false,
+            cts: false,
+            gratificacion: false));
       }
     }
     super.initState();
@@ -66,37 +70,57 @@ class _ListAirhspPresupuestoPageState extends State<ListAirhspPresupuestoPage> {
                     children: [
                       f.Button(
                           onPressed: () {
-                            
-                           // this.bloc.add(ListPracEvent(anio: anioSelected!,bonificacion: false,cts: false,gratificacion: false));
+                            // this.bloc.add(ListPracEvent(anio: anioSelected!,bonificacion: false,cts: false,gratificacion: false));
                           },
                           child: Text(
                             'Actualizar',
                             style: TextStyle(fontSize: 12),
                           )),
                       SizedBox(width: 5.0),
-                        f.ComboBox<String>(
+                      f.ComboBox<String>(
                         value: selectedCombo,
-                        items: [f.ComboBoxItem(child: Text('Base AIRHSP'),value: 'BASE'),
-                        f.ComboBoxItem(child: Text('AIRHSP Totales'),value: 'TOTALES',),
-                        f.ComboBoxItem(child: Text('Calculo AIRHSP'),value: 'CALCULO',),                        
+                        items: [
+                          f.ComboBoxItem(
+                              child: Text('Base AIRHSP'), value: 'BASE'),
+                          f.ComboBoxItem(
+                            child: Text('AIRHSP Totales'),
+                            value: 'TOTALES',
+                          ),
+                          f.ComboBoxItem(
+                            child: Text('Calculo AIRHSP'),
+                            value: 'CALCULO',
+                          ),
                         ],
-                         onChanged: (value) {
-                          this.selectedCombo = value;                                                                                                    
-                         if(value == 'BASE'){                                                                                                                                 
-                              this.bloc.add(ListPracEvent(anio: anioSelected!, bonificacion: false,cts: false,gratificacion: false));
-                         }
-                         if(value == 'TOTALES'){
-                            this.bloc.add(TotalesAirhspEvent(bonificacion: true,cts: true,gratificacion: true));
-                         }
-                              if(value == 'CALCULO'){
-                            this.bloc.add(CalculoAirhspEvent(bonificacion: true,cts: true,gratificacion: true));
-                         }
-                    },
-                        ),
+                        onChanged: (value) {
+                          this.selectedCombo = value;
+                          if (value == 'BASE') {
+                            this.bloc.add(ListPracEvent(
+                                anio: anioSelected!,
+                                bonificacion: false,
+                                cts: false,
+                                gratificacion: false));
+                          }
+                          if (value == 'TOTALES') {
+                            this.bloc.add(TotalesAirhspEvent(
+                                bonificacion: true,
+                                cts: true,
+                                gratificacion: true));
+                          }
+                          if (value == 'CALCULO') {
+                            this.bloc.add(CalculoAirhspEvent(
+                                bonificacion: true,
+                                cts: true,
+                                gratificacion: true));
+                          }
+                        },
+                      ),
                       SizedBox(width: 5.0),
                       f.Button(
                           onPressed: () {
-                           exportAirhspToExcel((state is AirhspPresupuestoLoaded)? state.listPracticanteFiltered : []);
+                            exportAirhspToExcel(
+                                (state is AirhspPresupuestoLoaded)
+                                    ? state.listPracticanteFiltered
+                                    : []);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -115,28 +139,38 @@ class _ListAirhspPresupuestoPageState extends State<ListAirhspPresupuestoPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 5.0),          
-              if (state is AirhspPresupuestoLoaded)                        
-                      GridAirhspPresupuestoPage(
-                        columns: getColumnsAirhspPresupuesto(context,ColumnsGridPresupuesto(gratificacion: state.gratificacion, cts: state.cts,bonificacion: state.bonificacion)),
-                        data: state.listPracticanteFiltered,
-                        keyGrid: this.keyGrid,
-                      ),                                        
-              (state is AirhspPresupuestoLoading)
-                  ? Center(
-                      child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                        Text('Cargando lista')
-                      ],
-                    ))
-                  : Container()
+              SizedBox(height: 5.0),
+              state.when(
+                init: () => Container(),
+                loaded: _loaded,
+                loading: _loading,
+              )
             ],
           ),
         );
       },
     );
+  }
+
+  Widget _loaded(AirhspPresupuestoLoaded state) {
+    return GridAirhspPresupuestoPage(
+      columns: getColumnsAirhspPresupuesto(
+          context,
+          ColumnsGridPresupuesto(
+              gratificacion: state.gratificacion,
+              cts: state.cts,
+              bonificacion: state.bonificacion)),
+      data: state.listPracticanteFiltered,
+      keyGrid: this.keyGrid,
+    );
+  }
+
+  Widget _loading(AirhspPresupuestoLoading state) {
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [CircularProgressIndicator(), Text('Cargando lista')],
+    ));
   }
 
   Future<void> exportDataGridToExcel() async {

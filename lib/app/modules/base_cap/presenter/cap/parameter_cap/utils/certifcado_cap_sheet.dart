@@ -133,10 +133,10 @@ _proyeccion(int _firstRowBase, int _column, Worksheet page, int _rowEnd,
   String colProyeccion = '\$AE';
   String colDevengado = '\$K';
   String colTotalAnual = '\$AF';
-  String colBaseEstadoOPP = '\$X';
-  String colBaseFuente = '\$AK';
-  String colBaseProducto = '\$AS';
-  String colBaseMeta = '\$AQ';
+  String colBaseEstadoOPP = '\$S';
+  String colBaseFuente = '\$AF';
+  String colBaseProducto = '\$AN';
+  String colBaseMeta = '\$AL';
 
   int _firstRowCertificado = 6;
   for (int x = _firstRowBase; x < _rowEnd - 1; x++) {

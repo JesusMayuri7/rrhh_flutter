@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 import 'package:rrhh_clean/core/uitls/universal_file/save_file_mobile.dart'
     if (dart.library.html) 'package:rrhh_clean/core/uitls/universal_file/save_file_web.dart';
 
-import 'widgets/column_airhsp_base.dart';
+import 'column_airhsp_base.dart';
 
 Future<void> exportAirhspToExcel(List<AirhspPresupuestoEntity> params) async {
 // Create a new Excel Document.

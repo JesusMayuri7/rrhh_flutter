@@ -114,7 +114,7 @@ Future<void> generateExcel(ParamsCalcular params) async {
      sheet
             .getRangeByName(ColumnBaseTable.essaludAnual.columnLetter + '$rowIndex')
             .formula =
-        '''=(\$${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex*IF(${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,( (\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+IF((${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex + ${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex) >= ($_fuit*$_fmaxSueldo*$_fmaxEssalud)>=0,($_fuit*$_fmaxSueldo*$_fmaxEssalud),${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex)''';
+        '''=(\$${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex*IF(${ColumnBaseTable.mesInicio.columnLetter}$rowIndex>0,( (\$${ColumnBaseTable.mesFin.columnLetter}$rowIndex-\$${ColumnBaseTable.mesInicio.columnLetter}$rowIndex)+1),0))+IF((${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex + ${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex) >= ($_fuit*$_fmaxSueldo*$_fmaxEssalud),0,${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex)''';
 
 // + IF( (${ColumnBaseTable.essaludMensual.columnLetter}$rowIndex + ${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex) >= ($_fuit*$_fmaxSueldo*$_fmaxEssalud),($_fuit*$_fmaxSueldo*$_fmaxEssalud),${ColumnBaseTable.essaludAdicional.columnLetter}$rowIndex)
 

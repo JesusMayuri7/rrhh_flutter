@@ -20,6 +20,8 @@ class AirhspPresupuestoBloc
   final TotalesAirhspUseCase totalesAirhspUseCase;
   final CalcularAirhspUseCase calcularAirhspUseCase;
 
+
+
   AirhspPresupuestoBloc({
     required this.listarAirhspPresupuestoUseCase,
     required this.totalesAirhspUseCase,

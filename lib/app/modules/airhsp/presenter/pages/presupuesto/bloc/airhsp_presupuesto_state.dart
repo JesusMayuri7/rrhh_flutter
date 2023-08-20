@@ -1,14 +1,37 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'airhsp_presupuesto_bloc.dart';
 
-abstract class AirshpPresupuestoState extends Equatable {
-  const AirshpPresupuestoState();
+sealed class AirshpPresupuestoState extends Equatable {  
+     T when<T>({  
+     required T Function() init,
+     T Function(AirhspPresupuestoLoading state)? loading,
+     T Function(AirhspPresupuestoExported state)? exported,
+     T Function(AirhspPresupuestoLoadedExt state)? exportedExt,
+     T Function(AirhspPresupuestoLoaded state)? loaded,
+     T Function(AirhspPresupuestoError state)? error,
+  }) {
+    return switch (this) {
+    AirhspPresupuestoInit() => init(),  
+    AirhspPresupuestoLoading s => loading?.call(s) ?? init(),
+    AirhspPresupuestoExported s => exported?.call(s) ?? init(),
+    AirhspPresupuestoLoadedExt s => exportedExt?.call(s) ?? init(),
+    AirhspPresupuestoLoaded s => loaded?.call(s) ?? init(),
+    AirhspPresupuestoError s => error?.call(s) ?? init(),
+    };
+  }
+}
+
+class AirhspPresupuestoInit extends AirshpPresupuestoState {
+  @override
+  List<Object> get props => [];
 }
 
 class AirhspPresupuestoLoading extends AirshpPresupuestoState {
   @override
   List<Object> get props => [];
 }
+
+
 
 class AirhspPresupuestoExported extends AirshpPresupuestoState {
   @override
